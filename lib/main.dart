@@ -1,9 +1,8 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/connect_internet/net_connect_bloc.dart';
 import 'package:tobeto_mobile_app/pages/pages.dart';
+import 'blocs/connection_bloc.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -21,11 +20,12 @@ class TobetoMobileApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider<NetConnectBloc>(
-          create: (context) => NetConnectBloc(Connectivity()),
+        BlocProvider(
+          create: (context) => NetConnectBloc(),
         ),
       ],
-      child: MaterialApp(
+      child: const MaterialApp(
+        debugShowCheckedModeBanner: false,
         home: SplashScreen(),
       ),
     );
