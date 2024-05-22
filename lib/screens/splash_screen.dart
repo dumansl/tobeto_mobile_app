@@ -2,11 +2,11 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/connection_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/connection_event.dart';
+import '../blocs/connect_bloc/connection_bloc.dart';
+import '../blocs/connect_bloc/connection_event.dart';
 import 'package:tobeto_mobile_app/pages/pages.dart';
 
-import '../blocs/connection_state.dart';
+import '../blocs/connect_bloc/connection_state.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
