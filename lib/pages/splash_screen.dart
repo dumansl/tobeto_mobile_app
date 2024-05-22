@@ -47,6 +47,9 @@ class _SplashScreenState extends State<SplashScreen> {
                     actions: [
                       ElevatedButton(
                           onPressed: () {
+                            context
+                                .read<NetConnectBloc>()
+                                .add(CheckInternetEvent());
                             Navigator.pop(context);
                           },
                           child: const Text('Tamam')),
@@ -56,7 +59,7 @@ class _SplashScreenState extends State<SplashScreen> {
               );
             }
           },
-          child: Expanded(child: Image.asset("assets/gifs/splash_screen.gif")),
+          child: Image.asset("assets/gifs/splash_screen.gif"),
         ),
       ),
     );
