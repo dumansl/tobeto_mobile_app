@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Center(
         child: BlocListener<NetConnectBloc, NetConnectState>(
-          listener: (context, state) {
+          listener: (context, state) async {
             if (state is ConnectedState) {
               Navigator.pushReplacement(
                 context,
@@ -38,19 +38,18 @@ class _SplashScreenState extends State<SplashScreen> {
                 ),
               );
             } else {
-              showDialog(
+              await showDialog(
                 context: context,
-                builder: (BuildContext context) {
+                builder: (context) {
                   return AlertDialog(
                     title: const Text('İnternet Bağlantısı'),
                     content: const Text('İnternet bağlantınızı kontrol edin.'),
                     actions: [
-                      TextButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                        child: const Text('Tamam'),
-                      ),
+                      ElevatedButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
+                          child: const Text('Tamam')),
                     ],
                   );
                 },

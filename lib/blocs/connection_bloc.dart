@@ -11,12 +11,14 @@ class NetConnectBloc extends Bloc<NetConnectEvent, NetConnectState> {
     on<CheckInternetEvent>(_internetToState);
   }
 
-  void _internetToState(
-      CheckInternetEvent event, Emitter<NetConnectState> emit) async {
-    emit(InitialState());
+  Future<void> _internetToState(CheckInternetEvent event, Emitter<NetConnectState> emit) async {
     try {
       final bool isConnected = await checkInternetConnection();
-      emit(ConnectedState(isConnected: isConnected));
+      if (isConnected) {
+        emit(ConnectedState(isConnected: true));
+      } else {
+        emit(NotConnectedState());
+      }
     } catch (e) {
       emit(NotConnectedState());
     }
@@ -24,7 +26,7 @@ class NetConnectBloc extends Bloc<NetConnectEvent, NetConnectState> {
 
   Future<bool> checkInternetConnection() async {
     try {
-      final result = await InternetAddress.lookup('example.com');
+      final result = await InternetAddress.lookup('google.com');
       return result.isNotEmpty && result[0].rawAddress.isNotEmpty;
     } on SocketException catch (_) {
       return false;
