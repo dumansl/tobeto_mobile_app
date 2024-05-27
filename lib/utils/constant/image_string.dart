@@ -1,4 +1,6 @@
-class ImageString {
+// Enes Yıldız - Zehra Karaca 
+abstract class ImagePath {
+  ImagePath._();
   //bottom navigation bar
   static const String homepage = "assets/icons/anasayfa_inaktif.png";
   static const String homepageActive = "assets/icons/anasayfa_aktif.png";
