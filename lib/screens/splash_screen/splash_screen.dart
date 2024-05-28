@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/connect_bloc/connection.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/screen_util.dart';
+import 'package:tobeto_mobile_app/services/shared_preferences_service.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,9 +13,12 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  late SharedPreferencesService _sharedPreferencesService;
+
   @override
   void initState() {
     super.initState();
+    _sharedPreferencesService = SharedPreferencesService();
     _internetConnectState();
   }
 
@@ -30,22 +33,34 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  _navigateToLogin() async {
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const LoginScreen(),
-      ),
-    );
+  _navigateToNextScreen() async {
+    if (_sharedPreferencesService.isFirstTime()) {
+      await _sharedPreferencesService.setFirstTime(false);
+      if (mounted) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const IntroScreen(),
+          ),
+        );
+      }
+    } else {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const LoginScreen(),
+        ),
+      );
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BlocListener<NetConnectBloc, NetConnectState>(
-        listener: (context, state) async {
+        listener: (context, state) {
           if (state is ConnectedState) {
-            _navigateToLogin();
+            _navigateToNextScreen();
           } else if (state is NotConnectedState) {
             _connectionWarning(context);
           }
@@ -55,18 +70,19 @@ class _SplashScreenState extends State<SplashScreen> {
     );
   }
 
-  Widget _animatedGif(BuildContext context) {
-    return SizedBox(
+  _animatedGif(BuildContext context) {
+    return Container(
+      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.screenpadding),
       width: ScreenUtil.getWidth(context),
       height: ScreenUtil.getHeight(context),
       child: Image.asset(
         ImagePath.splashScreenGif,
-        fit: BoxFit.fill,
+        fit: BoxFit.contain,
       ),
     );
   }
 
-  Future<dynamic> _connectionWarning(BuildContext context) async {
+  _connectionWarning(BuildContext context) async {
     return await showDialog(
       context: context,
       builder: (context) {
