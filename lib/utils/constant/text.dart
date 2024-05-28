@@ -7,18 +7,18 @@ abstract class TobetoText {
   static String internetConnectionTitle = "İnternet bağlantınızı kontrol edin.";
   static String internetConnectionButton = "Tekrar Dene";
   // introduction page
-  static String introHeadline1 = "TOBETO İle Yazılım Yolculuğu";
-  static String introHeadline2 = "Eğitimde Beni Neler Bekliyor?";
-  static String introHeadline3 = "Sakın Vazgeçme!";
+  static String introHeadline1 = "Hayalindeki Kariyere İlk Adım";
+  static String introHeadline2 = "Geleceğin İçin Geliş";
+  static String introHeadline3 = "Başarıya Adım Adım";
   static String introContent1 =
-      "Yazılım dünyasına adım atmaya karar verdiysen doğru yerdesin. Çünkü, kısa zamanda, etkili ve eğlenerek öğrenmeyi amaç edinmiş bir eğitim kadrosu ile çalışma yolculuğuna çıkıyorsun";
+      "Profilini oluştur ve yeteneklerini belirle. Sana özel hazırlanan eğitim programları ve mentorluk desteği ile kariyerine güçlü bir başlangıç yap.";
   static String introContent2 =
-      "Seçeceğin kodlama dilinde profesyonelleşmiş ve öğretmeyi amaç edinmiş bir kadro ile yolculuğa başlıyorsun. Bunun yanında, yazılım sürecinde, seni destekleyici teknolojik programlamaları içeren asenkron eğitimler ve iş hayatında ilişkilerini kuvvetlendirecek, softskill eğitimler alacaksın. Yetkinliğini ölçmek için ayrıca sana özel tanımlanmış seviye sınavları ile neler öğrendiğini ve nerelere tekrar yoğunlaşman  gerektiğini göreceksin.";
+      "Tobeto’nun geniş eğitim kataloğu ile yetkinliklerini artır. Uzman eğitmenler ve anında geri bildirimlerle öğrenme sürecini hızlandır.";
   static String introContent3 =
-      "Bu süreçte bir sürü zorluklarla karşılacaksın. Belki de eğitimi bırakmak isteyeceksin. Ama sen vazgeçmediğin sürece biz de vazgeçmeyeceğiz ve hep senin yanında olacağız. Hem teknik olarak hem de motivasyon olarak biz senden asla Vazgeçmiyoruz!";
+      "Profesyonel yetkinliklerini ölç ve raporunu al. İş hayatında başarılı olman için gereken davranışları öğren ve Tobeto ile fark yarat.";
   static String introSkipButton = "Atla";
   static String introNextButton = "İleri";
-  static String introLoginButton = "Giriş";
+  static String introLoginButton = "Giriş Yap";
   // login page
   static String loginUserEmail = "E-Posta";
   static String loginUserPassword = "Şifre";

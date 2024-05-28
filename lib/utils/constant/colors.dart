@@ -35,6 +35,7 @@ class IconColor {
   final Color black = Colors.black;
   final Color darkGrey = const Color(0xff6A707C);
   final Color red = Colors.red;
+  final Color grey = const Color(0xffE9E6E6);
 }
 
 class TextColor {
