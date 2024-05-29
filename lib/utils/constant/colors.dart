@@ -15,6 +15,7 @@ class CardColor {
   final Color white = Colors.white;
   final Color black = Colors.black;
   final Color grey = Colors.grey;
+  final Color cream = const Color(0xffF5F5F5);
   final Color lightGrey = const Color(0xffCCCCCC);
   final Color darkGrey = const Color(0xff1E1E1E);
   final Color lightGreen = const Color(0xff00956E);
