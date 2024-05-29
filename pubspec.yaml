@@ -39,6 +39,8 @@ dependencies:
   connectivity_plus: ^6.0.3
   google_fonts: ^6.2.1
   shared_preferences: ^2.2.3
+  bloc: ^8.0.3
+  equatable: ^2.0.3
 
 dev_dependencies:
   flutter_test:
