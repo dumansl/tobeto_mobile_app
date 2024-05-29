@@ -1,4 +1,4 @@
-// Enes Yıldız - Zehra Karaca 
+// Enes Yıldız - Zehra Karaca
 abstract class ImagePath {
   ImagePath._();
   //bottom navigation bar
@@ -70,6 +70,17 @@ abstract class ImagePath {
   static const String falseLight = "assets/images/false_light.png";
   static const String emptyLight = "assets/images/empty_light.png";
   static const String pointLight = "assets/images/point_light.png";
+  static const String birthdate = "assets/icons/birthdate.png";
+  static const String birthdateWhite = "assets/icons/birthdate_white.png";
+  static const String disabled = "assets/icons/disabled.png";
+  static const String disabledWhite = "assets/icons/disabled_white.png";
+  static const String eye = "assets/icons/eye.png";
+  static const String eyeWhite = "assets/icons/eye_white.png";
+  static const String mail = "assets/icons/mail.png";
+  static const String mailWhite = "assets/icons/mail_white.png";
+  static const String phone = "assets/icons/phone_number.png";
+  static const String phoneWhite = "assets/icons/phone_number_white.png";
+  static const String settings = "assets/icons/profile_edit_settings.png";
 
 //Zehra
   static const String profilePhoto = "assets/images/profile_photo.png";
