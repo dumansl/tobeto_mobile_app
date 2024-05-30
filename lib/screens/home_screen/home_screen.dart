@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       height: 90,
                       width: 360,
                       child: Card(
-                        color: TobetoColor.chart.cream,
+                        color: TobetoColor.card.cream,
                         elevation: 12,
                         child: Padding(
                           padding:
@@ -109,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               Row(
                                 children: [
                                   Text(
-                                    TobetoText.mainCardtitle1,
+                                    "Herkes için Kodlama",
                                     style: TobetoTextStyle
                                         .poppins.captionBlackBold12,
                                   )
@@ -117,7 +117,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               ),
                               Row(
                                 children: [
-                                  Text(TobetoText.mainCardtitle2,
+                                  Text("Herkes için Kodlama",
                                       style: TobetoTextStyle
                                           .poppins.captionGrayBold12)
                                 ],
@@ -129,7 +129,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                     padding: EdgeInsets.only(
                                         left: ScreenPadding.padding8px),
                                     child: Text(
-                                      TobetoText.mainCardtitle3,
+                                      "Herkes için Kodlama",
                                     ),
                                   )
                                 ],

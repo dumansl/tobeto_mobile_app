@@ -39,6 +39,12 @@ class IconColor {
   final Color grey = const Color(0xffE9E6E6);
 }
 
+class FrameColor {
+  final Color white = Colors.white;
+  final Color black = Colors.black;
+  final Color lightGrey = const Color(0xffE8ECF4);
+}
+
 class TextColor {
   final Color white = Colors.white;
   final Color black = Colors.black;
@@ -62,8 +68,9 @@ abstract class TobetoColor {
   static const Color purple = Color(0xFF9B33FF);
   static StateColor state = StateColor();
   static BackgroundColor background = BackgroundColor();
-  static CardColor chart = CardColor();
+  static CardColor card = CardColor();
   static IconColor icon = IconColor();
   static TextColor text = TextColor();
+  static FrameColor frame = FrameColor();
   static RainbowColor rainbow = RainbowColor();
 }

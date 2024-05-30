@@ -24,7 +24,7 @@ class Boxlong extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: TobetoColor.chart.grey.withOpacity(0.8),
+            color: TobetoColor.card.grey.withOpacity(0.8),
             spreadRadius: 1,
             blurRadius: 9,
             offset: const Offset(2, 4), // changes position of shadow
@@ -39,7 +39,7 @@ class Boxlong extends StatelessWidget {
         gradient: LinearGradient(
           begin: Alignment(0.9195402264595032, 7.601138385382455e-9),
           end: Alignment(-7.685097891396708e-9, 0.04152298718690872),
-          colors: [TobetoColor.chart.darkBlue, TobetoColor.purple],
+          colors: [TobetoColor.card.darkBlue, TobetoColor.purple],
         ),
       ),
       child: Center(
