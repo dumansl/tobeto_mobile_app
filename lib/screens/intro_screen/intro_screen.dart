@@ -98,10 +98,11 @@ class _IntroScreenState extends State<IntroScreen> {
                       : _skipButton(
                           onPressed: _onSkip, text: TobetoText.introSkipButton),
                   _nextButton(
-                      onPressed: _onNext,
-                      text: _currentIndex == introData.length - 1
-                          ? TobetoText.introLoginButton
-                          : TobetoText.introNextButton),
+                    onPressed: _onNext,
+                    text: _currentIndex == introData.length - 1
+                        ? TobetoText.introLoginButton
+                        : TobetoText.introNextButton,
+                  ),
                 ],
               ),
             ),
@@ -120,7 +121,7 @@ class _IntroScreenState extends State<IntroScreen> {
       decoration: BoxDecoration(
         color:
             _currentIndex == index ? TobetoColor.purple : TobetoColor.icon.grey,
-        borderRadius: BorderRadius.circular(5),
+        borderRadius: BorderRadius.circular(SizeRadius.radius5px),
       ),
     );
   }
@@ -163,11 +164,14 @@ class _IntroScreenState extends State<IntroScreen> {
     return Container(
       decoration: BoxDecoration(
         gradient: LinearGradient(
-          colors: [TobetoColor.purple.withOpacity(0.5), TobetoColor.purple],
+          colors: [
+            TobetoColor.purple.withOpacity(0.5),
+            TobetoColor.purple,
+          ],
           begin: Alignment.centerLeft,
           end: Alignment.centerRight,
         ),
-        borderRadius: BorderRadius.circular(15),
+        borderRadius: BorderRadius.circular(SizeRadius.radius16px),
       ),
       child: ElevatedButton(
         onPressed: onPressed,
