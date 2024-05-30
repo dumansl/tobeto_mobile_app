@@ -60,6 +60,12 @@ abstract class TobetoText {
   static String mainJoinEducation = "Eğitimlere Nasıl Katılırım?";
   static String mainInterviewNotification =
       "Henüz size atanan bir mülakat bulunmamaktadır.";
+  static String mainCardtitle1 = "Herkes İçin Kodlama 5A Değerlendirme Sınavı";
+  static String mainCardtitle2 = "Herkes İçin Kodlama 5A ";
+  static String mainCardtitle3 = "45 Dakika";
+  static String mainCard2title1 = "Kendini Değerlendir";
+  static String mainCardbuttontitle = "Başla";
+  static String mainCard3title1 = "Öğrenmeye Başla";
   // profile page
   static String profileAppBar = "Profil";
   static String profileName = "Ad Soyad";
