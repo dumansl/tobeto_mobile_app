@@ -9,8 +9,9 @@ class ProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: TobetoColor.chart.cream,
-        title: Text(TobetoText.profileAppBar, style: TobetoTextStyle.poppins.headlinePurpleBold32),
+        backgroundColor: TobetoColor.card.cream,
+        title: Text(TobetoText.profileAppBar,
+            style: TobetoTextStyle.poppins.headlinePurpleBold32),
         centerTitle: true,
         leading: IconButton(
           icon: Image.asset(ImagePath.purpleBack),
@@ -27,7 +28,7 @@ class ProfileScreen extends StatelessWidget {
           ),
         ],
       ),
-      backgroundColor: TobetoColor.chart.cream,
+      backgroundColor: TobetoColor.card.cream,
       body: SingleChildScrollView(
         padding: EdgeInsets.all(ScreenPadding.padding16px),
         child: Column(
@@ -62,20 +63,27 @@ class ProfileScreen extends StatelessWidget {
                       SizedBox(
                         width: double.infinity,
                         child: Card(
-                          color: TobetoColor.chart.white,
+                          color: TobetoColor.card.white,
                           margin: const EdgeInsets.only(bottom: 5),
                           child: Padding(
                             padding: EdgeInsets.all(ScreenPadding.padding16px),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                iconAndText(ImagePath.user, TobetoText.profileName),
-                                iconAndText(ImagePath.birthdate, TobetoText.profileBirthday),
-                                iconAndText(ImagePath.mail, TobetoText.profileEmail),
-                                iconAndText(ImagePath.phone, TobetoText.profilePhoneNumber),
-                                iconAndText(ImagePath.gender, TobetoText.profileGender),
-                                iconAndText(ImagePath.soldier, TobetoText.profileMilitaryStuation),
-                                iconAndText(ImagePath.disabled, TobetoText.profileDisableStuation),
+                                iconAndText(
+                                    ImagePath.user, TobetoText.profileName),
+                                iconAndText(ImagePath.birthdate,
+                                    TobetoText.profileBirthday),
+                                iconAndText(
+                                    ImagePath.mail, TobetoText.profileEmail),
+                                iconAndText(ImagePath.phone,
+                                    TobetoText.profilePhoneNumber),
+                                iconAndText(
+                                    ImagePath.gender, TobetoText.profileGender),
+                                iconAndText(ImagePath.soldier,
+                                    TobetoText.profileMilitaryStuation),
+                                iconAndText(ImagePath.disabled,
+                                    TobetoText.profileDisableStuation),
                               ],
                             ),
                           ),
@@ -92,9 +100,11 @@ class ProfileScreen extends StatelessWidget {
                       titleCards(TobetoText.profileInternship),
                       titleCards(TobetoText.profileCommunity),
                       titleCards(TobetoText.profileEducations),
-                      titleCards(TobetoText.profileTobetoWorkSuccess, onPressed: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text('Tobeto Work Success Başla Butonuna Tıklandı!')));
+                      titleCards(TobetoText.profileTobetoWorkSuccess,
+                          onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                            content: Text(
+                                'Tobeto Work Success Başla Butonuna Tıklandı!')));
                       }),
                       titleCards(TobetoText.profileTobetoTests),
                       titleCards(TobetoText.profileTobetoEducations),
@@ -124,7 +134,7 @@ Widget titleCards(String title, {VoidCallback? onPressed}) {
   return SizedBox(
     width: double.infinity,
     child: Card(
-      color: TobetoColor.chart.white,
+      color: TobetoColor.card.white,
       margin: const EdgeInsets.only(bottom: 5),
       child: Padding(
         padding: EdgeInsets.all(ScreenPadding.padding16px),
@@ -142,7 +152,8 @@ Widget titleCards(String title, {VoidCallback? onPressed}) {
                       backgroundColor: TobetoColor.purple, // Arka plan rengi
                       foregroundColor: TobetoColor.text.white, // Metin rengi
                     ),
-                    child: Text('Başla', style: TobetoTextStyle.poppins.captionWhiteSemiBold15),
+                    child: Text('Başla',
+                        style: TobetoTextStyle.poppins.captionWhiteSemiBold15),
                   ),
               ],
             ),
