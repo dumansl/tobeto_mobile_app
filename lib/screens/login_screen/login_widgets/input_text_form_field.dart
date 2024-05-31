@@ -25,7 +25,7 @@ class InputTextFormField extends StatelessWidget {
         vertical: ScreenPadding.padding8px,
       ),
       decoration: ShapeDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.onPrimary,
         shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(SizeRadius.radius8px)),
         shadows: const [
