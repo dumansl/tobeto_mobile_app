@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class BottomAppbarIcon extends StatelessWidget {
   final int currentTab;
@@ -23,7 +24,7 @@ class BottomAppbarIcon extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
           foregroundColor: TobetoColor.background.white,
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding18px),
           shadowColor: TobetoColor.background.transparent,
           backgroundColor: TobetoColor.background.transparent),
       onPressed: onPressed,
@@ -31,13 +32,14 @@ class BottomAppbarIcon extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           currentTab == pageIndex
-              ? Image.asset(activeIcon, width: 35, height: 35)
-              : Opacity(opacity: 0.5, child: Image.asset(inactiveIcon, width: 35, height: 35)),
+              ? Image.asset(activeIcon, width: IconSize.size35px, height: IconSize.size35px)
+              : Opacity(
+                  opacity: 0.5, child: Image.asset(inactiveIcon, width: IconSize.size35px, height: IconSize.size35px)),
           Text(
             iconName,
-            style: TextStyle(
-              color: currentTab == pageIndex ? TobetoColor.purple : TobetoColor.text.blackOpacity,
-            ),
+            style: currentTab == pageIndex
+                ? TobetoTextStyle.poppins.captionPurpleBold12
+                : TobetoTextStyle.poppins.captionGrayNormal12,
           ),
         ],
       ),

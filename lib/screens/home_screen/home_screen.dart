@@ -3,8 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/rainbow.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/paddings.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -101,8 +101,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: TobetoColor.card.cream,
                         elevation: 12,
                         child: Padding(
-                          padding:
-                              EdgeInsets.only(left: ScreenPadding.padding8px),
+                          padding: EdgeInsets.only(left: ScreenPadding.padding8px),
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
@@ -110,25 +109,21 @@ class _HomeScreenState extends State<HomeScreen> {
                                 children: [
                                   Text(
                                     "Herkes için Kodlama",
-                                    style: TobetoTextStyle
-                                        .poppins.captionBlackBold12,
+                                    style: TobetoTextStyle.poppins.captionBlackBold12,
                                   )
                                 ],
                               ),
                               Row(
                                 children: [
-                                  Text("Herkes için Kodlama",
-                                      style: TobetoTextStyle
-                                          .poppins.captionGrayBold12)
+                                  Text("Herkes için Kodlama", style: TobetoTextStyle.poppins.captionGrayBold12)
                                 ],
                               ),
                               Row(
                                 children: [
                                   const Icon(Icons.watch_later_outlined),
                                   Padding(
-                                    padding: EdgeInsets.only(
-                                        left: ScreenPadding.padding8px),
-                                    child: Text(
+                                    padding: EdgeInsets.only(left: ScreenPadding.padding8px),
+                                    child: const Text(
                                       "Herkes için Kodlama",
                                     ),
                                   )
@@ -149,7 +144,13 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     Boxlong(
                       text: TobetoText.mainCard2title1,
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ProfileScreen(),
+                            ));
+                      },
                       buttonText: TobetoText.mainCardbuttontitle,
                     ),
                     Boxlong(
