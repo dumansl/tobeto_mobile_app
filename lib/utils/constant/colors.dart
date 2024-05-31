@@ -1,5 +1,17 @@
 import 'package:flutter/material.dart';
 
+abstract class TobetoColor {
+  TobetoColor._();
+  static const Color purple = Color(0xFF9B33FF);
+  static StateColor state = StateColor();
+  static BackgroundColor background = BackgroundColor();
+  static CardColor card = CardColor();
+  static IconColor icon = IconColor();
+  static TextColor text = TextColor();
+  static FrameColor frame = FrameColor();
+  static RainbowColor rainbow = RainbowColor();
+}
+
 class StateColor {
   final Color error = const Color(0xFFFF0000);
   final Color warning = const Color(0xFFEBD514);
@@ -9,6 +21,7 @@ class StateColor {
 class BackgroundColor {
   final Color white = Colors.white;
   final Color darkGrey = const Color(0xff212529);
+  final Color transparent = Colors.transparent;
 }
 
 class CardColor {
@@ -29,6 +42,7 @@ class CardColor {
   final Color lightBrown = const Color(0xFFB38F6A);
   final Color fuchsia = const Color(0xffD75078);
   final Color peach = const Color(0xffD77E6F);
+  final Color shadowColor = const Color.fromARGB(255, 117, 117, 117);
 }
 
 class IconColor {
@@ -52,6 +66,7 @@ class TextColor {
   final Color lightGrey = const Color(0xFF8391A1);
   final Color lightGreen = const Color(0xff00956E);
   final Color red = Colors.red;
+  final Color blackOpacity = const Color.fromRGBO(0, 0, 0, 200);
 }
 
 class RainbowColor {
@@ -61,16 +76,4 @@ class RainbowColor {
   final Color linaergreenv2 = const Color(0xff16BBA9);
   final Color linearyellow = const Color(0xffEADA4A);
   final Color linearpurplev2 = const Color(0xff9933FF);
-}
-
-abstract class TobetoColor {
-  TobetoColor._();
-  static const Color purple = Color(0xFF9B33FF);
-  static StateColor state = StateColor();
-  static BackgroundColor background = BackgroundColor();
-  static CardColor card = CardColor();
-  static IconColor icon = IconColor();
-  static TextColor text = TextColor();
-  static FrameColor frame = FrameColor();
-  static RainbowColor rainbow = RainbowColor();
 }
