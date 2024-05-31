@@ -15,6 +15,7 @@ ColorScheme lightColorScheme = ColorScheme(
   secondary: TobetoColor.frame.lightGrey, // Çerceve Rengi
   onSecondary: TobetoColor.icon.darkGrey, // Icon Rengi
   onSurface: TobetoColor.text.lightGrey, // Text Rengi
+  inversePrimary: const Color(0xffb1d18a),
   error: const Color(0xffba1a1a),
   onError: const Color(0xffffffff),
 );
@@ -29,4 +30,5 @@ ColorScheme darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
   error: const Color(0xffffb4ab),
   onError: const Color(0xff690005),
+  inversePrimary: const Color(0xff4c662b),
 );
