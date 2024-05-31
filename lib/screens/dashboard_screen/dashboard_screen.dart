@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/bottom_appbar_icon.dart';
-import 'package:tobeto_mobile_app/screens/home_screen/home_screen.dart';
-import 'package:tobeto_mobile_app/screens/login_screen/login_screen.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
@@ -69,15 +66,20 @@ class _HomeState extends State<DashboardScreen> {
                         padding: _isTopRight
                             ? const EdgeInsets.only(top: 30, right: 10)
                             : const EdgeInsets.symmetric(vertical: 20),
-                        alignment: _isTopRight ? Alignment.centerRight : Alignment.bottomCenter,
+                        alignment: _isTopRight
+                            ? Alignment.centerRight
+                            : Alignment.bottomCenter,
                         child: CircleAvatar(
                           radius: _isTopRight ? 30 : 60,
-                          backgroundImage: const AssetImage(ImagePath.profilePhoto),
+                          backgroundImage:
+                              const AssetImage(ImagePath.profilePhoto),
                         ),
                       ),
                       Container(
                         padding: const EdgeInsets.only(top: 40),
-                        alignment: _isTopRight ? Alignment.center : Alignment.bottomCenter,
+                        alignment: _isTopRight
+                            ? Alignment.center
+                            : Alignment.bottomCenter,
                         child: const Text(
                           "TOBETO'ya hoş geldin Enes",
                           style: TextStyle(fontSize: 20),
@@ -110,7 +112,10 @@ class _HomeState extends State<DashboardScreen> {
           shape: const CircleBorder(),
           child: currentTab == 0
               ? Image.asset(ImagePath.homepageActive, width: 35, height: 35)
-              : Opacity(opacity: 0.5, child: Image.asset(ImagePath.homepage, width: 35, height: 35)),
+              : Opacity(
+                  opacity: 0.5,
+                  child:
+                      Image.asset(ImagePath.homepage, width: 35, height: 35)),
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
