@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import '/model/course_model.dart';
 import '../education_screen.dart';
 
@@ -44,7 +45,7 @@ class CourseCard extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Eğitime Git'),
+              child: Text(TobetoText.mainGoEducation),
             ),
           ],
         ),
@@ -93,7 +94,7 @@ class _CourseCardListState extends State<CourseCardList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kurslar'),
+        title: Text(TobetoText.mainEducation),
       ),
       body: Column(
         children: [
@@ -102,7 +103,7 @@ class _CourseCardListState extends State<CourseCardList> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                labelText: 'Ara',
+                labelText: TobetoText.mainSearch,
                 border: OutlineInputBorder(),
               ),
             ),

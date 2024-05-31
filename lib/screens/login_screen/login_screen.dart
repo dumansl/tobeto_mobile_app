@@ -30,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       resizeToAvoidBottomInset: false,
       body: Stack(
         children: [
-          const LoginBackground(),
+          const CustomBackground(),
           Padding(
             padding: EdgeInsets.symmetric(
               horizontal: ScreenPadding.screenpadding,
@@ -79,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Radius.circular(SizeRadius.radius16px),
       ),
       selectedBorderColor: TobetoColor.purple,
-      selectedColor: TobetoColor.text.white,
+      selectedColor: Theme.of(context).colorScheme.primary,
       fillColor: TobetoColor.purple,
       color: TobetoColor.purple,
       constraints: BoxConstraints(
@@ -105,7 +105,7 @@ class _LoginScreenState extends State<LoginScreen> {
           suffixIcon: IconButton(
             icon: Icon(
               _showPassword ? Icons.visibility : Icons.visibility_off,
-              color: TobetoColor.icon.darkGrey,
+              color: Theme.of(context).colorScheme.onSecondary,
             ),
             onPressed: () {
               setState(() {
@@ -224,7 +224,7 @@ class _LoginScreenState extends State<LoginScreen> {
           vertical: ScreenPadding.padding8px,
         ),
         decoration: ShapeDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.primary,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(SizeRadius.radius8px),
           ),

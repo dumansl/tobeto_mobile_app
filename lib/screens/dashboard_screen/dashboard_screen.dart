@@ -20,7 +20,7 @@ class _HomeState extends State<Dashboard> {
   final List<Widget> screens = [
     const HomeScreen(),
     const ProfileScreen(),
-    const EducationScreen(),
+    EducationScreen(),
     const SplashScreen(),
     const LoginScreen(),
   ];
@@ -73,7 +73,8 @@ class _HomeState extends State<Dashboard> {
           ],
         ),
         child: ClipRRect(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(SizeRadius.radius20px)),
+          borderRadius: BorderRadius.vertical(
+              top: Radius.circular(SizeRadius.radius20px)),
           child: BottomAppBar(
             height: ScreenUtil.getHeight(context) * 0.085,
             notchMargin: ScreenPadding.padding6px,
@@ -102,7 +103,7 @@ class _HomeState extends State<Dashboard> {
                         currentTab: currentTab,
                         onPressed: () {
                           setState(() {
-                            currentScreen = const EducationScreen();
+                            currentScreen = EducationScreen();
                             currentTab = 2;
                           });
                         },
@@ -170,10 +171,12 @@ class Fab extends StatelessWidget {
         onPressed: onPressed,
         shape: const CircleBorder(),
         child: currentTab == 0
-            ? Image.asset(ImagePath.homepageActive, width: IconSize.size35px, height: IconSize.size35px)
+            ? Image.asset(ImagePath.homepageActive,
+                width: IconSize.size35px, height: IconSize.size35px)
             : Opacity(
                 opacity: 0.5,
-                child: Image.asset(ImagePath.homepage, width: IconSize.size35px, height: IconSize.size35px)),
+                child: Image.asset(ImagePath.homepage,
+                    width: IconSize.size35px, height: IconSize.size35px)),
       ),
     );
   }

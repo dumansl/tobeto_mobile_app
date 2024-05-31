@@ -9,6 +9,8 @@ abstract class TobetoColor {
   static IconColor icon = IconColor();
   static TextColor text = TextColor();
   static FrameColor frame = FrameColor();
+  static ButtonColor button = ButtonColor();
+  static FormFieldColor formField = FormFieldColor();
   static RainbowColor rainbow = RainbowColor();
 }
 
@@ -45,6 +47,18 @@ class CardColor {
   final Color shadowColor = const Color.fromARGB(255, 117, 117, 117);
 }
 
+class ButtonColor {
+  final Color white = Colors.white;
+  final Color black = Colors.black;
+  final Color darkGrey = const Color(0xff2A2E32);
+}
+
+class FormFieldColor {
+  final Color white = Colors.white;
+  final Color black = Colors.black;
+  final Color darkGrey = const Color(0xff2A2E32);
+}
+
 class IconColor {
   final Color white = Colors.white;
   final Color black = Colors.black;
@@ -57,6 +71,7 @@ class FrameColor {
   final Color white = Colors.white;
   final Color black = Colors.black;
   final Color lightGrey = const Color(0xffE8ECF4);
+  final Color grey = const Color(0xff6A707C);
 }
 
 class TextColor {
