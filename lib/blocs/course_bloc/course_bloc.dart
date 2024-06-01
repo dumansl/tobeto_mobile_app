@@ -9,10 +9,10 @@ part 'course_state.dart';
 class CourseBloc extends Bloc<CourseEvent, CourseState> {
   CourseBloc() : super(CourseInitial()) {
     on<LoadCourses>((event, emit) {
-      emit(CoursesLoaded(courses: [
+      emit(const CoursesLoaded(courses: [
+        Course(title: 'Dr. Ecmel Ayral\'dan Hoşgeldin Mesajı', image: ImagePath.ecmelAyral, status: 'ongoing'),
+        Course(title: 'Eğitimlere Nasıl Katılırım?', image: ImagePath.howToTraining, status: 'completed'),
         Course(title: 'Flutter Eğitimi', image: ImagePath.ecmelAyral, status: 'ongoing'),
-        Course(title: 'React Native Eğitimi', image: ImagePath.ecmelAyral, status: 'completed'),
-        Course(title: 'Swift Eğitimi', image: ImagePath.ecmelAyral, status: 'ongoing'),
       ]));
     });
   }

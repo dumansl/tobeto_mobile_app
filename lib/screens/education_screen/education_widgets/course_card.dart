@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '/model/course_model.dart';
 import '../education_screen.dart';
 
@@ -11,6 +12,9 @@ class CourseCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(20.0),
+      ),
       child: InkWell(
         onTap: () {
           Navigator.push(
@@ -25,12 +29,23 @@ class CourseCard extends StatelessWidget {
         },
         child: Column(
           children: [
-            Image.asset(course.image),
+            ClipRRect(
+              borderRadius: BorderRadius.only(
+                topLeft: Radius.circular(20.0),
+                topRight: Radius.circular(20.0),
+              ),
+              child: Image.asset(
+                course.image,
+                height: 180,
+                width: double.infinity,
+                fit: BoxFit.cover,
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 course.title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                style: TobetoTextStyle.poppins.captionBlackNormal18,
               ),
             ),
             ElevatedButton(
@@ -45,7 +60,13 @@ class CourseCard extends StatelessWidget {
                   ),
                 );
               },
-              child: Text(TobetoText.mainGoEducation),
+              child: Text('Eğitime Git'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: TobetoColor.purple,
+                foregroundColor: Colors.white,
+                padding: EdgeInsets.symmetric(horizontal: 22, vertical: 7),
+                textStyle: TextStyle(fontSize: 14),
+              ),
             ),
           ],
         ),
@@ -94,7 +115,7 @@ class _CourseCardListState extends State<CourseCardList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TobetoText.mainEducation),
+        title: Text('Kurslar'),
       ),
       body: Column(
         children: [
@@ -103,7 +124,7 @@ class _CourseCardListState extends State<CourseCardList> {
             child: TextField(
               controller: _searchController,
               decoration: InputDecoration(
-                labelText: TobetoText.mainSearch,
+                labelText: 'Ara',
                 border: OutlineInputBorder(),
               ),
             ),
