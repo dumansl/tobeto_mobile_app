@@ -1,11 +1,11 @@
 // TO DO : Zehra Karaca <3
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/screens/education_screen/education_widgets/course_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '/blocs/course_bloc/course_bloc.dart';
 import '/model/course_model.dart';
-import 'education_widgets/course_card.dart';
 
 class EducationScreen extends StatefulWidget {
   @override
@@ -16,12 +16,16 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
   TextEditingController _searchController = TextEditingController();
   List<Course> _filteredCourses = [];
   TabController? _tabController;
+  final FocusNode _focusNode = FocusNode();
 
   @override
   void initState() {
     super.initState();
     _searchController.addListener(_filterCourses);
     _tabController = TabController(length: 3, vsync: this);
+    _focusNode.addListener(() {
+      setState(() {});
+    });
   }
 
   @override
@@ -29,6 +33,7 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
     _searchController.removeListener(_filterCourses);
     _searchController.dispose();
     _tabController?.dispose();
+    _focusNode.dispose();
     super.dispose();
   }
 
@@ -52,107 +57,118 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-      length: 3,
-      child: Scaffold(
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(180.0),
-          child: AppBar(
-            title: Padding(
-              padding: const EdgeInsets.only(top: 24.0),
-              child: Text(
-                TobetoText.mainEducation,
-                style: TextStyle(fontSize: 28.0),
+    return BlocProvider<CourseBloc>(
+      create: (context) => CourseBloc()..add(LoadCourses()),
+      child: DefaultTabController(
+        length: 3,
+        child: Scaffold(
+          appBar: PreferredSize(
+            preferredSize: Size.fromHeight(180.0),
+            child: AppBar(
+              title: Padding(
+                padding: const EdgeInsets.only(top: 24.0),
+                child: Text(
+                  'Eğitimlerim',
+                  style: TobetoTextStyle.poppins.captionBlackNormal24,
+                ),
               ),
-            ),
-            bottom: PreferredSize(
-              preferredSize: Size.fromHeight(80.0),
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    Row(
-                      children: [
-                        Expanded(
-                          flex: 9,
-                          child: TextField(
-                            controller: _searchController,
-                            decoration: InputDecoration(
-                              labelText: TobetoText.mainSearch,
-                              hintText: TobetoText.mainSearch,
-                              prefixIcon: Icon(Icons.search),
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                                borderSide: BorderSide(color: TobetoColor.purple),
+              bottom: PreferredSize(
+                preferredSize: Size.fromHeight(80.0),
+                child: Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Expanded(
+                            flex: 9,
+                            child: TextField(
+                              controller: _searchController,
+                              focusNode: _focusNode,
+                              decoration: InputDecoration(
+                                hintText: _focusNode.hasFocus ? '' : 'Arama',
+                                prefixIcon: Icon(Icons.search),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                                ),
+                                focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                                  borderSide: BorderSide(color: TobetoColor.purple),
+                                ),
                               ),
                             ),
                           ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: GestureDetector(
-                            onTap: () {
-                              _navigateToEmptyPage(context);
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(ImagePath.purpleFilter, width: 24, height: 24),
+                          Expanded(
+                            flex: 1,
+                            child: GestureDetector(
+                              onTap: () {
+                                _navigateToEmptyPage(context);
+                              },
+                              child: Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Image.asset(ImagePath.purpleFilter, width: 36, height: 36),
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                    TabBar(
-                      tabs: [
-                        Tab(
-                          child: Text(
-                            TobetoText.mainEducation,
-                            style: TobetoTextStyle.poppins.bodyGrayLightLight16,
+                        ],
+                      ),
+                      TabBar(
+                        isScrollable: true,
+                        indicatorColor: TobetoColor.purple,
+                        tabs: [
+                          Tab(
+                            child: Text(
+                              TobetoText.mainEducation,
+                              style: TobetoTextStyle.poppins.captionBlackNormal12,
+                              textAlign: TextAlign.center,
+                              //overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                        Tab(
-                          child: Text(
-                            TobetoText.mainContinue,
-                            style: TobetoTextStyle.poppins.bodyGrayLightLight16,
+                          Tab(
+                            child: Text(
+                              TobetoText.mainContinue,
+                              style: TobetoTextStyle.poppins.captionBlackNormal12,
+                              textAlign: TextAlign.center,
+                              //overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                        Tab(
-                          child: Text(
-                            TobetoText.mainComplated,
-                            style: TobetoTextStyle.poppins.bodyGrayLightLight16,
+                          Tab(
+                            child: Text(
+                              TobetoText.mainComplated,
+                              style: TobetoTextStyle.poppins.captionBlackNormal12,
+                              textAlign: TextAlign.center,
+                              //overflow: TextOverflow.ellipsis,
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-        body: Column(
-          children: [
-            Expanded(
-              child: BlocBuilder<CourseBloc, CourseState>(
-                builder: (context, state) {
-                  if (state is CoursesLoaded) {
-                    final coursesToShow = _searchController.text.isEmpty ? state.courses : _filteredCourses;
-                    return TabBarView(
-                      children: [
-                        _buildCourseList(coursesToShow),
-                        _buildCourseList(coursesToShow.where((course) => course.status == 'ongoing').toList()),
-                        _buildCourseList(coursesToShow.where((course) => course.status == 'completed').toList()),
-                      ],
-                    );
-                  }
-                  return Center(child: CircularProgressIndicator());
-                },
+          body: Column(
+            children: [
+              Expanded(
+                child: BlocBuilder<CourseBloc, CourseState>(
+                  builder: (context, state) {
+                    if (state is CoursesLoaded) {
+                      final coursesToShow = _searchController.text.isEmpty ? state.courses : _filteredCourses;
+                      return TabBarView(
+                        children: [
+                          _buildCourseList(coursesToShow),
+                          _buildCourseList(coursesToShow.where((course) => course.status == 'ongoing').toList()),
+                          _buildCourseList(coursesToShow.where((course) => course.status == 'completed').toList()),
+                        ],
+                      );
+                    }
+                    return Center(child: CircularProgressIndicator());
+                  },
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
