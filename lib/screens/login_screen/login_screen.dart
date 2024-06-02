@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_logo.dart';
+import 'package:tobeto_mobile_app/screens/login_screen/password_reset_screen.dart';
+import 'package:tobeto_mobile_app/screens/login_screen/register_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/horizontal_page_route.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 import 'login_widgets/custom_button.dart';
@@ -115,7 +118,12 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              createHorizontalPageRoute(const PasswordResetScreen()),
+            );
+          },
           child: Text(
             TobetoText.loginForgotPassword,
             style: TobetoTextStyle.inter.captionGrayDarkSemiBold15,
@@ -181,7 +189,12 @@ class _LoginScreenState extends State<LoginScreen> {
         CustomTextButton(
           text: TobetoText.loginSubtitle,
           textbold: TobetoText.loginRegisterButton,
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              createHorizontalPageRoute(const RegisterScreen()),
+            );
+          },
         ),
       ],
     );
