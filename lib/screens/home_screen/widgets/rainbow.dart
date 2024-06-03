@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class Rainbow extends StatelessWidget {
   const Rainbow({
@@ -13,17 +14,17 @@ class Rainbow extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: Container(
-              width: 330,
-              height: 100,
+              width: ScreenUtil.getWidth(context) * 0.92,
+              height: ScreenUtil.getHeight(context) * 0.162,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(24.0),
-                gradient: const LinearGradient(
+                gradient: LinearGradient(
                   colors: [
-                    Color(0XFF9933FF),
-                    Color(0XFF17BAAA),
-                    Color(0xff16BBA9),
-                    Color(0xffEADA4A),
-                    Color(0xff9933FF)
+                    TobetoColor.purple,
+                    TobetoColor.rainbow.lineargreen,
+                    TobetoColor.rainbow.linaergreenv2,
+                    TobetoColor.rainbow.linearyellow,
+                    TobetoColor.purple
                   ],
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
@@ -39,8 +40,8 @@ class Rainbow extends StatelessWidget {
                   alignment:
                       Alignment.bottomCenter, // Center the white container
                   child: Container(
-                    width: 326,
-                    height: 96,
+                    width: ScreenUtil.getWidth(context) * 0.9,
+                    height: ScreenUtil.getHeight(context) * 0.155,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(24.0),
