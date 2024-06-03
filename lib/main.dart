@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/course_bloc/course_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/theme_bloc/theme_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/themes/theme.dart';
-import 'blocs/connect_bloc/connection_bloc.dart';
 import 'firebase_options.dart';
 
 void main() async {
@@ -26,6 +24,7 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<NetConnectBloc>(create: (context) => NetConnectBloc()),
         BlocProvider<CourseBloc>(create: (context) => CourseBloc()),
         BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
+        BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {
