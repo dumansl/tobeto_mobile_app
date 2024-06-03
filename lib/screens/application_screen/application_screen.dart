@@ -3,7 +3,7 @@ import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class ApplicationScreen extends StatelessWidget {
-  const ApplicationScreen({Key? key}) : super(key: key);
+  const ApplicationScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +11,7 @@ class ApplicationScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(TobetoText.mainCard1),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -44,7 +44,7 @@ class ApplicationScreen extends StatelessWidget {
                           width: 100,
                           height: 100,
                         ),
-                        SizedBox(width: 16),
+                        const SizedBox(width: 16),
                         Expanded(
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -53,7 +53,7 @@ class ApplicationScreen extends StatelessWidget {
                                 'İstanbul Kodluyor',
                                 style: TobetoTextStyle.poppins.bodyBlackBold16,
                               ),
-                              SizedBox(height: 8),
+                              const SizedBox(height: 8),
                               Text(
                                 'Bilgilendirme',
                                 style: TobetoTextStyle.poppins.bodyBlackLight16,
@@ -68,8 +68,8 @@ class ApplicationScreen extends StatelessWidget {
                     top: 11,
                     right: 0,
                     child: Container(
-                      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                      decoration: BoxDecoration(
+                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      decoration: const BoxDecoration(
                         color: Color(0xFF076B34),
                         borderRadius: BorderRadius.only(
                           topLeft: Radius.circular(8),

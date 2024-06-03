@@ -7,7 +7,7 @@ import '../education_screen.dart';
 class CourseCard extends StatelessWidget {
   final Course course;
 
-  CourseCard({required this.course});
+  const CourseCard({super.key, required this.course});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class CourseCard extends StatelessWidget {
         child: Column(
           children: [
             ClipRRect(
-              borderRadius: BorderRadius.only(
+              borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0),
               ),
@@ -60,13 +60,13 @@ class CourseCard extends StatelessWidget {
                   ),
                 );
               },
-              child: Text('Eğitime Git'),
               style: ElevatedButton.styleFrom(
                 backgroundColor: TobetoColor.purple,
                 foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(horizontal: 22, vertical: 7),
-                textStyle: TextStyle(fontSize: 14),
+                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 7),
+                textStyle: const TextStyle(fontSize: 14),
               ),
+              child: const Text('Eğitime Git'),
             ),
           ],
         ),
@@ -78,14 +78,14 @@ class CourseCard extends StatelessWidget {
 class CourseCardList extends StatefulWidget {
   final List<Course> courses;
 
-  CourseCardList({required this.courses});
+  const CourseCardList({super.key, required this.courses});
 
   @override
-  _CourseCardListState createState() => _CourseCardListState();
+  State<CourseCardList> createState() => _CourseCardListState();
 }
 
 class _CourseCardListState extends State<CourseCardList> {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<Course> _filteredCourses = [];
 
   @override
@@ -115,7 +115,7 @@ class _CourseCardListState extends State<CourseCardList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Kurslar'),
+        title: const Text('Kurslar'),
       ),
       body: Column(
         children: [
@@ -123,7 +123,7 @@ class _CourseCardListState extends State<CourseCardList> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: _searchController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Ara',
                 border: OutlineInputBorder(),
               ),

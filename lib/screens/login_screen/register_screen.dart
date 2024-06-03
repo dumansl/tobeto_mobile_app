@@ -41,7 +41,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             Navigator.pushReplacement(
               context,
               MaterialPageRoute(
-                builder: (context) => const Dashboard(),
+                builder: (context) => const DashboardScreen(),
               ),
             );
           } else if (state is LoginError) {
@@ -71,9 +71,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Expanded(
                     flex: 10,
-                    child: Align(
-                        alignment: AlignmentDirectional.topCenter,
-                        child: _loginScreenNavigator()),
+                    child: Align(alignment: AlignmentDirectional.topCenter, child: _loginScreenNavigator()),
                   ),
                 ],
               ),

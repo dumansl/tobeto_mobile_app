@@ -8,12 +8,14 @@ import '/blocs/course_bloc/course_bloc.dart';
 import '/model/course_model.dart';
 
 class EducationScreen extends StatefulWidget {
+  const EducationScreen({super.key});
+
   @override
-  _EducationScreenState createState() => _EducationScreenState();
+  State<EducationScreen> createState() => _EducationScreenState();
 }
 
 class _EducationScreenState extends State<EducationScreen> with SingleTickerProviderStateMixin {
-  TextEditingController _searchController = TextEditingController();
+  final TextEditingController _searchController = TextEditingController();
   List<Course> _filteredCourses = [];
   TabController? _tabController;
   final FocusNode _focusNode = FocusNode();
@@ -48,7 +50,7 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
   }
 
   void _navigateToEmptyPage(BuildContext context) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EmptyPage()));
+    Navigator.push(context, MaterialPageRoute(builder: (context) => const EmptyPage()));
   }
 
   void _navigateToEducationPage(BuildContext context, String title, String imagePath) {
@@ -63,7 +65,7 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
         length: 3,
         child: Scaffold(
           appBar: PreferredSize(
-            preferredSize: Size.fromHeight(180.0),
+            preferredSize: const Size.fromHeight(180.0),
             child: AppBar(
               title: Padding(
                 padding: const EdgeInsets.only(top: 24.0),
@@ -73,7 +75,7 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                 ),
               ),
               bottom: PreferredSize(
-                preferredSize: Size.fromHeight(80.0),
+                preferredSize: const Size.fromHeight(80.0),
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -87,11 +89,11 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                               focusNode: _focusNode,
                               decoration: InputDecoration(
                                 hintText: _focusNode.hasFocus ? '' : 'Arama',
-                                prefixIcon: Icon(Icons.search),
-                                border: OutlineInputBorder(
+                                prefixIcon: const Icon(Icons.search),
+                                border: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(30.0)),
                                 ),
-                                focusedBorder: OutlineInputBorder(
+                                focusedBorder: const OutlineInputBorder(
                                   borderRadius: BorderRadius.all(Radius.circular(30.0)),
                                   borderSide: BorderSide(color: TobetoColor.purple),
                                 ),
@@ -163,7 +165,7 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                         ],
                       );
                     }
-                    return Center(child: CircularProgressIndicator());
+                    return const Center(child: CircularProgressIndicator());
                   },
                 ),
               ),
@@ -191,13 +193,15 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
 }
 
 class EmptyPage extends StatelessWidget {
+  const EmptyPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Filtre Sayfası'),
+        title: const Text('Filtre Sayfası'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Filtre ekranı'),
       ),
     );
@@ -208,7 +212,7 @@ class EducationPage extends StatelessWidget {
   final String title;
   final String imagePath;
 
-  EducationPage({required this.title, required this.imagePath});
+  const EducationPage({super.key, required this.title, required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -221,10 +225,10 @@ class EducationPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Image.asset(imagePath),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               '$title Sayfasına Hoşgeldiniz!',
-              style: TextStyle(fontSize: 24),
+              style: const TextStyle(fontSize: 24),
             ),
           ],
         ),
