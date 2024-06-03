@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/connect_bloc/connection.dart';
+import 'package:tobeto_mobile_app/blocs/connect_bloc/connection_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/connect_bloc/connection_event.dart';
+import 'package:tobeto_mobile_app/blocs/connect_bloc/connection_state.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/services/shared_preferences_service.dart';
