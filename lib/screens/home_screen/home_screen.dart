@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/screens/application_screen/application_screen.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/exams_card.dart';
@@ -61,7 +62,17 @@ class _HomeScreenState extends State<HomeScreen> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Expanded(child: Box(text: TobetoText.mainCard1, onTap: () {})),
+              Expanded(
+                child: Box(
+                  text: TobetoText.mainCard1,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => ApplicationScreen()),
+                    );
+                  },
+                ),
+              ),
               Expanded(
                 child: Box(
                   text: TobetoText.mainCard2,
