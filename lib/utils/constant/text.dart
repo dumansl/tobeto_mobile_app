@@ -45,18 +45,19 @@ abstract class TobetoText {
   static String registerLoginButton = " Giriş Yap";
   // password reset page
   static String passwordResetTitle = "Şifre Sıfırlama";
+
   static String passwordResetBoxText = "E-posta adresinizi giriniz";
   static String passwordResetButtonText = "Gönder";
+
   // main page
   static String mainWelcome = "TOBETO'ya hoş geldin";
   static String mainHeadline1 =
       "Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!";
-  static String mainHeadline2 =
-      "Ücretsiz eğitimlerle, geleceğin mesleklerinde sen de yerini al.";
+  static String mainHeadline2 = "Ücretsiz eğitimlerle, \n geleceğin mesleklerinde sen de yerini al.";
   static String mainHeadline3 = "Aradığın “İş” Burada!";
   static String mainCard1 = "Başvurularım";
   static String mainCard2 = "Değerlendir";
-  static String mainCard3 = "Duyuru ve Haberlerim";
+  static String mainCard3 = "Duyuru ve \n Haberlerim";
   static String mainCard4 = "Anketlerim";
   static String mainCard5 = "İş Süreçlerim";
   static String mainSearch = "Arama";
