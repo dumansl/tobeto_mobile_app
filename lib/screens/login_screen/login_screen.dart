@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
+import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_logo.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/home/tobeto_home_screen.dart';
+import 'package:tobeto_mobile_app/services/auth_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/horizontal_page_route.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 import 'login_widgets/custom_button.dart';
@@ -16,51 +25,79 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  final AuthService _authService = AuthService();
   final List<bool> _selectedUserRole = <bool>[true, false];
   bool _showPassword = false;
 
+  final formKey = GlobalKey<FormState>();
   List<Widget> userRole = <Widget>[
     const Text('Öğrenci'),
     const Text('Eğitmen'),
   ];
 
+  String _email = "";
+  String _password = "";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Stack(
-        children: [
-          const CustomBackground(),
-          Padding(
-            padding: EdgeInsets.symmetric(
-              horizontal: ScreenPadding.screenpadding,
-              vertical: ScreenPadding.screenpadding * 2,
-            ),
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 10,
-                  child: Align(
-                    alignment: Alignment.centerRight,
-                    child: _buildUserRoleToggleButtons(),
+      body: BlocListener<AuthBloc, AuthState>(
+        listener: (context, state) {
+          if (state is LoginSuccess) {
+            if (_authService.currentUser?.isAnonymous ?? false) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const TobetoHomeScreen()),
+              );
+            } else {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const HomeScreen()),
+              );
+            }
+          } else if (state is LoginError) {
+            snackBar(
+              context,
+              "Giriş yaparken bir hata oluştu! Lütfen tekrar deneyin.",
+            );
+          }
+        },
+        child: Stack(
+          children: [
+            const CustomBackground(),
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: ScreenPadding.screenpadding,
+                vertical: ScreenPadding.screenpadding * 2,
+              ),
+              child: Column(
+                children: [
+                  Expanded(
+                    flex: 10,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: _buildUserRoleToggleButtons(),
+                    ),
                   ),
-                ),
-                const Expanded(
-                  flex: 15,
-                  child: CustomLogo(),
-                ),
-                Expanded(
-                  flex: 40,
-                  child: _loginContent(),
-                ),
-                Expanded(
-                  flex: 35,
-                  child: _anotherLogin(),
-                ),
-              ],
+                  const Expanded(
+                    flex: 15,
+                    child: CustomLogo(),
+                  ),
+                  Expanded(
+                    flex: 40,
+                    child: _loginContent(),
+                  ),
+                  Expanded(
+                    flex: 35,
+                    child: _anotherLogin(),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
@@ -92,40 +129,60 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   Widget _loginContent() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.end,
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        InputTextFormField(
-          hintText: TobetoText.loginUserEmail,
-        ),
-        InputTextFormField(
-          hintText: TobetoText.loginUserPassword,
-          obscureText: !_showPassword,
-          suffixIcon: IconButton(
-            icon: Icon(
-              _showPassword ? Icons.visibility : Icons.visibility_off,
-              color: Theme.of(context).colorScheme.onSecondary,
-            ),
-            onPressed: () {
-              setState(() {
-                _showPassword = !_showPassword;
-              });
+    return Form(
+      key: formKey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          InputTextFormField(
+            hintText: TobetoText.loginUserEmail,
+            keyboardType: TextInputType.emailAddress,
+            onSave: (newValue) {
+              _email = newValue!;
             },
           ),
-        ),
-        TextButton(
-          onPressed: () {},
-          child: Text(
-            TobetoText.loginForgotPassword,
-            style: TobetoTextStyle.inter.captionGrayDarkSemiBold15,
+          InputTextFormField(
+            hintText: TobetoText.loginUserPassword,
+            obscureText: !_showPassword,
+            suffixIcon: IconButton(
+              icon: Icon(
+                _showPassword ? Icons.visibility : Icons.visibility_off,
+                color: Theme.of(context).colorScheme.onSecondary,
+              ),
+              onPressed: () {
+                setState(() {
+                  _showPassword = !_showPassword;
+                });
+              },
+            ),
+            onSave: (newValue) {
+              _password = newValue!;
+            },
           ),
-        ),
-        CustomButton(
-          onPressed: () {},
-          text: TobetoText.loginButton,
-        ),
-      ],
+          TextButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                createHorizontalPageRoute(const PasswordResetScreen()),
+              );
+            },
+            child: Text(
+              TobetoText.loginForgotPassword,
+              style: TobetoTextStyle.inter.captionGrayDarkSemiBold15,
+            ),
+          ),
+          CustomButton(
+            onPressed: () {
+              formKey.currentState!.save();
+              context
+                  .read<AuthBloc>()
+                  .add(LoginEvent(email: _email, password: _password));
+            },
+            text: TobetoText.loginButton,
+          ),
+        ],
+      ),
     );
   }
 
@@ -142,7 +199,9 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Column(
             children: [
               _customframe(
-                onTap: () {},
+                onTap: () {
+                  context.read<AuthBloc>().add(const GuestLoginEvent());
+                },
                 child: Row(
                   children: [
                     Padding(
@@ -164,7 +223,9 @@ class _LoginScreenState extends State<LoginScreen> {
                   children: [
                     _customframe(
                       width: ScreenUtil.getWidth(context) * 0.35,
-                      onTap: () {},
+                      onTap: () {
+                        context.read<AuthBloc>().add(const GoogleLoginEvent());
+                      },
                       child: Image.asset(ImagePath.googleIcon),
                     ),
                     _customframe(
@@ -181,7 +242,12 @@ class _LoginScreenState extends State<LoginScreen> {
         CustomTextButton(
           text: TobetoText.loginSubtitle,
           textbold: TobetoText.loginRegisterButton,
-          onPressed: () {},
+          onPressed: () {
+            // Navigator.push(
+            //   context,
+            //   createHorizontalPageRoute(const RegisterScreen()),
+            // );
+          },
         ),
       ],
     );
