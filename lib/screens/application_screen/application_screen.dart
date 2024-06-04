@@ -24,7 +24,7 @@ class ApplicationScreen extends StatelessWidget {
           children: [
             Container(
               decoration: BoxDecoration(
-                color: TobetoColor.card.lightGrey,
+                color: TobetoColor.card.cream,
                 borderRadius: BorderRadius.circular(16),
                 border: Border(
                   left: BorderSide(
