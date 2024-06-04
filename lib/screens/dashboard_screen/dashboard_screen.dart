@@ -24,46 +24,41 @@ class _HomeState extends State<DashboardScreen> {
               item: ItemConfig(
                 icon: Image.asset(ImagePath.profileActive),
                 title: TobetoText.bottomIconProfile,
-                inactiveIcon: Opacity(
-                  opacity: 0.5,
-                  child: Image.asset(ImagePath.profile),
-                ),
+                inactiveIcon: Image.asset(ImagePath.profile),
               )),
           PersistentTabConfig(
               screen: const EducationScreen(),
               item: ItemConfig(
-                  icon: Image.asset(ImagePath.trainingsActive),
-                  title: TobetoText.bottomIconEducation,
-                  inactiveIcon: Opacity(
-                    opacity: 0.5,
-                    child: Image.asset(ImagePath.trainings),
-                  ))),
+                icon: Image.asset(ImagePath.trainingsActive),
+                title: TobetoText.bottomIconEducation,
+                inactiveIcon: Image.asset(ImagePath.trainings),
+              )),
           PersistentTabConfig(
               screen: const HomeScreen(),
               item: ItemConfig(
-                  icon: Image.asset(ImagePath.homepageActive),
-                  inactiveIcon: Opacity(
-                    opacity: 0.5,
-                    child: Image.asset(ImagePath.homepage),
-                  ))),
+                icon: Image.asset(
+                  ImagePath.homepageActive,
+                  width: IconSize.size35px,
+                ),
+                inactiveIcon: Image.asset(
+                  ImagePath.homepage,
+                  width: IconSize.size35px,
+                ),
+              )),
           PersistentTabConfig(
               screen: const SplashScreen(),
               item: ItemConfig(
-                  icon: Image.asset(ImagePath.catalogActive),
-                  title: TobetoText.bottomIconCatalog,
-                  inactiveIcon: Opacity(
-                    opacity: 0.5,
-                    child: Image.asset(ImagePath.catalog),
-                  ))),
+                icon: Image.asset(ImagePath.catalogActive),
+                title: TobetoText.bottomIconCatalog,
+                inactiveIcon: Image.asset(ImagePath.catalog),
+              )),
           PersistentTabConfig(
               screen: const LoginScreen(),
               item: ItemConfig(
-                  icon: Image.asset(ImagePath.calendarActive),
-                  title: TobetoText.bottomIconCalendar,
-                  inactiveIcon: Opacity(
-                    opacity: 0.5,
-                    child: Image.asset(ImagePath.calendar),
-                  )))
+                icon: Image.asset(ImagePath.calendarActive),
+                title: TobetoText.bottomIconCalendar,
+                inactiveIcon: Image.asset(ImagePath.calendar),
+              ))
         ],
         navBarBuilder: (navBarConfig) => CustomNavBar(
               navBarConfig: navBarConfig,
