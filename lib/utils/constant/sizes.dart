@@ -5,8 +5,14 @@ abstract class SizeRadius {
 
   static double radius5px = 5;
   static double radius8px = 8;
+  static double radius10px = 10;
   static double radius16px = 16;
   static double radius20px = 20;
+}
+
+abstract class IconOpacity {
+  IconOpacity._();
+  static double halfOpacity = 0.5;
 }
 
 abstract class ScreenUtil {
@@ -36,7 +42,9 @@ abstract class ScreenPadding {
 
 abstract class IconSize {
   IconSize._();
+  static double size25px = 25;
   static double size30px = 30;
   static double size35px = 35;
   static double size60px = 60;
+  static double size65px = 65;
 }

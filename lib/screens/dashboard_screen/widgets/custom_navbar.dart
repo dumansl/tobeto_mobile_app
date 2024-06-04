@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -20,8 +21,8 @@ class CustomNavBar extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: IconTheme(
-              data: const IconThemeData(
-                size: 35,
+              data: IconThemeData(
+                size: IconSize.size35px,
               ),
               child: isSelected ? item.icon : item.inactiveIcon,
             ),
@@ -43,22 +44,22 @@ class CustomNavBar extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: 70,
-            height: 70,
-            decoration: const BoxDecoration(
+            width: IconSize.size65px,
+            height: IconSize.size65px,
+            decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: Colors.white,
+              color: TobetoColor.button.white,
               boxShadow: [
                 BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 10,
+                  color: TobetoColor.card.shadowColor,
+                  blurRadius: SizeRadius.radius10px,
                 ),
               ],
             ),
             child: Center(
               child: IconTheme(
-                data: const IconThemeData(
-                  size: 35,
+                data: IconThemeData(
+                  size: IconSize.size35px,
                 ),
                 child: isSelected ? item.icon : item.inactiveIcon,
               ),
@@ -80,18 +81,18 @@ class CustomNavBar extends StatelessWidget {
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const SizedBox(height: 30),
+            SizedBox(height: IconSize.size25px),
             DecoratedNavBar(
-              decoration: const NavBarDecoration(boxShadow: [
+              decoration: NavBarDecoration(boxShadow: [
                 BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 10,
+                  color: TobetoColor.card.shadowColor,
+                  blurRadius: SizeRadius.radius10px,
                 ),
-              ], borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
+              ], borderRadius: BorderRadius.vertical(top: Radius.circular(SizeRadius.radius20px))),
               // ignore: deprecated_member_use
               filter: navBarConfig.selectedItem.filter,
               // opacity: navBarConfig.selectedItem.opacity,
-              height: 60,
+              height: IconSize.size60px,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: navBarConfig.items.map((item) {
