@@ -6,8 +6,9 @@ import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const FixedAppbar({super.key});
-
+  const FixedAppbar({super.key, this.bottom, this.height = 75});
+  final TabBar? bottom;
+  final double height;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -60,9 +61,11 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
           ]),
         ),
       ],
+      bottom: bottom,
     );
   }
 
   @override
-  Size get preferredSize => const Size.fromHeight(75.0); // Sabit bir yükseklik değeri kullanın
+  Size get preferredSize =>
+      Size.fromHeight(height); // Sabit bir yükseklik değeri kullanın
 }

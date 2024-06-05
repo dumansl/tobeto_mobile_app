@@ -40,15 +40,14 @@ class ExamsCard extends StatelessWidget {
                         children: [
                           Text(
                             "Herkes için Kodlama",
-                            style: TobetoTextStyle.poppins.captionBlackBold18,
+                            style: TobetoTextStyle.poppins.captionBlackBold24,
                           )
                         ],
                       ),
                       Row(
                         children: [
                           Text("Herkes için Kodlama",
-                              style:
-                                  TobetoTextStyle.poppins.captionGrayDarkBold15)
+                              style: TobetoTextStyle.poppins.captionBlackBold24)
                         ],
                       ),
                       Row(
