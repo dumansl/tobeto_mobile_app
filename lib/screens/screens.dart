@@ -8,3 +8,5 @@ export "profile_screen/profile_screen.dart";
 export 'login_screen/register_screen.dart';
 export 'login_screen/password_reset_screen.dart';
 export "reviews_screen/rewiews_screen.dart";
+export 'reviews_screen/tobeto_success_screen.dart';
+export 'reviews_screen/exam_result_screen.dart';

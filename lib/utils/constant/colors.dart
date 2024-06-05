@@ -23,6 +23,7 @@ class StateColor {
 class BackgroundColor {
   final Color white = Colors.white;
   final Color darkGrey = const Color(0xff212529);
+  final Color lightGrey = const Color(0xffF5F5F5);
   final Color transparent = Colors.transparent;
 }
 

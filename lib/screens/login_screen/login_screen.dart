@@ -243,10 +243,10 @@ class _LoginScreenState extends State<LoginScreen> {
           text: TobetoText.loginSubtitle,
           textbold: TobetoText.loginRegisterButton,
           onPressed: () {
-            // Navigator.push(
-            //   context,
-            //   createHorizontalPageRoute(const RegisterScreen()),
-            // );
+            Navigator.push(
+              context,
+              createHorizontalPageRoute(const RegisterScreen()),
+            );
           },
         ),
       ],
