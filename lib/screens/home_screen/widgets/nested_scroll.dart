@@ -38,24 +38,62 @@ class NestedScroll extends StatelessWidget {
                   children: [
                     Container(
                       padding: _isTopRight
-                          ? EdgeInsets.only(top: ScreenPadding.padding32px, right: ScreenPadding.padding12px)
-                          : EdgeInsets.symmetric(vertical: ScreenPadding.padding32px),
-                      alignment: _isTopRight ? Alignment.centerRight : Alignment.bottomCenter,
-                      child: CircleAvatar(
-                        radius: _isTopRight ? IconSize.size30px : IconSize.size60px,
-                        backgroundImage: const AssetImage(ImagePath.profilePhoto),
+                          ? EdgeInsets.only(
+                              top: ScreenPadding.padding32px,
+                              right: ScreenPadding.padding12px)
+                          : EdgeInsets.symmetric(
+                              vertical: ScreenPadding.padding32px),
+                      alignment: _isTopRight
+                          ? Alignment.centerRight
+                          : Alignment.bottomCenter,
+                      child: Container(
+                        padding: const EdgeInsets.all(2.0),
+                        width: _isTopRight
+                            ? IconSize.size30px * 2
+                            : IconSize.size60px * 2,
+                        height: _isTopRight
+                            ? IconSize.size30px * 2
+                            : IconSize.size60px * 2,
+                        decoration: BoxDecoration(
+                          shape: BoxShape.circle,
+                          gradient: LinearGradient(
+                            colors: [
+                              TobetoColor.purple,
+                              TobetoColor.rainbow.lineargreen,
+                              TobetoColor.rainbow.linaergreenv2,
+                              TobetoColor.rainbow.linearyellow,
+                              TobetoColor.purple
+                            ],
+                            begin: Alignment.topLeft,
+                            end: Alignment.bottomRight,
+                          ),
+                        ),
+                        child: CircleAvatar(
+                          radius: _isTopRight
+                              ? IconSize.size30px
+                              : IconSize.size60px,
+                          backgroundImage:
+                              const AssetImage(ImagePath.profilePhoto),
+                        ),
                       ),
                     ),
                     Container(
                       padding: EdgeInsets.only(top: ScreenPadding.padding32px),
-                      alignment: _isTopRight ? Alignment.center : Alignment.bottomCenter,
+                      alignment: _isTopRight
+                          ? Alignment.center
+                          : Alignment.bottomCenter,
                       child: RichText(
-                        text: TextSpan(style: TobetoTextStyle.poppins.captionBlackBold18, children: <TextSpan>[
-                          TextSpan(text: "TOBETO", style: TobetoTextStyle.poppins.captionPurpleBold18),
-                          const TextSpan(
-                            text: "'ya hoş geldin Enes",
-                          ),
-                        ]),
+                        text: TextSpan(
+                            style: TobetoTextStyle.poppins.captionBlackBold18,
+                            children: <TextSpan>[
+                              TextSpan(
+                                  text: "TOBETO",
+                                  style: TobetoTextStyle
+                                      .poppins.captionPurpleBold18),
+                              const TextSpan(
+                                text: "'ya hoş geldin Enes",
+                              ),
+                            ]),
                       ),
                     ),
                   ],
