@@ -70,6 +70,7 @@ class Typography {
   final TextStyle captionWhiteLight15;
 
   final TextStyle captionWhiteNormal14;
+  final TextStyle captionWhiteSemiBold14;
   final TextStyle captionWhiteSemiBold8;
 
   // Purple styles
@@ -939,6 +940,11 @@ class Typography {
         ),
         captionWhiteNormal14 = baseStyle.copyWith(
           fontSize: 14,
+          color: TobetoColor.text.white,
+        ),
+        captionWhiteSemiBold14 = baseStyle.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.w600,
           color: TobetoColor.text.white,
         ),
         captionWhiteSemiBold8 = baseStyle.copyWith(

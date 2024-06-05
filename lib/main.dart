@@ -33,7 +33,7 @@ class TobetoMobileApp extends StatelessWidget {
             themeMode: state,
             darkTheme: darkTheme,
             debugShowCheckedModeBanner: false,
-            home: const RegisterScreen(), // Kendinize göre değiştirin
+            home: const SplashScreen(), // Kendinize göre değiştirin
           );
         },
       ),

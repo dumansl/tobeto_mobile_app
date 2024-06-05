@@ -242,6 +242,7 @@ abstract class TobetoText {
   static String evaluationCard4Subtitle =
       "*Türkiye Ar-Ge Merkezi tarafından tasarlanmıştır.";
   static String evaluationCard5 = "Değerlendirmeye Başla";
+
   static String evaluationMain1 =
       "Tobeto İşte Başarı Modeli iş bulma ve bir işte başarılı olma sürecinde hayli kritik olan istihdam edilebilirlik yetkinlikleri üzerine kuruludur. Araştırmalar söylüyor ki bu yetkinlikler en az profesyonel iş yetkinlikleri kadar ve hatta bazı görüşlere göre daha önemli! Çünkü bu yetkinlikler, hangi alanda olursa olsun; bir işte sürdürülebilir başarıyı sağlayacak temel becerileri içeriyor. Dolayısıyla da şirketler, kurumlar adayların bu yetkinleri çok önemsiyor ve çalışanlarını bu alanlarda geliştirmek için büyük yatırımlar yapıyorlar. O halde şimdi sen de kendini analiz et; yetkinlik raporun çıksın. Kendini hangi alanlarda güçlü görüyorsun öğren. Ek olarak bu yetkinlikleri geliştirmek üzere Tobeto tarafından sunulan eğitimlere ücretsiz erişimin açılsın! Unutma; bu bir öz değerlendirme. Kendini yine sen değerlendiriyor, kendi fotoğrafını çekiyorsun. Bu bir test ya da sınav değil. Güçlü ve gelişime açık yetkinliklerini belirlemen için bir araç. O yüzden kendine karşı dürüst ol, gerçekten ne isen ona göre değerlendirme yap. Testi tamamlamak çok basit. 80 tane davranış ifadesi var. Bunların her birini okuyup o davranışta kendini ne kadar başarılı ya da iyi gördüğünü aşağıdaki ölçeği dikkate alarak işaretle. Tüm maddeler için işaretleme yapmalısın. Başarılar.";
   // catalog page/main
