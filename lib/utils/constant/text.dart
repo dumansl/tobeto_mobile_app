@@ -53,7 +53,8 @@ abstract class TobetoText {
   static String mainWelcome = "TOBETO'ya hoş geldin";
   static String mainHeadline1 =
       "Yeni nesil öğrenme deneyimi ile Tobeto kariyer yolculuğunda senin yanında!";
-  static String mainHeadline2 = "Ücretsiz eğitimlerle, \n geleceğin mesleklerinde sen de yerini al.";
+  static String mainHeadline2 =
+      "Ücretsiz eğitimlerle, \n geleceğin mesleklerinde sen de yerini al.";
   static String mainHeadline3 = "Aradığın “İş” Burada!";
   static String mainCard1 = "Başvurularım";
   static String mainCard2 = "Değerlendir";
@@ -215,17 +216,20 @@ abstract class TobetoText {
   static String profileEditSettingsFinalButton = "Üyeliği Sonlandır";
   // evaluation page
   static String evaluationAppBar = "Değerlendirmeler";
-  static String evaluationHeadline1 =
-      "Yetkinliklerini ücretsiz ölç, bilgilerini test et.";
+  static String evaluationHeadline1part1 = "Yetkinlik";
+  static String evaluationHeadline1part2 = "lerini ücretsiz ölç,";
+  static String evaluationHeadline1part3 = "\nbilgi";
+  static String evaluationHeadline1part4 = "lerini test et.";
   static String evaluationCard1Title = "Tobeto İşte Başarı Modeli";
   static String evaluationCard1Body =
-      "80 soru ile yetkinliklerini ölç, önerilen eğitimleri tamamla, rozetini kazan.";
+      "80 soru ile yetkinliklerini ölç,\nönerilen eğitimleri tamamla, rozetini kazan.";
   static String evaluationCardButton = "Başla";
   static String evaluationCard2Title = "Yazılımda Başarı Testi";
   static String evaluationCard2Body =
       "Çoktan seçmeli sorular ile teknik bilgini test et.";
-  static String evaluationHeadline2 =
-      "Aboneliğe özel değerlendirme araçları için";
+  static String evaluationCard2Button = ">>>";
+  static String evaluationHeadlineTitle2 = "Aboneliğe özel değerlendirme";
+  static String evaluationHeadlineSubTitle2 = "\naraçları için";
   static String evaluationCard3Title = "Kazanım Odaklı Testler";
   static String evaluationCard3Body =
       "Dijital gelişim kategorisindeki eğitimlere başlamadan önce konuyla ilgili bilgin ölçülür ve seviyene göre yönlendirilirsin.";

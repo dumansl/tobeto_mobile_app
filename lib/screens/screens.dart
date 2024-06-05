@@ -7,3 +7,4 @@ export "intro_screen/intro_screen.dart";
 export "profile_screen/profile_screen.dart";
 export 'login_screen/register_screen.dart';
 export 'login_screen/password_reset_screen.dart';
+export "reviews_screen/rewiews_screen.dart";

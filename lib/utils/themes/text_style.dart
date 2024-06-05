@@ -36,6 +36,8 @@ class Typography {
   final TextStyle captionBlackNormal15;
   final TextStyle captionBlackLight15;
 
+  final TextStyle captionBlackNormal14;
+
   // White styles
   final TextStyle headlineWhiteBold32;
   final TextStyle headlineWhiteSemiBold32;
@@ -66,6 +68,9 @@ class Typography {
   final TextStyle captionWhiteSemiBold15;
   final TextStyle captionWhiteNormal15;
   final TextStyle captionWhiteLight15;
+
+  final TextStyle captionWhiteNormal14;
+  final TextStyle captionWhiteSemiBold8;
 
   // Purple styles
   final TextStyle headlinePurpleBold32;
@@ -932,6 +937,15 @@ class Typography {
           fontWeight: FontWeight.w300,
           color: TobetoColor.text.white,
         ),
+        captionWhiteNormal14 = baseStyle.copyWith(
+          fontSize: 14,
+          color: TobetoColor.text.white,
+        ),
+        captionWhiteSemiBold8 = baseStyle.copyWith(
+          fontSize: 8,
+          fontWeight: FontWeight.w600,
+          color: TobetoColor.text.white,
+        ),
         headlinePurpleBold32 = baseStyle.copyWith(
           fontSize: 32,
           fontWeight: FontWeight.bold,
@@ -1291,6 +1305,11 @@ class Typography {
           fontSize: 15,
           fontWeight: FontWeight.w300,
           color: TobetoColor.text.lightGrey,
+        ),
+        captionBlackNormal14 = baseStyle.copyWith(
+          fontSize: 18,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
         );
 }
 

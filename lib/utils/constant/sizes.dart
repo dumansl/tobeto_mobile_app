@@ -7,6 +7,7 @@ abstract class SizeRadius {
   static double radius8px = 8;
   static double radius10px = 10;
   static double radius16px = 16;
+  static double radius30px = 30;
   static double radius20px = 20;
 }
 
@@ -37,7 +38,7 @@ abstract class ScreenPadding {
   static double padding24px = 24;
   static double padding32px = 32;
   static double padding58px = 58;
-  static double screenpadding = 24;
+  static double screenpadding = 12;
 }
 
 abstract class IconSize {
