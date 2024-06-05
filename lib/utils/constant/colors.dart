@@ -38,6 +38,7 @@ class CardColor {
   final Color darkBlue = const Color(0xff6100FF);
   final Color lightPurple = const Color(0xffF5EBFF);
   final Color darkPurple = const Color(0xff6667AB);
+  final Color linearpurple = const Color(0xff953DAC);
   final Color turquoise = const Color(0xff85A0A9);
   final Color yellow = const Color(0xffEEC272);
   final Color pink = const Color(0xffE288B6);

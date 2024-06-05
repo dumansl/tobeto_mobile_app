@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/home_screen/widgets/nested_scroll.dart
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/rainbow.dart';
+import 'package:tobeto_mobile_app/screens/reviews_screen/rewiews_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -86,7 +87,14 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: Box(
                       text: TobetoText.mainCard2,
-                      onTap: () {},
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const RewiewsScreen(),
+                          ),
+                        );
+                      },
                     ),
                   ),
                   Expanded(
