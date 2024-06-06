@@ -2,32 +2,29 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
 import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
-import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const FixedAppbar({super.key, this.bottom, this.height = 75});
+  const FixedAppbar({super.key, this.bottom, this.height = 75, required this.title});
   final TabBar? bottom;
   final double height;
+  final String title;
   @override
   Widget build(BuildContext context) {
     return AppBar(
       toolbarHeight: ScreenUtil.getHeight(context) * 0.090,
       title: Text(
-        TobetoText.profileAppBar,
+        title,
         style: TobetoTextStyle.poppins.subHeadlinePurpleBold28,
       ),
       centerTitle: true,
-      leading: Padding(
-        padding: EdgeInsets.only(left: ScreenPadding.padding12px),
-        child: IconButton(
-          icon: Icon(
-            Icons.arrow_back_rounded,
-            color: TobetoColor.purple,
-            size: IconSize.size35px,
-          ),
-          onPressed: () {},
+      leading: IconButton(
+        icon: Icon(
+          Icons.arrow_back_rounded,
+          color: TobetoColor.purple,
+          size: IconSize.size35px,
         ),
+        onPressed: () {},
       ),
       actions: [
         Padding(
@@ -66,6 +63,5 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize =>
-      Size.fromHeight(height); // Sabit bir yükseklik değeri kullanın
+  Size get preferredSize => Size.fromHeight(height); // Sabit bir yükseklik değeri kullanın
 }

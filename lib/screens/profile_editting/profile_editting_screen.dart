@@ -1,10 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/home_screen.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/profile_edit_screen.dart';
 import 'package:tobeto_mobile_app/screens/profile_screen/profile_screen.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 // import 'tabs/contact_tab.dart';
 // import 'tabs/work_tab.dart';
@@ -20,8 +19,7 @@ class ProfileEditPage extends StatefulWidget {
   State<ProfileEditPage> createState() => _ProfileEditPageState();
 }
 
-class _ProfileEditPageState extends State<ProfileEditPage>
-    with SingleTickerProviderStateMixin {
+class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -57,23 +55,27 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             Tab(icon: Icon(Icons.settings), text: "Ayarlar"),
           ],
         ),
+        title: TobetoText.profileAppBar,
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children: const [
-          GeneralTab(),
-          ProfileScreen(),
-          HomeScreen(),
-          // WorkTab(),
-          // EducationTab(),
-          // SkillsTab(),
-          // CertificatesTab(),
-          // CommunitiesTab(),
-          // HobbiesTab(),
-          // LanguagesTab(),
-          // AwardsTab(),
-          // SettingsTab(),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 12),
+        child: TabBarView(
+          controller: _tabController,
+          children: const [
+            GeneralTab(),
+            ProfileScreen(),
+            HomeScreen(),
+            // WorkTab(),
+            // EducationTab(),
+            // SkillsTab(),
+            // CertificatesTab(),
+            // CommunitiesTab(),
+            // HobbiesTab(),
+            // LanguagesTab(),
+            // AwardsTab(),
+            // SettingsTab(),
+          ],
+        ),
       ),
     );
   }
