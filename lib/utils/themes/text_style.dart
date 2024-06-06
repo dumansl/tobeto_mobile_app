@@ -366,7 +366,7 @@ class Typography {
         captionPurpleNormal18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.normal,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionWhiteThin18 = baseStyle.copyWith(
           fontSize: 18,
