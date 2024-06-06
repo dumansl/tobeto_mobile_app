@@ -9,11 +9,7 @@ class Announcement {
   final DateTime date;
   bool isRead;
 
-  Announcement(
-      {required this.title,
-      required this.description,
-      required this.date,
-      this.isRead = false});
+  Announcement({required this.title, required this.description, required this.date, this.isRead = false});
 
   void markAsRead() {
     isRead = true;
@@ -40,25 +36,11 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
         date: DateTime.now(),
         isRead: false),
     Announcement(
-        title: "Mezunlar için İstanbul Kodluyor Süreci",
-        description: "Açıklama 2",
-        date: DateTime.now(),
-        isRead: true),
+        title: "Mezunlar için İstanbul Kodluyor Süreci", description: "Açıklama 2", date: DateTime.now(), isRead: true),
+    Announcement(title: "6 Mart Sınavları Hk.", description: "Açıklama 3", date: DateTime.now(), isRead: true),
     Announcement(
-        title: "6 Mart Sınavları Hk.",
-        description: "Açıklama 3",
-        date: DateTime.now(),
-        isRead: true),
-    Announcement(
-        title: "20 Şubat Kampüs Buluşması Hk.",
-        description: "Açıklama 4",
-        date: DateTime.now(),
-        isRead: false),
-    Announcement(
-        title: "Mindset Anketi",
-        description: "Açıklama 5",
-        date: DateTime.now(),
-        isRead: true),
+        title: "20 Şubat Kampüs Buluşması Hk.", description: "Açıklama 4", date: DateTime.now(), isRead: false),
+    Announcement(title: "Mindset Anketi", description: "Açıklama 5", date: DateTime.now(), isRead: true),
   ];
 
   List<Announcement> filteredAnnouncements = [];
@@ -84,15 +66,11 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
       if (query.isEmpty) {
         filteredAnnouncements = announcements;
       } else {
-        filteredAnnouncements = announcements
-            .where((announcement) =>
-                announcement.title.toLowerCase().contains(query))
-            .toList();
+        filteredAnnouncements =
+            announcements.where((announcement) => announcement.title.toLowerCase().contains(query)).toList();
       }
       if (_showOnlyUnread) {
-        filteredAnnouncements = filteredAnnouncements
-            .where((announcement) => !announcement.isRead)
-            .toList();
+        filteredAnnouncements = filteredAnnouncements.where((announcement) => !announcement.isRead).toList();
       }
     });
   }
@@ -143,13 +121,9 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
                 Expanded(
                   flex: 1,
                   child: IconButton(
-                    icon: Icon(_showOnlyUnread
-                        ? Icons.visibility_off
-                        : Icons.visibility),
+                    icon: Icon(_showOnlyUnread ? Icons.visibility_off : Icons.visibility),
                     onPressed: _toggleShowUnread,
-                    tooltip: _showOnlyUnread
-                        ? 'Hepsini Göster'
-                        : 'Okunmuş Olanları Gizle',
+                    tooltip: _showOnlyUnread ? 'Hepsini Göster' : 'Okunmuş Olanları Gizle',
                   ),
                 ),
               ],
@@ -159,8 +133,7 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
             child: ListView.builder(
               itemCount: filteredAnnouncements.length,
               itemBuilder: (context, index) {
-                return AnnouncementCard(
-                    announcement: filteredAnnouncements[index]);
+                return AnnouncementCard(announcement: filteredAnnouncements[index], focusNode: _focusNode);
               },
             ),
           ),
