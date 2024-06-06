@@ -5,8 +5,9 @@ import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class AnnouncementCard extends StatefulWidget {
   final Announcement announcement;
+  final FocusNode focusNode;
 
-  const AnnouncementCard({super.key, required this.announcement});
+  const AnnouncementCard({super.key, required this.announcement, required this.focusNode});
 
   @override
   State<AnnouncementCard> createState() => _AnnouncementCardState();
@@ -22,6 +23,8 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
       widget.announcement.markAsRead();
     });
 
+    widget.focusNode.unfocus();
+
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
@@ -36,8 +39,7 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
               children: [
                 Text(
                   widget.announcement.title,
-                  style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
+                  style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(height: 16),
                 Text(widget.announcement.description),
@@ -47,8 +49,7 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                   children: [
                     Row(
                       children: [
-                        const Icon(Icons.calendar_today,
-                            size: 16, color: Colors.grey),
+                        const Icon(Icons.calendar_today, size: 16, color: Colors.grey),
                         const SizedBox(width: 4),
                         Text(
                           'Tarih: ${_formatDate(widget.announcement.date)}',
@@ -73,12 +74,9 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
-          color: widget.announcement.isRead
-              ? TobetoColor.card.lightGrey
-              : TobetoColor.card.cream,
+          color: widget.announcement.isRead ? TobetoColor.card.lightGrey : TobetoColor.card.cream,
           borderRadius: BorderRadius.circular(16.0),
-          border: Border(
-              left: BorderSide(color: TobetoColor.card.lightGreen, width: 7)),
+          border: Border(left: BorderSide(color: TobetoColor.card.lightGreen, width: 7)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -90,13 +88,11 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                 children: [
                   Text(
                     'Duyuru',
-                    style: TobetoTextStyle.poppins.captionBlackNormal12
-                        .copyWith(color: TobetoColor.card.lightGreen),
+                    style: TobetoTextStyle.poppins.captionBlackNormal12.copyWith(color: TobetoColor.card.lightGreen),
                   ),
                   Text(
                     'İstanbul Kodluyor',
-                    style: TobetoTextStyle.poppins.captionBlackNormal12
-                        .copyWith(color: TobetoColor.card.lightGreen),
+                    style: TobetoTextStyle.poppins.captionBlackNormal12.copyWith(color: TobetoColor.card.lightGreen),
                   ),
                 ],
               ),
@@ -111,8 +107,7 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.calendar_month,
-                          size: 16, color: Colors.grey),
+                      const Icon(Icons.calendar_month, size: 16, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
                         'Tarih: ${_formatDate(widget.announcement.date)}',
