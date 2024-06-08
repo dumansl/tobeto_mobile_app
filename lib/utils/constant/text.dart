@@ -141,9 +141,9 @@ abstract class TobetoText {
   static String profileEditSectorBox = "Lütfen sektör bilgisi giriniz...";
   static String profileEditWorkplaceLocation = "Şehir Seçiniz*";
   static String profileEditWorkplaceLocationBox = "Lütfen şehir seçiniz...";
-  static String profileEditStartJobDate = "İş Başlangıcı*";
+  static String profileEditStartJobDate = "İş Başlangıç*";
   static String profileEditStartJobDateBox = "gg.aa.yyyy";
-  static String profileEditFinishJobDate = "İş Bitişi*";
+  static String profileEditFinishJobDate = "İş Bitiş*";
   static String profileEditFinishJobDateBox = "gg.aa.yyyy";
   static String profileEditExperienceContinueBox = "Çalışmaya Devam Ediyorum";
   static String profileEditJobDescription = "İş Açıklaması*";
@@ -188,7 +188,7 @@ abstract class TobetoText {
   static String profileEditProjectAwardDate = "Alınan Tarih*";
   static String profileEditProjectAwardDateBox = "gg.aa.yyyy*";
   static String profileEditProjectAwardSubtitle =
-      "Henüz eklediğiniz bir proje veya ödül bulunmamaktadır.";
+      "Henüz eklediğiniz bir proje veya ödül \n bulunmamaktadır.";
   // profile edit page/social media account
   static String profileEditSocialMediaName = "Sosyal Medya Adı*";
   static String profileEditSocialMediaNameBox =
@@ -250,7 +250,7 @@ abstract class TobetoText {
   static String catalogSearchBox = "Eğitim arayın...";
   static String catalogHeadline1 = "Popüler Kurslar";
   static String catalogHeadline2 = "Kategori";
-  static String catalogSeeAll = "Tümünü Göster";
+  static String catalogSeeAll = "Tümünü \n Göster";
   // catalog page/filter
   static String catalogCategory = "Kategori";
   static String catalogCategoryBox = "Lütfen kategori seçiniz...";
