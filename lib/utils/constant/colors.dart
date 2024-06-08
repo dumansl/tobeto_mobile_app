@@ -47,6 +47,8 @@ class CardColor {
   final Color fuchsia = const Color(0xffD75078);
   final Color peach = const Color(0xffD77E6F);
   final Color shadowColor = const Color.fromARGB(255, 117, 117, 117);
+  final Color iknavyblue = const Color(0xff1E0F41);
+  final Color ikgreen = const Color(0xff00D29B);
 }
 
 class ButtonColor {
