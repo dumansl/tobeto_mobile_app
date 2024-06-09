@@ -60,7 +60,7 @@ class RewiewsScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
-                  child: _rainbowDivider(),
+                  child: _rainbowDivider(context),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding8px),
@@ -238,8 +238,11 @@ class RewiewsScreen extends StatelessWidget {
       ),
       child: Row(
         children: [
-          Image.asset(height: 48, width: 48, ImagePath.platformIcon),
-          const SizedBox(width: 8),
+          Image.asset(
+              height: ScreenUtil.getHeight(context) * 0.06,
+              width: ScreenUtil.getHeight(context) * 0.06,
+              ImagePath.platformIcon),
+          SizedBox(width: ScreenPadding.padding8px),
           Text(
             title,
             style: TobetoTextStyle.poppins.subtitleWhiteSemiBold20,
@@ -258,10 +261,10 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  Widget _rainbowDivider() {
+  Widget _rainbowDivider(BuildContext context) {
     return Container(
-      height: 121,
-      width: 7,
+      height: ScreenUtil.getHeight(context) * 0.16,
+      width: ScreenUtil.getWidth(context) * 0.02,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius5px)),
         gradient: LinearGradient(
