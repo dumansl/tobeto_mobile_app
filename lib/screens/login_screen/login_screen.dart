@@ -54,7 +54,8 @@ class _LoginScreenState extends State<LoginScreen> {
             } else {
               Navigator.pushReplacement(
                 context,
-                MaterialPageRoute(builder: (context) => const HomeScreen()),
+                MaterialPageRoute(
+                    builder: (context) => const DashboardScreen()),
               );
             }
           } else if (state is LoginError) {
@@ -69,8 +70,8 @@ class _LoginScreenState extends State<LoginScreen> {
             const CustomBackground(),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: ScreenPadding.screenpadding,
-                vertical: ScreenPadding.screenpadding * 2,
+                horizontal: ScreenPadding.screenpadding * 2,
+                vertical: ScreenPadding.screenpadding * 4,
               ),
               child: Column(
                 children: [

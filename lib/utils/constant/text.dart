@@ -245,6 +245,23 @@ abstract class TobetoText {
 
   static String evaluationMain1 =
       "Tobeto İşte Başarı Modeli iş bulma ve bir işte başarılı olma sürecinde hayli kritik olan istihdam edilebilirlik yetkinlikleri üzerine kuruludur. Araştırmalar söylüyor ki bu yetkinlikler en az profesyonel iş yetkinlikleri kadar ve hatta bazı görüşlere göre daha önemli! Çünkü bu yetkinlikler, hangi alanda olursa olsun; bir işte sürdürülebilir başarıyı sağlayacak temel becerileri içeriyor. Dolayısıyla da şirketler, kurumlar adayların bu yetkinleri çok önemsiyor ve çalışanlarını bu alanlarda geliştirmek için büyük yatırımlar yapıyorlar. O halde şimdi sen de kendini analiz et; yetkinlik raporun çıksın. Kendini hangi alanlarda güçlü görüyorsun öğren. Ek olarak bu yetkinlikleri geliştirmek üzere Tobeto tarafından sunulan eğitimlere ücretsiz erişimin açılsın! Unutma; bu bir öz değerlendirme. Kendini yine sen değerlendiriyor, kendi fotoğrafını çekiyorsun. Bu bir test ya da sınav değil. Güçlü ve gelişime açık yetkinliklerini belirlemen için bir araç. O yüzden kendine karşı dürüst ol, gerçekten ne isen ona göre değerlendirme yap. Testi tamamlamak çok basit. 80 tane davranış ifadesi var. Bunların her birini okuyup o davranışta kendini ne kadar başarılı ya da iyi gördüğünü aşağıdaki ölçeği dikkate alarak işaretle. Tüm maddeler için işaretleme yapmalısın. Başarılar.";
+  static String evaluationHeadlineSubTitle3 = "Analiz Raporum";
+  static String evaluationspiderChartDescription1 =
+      "Yeni dünyaya hazırlanıyorum";
+  static String evaluationspiderChartDescription2 =
+      "Profesyonel duruşumu geliştiriyorum";
+  static String evaluationspiderChartDescription3 =
+      "Kendimi tanıyor ve yönetiyorum";
+  static String evaluationspiderChartDescription4 =
+      "Yaratıcı ve doğru çözümler geliştiriyorum";
+  static String evaluationspiderChartDescription5 =
+      "Kendimi sürekli geliştiriyorum";
+  static String evaluationspiderChartDescription6 =
+      "Başkaları ile birlikte çalışıyorum";
+  static String evaluationspiderChartDescription7 = "Sonuç ve başarı odaklıyım";
+  static String evaluationspiderChartDescription8 =
+      "Anlıyorum ve anlaşılıyorum";
+  static String evaluationScore = "Yetkinlik Puanı";
   // catalog page/main
   static String catalogAppBar = "Katalog";
   static String catalogSearchBox = "Eğitim arayın...";
