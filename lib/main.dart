@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/exams_bloc/exams_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
+import 'package:tobeto_mobile_app/screens/deneme_v2.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/themes/theme.dart';
 import 'firebase_options.dart';
@@ -25,6 +27,7 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<CourseBloc>(create: (context) => CourseBloc()),
         BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
+        BlocProvider<ExamBloc>(create: (context) => ExamBloc()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {
@@ -33,7 +36,7 @@ class TobetoMobileApp extends StatelessWidget {
             themeMode: state,
             darkTheme: darkTheme,
             debugShowCheckedModeBanner: false,
-            home: const SplashScreen(), // Kendinize göre değiştirin
+            home: const ExamsScreen(), // Kendinize göre değiştirin
           );
         },
       ),
