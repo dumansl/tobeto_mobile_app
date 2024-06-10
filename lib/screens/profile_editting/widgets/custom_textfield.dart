@@ -3,28 +3,34 @@ import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+  CustomTextField({
     super.key,
     this.keyboardType = TextInputType.text,
     required this.title,
     this.maxLength,
     this.maxLines,
+    required this.onSaved,
+    required this.controller,
   });
 
   final TextInputType keyboardType;
   final String title;
   final int? maxLength;
   final int? maxLines;
+  final TextEditingController controller;
+  dynamic Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
+      onSaved: onSaved,
       maxLines: maxLines,
       cursorColor: TobetoColor.card.grey,
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
       maxLength: maxLength,
-      style: TobetoTextStyle.poppins.bodyBlackSemiBold16,
+      style: TobetoTextStyle.poppins.bodyBlackBold16,
       decoration: InputDecoration(
         counterText: "",
         focusedBorder: const OutlineInputBorder(

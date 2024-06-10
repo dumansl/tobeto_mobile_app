@@ -1,16 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/screens/home_screen/home_screen.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/screen/profile_edit_screen.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/competencies.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/education_life.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/languages.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/social_media.dart';
 import 'package:tobeto_mobile_app/screens/profile_screen/profile_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-
-// import 'tabs/contact_tab.dart';
-// import 'tabs/work_tab.dart';
-// import 'tabs/education_tab.dart';
-// import 'tabs/skills_tab.dart';
-// import 'tabs/certificates_tab.dart';
-// import 'tabs/communities_tab.dart';
 
 class ProfileEditPage extends StatefulWidget {
   const ProfileEditPage({super.key});
@@ -32,27 +28,36 @@ class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProv
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FixedAppbar(
-        height: 150,
+        height: 130,
         bottom: TabBar(
           tabAlignment: TabAlignment.start,
           indicatorColor: TobetoColor.purple,
-          dividerColor: Colors.amber,
-          labelColor: TobetoColor.purple,
           controller: _tabController,
           dividerHeight: 0,
           isScrollable: true,
-          tabs: const [
-            Tab(icon: Icon(Icons.person), text: "Genel"),
-            Tab(icon: Icon(Icons.contact_mail), text: "İletişim"),
-            Tab(icon: Icon(Icons.work), text: "İş"),
-            Tab(icon: Icon(Icons.school), text: "Eğitim"),
-            Tab(icon: Icon(Icons.assignment), text: "Yetenekler"),
-            Tab(icon: Icon(Icons.card_membership), text: "Sertifikalar"),
-            Tab(icon: Icon(Icons.group), text: "Topluluklar"),
-            Tab(icon: Icon(Icons.houseboat), text: "Hobiler"),
-            Tab(icon: Icon(Icons.language), text: "Diller"),
-            Tab(icon: Icon(Icons.star), text: "Ödüller"),
-            Tab(icon: Icon(Icons.settings), text: "Ayarlar"),
+          tabs: [
+            Tab(icon: Image.asset(ImagePath.personalInformation)),
+            Tab(
+                icon: Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Image.asset(ImagePath.experiences),
+            )),
+            Tab(icon: Image.asset(ImagePath.education)),
+            Tab(icon: Image.asset(ImagePath.competencies)),
+            Tab(icon: Image.asset(ImagePath.certificates)),
+            Tab(
+                icon: Padding(
+              padding: const EdgeInsets.only(bottom: 2),
+              child: Image.asset(ImagePath.communities),
+            )),
+            Tab(icon: Image.asset(ImagePath.projectsAndAwards)),
+            Tab(icon: Image.asset(ImagePath.socialMedia)),
+            Tab(icon: Image.asset(ImagePath.foreignLanguages)),
+            Tab(
+                icon: Padding(
+              padding: const EdgeInsets.only(bottom: 4),
+              child: Image.asset(ImagePath.settings),
+            )),
           ],
         ),
         title: TobetoText.profileAppBar,
@@ -62,17 +67,17 @@ class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProv
         child: TabBarView(
           controller: _tabController,
           children: const [
-            GeneralTab(),
+            PersonalInformation(),
             ProfileScreen(),
-            HomeScreen(),
-            // WorkTab(),
+            // EducationLife(),
+            // Competencies(),
             // EducationTab(),
             // SkillsTab(),
             // CertificatesTab(),
             // CommunitiesTab(),
             // HobbiesTab(),
-            // LanguagesTab(),
-            // AwardsTab(),
+            // SocialMedia(),
+            // Languages(),
             // SettingsTab(),
           ],
         ),
