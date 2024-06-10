@@ -578,8 +578,7 @@ class IstanbulKodluyorScreen extends StatelessWidget {
               padding: const EdgeInsets.only(top: 30),
               child: Container(
                 decoration: const BoxDecoration(
-                    borderRadius: BorderRadius.only(topRight: Radius.circular(30), topLeft: Radius.circular(30)),
-                    color: Color.fromARGB(255, 0, 231, 170)),
+                    borderRadius: BorderRadius.all(Radius.circular(30)), color: Color.fromARGB(255, 0, 231, 170)),
                 width: double.infinity,
                 child: Column(
                   children: [
@@ -626,22 +625,25 @@ class IstanbulKodluyorScreen extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        RichText(
-                          text: TextSpan(
-                            children: [
-                              TextSpan(
-                                text: '1',
-                                style: GoogleFonts.poppins(
-                                  color: const Color.fromARGB(230, 31, 127, 10),
-                                  fontSize: 30,
-                                  fontWeight: FontWeight.bold,
+                        Padding(
+                          padding: const EdgeInsets.only(left: 2),
+                          child: RichText(
+                            text: TextSpan(
+                              children: [
+                                TextSpan(
+                                  text: '1',
+                                  style: GoogleFonts.poppins(
+                                    color: const Color.fromARGB(230, 31, 127, 10),
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              TextSpan(
-                                text: '    Profesyonel Yetkinlikler Kazan!',
-                                style: TobetoTextStyle.poppins.bodyWhiteBold16,
-                              ),
-                            ],
+                                TextSpan(
+                                  text: '     Profesyonel Yetkinlikler Kazan!',
+                                  style: TobetoTextStyle.poppins.bodyWhiteBold16,
+                                ),
+                              ],
+                            ),
                           ),
                         ),
                         RichText(
@@ -681,7 +683,297 @@ class IstanbulKodluyorScreen extends StatelessWidget {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Container(
+                decoration: BoxDecoration(
+                    borderRadius: const BorderRadius.all(Radius.circular(30)), color: TobetoColor.card.lightGrey),
+                width: double.infinity,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30, left: 30),
+                      child: Text(
+                        'Bu Proje Nasıl Destekleniyor?',
+                        style: TobetoTextStyle.poppins.captionBlackBold18,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(30),
+                      child: RichText(
+                        text: TextSpan(
+                          children: [
+                            TextSpan(text: 'İstanbul Kodluyor', style: TobetoTextStyle.poppins.bodyBlackBold16),
+                            TextSpan(
+                                text:
+                                    ', Türkiye’nin ilk sosyal etki tahvili projesidir. Sosyal etki tahvilleri, sosyal sorunlara çözüm bulan, performansa dayalı sözleşmelerdir ve ölçülebilir, pozitif, sosyal ve çevresel etki yaratacak sonuçlara ulaşılmayı amaçlamaktadır.',
+                                style: TobetoTextStyle.poppins.bodyBlackNormal16),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: SizedBox(
+                        width: 350,
+                        child: Image.asset(ImagePath.stb),
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: SizedBox(
+                          width: 100,
+                          child: Image.asset(ImagePath.istka),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: SizedBox(
+                          width: 250,
+                          child: Image.asset(ImagePath.bop),
+                        ),
+                      ),
+                    ),
+                    Center(
+                      child: SizedBox(
+                        width: 100,
+                        child: Image.asset(ImagePath.etkiYap),
+                      ),
+                    ),
+                    Center(
+                      child: SizedBox(
+                        width: 150,
+                        child: Image.asset(ImagePath.enocta),
+                      ),
+                    ),
+                    Center(
+                      child: Padding(
+                        padding: const EdgeInsets.only(top: 30, bottom: 30),
+                        child: SizedBox(
+                          width: 250,
+                          child: Image.asset(ImagePath.greyTobeto),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Text(
+                'Sıkça Sorulan Sorular',
+                style: TobetoTextStyle.poppins.captionBlackBold24,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Container(
+                decoration:
+                    const BoxDecoration(color: Color(0xFF1E0F41), borderRadius: BorderRadius.all(Radius.circular(30))),
+                height: 50,
+                width: double.infinity,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Expanded(
+                      child: Text(
+                        'Başvuru ve  Ön-değerlendirme',
+                        style: TobetoTextStyle.poppins.captionWhiteBold15,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {},
+                      icon: Icon(
+                        Icons.keyboard_arrow_down,
+                        color: TobetoColor.text.white,
+                        size: 30,
+                      ),
+                      alignment: Alignment.centerRight,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 30, bottom: 30),
+              child: Text(
+                'Projeden Kareler',
+                style: TobetoTextStyle.poppins.captionBlackBold24,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 3),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: ScreenUtil.getWidth(context) * 0.65,
+                    padding: const EdgeInsets.all(1.5), // Rainbow border thickness
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      gradient: LinearGradient(
+                        colors: [
+                          TobetoColor.purple,
+                          TobetoColor.rainbow.lineargreen,
+                          TobetoColor.rainbow.linaergreenv2,
+                          TobetoColor.rainbow.linearyellow,
+                          TobetoColor.purple
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      height: ScreenUtil.getHeight(context) * 0.2,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        image: DecorationImage(
+                          image: AssetImage(ImagePath.ik1),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 3, top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: ScreenUtil.getWidth(context) * 0.65,
+                    padding: const EdgeInsets.all(1.5), // Rainbow border thickness
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      gradient: LinearGradient(
+                        colors: [
+                          TobetoColor.purple,
+                          TobetoColor.rainbow.lineargreen,
+                          TobetoColor.rainbow.linaergreenv2,
+                          TobetoColor.rainbow.linearyellow,
+                          TobetoColor.purple
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      height: ScreenUtil.getHeight(context) * 0.2,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        image: DecorationImage(
+                          image: AssetImage(ImagePath.ik2),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 3, top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Container(
+                    width: ScreenUtil.getWidth(context) * 0.65,
+                    padding: const EdgeInsets.all(1.5), // Rainbow border thickness
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      gradient: LinearGradient(
+                        colors: [
+                          TobetoColor.purple,
+                          TobetoColor.rainbow.lineargreen,
+                          TobetoColor.rainbow.linaergreenv2,
+                          TobetoColor.rainbow.linearyellow,
+                          TobetoColor.purple
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      height: ScreenUtil.getHeight(context) * 0.2,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        image: DecorationImage(
+                          image: AssetImage(ImagePath.ik3),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(right: 3, top: 5),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Container(
+                    width: ScreenUtil.getWidth(context) * 0.65,
+                    padding: const EdgeInsets.all(1.5), // Rainbow border thickness
+                    decoration: BoxDecoration(
+                      borderRadius: const BorderRadius.all(Radius.circular(30)),
+                      gradient: LinearGradient(
+                        colors: [
+                          TobetoColor.purple,
+                          TobetoColor.rainbow.lineargreen,
+                          TobetoColor.rainbow.linaergreenv2,
+                          TobetoColor.rainbow.linearyellow,
+                          TobetoColor.purple
+                        ],
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                      ),
+                    ),
+                    alignment: Alignment.centerLeft,
+                    child: Container(
+                      height: ScreenUtil.getHeight(context) * 0.2,
+                      decoration: const BoxDecoration(
+                        borderRadius: BorderRadius.all(Radius.circular(30)),
+                        image: DecorationImage(
+                          image: AssetImage(ImagePath.ik4),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 40),
+              child: Container(
+                color: const Color(0xFF1E0F41),
+                width: double.infinity,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40, bottom: 40),
+                      child: Image.asset(
+                        ImagePath.ikLogoLight,
+                        width: 290,
+                        height: 120,
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -692,6 +984,3 @@ class IstanbulKodluyorScreen extends StatelessWidget {
     );
   }
 }
-// Emraha not: tobeto yeşili text yok
-// Şuleye not: tobeto laciverti yok, tobeto yeşili yok 
-// Kendime not: textleri ekle
