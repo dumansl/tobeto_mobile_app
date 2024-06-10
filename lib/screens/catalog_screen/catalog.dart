@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/widget/catalogSearchBar.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/widget/categoryCard.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/widget/courseCard.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/widget/courseCardBig.dart';
+import 'package:tobeto_mobile_app/screens/catalog_screen/widget/catalog_search_bar.dart';
+import 'package:tobeto_mobile_app/screens/catalog_screen/widget/category_card.dart';
+import 'package:tobeto_mobile_app/screens/catalog_screen/widget/course_card.dart';
+import 'package:tobeto_mobile_app/screens/catalog_screen/widget/course_card_big.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
-import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CatalogScreen extends StatefulWidget {
