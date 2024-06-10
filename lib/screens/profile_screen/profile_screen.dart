@@ -11,7 +11,8 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TobetoColor.card.cream,
-        title: Text(TobetoText.profileAppBar, style: TobetoTextStyle.poppins.headlinePurpleBold32),
+        title: Text(TobetoText.profileAppBar,
+            style: TobetoTextStyle.poppins.headlinePurpleBold32),
         centerTitle: true,
         leading: IconButton(
           icon: Image.asset(ImagePath.purpleBack),
@@ -48,7 +49,10 @@ class ProfileScreen extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEditPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileEditPage()));
                 },
                 icon: Image.asset(ImagePath.organizer),
               ),
@@ -209,14 +213,18 @@ class ProfileScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(content: Text('Tobeto Work Success Başla Butonuna Tıklandı!')),
+                          const SnackBar(
+                              content: Text(
+                                  'Tobeto Work Success Başla Butonuna Tıklandı!')),
                         );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: TobetoColor.purple,
                         foregroundColor: TobetoColor.text.white,
                       ),
-                      child: Text('Başla', style: TobetoTextStyle.poppins.captionWhiteSemiBold15),
+                      child: Text('Başla',
+                          style:
+                              TobetoTextStyle.poppins.captionWhiteSemiBold15),
                     ),
                   ),
                 ],
@@ -261,7 +269,8 @@ class MainTitleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) => ConstrainedBox(
+        builder: (BuildContext context, BoxConstraints constraints) =>
+            ConstrainedBox(
               constraints: const BoxConstraints(
                 minHeight: 0,
                 maxHeight: double.infinity,
@@ -385,7 +394,8 @@ class TwoLineCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(line1!, style: TobetoTextStyle.poppins.captionGrayNormal12),
-              Text(line2, style: TobetoTextStyle.poppins.bodyGrayDarkSemiBold16),
+              Text(line2,
+                  style: TobetoTextStyle.poppins.bodyGrayDarkSemiBold16),
             ],
           ),
         ),
@@ -431,7 +441,8 @@ class DialogCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 5),
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding16px),
-          child: Text(skill, style: TobetoTextStyle.poppins.bodyGrayDarkSemiBold16),
+          child: Text(skill,
+              style: TobetoTextStyle.poppins.bodyGrayDarkSemiBold16),
         ),
       ),
     );
