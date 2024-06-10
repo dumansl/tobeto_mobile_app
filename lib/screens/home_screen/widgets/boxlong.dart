@@ -22,7 +22,7 @@ class Boxlong extends StatelessWidget {
     final screenSize = MediaQuery.of(context).size;
 
     return Container(
-      width: screenSize.width * 0.16, // Sayfa genişliğinin %40'ı
+      width: screenSize.width * 0.17, // Sayfa genişliğinin %40'ı
       height: screenSize.height * 0.16, // Sayfa yüksekliğinin %20'si
       decoration: BoxDecoration(
         boxShadow: [
@@ -49,21 +49,31 @@ class Boxlong extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              text,
-              style: TobetoTextStyle.poppins.captionWhiteBold15,
-              textAlign: TextAlign.center,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  text,
+                  style: TobetoTextStyle.poppins.captionWhiteBold15,
+                  textAlign: TextAlign.center,
+                ),
+              ],
             ),
-            const SizedBox(height: 10), // Metin ve düğme arasına boşluk ekle
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                  backgroundColor: TobetoColor.card.darkBlue,
-                  shadowColor: TobetoColor.card.fuchsia),
-              onPressed: onPressed,
-              child: Text(
-                buttonText,
-                style: TobetoTextStyle.poppins.bodyWhiteBold16,
-              ),
+            // Metin ve düğme arasına boşluk ekle
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: TobetoColor.card.darkBlue,
+                      shadowColor: TobetoColor.card.fuchsia),
+                  onPressed: onPressed,
+                  child: Text(
+                    buttonText,
+                    style: TobetoTextStyle.poppins.bodyWhiteBold16,
+                  ),
+                ),
+              ],
             ),
           ],
         ),
