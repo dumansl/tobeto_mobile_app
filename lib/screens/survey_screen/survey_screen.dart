@@ -9,6 +9,8 @@ class SurveyScreen extends StatelessWidget {
     'Anket 3',
   ];
 
+  SurveyScreen({super.key});
+
   void navigateToSurvey(BuildContext context, String surveyTitle) {
     Navigator.push(
       context,
@@ -22,7 +24,7 @@ class SurveyScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Anketler'),
+        title: const Text('Anketler'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -51,22 +53,34 @@ class SurveyScreen extends StatelessWidget {
 class SurveyDetailScreen extends StatefulWidget {
   final String surveyTitle;
 
-  SurveyDetailScreen({required this.surveyTitle});
+  const SurveyDetailScreen({super.key, required this.surveyTitle});
 
   @override
-  _SurveyDetailScreenState createState() => _SurveyDetailScreenState();
+  State<SurveyDetailScreen> createState() => _SurveyDetailScreenState();
 }
 
 class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
   final List<Map<String, dynamic>> questions = [
     {
       'question': 'Bu eğitimden ne kadar memnun kaldınız?',
-      'options': ['Çok memnun', 'Memnun', 'Kararsız', 'Memnun değil', 'Hiç memnun değil'],
+      'options': [
+        'Çok memnun',
+        'Memnun',
+        'Kararsız',
+        'Memnun değil',
+        'Hiç memnun değil'
+      ],
       'selected': null,
     },
     {
       'question': 'Eğitimin içeriği yeterli miydi?',
-      'options': ['Çok yeterli', 'Yeterli', 'Kararsız', 'Yetersiz', 'Çok yetersiz'],
+      'options': [
+        'Çok yeterli',
+        'Yeterli',
+        'Kararsız',
+        'Yetersiz',
+        'Çok yetersiz'
+      ],
       'selected': null,
     },
     {
@@ -84,11 +98,11 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
 
   void _saveAnswers() {
     for (var question in questions) {
-      print('Soru: ${question['question']}');
-      print('Seçilen: ${question['selected']}');
+      debugPrint('Soru: ${question['question']}');
+      debugPrint('Seçilen: ${question['selected']}');
     }
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(content: Text('Cevaplar kaydedildi!')),
+      const SnackBar(content: Text('Cevaplar kaydedildi!')),
     );
   }
 
@@ -98,7 +112,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
       appBar: AppBar(
         title: Text(widget.surveyTitle),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -122,13 +136,13 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                       children: [
                         Text(
                           questions[index]['question'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             color: Colors.black,
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 10.0),
+                        const SizedBox(height: 10.0),
                         ...questions[index]['options'].map<Widget>((option) {
                           return ListTile(
                             title: Text(option),
@@ -139,7 +153,8 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                               onChanged: (value) {
                                 _handleRadioValueChange(index, value);
                               },
-                              materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
                               activeColor: TobetoColor.purple,
                             ),
                           );
@@ -156,7 +171,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
             child: ElevatedButton(
               style: elevatedButtonStyle(),
               onPressed: _saveAnswers,
-              child: Text('Kaydet'),
+              child: const Text('Kaydet'),
             ),
           ),
         ],

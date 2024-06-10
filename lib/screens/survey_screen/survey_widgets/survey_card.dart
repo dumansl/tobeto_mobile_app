@@ -8,7 +8,8 @@ class SurveyCard extends StatelessWidget {
   final Color lineerColor2;
   final bool isThereButton;
 
-  SurveyCard({
+  const SurveyCard({
+    super.key,
     required this.headline,
     required this.lineerColor1,
     required this.lineerColor2,
@@ -19,7 +20,9 @@ class SurveyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px, vertical: ScreenPadding.padding32px),
+      padding: EdgeInsets.symmetric(
+          horizontal: ScreenPadding.padding16px,
+          vertical: ScreenPadding.padding32px),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -55,6 +58,6 @@ ButtonStyle elevatedButtonStyle() {
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10.0),
     ),
-    padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
   );
 }

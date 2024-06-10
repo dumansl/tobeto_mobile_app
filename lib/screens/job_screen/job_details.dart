@@ -8,7 +8,8 @@ class JobDetails extends StatelessWidget {
   final String location;
   final String appliedDate;
 
-  JobDetails({
+  const JobDetails({
+    super.key,
     required this.jobType,
     required this.jobTitle,
     required this.companyName,
@@ -20,7 +21,8 @@ class JobDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('İş Detayları', style: TobetoTextStyle.poppins.captionLightGrayBold24),
+        title: Text('İş Detayları',
+            style: TobetoTextStyle.poppins.captionLightGrayBold24),
         backgroundColor: Colors.white,
       ),
       body: Padding(
@@ -29,22 +31,24 @@ class JobDetails extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(jobTitle, style: TobetoTextStyle.poppins.titlePurpleBold24),
-            SizedBox(height: 10),
-            Text('$companyName - $location', style: TobetoTextStyle.poppins.captionGrayNormal18),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
+            Text('$companyName - $location',
+                style: TobetoTextStyle.poppins.captionGrayNormal18),
+            const SizedBox(height: 10),
             Text(
               'İş Tipi: $jobType',
               style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Başvuru Tarihi: $appliedDate',
               style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text('İş Tanımı', style: TobetoTextStyle.poppins.titlePurpleBold24),
-            SizedBox(height: 10),
-            Text('Detaylar...', style: TobetoTextStyle.poppins.bodyGrayDarkNormal16),
+            const SizedBox(height: 10),
+            Text('Detaylar...',
+                style: TobetoTextStyle.poppins.bodyGrayDarkNormal16),
           ],
         ),
       ),

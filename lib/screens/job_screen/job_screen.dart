@@ -4,8 +4,10 @@ import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '../job_screen/job_widgets/job_card.dart';
 
 class JobScreen extends StatefulWidget {
+  const JobScreen({super.key});
+
   @override
-  _JobScreenState createState() => _JobScreenState();
+  State<JobScreen> createState() => _JobScreenState();
 }
 
 class _JobScreenState extends State<JobScreen> {
@@ -34,7 +36,8 @@ class _JobScreenState extends State<JobScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('İş Süreçlerim', style: TobetoTextStyle.poppins.headlineBlackBold32),
+        title: Text('İş Süreçlerim',
+            style: TobetoTextStyle.poppins.headlineBlackBold32),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
@@ -55,22 +58,24 @@ class _JobScreenState extends State<JobScreen> {
                 selectedBorderColor: Colors.transparent,
                 selectedColor: Colors.white,
                 borderRadius: BorderRadius.circular(20),
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text('Başvurularım', style: TextStyle(fontFamily: 'Poppins')),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: Text('Mülakatlarım', style: TextStyle(fontFamily: 'Poppins')),
-                  ),
-                ],
                 isSelected: [selectedIndex == 0, selectedIndex == 1],
                 onPressed: (index) {
                   setState(() {
                     selectedIndex = index;
                   });
                 },
+                children: const [
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text('Başvurularım',
+                        style: TextStyle(fontFamily: 'Poppins')),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: Text('Mülakatlarım',
+                        style: TextStyle(fontFamily: 'Poppins')),
+                  ),
+                ],
               ),
             ),
           ),

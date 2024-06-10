@@ -3,7 +3,7 @@ import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomTextField extends StatelessWidget {
-  CustomTextField({
+  const CustomTextField({
     super.key,
     this.keyboardType = TextInputType.text,
     required this.title,
@@ -18,7 +18,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLength;
   final int? maxLines;
   final TextEditingController controller;
-  dynamic Function(String?)? onSaved;
+  final dynamic Function(String?)? onSaved;
 
   @override
   Widget build(BuildContext context) {

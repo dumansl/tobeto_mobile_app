@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:date_format_field/date_format_field.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/repositories/user_repository.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdown_input.dart';
@@ -79,23 +77,26 @@ class _GeneralTabState extends State<PersonalInformation> {
                   decoration: InputDecoration(
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
+                      borderSide:
+                          BorderSide(color: TobetoColor.purple, width: 2.0),
                     ),
                     labelText: TobetoText.profileEditBirthday,
                     labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
-                    floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
+                    floatingLabelStyle:
+                        TobetoTextStyle.poppins.captionPurpleNormal18,
                     border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                       Radius.circular(12),
                     )),
                     enabledBorder: const OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.transparent, width: 1.0),
+                      borderSide:
+                          BorderSide(color: Colors.transparent, width: 1.0),
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     ),
                   ),
                   type: DateFormatType.type2,
                   onComplete: (date) {
-                    print(date.toString);
+                    debugPrint("$date");
                   })),
           InputText(
               child: CustomTextField(
@@ -103,7 +104,8 @@ class _GeneralTabState extends State<PersonalInformation> {
             keyboardType: TextInputType.number,
             maxLength: 11,
             onSaved: (newValue) {
-              identificationController.text = newValue ?? identificationController.text;
+              identificationController.text =
+                  newValue ?? identificationController.text;
             },
             controller: identificationController,
           )),

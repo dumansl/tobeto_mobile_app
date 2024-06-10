@@ -2,14 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 
 class CustomCheckbox extends StatelessWidget {
-  CustomCheckbox({
-    super.key,
-    required this.onChanged,
-    required this.isChecked,
-  });
-
   final Function(bool?) onChanged;
-  bool isChecked = false;
+  final bool isChecked;
+
+  const CustomCheckbox(
+      {super.key, required this.onChanged, this.isChecked = false});
 
   @override
   Widget build(BuildContext context) {

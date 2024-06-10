@@ -9,7 +9,8 @@ class JobCard extends StatelessWidget {
   final String location;
   final String appliedDate;
 
-  JobCard({
+  const JobCard({
+    super.key,
     required this.jobType,
     required this.jobTitle,
     required this.companyName,
@@ -20,7 +21,7 @@ class JobCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      margin: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+      margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -28,22 +29,22 @@ class JobCard extends StatelessWidget {
           children: [
             Text(
               jobType,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
                 color: TobetoColor.purple,
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               jobTitle,
-              style: TextStyle(
+              style: const TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
               ),
             ),
-            SizedBox(height: 5),
+            const SizedBox(height: 5),
             Text(
               '$companyName - $location',
               style: TextStyle(
@@ -52,12 +53,12 @@ class JobCard extends StatelessWidget {
                 color: Colors.grey[600],
               ),
             ),
-            SizedBox(height: 15),
+            const SizedBox(height: 15),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  '$appliedDate',
+                  appliedDate,
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     color: Colors.grey[600],
@@ -78,7 +79,7 @@ class JobCard extends StatelessWidget {
                       ),
                     );
                   },
-                  child: Text(
+                  child: const Text(
                     'Detaylar',
                     style: TextStyle(
                       fontFamily: 'Poppins',

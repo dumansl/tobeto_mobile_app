@@ -28,7 +28,7 @@ class PhoneTextField extends StatelessWidget {
       ),
       initialCountryCode: 'TR',
       onChanged: (phone) {
-        print(phone.completeNumber);
+        debugPrint(phone.completeNumber);
       },
     );
   }
