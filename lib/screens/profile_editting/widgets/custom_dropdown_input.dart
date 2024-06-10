@@ -3,20 +3,15 @@ import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomDropDownInput extends StatelessWidget {
-  const CustomDropDownInput(
-      {super.key,
-      required this.onChanged,
-      required this.items,
-      required this.title,
-      this.selectedGender,
-      this.selectedMilitaryStatus,
-      this.selectedDisabilityStatus});
-  final Function(String?) onChanged;
+  const CustomDropDownInput({
+    super.key,
+    required this.onChanged,
+    required this.items,
+    required this.title,
+  });
+  final Function(String?)? onChanged;
   final List<DropdownMenuItem<String>>? items;
   final String title;
-  final String? selectedGender;
-  final String? selectedMilitaryStatus;
-  final String? selectedDisabilityStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -28,8 +23,8 @@ class CustomDropDownInput extends StatelessWidget {
           size: 25,
         ),
       ),
-      value: selectedGender,
       items: items,
+      style: TobetoTextStyle.poppins.bodyBlackBold16,
       hint: Text(
         title,
         style: TobetoTextStyle.poppins.bodyGrayLightNormal16,

@@ -12,6 +12,7 @@ class PhoneTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
+      invalidNumberMessage: null,
       cursorColor: TobetoColor.card.grey,
       textInputAction: TextInputAction.next,
       decoration: InputDecoration(

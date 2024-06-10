@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/profile_editting_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -46,7 +47,9 @@ class ProfileScreen extends StatelessWidget {
             Align(
               alignment: Alignment.topRight,
               child: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileEditPage()));
+                },
                 icon: Image.asset(ImagePath.organizer),
               ),
             ),
@@ -206,8 +209,7 @@ class ProfileScreen extends StatelessWidget {
                     child: ElevatedButton(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                              content: Text('Tobeto Work Success Başla Butonuna Tıklandı!')),
+                          const SnackBar(content: Text('Tobeto Work Success Başla Butonuna Tıklandı!')),
                         );
                       },
                       style: ElevatedButton.styleFrom(

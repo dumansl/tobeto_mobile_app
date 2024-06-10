@@ -3,11 +3,11 @@ import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class InputText extends StatelessWidget {
-  final Widget child;
   const InputText({
     super.key,
     required this.child,
   });
+  final Widget child;
 
   @override
   Widget build(BuildContext context) {
