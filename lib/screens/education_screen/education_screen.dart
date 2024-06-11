@@ -6,6 +6,7 @@ import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '/blocs/course_bloc/course_bloc.dart';
 import '/model/course_model.dart';
+import 'education_details.dart';
 
 class EducationScreen extends StatefulWidget {
   const EducationScreen({super.key});
@@ -53,8 +54,20 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
     Navigator.push(context, MaterialPageRoute(builder: (context) => const EmptyPage()));
   }
 
-  void _navigateToEducationPage(BuildContext context, String title, String imagePath) {
-    Navigator.push(context, MaterialPageRoute(builder: (context) => EducationPage(title: title, imagePath: imagePath)));
+  void _navigateToEducationPage(BuildContext context, Course course) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => EducationDetails(
+          imageUrl: course.image,
+          videoName: course.title,
+          videoDuration: course.duration,
+          videoPoints: course.points,
+          videoLanguage: course.language,
+          educationContent: course.content,
+        ),
+      ),
+    );
   }
 
   @override
@@ -183,7 +196,7 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
         final course = courses[index];
         return GestureDetector(
           onTap: () {
-            _navigateToEducationPage(context, course.title, course.image);
+            _navigateToEducationPage(context, course);
           },
           child: CourseCard(course: course),
         );
@@ -203,35 +216,6 @@ class EmptyPage extends StatelessWidget {
       ),
       body: const Center(
         child: Text('Filtre ekranı'),
-      ),
-    );
-  }
-}
-
-class EducationPage extends StatelessWidget {
-  final String title;
-  final String imagePath;
-
-  const EducationPage({super.key, required this.title, required this.imagePath});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Image.asset(imagePath),
-            const SizedBox(height: 20),
-            Text(
-              '$title Sayfasına Hoşgeldiniz!',
-              style: const TextStyle(fontSize: 24),
-            ),
-          ],
-        ),
       ),
     );
   }
