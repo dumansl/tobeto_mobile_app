@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '/model/course_model.dart';
 import '../education_screen.dart';
+import '../education_details.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
@@ -20,9 +21,13 @@ class CourseCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => EducationPage(
-                title: course.title,
-                imagePath: course.image,
+              builder: (context) => EducationDetails(
+                imageUrl: course.image,
+                videoName: course.title,
+                videoDuration: course.duration,
+                videoPoints: course.points,
+                videoLanguage: course.language,
+                educationContent: course.content,
               ),
             ),
           );
@@ -53,9 +58,13 @@ class CourseCard extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EducationPage(
-                      title: course.title,
-                      imagePath: course.image,
+                    builder: (context) => EducationDetails(
+                      imageUrl: course.image,
+                      videoName: course.title,
+                      videoDuration: course.duration,
+                      videoPoints: course.points,
+                      videoLanguage: course.language,
+                      educationContent: course.content,
                     ),
                   ),
                 );
