@@ -86,6 +86,7 @@ class TextColor {
   final Color lightGreen = const Color(0xff00956E);
   final Color red = Colors.red;
   final Color blackOpacity = const Color.fromRGBO(0, 0, 0, 200);
+  final Color grey = Colors.grey;
 }
 
 class RainbowColor {
