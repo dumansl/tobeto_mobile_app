@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/education_life.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/work_life.dart';
 
@@ -32,12 +33,17 @@ class UserRepository {
       'startWork': worklifeStartController.text,
       'endWork': worklifeEndController.text,
       'workDescription': jobDescriptionController.text,
+      'educationStatu': educationStatuController.text,
+      'univercity': univercityController.text,
+      'graduatedDepartment': graduatedDepartmentController.text,
+      'startUnivercityDate': startUnivercityDateController.text,
+      'graduateUnivercityDate': graduateUnivercityDateController.text,
+      'continueUnivercity': checkBoxController.value,
     });
   }
 
   Future<void> getData() async {
-    final DocumentSnapshot userDoc =
-        await db.collection('users').doc(userId).get();
+    final DocumentSnapshot userDoc = await db.collection('users').doc(userId).get();
     if (userDoc.exists) {
       firstNameController.text = userDoc['firstName'] ?? '';
       lastNameController.text = userDoc['lastName'] ?? '';
@@ -62,6 +68,12 @@ class UserRepository {
       worklifeStartController.text = userDoc['startWork'] ?? '';
       worklifeEndController.text = userDoc['endWork'] ?? '';
       jobDescriptionController.text = userDoc['workDescription'] ?? '';
+      educationStatuController.text = userDoc['educationStatu'] ?? '';
+      univercityController.text = userDoc['univercity'] ?? '';
+      graduatedDepartmentController.text = userDoc['graduatedDepartment'] ?? '';
+      startUnivercityDateController.text = userDoc['startUnivercityDate'] ?? '';
+      graduateUnivercityDateController.text = userDoc['graduateUnivercityDate'] ?? '';
+      checkBoxController.value = userDoc['continueUnivercity'] ?? '';
     }
   }
 }

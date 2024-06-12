@@ -27,8 +27,7 @@ final TextEditingController workplaceNameController = TextEditingController();
 final TextEditingController positionController = TextEditingController();
 final TextEditingController experienceTypeController = TextEditingController();
 final TextEditingController sectorController = TextEditingController();
-final TextEditingController workplaceLocationController =
-    TextEditingController();
+final TextEditingController workplaceLocationController = TextEditingController();
 final TextEditingController worklifeStartController = TextEditingController();
 final TextEditingController worklifeEndController = TextEditingController();
 final TextEditingController jobDescriptionController = TextEditingController();
@@ -53,8 +52,7 @@ class _WorkLifeState extends State<WorkLife> {
                 child: CustomTextField(
                   title: TobetoText.profileEditWorkplaceName,
                   onSaved: (newValue) {
-                    workplaceNameController.text =
-                        newValue ?? workplaceNameController.text;
+                    workplaceNameController.text = newValue ?? workplaceNameController.text;
                   },
                   controller: workplaceNameController,
                 ),
@@ -63,8 +61,7 @@ class _WorkLifeState extends State<WorkLife> {
                 child: CustomTextField(
                   title: TobetoText.profileEditPosition,
                   onSaved: (newValue) {
-                    positionController.text =
-                        newValue ?? positionController.text;
+                    positionController.text = newValue ?? positionController.text;
                   },
                   controller: positionController,
                 ),
@@ -72,8 +69,7 @@ class _WorkLifeState extends State<WorkLife> {
               InputText(
                 child: CustomDropDownInput(
                   onChanged: (newValue) {
-                    experienceTypeController.text =
-                        newValue ?? experienceTypeController.text;
+                    experienceTypeController.text = newValue ?? experienceTypeController.text;
                   },
                   items: TobetoText.militaryStatu
                       .map((label) => DropdownMenuItem(
@@ -100,8 +96,7 @@ class _WorkLifeState extends State<WorkLife> {
                 child: CustomTextField(
                   title: TobetoText.profileEditWorkplaceLocation,
                   onSaved: (newValue) {
-                    workplaceLocationController.text =
-                        newValue ?? workplaceLocationController.text;
+                    workplaceLocationController.text = newValue ?? workplaceLocationController.text;
                   },
                   controller: workplaceLocationController,
                 ),
@@ -112,20 +107,17 @@ class _WorkLifeState extends State<WorkLife> {
                   decoration: InputDecoration(
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: TobetoColor.purple, width: 2.0),
+                      borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
                     ),
                     labelText: TobetoText.profileEditStartJobDate,
                     labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
-                    floatingLabelStyle:
-                        TobetoTextStyle.poppins.captionPurpleNormal18,
+                    floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
                     border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                       Radius.circular(12),
                     )),
                     enabledBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.transparent, width: 1.0),
+                      borderSide: BorderSide(color: Colors.transparent, width: 1.0),
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     ),
                   ),
@@ -141,20 +133,17 @@ class _WorkLifeState extends State<WorkLife> {
                   decoration: InputDecoration(
                     focusedBorder: const OutlineInputBorder(
                       borderRadius: BorderRadius.all(Radius.circular(10)),
-                      borderSide:
-                          BorderSide(color: TobetoColor.purple, width: 2.0),
+                      borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
                     ),
                     labelText: TobetoText.profileEditFinishJobDate,
                     labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
-                    floatingLabelStyle:
-                        TobetoTextStyle.poppins.captionPurpleNormal18,
+                    floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
                     border: const OutlineInputBorder(
                         borderRadius: BorderRadius.all(
                       Radius.circular(12),
                     )),
                     enabledBorder: const OutlineInputBorder(
-                      borderSide:
-                          BorderSide(color: Colors.transparent, width: 1.0),
+                      borderSide: BorderSide(color: Colors.transparent, width: 1.0),
                       borderRadius: BorderRadius.all(Radius.circular(10.0)),
                     ),
                   ),
@@ -172,7 +161,7 @@ class _WorkLifeState extends State<WorkLife> {
                         _isChecked = value!;
                       });
                     },
-                    isChecked: _isChecked,
+                    value: _isChecked,
                   ),
                   Text(
                     TobetoText.profileEditExperienceContinueBox,
@@ -185,8 +174,7 @@ class _WorkLifeState extends State<WorkLife> {
                   title: TobetoText.profileEditJobDescription,
                   maxLines: 5,
                   onSaved: (newValue) {
-                    jobDescriptionController.text =
-                        newValue ?? jobDescriptionController.text;
+                    jobDescriptionController.text = newValue ?? jobDescriptionController.text;
                   },
                   controller: jobDescriptionController,
                 ),

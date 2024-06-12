@@ -33,7 +33,8 @@ class UserModel {
   String? univercity;
   String? graduatedDepartment;
   String? startUnivercityDate;
-  String? graduateUnivercityDate; // Devam ediyorum checkBox
+  String? graduateUnivercityDate;
+  bool? continueUnivercity; // Devam ediyorum checkBox
   //Yetkinlikler
   String? skill;
 //Sertifikalar
@@ -85,6 +86,7 @@ class UserModel {
     this.graduatedDepartment,
     this.startUnivercityDate,
     this.graduateUnivercityDate,
+    this.continueUnivercity,
     this.skill,
     this.certificateName,
     this.certificatesDate,
@@ -131,6 +133,7 @@ class UserModel {
     String? graduatedDepartment,
     String? startUnivercityDate,
     String? graduateUnivercityDate,
+    bool? continueUnivercity,
     String? skill,
     String? certificateName,
     String? certificatesDate,
@@ -176,6 +179,7 @@ class UserModel {
       graduatedDepartment: graduatedDepartment ?? this.graduatedDepartment,
       startUnivercityDate: startUnivercityDate ?? this.startUnivercityDate,
       graduateUnivercityDate: graduateUnivercityDate ?? this.graduateUnivercityDate,
+      continueUnivercity: continueUnivercity ?? this.continueUnivercity,
       skill: skill ?? this.skill,
       certificateName: certificateName ?? this.certificateName,
       certificatesDate: certificatesDate ?? this.certificatesDate,
@@ -224,6 +228,7 @@ class UserModel {
       'graduatedDepartment': graduatedDepartment,
       'startUnivercityDate': startUnivercityDate,
       'graduateUnivercityDate': graduateUnivercityDate,
+      'continueUnivercity': continueUnivercity,
       'skill': skill,
       'certificateName': certificateName,
       'certificatesDate': certificatesDate,
@@ -272,6 +277,7 @@ class UserModel {
       graduatedDepartment: map['graduatedDepartment'] != null ? map['graduatedDepartment'] as String : null,
       startUnivercityDate: map['startUnivercityDate'] != null ? map['startUnivercityDate'] as String : null,
       graduateUnivercityDate: map['graduateUnivercityDate'] != null ? map['graduateUnivercityDate'] as String : null,
+      continueUnivercity: map['continueUnivercity'] != null ? map['continueUnivercity'] as bool : null,
       skill: map['skill'] != null ? map['skill'] as String : null,
       certificateName: map['certificateName'] != null ? map['certificateName'] as String : null,
       certificatesDate: map['certificatesDate'] != null ? map['certificatesDate'] as String : null,
@@ -295,7 +301,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, birthDate: $birthDate, gender: $gender, militaryStatu: $militaryStatu, disabledStatu: $disabledStatu, email: $email, identification: $identification, github: $github, country: $country, city: $city, district: $district, street: $street, aboutMe: $aboutMe, companyName: $companyName, position: $position, experienceType: $experienceType, sector: $sector, workCity: $workCity, startWork: $startWork, endWork: $endWork, workDescription: $workDescription, educationStatu: $educationStatu, univercity: $univercity, graduatedDepartment: $graduatedDepartment, startUnivercityDate: $startUnivercityDate, graduateUnivercityDate: $graduateUnivercityDate, skill: $skill, certificateName: $certificateName, certificatesDate: $certificatesDate, communityName: $communityName, communityStatu: $communityStatu, projectName: $projectName, projectDate: $projectDate, socialMediaName: $socialMediaName, socialMediaLink: $socialMediaLink, languageName: $languageName, languageLevel: $languageLevel, oldPassword: $oldPassword, newPassword: $newPassword, oldPasswordAgain: $oldPasswordAgain)';
+    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, birthDate: $birthDate, gender: $gender, militaryStatu: $militaryStatu, disabledStatu: $disabledStatu, email: $email, identification: $identification, github: $github, country: $country, city: $city, district: $district, street: $street, aboutMe: $aboutMe, companyName: $companyName, position: $position, experienceType: $experienceType, sector: $sector, workCity: $workCity, startWork: $startWork, endWork: $endWork, workDescription: $workDescription, educationStatu: $educationStatu, univercity: $univercity, graduatedDepartment: $graduatedDepartment, startUnivercityDate: $startUnivercityDate, graduateUnivercityDate: $graduateUnivercityDate, continueUnivercity: $continueUnivercity, skill: $skill, certificateName: $certificateName, certificatesDate: $certificatesDate, communityName: $communityName, communityStatu: $communityStatu, projectName: $projectName, projectDate: $projectDate, socialMediaName: $socialMediaName, socialMediaLink: $socialMediaLink, languageName: $languageName, languageLevel: $languageLevel, oldPassword: $oldPassword, newPassword: $newPassword, oldPasswordAgain: $oldPasswordAgain)';
   }
 
   @override
@@ -331,6 +337,7 @@ class UserModel {
         other.graduatedDepartment == graduatedDepartment &&
         other.startUnivercityDate == startUnivercityDate &&
         other.graduateUnivercityDate == graduateUnivercityDate &&
+        other.continueUnivercity == continueUnivercity &&
         other.skill == skill &&
         other.certificateName == certificateName &&
         other.certificatesDate == certificatesDate &&
@@ -378,6 +385,7 @@ class UserModel {
         graduatedDepartment.hashCode ^
         startUnivercityDate.hashCode ^
         graduateUnivercityDate.hashCode ^
+        continueUnivercity.hashCode ^
         skill.hashCode ^
         certificateName.hashCode ^
         certificatesDate.hashCode ^
