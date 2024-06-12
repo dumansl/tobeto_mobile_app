@@ -9,7 +9,7 @@ class UserModel {
   int? phoneNumber;
   int? birthDate;
   String? gender;
-  String? militartStatu;
+  String? militaryStatu;
   String? disabledStatu;
   String? email;
   int? identification;
@@ -62,7 +62,7 @@ class UserModel {
     this.phoneNumber,
     this.birthDate,
     this.gender,
-    this.militartStatu,
+    this.militaryStatu,
     this.disabledStatu,
     this.email,
     this.identification,
@@ -108,7 +108,7 @@ class UserModel {
     int? phoneNumber,
     int? birthDate,
     String? gender,
-    String? militartStatu,
+    String? militaryStatu,
     String? disabledStatu,
     String? email,
     int? identification,
@@ -153,7 +153,7 @@ class UserModel {
       phoneNumber: phoneNumber ?? this.phoneNumber,
       birthDate: birthDate ?? this.birthDate,
       gender: gender ?? this.gender,
-      militartStatu: militartStatu ?? this.militartStatu,
+      militaryStatu: militaryStatu ?? this.militaryStatu,
       disabledStatu: disabledStatu ?? this.disabledStatu,
       email: email ?? this.email,
       identification: identification ?? this.identification,
@@ -201,7 +201,7 @@ class UserModel {
       'phoneNumber': phoneNumber,
       'birthDate': birthDate,
       'gender': gender,
-      'militartStatu': militartStatu,
+      'militaryStatu': militaryStatu,
       'disabledStatu': disabledStatu,
       'email': email,
       'identification': identification,
@@ -249,7 +249,7 @@ class UserModel {
       phoneNumber: map['phoneNumber'] != null ? map['phoneNumber'] as int : null,
       birthDate: map['birthDate'] != null ? map['birthDate'] as int : null,
       gender: map['gender'] != null ? map['gender'] as String : null,
-      militartStatu: map['militartStatu'] != null ? map['militartStatu'] as String : null,
+      militaryStatu: map['militaryStatu'] != null ? map['militaryStatu'] as String : null,
       disabledStatu: map['disabledStatu'] != null ? map['disabledStatu'] as String : null,
       email: map['email'] != null ? map['email'] as String : null,
       identification: map['identification'] != null ? map['identification'] as int : null,
@@ -295,7 +295,7 @@ class UserModel {
 
   @override
   String toString() {
-    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, birthDate: $birthDate, gender: $gender, militartStatu: $militartStatu, disabledStatu: $disabledStatu, email: $email, identification: $identification, github: $github, country: $country, city: $city, district: $district, street: $street, aboutMe: $aboutMe, companyName: $companyName, position: $position, experienceType: $experienceType, sector: $sector, workCity: $workCity, startWork: $startWork, endWork: $endWork, workDescription: $workDescription, educationStatu: $educationStatu, univercity: $univercity, graduatedDepartment: $graduatedDepartment, startUnivercityDate: $startUnivercityDate, graduateUnivercityDate: $graduateUnivercityDate, skill: $skill, certificateName: $certificateName, certificatesDate: $certificatesDate, communityName: $communityName, communityStatu: $communityStatu, projectName: $projectName, projectDate: $projectDate, socialMediaName: $socialMediaName, socialMediaLink: $socialMediaLink, languageName: $languageName, languageLevel: $languageLevel, oldPassword: $oldPassword, newPassword: $newPassword, oldPasswordAgain: $oldPasswordAgain)';
+    return 'UserModel(id: $id, firstName: $firstName, lastName: $lastName, phoneNumber: $phoneNumber, birthDate: $birthDate, gender: $gender, militaryStatu: $militaryStatu, disabledStatu: $disabledStatu, email: $email, identification: $identification, github: $github, country: $country, city: $city, district: $district, street: $street, aboutMe: $aboutMe, companyName: $companyName, position: $position, experienceType: $experienceType, sector: $sector, workCity: $workCity, startWork: $startWork, endWork: $endWork, workDescription: $workDescription, educationStatu: $educationStatu, univercity: $univercity, graduatedDepartment: $graduatedDepartment, startUnivercityDate: $startUnivercityDate, graduateUnivercityDate: $graduateUnivercityDate, skill: $skill, certificateName: $certificateName, certificatesDate: $certificatesDate, communityName: $communityName, communityStatu: $communityStatu, projectName: $projectName, projectDate: $projectDate, socialMediaName: $socialMediaName, socialMediaLink: $socialMediaLink, languageName: $languageName, languageLevel: $languageLevel, oldPassword: $oldPassword, newPassword: $newPassword, oldPasswordAgain: $oldPasswordAgain)';
   }
 
   @override
@@ -308,7 +308,7 @@ class UserModel {
         other.phoneNumber == phoneNumber &&
         other.birthDate == birthDate &&
         other.gender == gender &&
-        other.militartStatu == militartStatu &&
+        other.militaryStatu == militaryStatu &&
         other.disabledStatu == disabledStatu &&
         other.email == email &&
         other.identification == identification &&
@@ -355,7 +355,7 @@ class UserModel {
         phoneNumber.hashCode ^
         birthDate.hashCode ^
         gender.hashCode ^
-        militartStatu.hashCode ^
+        militaryStatu.hashCode ^
         disabledStatu.hashCode ^
         email.hashCode ^
         identification.hashCode ^

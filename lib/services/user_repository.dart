@@ -20,6 +20,9 @@ class UserRepository {
       'aboutMe': aboutMeController.text,
       'phoneNumber': phoneNumberController.text,
       'birthDate': birthDateController.text,
+      'gender': genderController.text,
+      'militaryStatu': militaryStatuController.text,
+      'disabledStatu': disabledStatuController.text,
     });
   }
 
@@ -38,6 +41,9 @@ class UserRepository {
       aboutMeController.text = userDoc['aboutMe'] ?? '';
       phoneNumberController.text = userDoc['phoneNumber'] ?? '';
       birthDateController.text = userDoc['birthDate'] ?? '';
+      genderController.text = userDoc['gender'] ?? '';
+      militaryStatuController.text = userDoc['militaryStatu'] ?? '';
+      disabledStatuController.text = userDoc['disabledStatu'] ?? '';
     }
   }
 }

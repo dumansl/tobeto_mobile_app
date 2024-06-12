@@ -17,6 +17,7 @@ class PhoneTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
+      style: TobetoTextStyle.poppins.bodyBlackBold16,
       onSaved: onSaved,
       controller: controller,
       invalidNumberMessage: null,
@@ -25,14 +26,19 @@ class PhoneTextField extends StatelessWidget {
       decoration: InputDecoration(
         border: InputBorder.none,
         counterText: "",
+        enabledBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: Colors.transparent, width: 1.0),
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        ),
         focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(12)),
+          borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
         labelText: TobetoText.profileEditPhoneNumber,
         labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
         floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
       ),
+
       initialCountryCode: 'TR', //Bütün sorumluluk Şule'dedir.
       onChanged: (phone) {
         debugPrint(phone.completeNumber);

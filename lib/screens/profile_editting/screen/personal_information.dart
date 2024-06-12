@@ -32,6 +32,9 @@ final TextEditingController cityController = TextEditingController();
 final TextEditingController districtController = TextEditingController();
 final TextEditingController streetController = TextEditingController();
 final TextEditingController aboutMeController = TextEditingController();
+final TextEditingController genderController = TextEditingController();
+final TextEditingController militaryStatuController = TextEditingController();
+final TextEditingController disabledStatuController = TextEditingController();
 
 class _PersonalInformationFormState extends State<PersonalInformationForm> {
   final _formKey = GlobalKey<FormState>();
@@ -119,41 +122,52 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                   controller: emailController,
                 )),
                 InputText(
-                    child: CustomDropDownInput(
-                        onChanged: (value) {
-                          context.read<UserBloc>().add(UpdateUserData());
-                        },
-                        items: TobetoText.genderStatu
-                            .map((label) => DropdownMenuItem(
-                                  value: label,
-                                  child: Text(label),
-                                ))
-                            .toList(),
-                        title: TobetoText.profileEditGender)),
+                  child: CustomDropDownInput(
+                    onChanged: (newValue) {
+                      genderController.text = newValue ?? genderController.text;
+                    },
+                    items: TobetoText.genderStatu
+                        .map((label) => DropdownMenuItem(
+                              value: label,
+                              child: Text(label),
+                            ))
+                        .toList(),
+                    title: genderController.text.isNotEmpty ? genderController.text : TobetoText.profileEditGender,
+                    controller: genderController,
+                  ),
+                ),
                 InputText(
                     child: CustomDropDownInput(
-                        onChanged: (value) {
-                          context.read<UserBloc>().add(UpdateUserData());
-                        },
-                        items: TobetoText.militaryStatu
-                            .map((label) => DropdownMenuItem(
-                                  value: label,
-                                  child: Text(label),
-                                ))
-                            .toList(),
-                        title: TobetoText.profileEditMilitaryStuation)),
+                  onChanged: (newValue) {
+                    militaryStatuController.text = newValue ?? militaryStatuController.text;
+                  },
+                  items: TobetoText.militaryStatu
+                      .map((label) => DropdownMenuItem(
+                            value: label,
+                            child: Text(label),
+                          ))
+                      .toList(),
+                  title: militaryStatuController.text.isNotEmpty
+                      ? militaryStatuController.text
+                      : TobetoText.profileEditMilitaryStuation,
+                  controller: militaryStatuController,
+                )),
                 InputText(
                     child: CustomDropDownInput(
-                        onChanged: (value) {
-                          context.read<UserBloc>().add(UpdateUserData());
-                        },
-                        items: TobetoText.disableStatu
-                            .map((label) => DropdownMenuItem(
-                                  value: label,
-                                  child: Text(label),
-                                ))
-                            .toList(),
-                        title: TobetoText.profileEditDisableStuation)),
+                  onChanged: (newValue) {
+                    disabledStatuController.text = newValue ?? disabledStatuController.text;
+                  },
+                  items: TobetoText.disableStatu
+                      .map((label) => DropdownMenuItem(
+                            value: label,
+                            child: Text(label),
+                          ))
+                      .toList(),
+                  title: disabledStatuController.text.isNotEmpty
+                      ? disabledStatuController.text
+                      : TobetoText.profileEditDisableStuation,
+                  controller: disabledStatuController,
+                )),
                 InputText(
                     child: CustomTextField(
                   title: TobetoText.profileEditGithubAdress,
