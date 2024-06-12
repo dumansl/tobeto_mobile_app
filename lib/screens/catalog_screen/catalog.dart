@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/screens/catalog_screen/widget/catalog_details_lesson_image.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/catalog_search_bar.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/category_card.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/course_card.dart';
@@ -25,6 +26,11 @@ class _CatalogScreenState extends State<CatalogScreen> {
         width: ScreenUtil.getWidth(context) * 0.43,
         imagePath: ImagePath.howToTraining,
         height: ScreenUtil.getHeight(context) * 0.2,
+        link: () {
+          Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const CatalogLessonImage(),
+          ));
+        },
       ),
       CatalogCourseCardsmall(
         courseName: 'Ağ ve Güvenlik',
@@ -33,6 +39,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
         width: ScreenUtil.getWidth(context) * 0.43,
         imagePath: ImagePath.biz3,
         height: ScreenUtil.getHeight(context) * 0.2,
+        link: () {},
       ),
       CatalogCourseCardsmall(
         courseName: 'Web Tasarımı',
@@ -41,6 +48,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
         width: ScreenUtil.getWidth(context) * 0.43,
         imagePath: ImagePath.biz2,
         height: ScreenUtil.getHeight(context) * 0.2,
+        link: () {},
       )
     ];
 
