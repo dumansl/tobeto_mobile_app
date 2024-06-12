@@ -11,8 +11,7 @@ class ProfileEditPage extends StatefulWidget {
   State<ProfileEditPage> createState() => _ProfileEditPageState();
 }
 
-class _ProfileEditPageState extends State<ProfileEditPage>
-    with SingleTickerProviderStateMixin {
+class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -63,8 +62,8 @@ class _ProfileEditPageState extends State<ProfileEditPage>
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: TabBarView(
           controller: _tabController,
-          children: const [
-            PersonalInformation(),
+          children: [
+            PersonalInformationForm(),
             ProfileScreen(),
             // EducationLife(),
             // Competencies(),

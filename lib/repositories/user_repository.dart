@@ -6,7 +6,6 @@ import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_infor
 class UserRepository {
   final userId = FirebaseAuth.instance.currentUser!.uid;
   FirebaseFirestore db = FirebaseFirestore.instance;
-  late String _uid;
 
   Future<void> uploadProfileEdit() async {
     await db.collection('users').doc(userId).update({
@@ -19,38 +18,27 @@ class UserRepository {
       'city': cityController.text,
       'district': districtController.text,
       'street': streetController.text,
-      'aboutMe': aboutMeController.text
+      'aboutMe': aboutMeController.text,
+      'phoneNumber': phoneNumberController.text,
+      'birthDate': birthDateController.text,
     });
   }
 
   Future<void> getData() async {
-    _uid = userId;
-    final DocumentSnapshot userDoc = await db.collection('users').doc(_uid).get();
-    firstNameController.text = userDoc.get('firstName');
-    lastNameController.text = userDoc.get('lastName');
-    identificationController.text = userDoc.get('identification');
-    emailController.text = userDoc.get('email');
-    githubController.text = userDoc.get('github');
-    countryController.text = userDoc.get('country');
-    cityController.text = userDoc.get('city');
-    districtController.text = userDoc.get('district');
-    streetController.text = userDoc.get('street');
-    aboutMeController.text = userDoc.get('aboutMe');
-    // selectedGender = userDoc.get('gender');
-    // selectedMilitaryStatus = userDoc.get('militaryStatus');
-    // selectedDisabilityStatus = userDoc.get('disabilityStatus');
-  }
-
-  void initializeControllers() {
-    firstNameController = TextEditingController();
-    lastNameController = TextEditingController();
-    identificationController = TextEditingController();
-    emailController = TextEditingController();
-    githubController = TextEditingController();
-    countryController = TextEditingController();
-    cityController = TextEditingController();
-    districtController = TextEditingController();
-    streetController = TextEditingController();
-    aboutMeController = TextEditingController();
+    final DocumentSnapshot userDoc = await db.collection('users').doc(userId).get();
+    if (userDoc.exists) {
+      firstNameController.text = userDoc['firstName'] ?? '';
+      lastNameController.text = userDoc['lastName'] ?? '';
+      emailController.text = userDoc['email'] ?? '';
+      identificationController.text = userDoc['identification'] ?? '';
+      githubController.text = userDoc['github'] ?? '';
+      countryController.text = userDoc['country'] ?? '';
+      cityController.text = userDoc['city'] ?? '';
+      districtController.text = userDoc['district'] ?? '';
+      streetController.text = userDoc['street'] ?? '';
+      aboutMeController.text = userDoc['aboutMe'] ?? '';
+      phoneNumberController.text = userDoc['phoneNumber'] ?? '';
+      birthDateController.text = userDoc['birthDate'] ?? '';
+    }
   }
 }

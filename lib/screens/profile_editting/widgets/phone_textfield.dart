@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -7,11 +8,17 @@ import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 class PhoneTextField extends StatelessWidget {
   const PhoneTextField({
     super.key,
+    required this.controller,
+    required this.onSaved,
   });
+  final TextEditingController controller;
+  final dynamic Function(PhoneNumber?)? onSaved;
 
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
+      onSaved: onSaved,
+      controller: controller,
       invalidNumberMessage: null,
       cursorColor: TobetoColor.card.grey,
       textInputAction: TextInputAction.next,
@@ -26,7 +33,7 @@ class PhoneTextField extends StatelessWidget {
         labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
         floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
       ),
-      initialCountryCode: 'TR',
+      initialCountryCode: 'TR', //Bütün sorumluluk Şule'dedir.
       onChanged: (phone) {
         debugPrint(phone.completeNumber);
       },
