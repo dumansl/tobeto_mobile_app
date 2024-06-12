@@ -1,16 +1,14 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:equatable/equatable.dart';
-import 'package:tobeto_mobile_app/repositories/user_repository.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
+import 'package:tobeto_mobile_app/services/user_repository.dart';
 import 'user_event.dart';
 import 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final UserRepository userRepository;
+  final UserRepository userRepository = UserRepository();
 
-  UserBloc({required this.userRepository}) : super(UserInitial()) {
+  UserBloc() : super(UserInitial()) {
     on<LoadUserData>(_onLoadUserData);
     on<UpdateUserData>(_onUpdateUserData);
   }

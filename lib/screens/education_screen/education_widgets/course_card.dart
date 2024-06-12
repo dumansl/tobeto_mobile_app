@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '/model/course_model.dart';
-import '../education_screen.dart';
 import '../education_details.dart';
 
 class CourseCard extends StatelessWidget {

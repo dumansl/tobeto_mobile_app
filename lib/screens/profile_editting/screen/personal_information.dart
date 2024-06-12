@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_event.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_state.dart';
-import 'package:tobeto_mobile_app/repositories/user_repository.dart';
+import 'package:tobeto_mobile_app/services/user_repository.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdown_input.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
