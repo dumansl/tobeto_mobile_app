@@ -276,12 +276,346 @@ class Typography {
   final TextStyle captionLightGrayThin30;
   final TextStyle captionLightGrayBold30;
   final TextStyle captionLightGrayNormal30;
+  final TextStyle captionMediumPurple12;
+  final TextStyle captionMediumPurple14;
+  final TextStyle captionMediumPurple16;
+  final TextStyle captionMediumPurple18;
+  final TextStyle captionMediumPurple20;
+  final TextStyle captionMediumPurple22;
+  final TextStyle captionMediumPurple24;
+  final TextStyle captionMediumPurple26;
+  final TextStyle captionMediumPurple28;
+  final TextStyle captionMediumPurple30;
+  final TextStyle captionMediumPurple32;
+
+  final TextStyle captionMediumDarkGreen12;
+  final TextStyle captionMediumDarkGreen14;
+  final TextStyle captionMediumDarkGreen16;
+  final TextStyle captionMediumDarkGreen18;
+  final TextStyle captionMediumDarkGreen20;
+  final TextStyle captionMediumDarkGreen22;
+  final TextStyle captionMediumDarkGreen24;
+  final TextStyle captionMediumDarkGreen26;
+  final TextStyle captionMediumDarkGreen28;
+  final TextStyle captionMediumDarkGreen30;
+  final TextStyle captionMediumDarkGreen32;
+
+  final TextStyle captionMediumWhite12;
+  final TextStyle captionMediumWhite14;
+  final TextStyle captionMediumWhite16;
+  final TextStyle captionMediumWhite18;
+  final TextStyle captionMediumWhite20;
+  final TextStyle captionMediumWhite22;
+  final TextStyle captionMediumWhite24;
+  final TextStyle captionMediumWhite26;
+  final TextStyle captionMediumWhite28;
+  final TextStyle captionMediumWhite30;
+  final TextStyle captionMediumWhite32;
+
+  final TextStyle captionMediumBlack12;
+  final TextStyle captionMediumBlack14;
+  final TextStyle captionMediumBlack16;
+  final TextStyle captionMediumBlack18;
+  final TextStyle captionMediumBlack20;
+  final TextStyle captionMediumBlack22;
+  final TextStyle captionMediumBlack24;
+  final TextStyle captionMediumBlack26;
+  final TextStyle captionMediumBlack28;
+  final TextStyle captionMediumBlack30;
+  final TextStyle captionMediumBlack32;
+
+  final TextStyle captionMediumGreen12;
+  final TextStyle captionMediumGreen14;
+  final TextStyle captionMediumGreen16;
+  final TextStyle captionMediumGreen18;
+  final TextStyle captionMediumGreen20;
+  final TextStyle captionMediumGreen22;
+  final TextStyle captionMediumGreen24;
+  final TextStyle captionMediumGreen26;
+  final TextStyle captionMediumGreen28;
+  final TextStyle captionMediumGreen30;
+  final TextStyle captionMediumGreen32;
 
   Typography({required this.baseStyle})
       : captionPurpleThin12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.w300,
+          color: TobetoColor.purple,
+        ),
+        captionMediumPurple12 = baseStyle.copyWith(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
           color: Colors.purple,
+        ),
+        captionMediumPurple14 = baseStyle.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple16 = baseStyle.copyWith(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple18 = baseStyle.copyWith(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple20 = baseStyle.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple22 = baseStyle.copyWith(
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple24 = baseStyle.copyWith(
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple26 = baseStyle.copyWith(
+          fontSize: 26,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple28 = baseStyle.copyWith(
+          fontSize: 28,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple30 = baseStyle.copyWith(
+          fontSize: 30,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumPurple32 = baseStyle.copyWith(
+          fontSize: 32,
+          fontWeight: FontWeight.w500,
+          color: Colors.purple,
+        ),
+        captionMediumDarkGreen12 = baseStyle.copyWith(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen14 = baseStyle.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen16 = baseStyle.copyWith(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen18 = baseStyle.copyWith(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen20 = baseStyle.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen22 = baseStyle.copyWith(
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen24 = baseStyle.copyWith(
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen26 = baseStyle.copyWith(
+          fontSize: 26,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen28 = baseStyle.copyWith(
+          fontSize: 28,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen30 = baseStyle.copyWith(
+          fontSize: 30,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumDarkGreen32 = baseStyle.copyWith(
+          fontSize: 32,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.darkGrey,
+        ),
+        captionMediumWhite12 = baseStyle.copyWith(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite14 = baseStyle.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite16 = baseStyle.copyWith(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite18 = baseStyle.copyWith(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite20 = baseStyle.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite22 = baseStyle.copyWith(
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite24 = baseStyle.copyWith(
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite26 = baseStyle.copyWith(
+          fontSize: 26,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite28 = baseStyle.copyWith(
+          fontSize: 28,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite30 = baseStyle.copyWith(
+          fontSize: 30,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumWhite32 = baseStyle.copyWith(
+          fontSize: 32,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.white,
+        ),
+        captionMediumBlack12 = baseStyle.copyWith(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack14 = baseStyle.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack16 = baseStyle.copyWith(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack18 = baseStyle.copyWith(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack20 = baseStyle.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack22 = baseStyle.copyWith(
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack24 = baseStyle.copyWith(
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack26 = baseStyle.copyWith(
+          fontSize: 26,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack28 = baseStyle.copyWith(
+          fontSize: 28,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack30 = baseStyle.copyWith(
+          fontSize: 30,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumBlack32 = baseStyle.copyWith(
+          fontSize: 32,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.black,
+        ),
+        captionMediumGreen12 = baseStyle.copyWith(
+          fontSize: 12,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen14 = baseStyle.copyWith(
+          fontSize: 14,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen16 = baseStyle.copyWith(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen18 = baseStyle.copyWith(
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen20 = baseStyle.copyWith(
+          fontSize: 20,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen22 = baseStyle.copyWith(
+          fontSize: 22,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen24 = baseStyle.copyWith(
+          fontSize: 24,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen26 = baseStyle.copyWith(
+          fontSize: 26,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen28 = baseStyle.copyWith(
+          fontSize: 28,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen30 = baseStyle.copyWith(
+          fontSize: 30,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
+        ),
+        captionMediumGreen32 = baseStyle.copyWith(
+          fontSize: 32,
+          fontWeight: FontWeight.w500,
+          color: TobetoColor.text.lightGreen,
         ),
         captionPurpleBold12 = baseStyle.copyWith(
           fontSize: 12,
@@ -291,22 +625,22 @@ class Typography {
         captionPurpleNormal12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.normal,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionWhiteThin12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.w300,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionWhiteBold12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionWhiteNormal12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.normal,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionBlackThin12 = baseStyle.copyWith(
           fontSize: 12,
@@ -326,37 +660,37 @@ class Typography {
         captionGrayThin12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.w300,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionGrayBold12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionGrayNormal12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.normal,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionLightGrayThin12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.w300,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionLightGrayBold12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionLightGrayNormal12 = baseStyle.copyWith(
           fontSize: 12,
           fontWeight: FontWeight.normal,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionPurpleThin18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.w300,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionPurpleBold18 = baseStyle.copyWith(
           fontSize: 18,
@@ -371,17 +705,17 @@ class Typography {
         captionWhiteThin18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.w300,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionWhiteBold18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionWhiteNormal18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.normal,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionBlackThin18 = baseStyle.copyWith(
           fontSize: 18,
@@ -401,62 +735,62 @@ class Typography {
         captionGrayThin18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.w300,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionGrayBold18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionGrayNormal18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.normal,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionLightGrayThin18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.w300,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionLightGrayBold18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionLightGrayNormal18 = baseStyle.copyWith(
           fontSize: 18,
           fontWeight: FontWeight.normal,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionPurpleThin24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.w300,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionPurpleBold24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionPurpleNormal24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.normal,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionWhiteThin24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.w300,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionWhiteBold24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionWhiteNormal24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.normal,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionBlackThin24 = baseStyle.copyWith(
           fontSize: 24,
@@ -476,62 +810,62 @@ class Typography {
         captionGrayThin24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.w300,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionGrayBold24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionGrayNormal24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.normal,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionLightGrayThin24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.w300,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionLightGrayBold24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionLightGrayNormal24 = baseStyle.copyWith(
           fontSize: 24,
           fontWeight: FontWeight.normal,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionPurpleThin30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.w300,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionPurpleBold30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.bold,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionPurpleNormal30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.normal,
-          color: Colors.purple,
+          color: TobetoColor.purple,
         ),
         captionWhiteThin30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.w300,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionWhiteBold30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.bold,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionWhiteNormal30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.normal,
-          color: Colors.white,
+          color: TobetoColor.text.white,
         ),
         captionBlackThin30 = baseStyle.copyWith(
           fontSize: 30,
@@ -551,32 +885,32 @@ class Typography {
         captionGrayThin30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.w300,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionGrayBold30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.bold,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionGrayNormal30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.normal,
-          color: Colors.grey,
+          color: TobetoColor.text.grey,
         ),
         captionLightGrayThin30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.w300,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionLightGrayBold30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.bold,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         captionLightGrayNormal30 = baseStyle.copyWith(
           fontSize: 30,
           fontWeight: FontWeight.normal,
-          color: Colors.grey[300],
+          color: TobetoColor.text.lightGrey,
         ),
         headlineBlackBold32 = baseStyle.copyWith(
           fontSize: 32,
