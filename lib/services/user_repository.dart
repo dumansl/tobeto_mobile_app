@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/work_life.dart';
 
 class UserRepository {
   final userId = FirebaseAuth.instance.currentUser!.uid;
@@ -23,11 +24,20 @@ class UserRepository {
       'gender': genderController.text,
       'militaryStatu': militaryStatuController.text,
       'disabledStatu': disabledStatuController.text,
+      'companyName': workplaceNameController.text,
+      'position': positionController.text,
+      'experienceType': experienceTypeController.text,
+      'sector': sectorController.text,
+      'workCity': workplaceLocationController.text,
+      'startWork': worklifeStartController.text,
+      'endWork': worklifeEndController.text,
+      'workDescription': jobDescriptionController.text,
     });
   }
 
   Future<void> getData() async {
-    final DocumentSnapshot userDoc = await db.collection('users').doc(userId).get();
+    final DocumentSnapshot userDoc =
+        await db.collection('users').doc(userId).get();
     if (userDoc.exists) {
       firstNameController.text = userDoc['firstName'] ?? '';
       lastNameController.text = userDoc['lastName'] ?? '';
@@ -44,6 +54,14 @@ class UserRepository {
       genderController.text = userDoc['gender'] ?? '';
       militaryStatuController.text = userDoc['militaryStatu'] ?? '';
       disabledStatuController.text = userDoc['disabledStatu'] ?? '';
+      workplaceNameController.text = userDoc['companyName'] ?? '';
+      positionController.text = userDoc['position'] ?? '';
+      experienceTypeController.text = userDoc['experienceType'] ?? '';
+      sectorController.text = userDoc['sector'] ?? '';
+      workplaceLocationController.text = userDoc['workCity'] ?? '';
+      worklifeStartController.text = userDoc['startWork'] ?? '';
+      worklifeEndController.text = userDoc['endWork'] ?? '';
+      jobDescriptionController.text = userDoc['workDescription'] ?? '';
     }
   }
 }
