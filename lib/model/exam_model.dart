@@ -1,22 +1,13 @@
-class ExamModel {
+class Exam {
   final String exam;
-  final int examId;
+  final dynamic examId;
 
-  ExamModel({required this.exam, required this.examId});
+  Exam({required this.exam, required this.examId});
 
-  factory ExamModel.fromJson(Map<String, dynamic> json) {
-    return ExamModel(
-      exam: json['exam'] ?? '',
-      examId: json['exam_id'] ?? 0,
+  factory Exam.fromJson(Map<String, dynamic> json) {
+    return Exam(
+      exam: json['exam'],
+      examId: json['exam_id'].toString(),
     );
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = {};
-
-    data['exam'] = exam;
-    data['exam_id'] = examId;
-
-    return data;
   }
 }

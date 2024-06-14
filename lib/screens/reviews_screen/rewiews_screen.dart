@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_event.dart';
+import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_state.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -11,15 +16,15 @@ class RewiewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: TobetoColor.background.lightGrey,
-      appBar: AppBar(
-        centerTitle: true,
-        title: const Text("Değerlendirmeler"),
+      appBar: FixedAppbar(
+        title: TobetoText.evaluationAppBar,
       ),
       body: SingleChildScrollView(
         child: Center(
           child: Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: ScreenPadding.screenpadding),
+            padding: EdgeInsets.symmetric(
+              horizontal: ScreenPadding.screenpadding,
+            ),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -48,15 +53,30 @@ class RewiewsScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
-                  child: Column(
-                    children: [
-                      _examCard(context, title: "Front End"),
-                      _examCard(context, title: "Front End"),
-                      _examCard(context, title: "Front End"),
-                      _examCard(context, title: "Front End"),
-                      _examCard(context, title: "Front End"),
-                    ],
-                  ),
+                  child: BlocBuilder<ExamBloc, ExamState>(
+                      builder: (context, state) {
+                    if (state is InitialState) {
+                      context.read<ExamBloc>().add(FetchExams());
+                    }
+                    if (state is ExamLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is ExamLoaded) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: state.exams.length,
+                        itemBuilder: (context, index) {
+                          var exam = state.exams[index];
+                          return _examCard(context, title: exam.exam);
+                        },
+                      );
+                    } else if (state is ExamError) {
+                      return Center(child: Text('Hata: ${state.message}'));
+                    } else {
+                      return const Center(
+                          child: Text('Bilinmeyen bir hata oluştu.'));
+                    }
+                  }),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
@@ -243,9 +263,12 @@ class RewiewsScreen extends StatelessWidget {
               width: ScreenUtil.getHeight(context) * 0.06,
               ImagePath.platformIcon),
           SizedBox(width: ScreenPadding.padding8px),
-          Text(
-            title,
-            style: TobetoTextStyle.poppins.subtitleWhiteSemiBold20,
+          Expanded(
+            child: Text(
+              title,
+              style: TobetoTextStyle.poppins.subtitleWhiteSemiBold20,
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
           const Spacer(),
           CustomReviewButton(

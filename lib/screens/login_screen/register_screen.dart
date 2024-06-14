@@ -71,7 +71,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                   Expanded(
                     flex: 10,
-                    child: Align(alignment: AlignmentDirectional.topCenter, child: _loginScreenNavigator()),
+                    child: Align(
+                        alignment: AlignmentDirectional.topCenter,
+                        child: _loginScreenNavigator()),
                   ),
                 ],
               ),
@@ -156,7 +158,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
           ),
           InputTextFormField(
             hintText: TobetoText.signUpPasswordAgain,
-            obscureText: !_showPassword,
+            obscureText: !_showConfirmPassword,
             suffixIcon: IconButton(
               icon: Icon(
                 _showConfirmPassword ? Icons.visibility : Icons.visibility_off,
