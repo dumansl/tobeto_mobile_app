@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 import 'package:tobeto_mobile_app/services/user_repository.dart';
 import 'user_event.dart';
 import 'user_state.dart';
@@ -11,6 +12,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   UserBloc() : super(UserInitial()) {
     on<LoadUserData>(_onLoadUserData);
     on<UpdateUserData>(_onUpdateUserData);
+    on<UploadUserDAte>(_onUploadFile);
   }
 
   final userId = FirebaseAuth.instance.currentUser!.uid;
@@ -19,9 +21,10 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   void _onLoadUserData(LoadUserData event, Emitter<UserState> emit) async {
     emit(UserLoading());
     try {
-      userRepository.getData();
+      await userRepository.getData();
       emit(UserLoaded());
     } catch (e) {
+      debugPrint(e.toString());
       emit(UserError(e.toString()));
     }
   }
@@ -29,10 +32,21 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   void _onUpdateUserData(UpdateUserData event, Emitter<UserState> emit) async {
     emit(UserLoading());
     try {
-      userRepository.uploadProfileEdit();
+      await userRepository.uploadProfileEdit();
       // Veriyi güncelledikten sonra tekrar yükle
-      userRepository.getData();
-      emit(UserLoaded());
+      await userRepository.getData();
+      emit(UserUpdated());
+    } catch (e) {
+      emit(UserError(e.toString()));
+    }
+  }
+
+  void _onUploadFile(UploadUserDAte event, Emitter<UserState> emit) async {
+    emit(UserLoading());
+    try {
+      await userRepository.uploadFile(event.context);
+      await userRepository.getData();
+      emit(UserFileUploaded());
     } catch (e) {
       emit(UserError(e.toString()));
     }
