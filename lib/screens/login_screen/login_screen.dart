@@ -28,6 +28,7 @@ class _LoginScreenState extends State<LoginScreen> {
   final AuthService _authService = AuthService();
   final List<bool> _selectedUserRole = <bool>[true, false];
   bool _showPassword = false;
+  bool _educatorSwitch = false;
 
   final formKey = GlobalKey<FormState>();
   List<Widget> userRole = <Widget>[
@@ -67,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
         },
         child: Stack(
           children: [
-            const CustomBackground(),
+            CustomBackground(educatorSwitch: _educatorSwitch),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: ScreenPadding.screenpadding * 2,
@@ -92,7 +93,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
                   Expanded(
                     flex: 35,
-                    child: _anotherLogin(),
+                    child: _educatorSwitch ? const SizedBox() : _anotherLogin(),
                   ),
                 ],
               ),
@@ -110,6 +111,12 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() {
           for (int i = 0; i < _selectedUserRole.length; i++) {
             _selectedUserRole[i] = i == index;
+          }
+          if (index == 0) {
+            _educatorSwitch = false;
+          } else {
+            // "Eğitmen" seçildiyse "_anotherLogin()" gizlensin
+            _educatorSwitch = true;
           }
         });
       },
@@ -168,10 +175,12 @@ class _LoginScreenState extends State<LoginScreen> {
                 createHorizontalPageRoute(const PasswordResetScreen()),
               );
             },
-            child: Text(
-              TobetoText.loginForgotPassword,
-              style: TobetoTextStyle.inter.captionGrayDarkSemiBold15,
-            ),
+            child: _educatorSwitch
+                ? const SizedBox()
+                : Text(
+                    TobetoText.loginForgotPassword,
+                    style: TobetoTextStyle.inter.captionGrayDarkSemiBold15,
+                  ),
           ),
           CustomButton(
             onPressed: () {

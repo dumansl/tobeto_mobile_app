@@ -11,4 +11,4 @@ export "reviews_screen/rewiews_screen.dart";
 export 'reviews_screen/tobeto_success_screen.dart';
 export 'reviews_screen/exam_result_screen.dart';
 export 'reviews_screen/success_model_result_screen.dart';
-export 'reviews_screen/exam_screen.dart';
+export 'reviews_screen/success_exam_screen.dart';
