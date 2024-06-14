@@ -69,8 +69,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     itemCount: boxWidgets.length,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (BuildContext context, int index) {
-                      return boxWidgets[
-                          index]; // Belirlenen Box widget'larını kullan
+                      return boxWidgets[index]; // Belirlenen Box widget'larını kullan
                     },
                   ),
                 ),
