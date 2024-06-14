@@ -95,7 +95,7 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: ScreenPadding.padding12px),
               Text(
                 TobetoText.mainHeadline1,
-                style: TobetoTextStyle.poppins.bodyBlackNormal16,
+                style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: ScreenPadding.padding12px),
@@ -103,13 +103,13 @@ class _HomeScreenState extends State<HomeScreen> {
               SizedBox(height: ScreenPadding.padding12px),
               Text(
                 TobetoText.mainHeadline2,
-                style: TobetoTextStyle.poppins.bodyBlackNormal16,
+                style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: ScreenPadding.padding12px),
               Text(
                 TobetoText.mainHeadline3,
-                style: TobetoTextStyle.poppins.subtitleBlackSemiBold20,
+                style: TobetoTextStyle.poppins(context).subtitleBlackSemiBold20,
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: ScreenPadding.padding12px),
@@ -135,7 +135,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     padding: EdgeInsets.only(left: ScreenPadding.padding8px),
                     child: Text(
                       "Sınavlarım",
-                      style: TobetoTextStyle.poppins.bodyBlackBold16,
+                      style: TobetoTextStyle.poppins(context).bodyBlackBold16,
                     ),
                   ),
                   Row(
@@ -200,7 +200,7 @@ class _ExamplesCard extends StatelessWidget {
               children: [
                 Text(
                   "Herkes için Kodlama",
-                  style: TobetoTextStyle.poppins.captionBlackBold12,
+                  style: TobetoTextStyle.poppins(context).captionBlackBold12,
                 ),
               ],
             ),
@@ -208,7 +208,7 @@ class _ExamplesCard extends StatelessWidget {
               children: [
                 Text(
                   "Herkes için Kodlama",
-                  style: TobetoTextStyle.poppins.captionGrayBold12,
+                  style: TobetoTextStyle.poppins(context).captionGrayBold12,
                 ),
               ],
             ),

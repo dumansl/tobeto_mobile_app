@@ -49,7 +49,7 @@ class CourseCard extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Text(
                 course.title,
-                style: TobetoTextStyle.poppins.captionBlackNormal18,
+                style: TobetoTextStyle.poppins(context).captionBlackNormal18,
               ),
             ),
             ElevatedButton(

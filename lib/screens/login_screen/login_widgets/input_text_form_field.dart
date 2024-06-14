@@ -49,8 +49,9 @@ class InputTextFormField extends StatelessWidget {
           border: InputBorder.none,
           hintText: hintText,
           suffixIcon: suffixIcon,
+          hintStyle: TobetoTextStyle.inter(context).captionGrayLightNormal15,
         ),
-        style: TobetoTextStyle.inter.captionGrayLightNormal15,
+        style: TobetoTextStyle.inter(context).captionGrayLightNormal15,
       ),
     );
   }

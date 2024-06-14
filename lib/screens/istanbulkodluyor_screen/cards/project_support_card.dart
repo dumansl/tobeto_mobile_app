@@ -30,14 +30,14 @@ class ProjectSupportCard extends StatelessWidget {
             const VerticalPadding(),
             PaddedText(
               text: 'Bu Proje Nasıl Destekleniyor?',
-              style: TobetoTextStyle.poppins.captionBlackBold18,
+              style: TobetoTextStyle.poppins(context).captionBlackBold18,
               padding: EdgeInsets.zero,
             ),
             const VerticalPadding(),
             PaddedText(
               text:
                   'İstanbul Kodluyor, Türkiye’nin ilk sosyal etki tahvili projesidir. Sosyal etki tahvilleri, sosyal sorunlara çözüm bulan, performansa dayalı sözleşmelerdir ve ölçülebilir, pozitif, sosyal ve çevresel etki yaratacak sonuçlara ulaşılmayı amaçlamaktadır.',
-              style: TobetoTextStyle.poppins.bodyBlackNormal16,
+              style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
               padding: const EdgeInsets.only(left: 30, right: 30),
             ),
             const Center(

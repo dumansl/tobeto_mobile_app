@@ -29,10 +29,10 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<CourseBloc>(create: (context) => CourseBloc()),
         BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
-        BlocProvider<UserBloc>(create: (context) => UserBloc()..add(LoadUserData())),
+        BlocProvider<UserBloc>(
+            create: (context) => UserBloc()..add(LoadUserData())),
         BlocProvider<ExamBloc>(create: (context) => ExamBloc()),
         BlocProvider<ReviewBloc>(create: (context) => ReviewBloc()),
-
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {
@@ -41,7 +41,7 @@ class TobetoMobileApp extends StatelessWidget {
             themeMode: state,
             darkTheme: darkTheme,
             debugShowCheckedModeBanner: false,
-            home: const SplashScreen(),
+            home: const LoginScreen(),
           );
         },
       ),

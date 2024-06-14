@@ -12,7 +12,8 @@ class EmploymentPathCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomContainer(
       backgroundColor: const Color.fromARGB(255, 0, 231, 170),
-      borderRadius: const BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
+      borderRadius: const BorderRadius.only(
+          bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
       boxShadow: [
         BoxShadow(
           color: TobetoColor.card.grey.withOpacity(0.45),
@@ -25,7 +26,8 @@ class EmploymentPathCard extends StatelessWidget {
         const VerticalPadding(),
         CustomContainer(
           backgroundColor: const Color(0xFF1E0F41),
-          borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
+          borderRadius: const BorderRadius.only(
+              topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
           children: [
             Row(
               children: [
@@ -40,7 +42,7 @@ class EmploymentPathCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 60),
                   child: CenteredText(
                     text: 'İstihtama Giden Yol',
-                    style: TobetoTextStyle.poppins.subtitleWhiteBold20,
+                    style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
                   ),
                 ),
               ],
@@ -50,13 +52,14 @@ class EmploymentPathCard extends StatelessWidget {
         Column(
           children: [
             PaddedText(
-              text: 'Yazılım ve Teknoloji Alanında Meslek \n        Edinmeye Yönelik Eğitimler',
-              style: TobetoTextStyle.poppins.captionWhiteBold18,
+              text:
+                  'Yazılım ve Teknoloji Alanında Meslek \n        Edinmeye Yönelik Eğitimler',
+              style: TobetoTextStyle.poppins(context).captionWhiteBold18,
               padding: const EdgeInsets.only(top: 30, bottom: 20, left: 10),
             ),
             PaddedText(
               text: 'Mesleki Eğitimler',
-              style: TobetoTextStyle.poppins.captionWhiteBold18,
+              style: TobetoTextStyle.poppins(context).captionWhiteBold18,
               padding: const EdgeInsets.only(bottom: 10),
             ),
             PaddedText(
@@ -64,7 +67,7 @@ class EmploymentPathCard extends StatelessWidget {
                   '•  Video İçerikler\n'
                   '•  İstanbul’da Kampüs Buluşmaları\n'
                   '•  Proje Uygulamaları',
-              style: TobetoTextStyle.poppins.bodyWhiteNormal16,
+              style: TobetoTextStyle.poppins(context).bodyWhiteNormal16,
               padding: const EdgeInsets.only(bottom: 10),
             ),
             Icon(
@@ -74,7 +77,7 @@ class EmploymentPathCard extends StatelessWidget {
             ),
             PaddedText(
               text: 'Profesyonel Gelişim Eğitimleri',
-              style: TobetoTextStyle.poppins.captionWhiteBold18,
+              style: TobetoTextStyle.poppins(context).captionWhiteBold18,
               padding: const EdgeInsets.only(bottom: 10, top: 20),
             ),
             PaddedText(
@@ -82,7 +85,7 @@ class EmploymentPathCard extends StatelessWidget {
                   '•  Sektör Buluşmaları ve Webinarlar\n'
                   '•  Kariyer Gelişim Desteği\n'
                   '•  Mentörlük',
-              style: TobetoTextStyle.poppins.bodyWhiteNormal16,
+              style: TobetoTextStyle.poppins(context).bodyWhiteNormal16,
               padding: const EdgeInsets.only(bottom: 20),
             ),
           ],

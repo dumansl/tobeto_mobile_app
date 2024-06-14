@@ -23,7 +23,7 @@ class _FAQCardState extends State<FAQCard> {
         const VerticalPadding(),
         CenteredText(
           text: 'Sıkça Sorulan Sorular',
-          style: TobetoTextStyle.poppins.captionBlackBold24,
+          style: TobetoTextStyle.poppins(context).captionBlackBold24,
         ),
         const VerticalPadding(),
         GestureDetector(
@@ -42,11 +42,14 @@ class _FAQCardState extends State<FAQCard> {
                   Expanded(
                     child: CenteredText(
                       text: 'Başvuru ve Ön-değerlendirme',
-                      style: TobetoTextStyle.poppins.captionWhiteBold15,
+                      style:
+                          TobetoTextStyle.poppins(context).captionWhiteBold15,
                     ),
                   ),
                   Icon(
-                    _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
+                    _isExpanded
+                        ? Icons.keyboard_arrow_up
+                        : Icons.keyboard_arrow_down,
                     color: TobetoColor.text.white,
                     size: 50,
                   ),

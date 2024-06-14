@@ -20,7 +20,7 @@ class LoginTitleDivider extends StatelessWidget {
           padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding8px),
           child: Text(
             text,
-            style: TobetoTextStyle.inter.captionGrayDarkSemiBold15,
+            style: TobetoTextStyle.inter(context).captionGrayDarkSemiBold15,
           ),
         ),
         Expanded(

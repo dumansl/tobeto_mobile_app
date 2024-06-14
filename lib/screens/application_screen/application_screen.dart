@@ -51,12 +51,14 @@ class ApplicationScreen extends StatelessWidget {
                             children: [
                               Text(
                                 'İstanbul Kodluyor',
-                                style: TobetoTextStyle.poppins.bodyBlackBold16,
+                                style: TobetoTextStyle.poppins(context)
+                                    .bodyBlackBold16,
                               ),
                               const SizedBox(height: 8),
                               Text(
                                 'Bilgilendirme',
-                                style: TobetoTextStyle.poppins.bodyBlackLight16,
+                                style: TobetoTextStyle.poppins(context)
+                                    .bodyBlackLight16,
                               ),
                             ],
                           ),
@@ -68,7 +70,8 @@ class ApplicationScreen extends StatelessWidget {
                     top: 11,
                     right: 0,
                     child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 8, vertical: 4),
                       decoration: const BoxDecoration(
                         color: Color(0xFF076B34),
                         borderRadius: BorderRadius.only(
@@ -79,7 +82,9 @@ class ApplicationScreen extends StatelessWidget {
                       width: 120,
                       child: Text(
                         'Kabul Edildi',
-                        style: TobetoTextStyle.poppins.captionBlackNormal12.copyWith(color: TobetoColor.card.white),
+                        style: TobetoTextStyle.poppins(context)
+                            .captionBlackNormal12
+                            .copyWith(color: TobetoColor.card.white),
                         textAlign: TextAlign.center,
                       ),
                     ),

@@ -12,7 +12,7 @@ class ProfileScreen extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: TobetoColor.card.cream,
         title: Text(TobetoText.profileAppBar,
-            style: TobetoTextStyle.poppins.headlinePurpleBold32),
+            style: TobetoTextStyle.poppins(context).headlinePurpleBold32),
         centerTitle: true,
         leading: IconButton(
           icon: Image.asset(ImagePath.purpleBack),
@@ -100,7 +100,7 @@ class ProfileScreen extends StatelessWidget {
               title: TobetoText.profileAboutMe,
               content: Text(
                 'Elektronik ve Haberleşme Mühendisiyim. Mühendislik alanında farklı sektörlerde toplam 12 yıl deneyimim bulunmaktadır.',
-                style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
               ),
             ),
             TitleCard(
@@ -152,14 +152,14 @@ class ProfileScreen extends StatelessWidget {
               title: TobetoText.profileMyCertificate,
               content: Text(
                 'Henüz bir sertifika eklemediniz.',
-                style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
               ),
             ),
             TitleCard(
               title: TobetoText.profileProjectAwards,
               content: Text(
                 'Henüz bir proje veya ödül eklemediniz.',
-                style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
               ),
             ),
             TitleCard(
@@ -178,14 +178,14 @@ class ProfileScreen extends StatelessWidget {
               title: TobetoText.profileInternship,
               content: Text(
                 'Henüz bir staj veya gönüllü çalışma deneyimi eklemediniz.',
-                style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
               ),
             ),
             TitleCard(
               title: TobetoText.profileCommunity,
               content: Text(
                 'Henüz bir topluluk eklemediniz.',
-                style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
               ),
             ),
             TitleCard(
@@ -206,7 +206,8 @@ class ProfileScreen extends StatelessWidget {
                 children: [
                   Text(
                     'Henüz Tobeto Başarı Testi¨ne girmediniz.',
-                    style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+                    style:
+                        TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
                     textAlign: TextAlign.left,
                   ),
                   Center(
@@ -223,8 +224,8 @@ class ProfileScreen extends StatelessWidget {
                         foregroundColor: TobetoColor.text.white,
                       ),
                       child: Text('Başla',
-                          style:
-                              TobetoTextStyle.poppins.captionWhiteSemiBold15),
+                          style: TobetoTextStyle.poppins(context)
+                              .captionWhiteSemiBold15),
                     ),
                   ),
                 ],
@@ -315,8 +316,10 @@ class IconAndText extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(text, style: TobetoTextStyle.poppins.bodyGrayDarkSemiBold16),
-            Text(value, style: TobetoTextStyle.poppins.captionGrayBold18),
+            Text(text,
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
+            Text(value,
+                style: TobetoTextStyle.poppins(context).captionGrayBold18),
           ],
         ),
       ],
@@ -353,7 +356,8 @@ class TitleCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(title, style: TobetoTextStyle.poppins.bodyBlackBold16),
+                  Text(title,
+                      style: TobetoTextStyle.poppins(context).bodyBlackBold16),
                   if (icon != null)
                     InkWell(
                       onTap: onTap,
@@ -393,9 +397,11 @@ class TwoLineCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(line1!, style: TobetoTextStyle.poppins.captionGrayNormal12),
+              Text(line1!,
+                  style: TobetoTextStyle.poppins(context).captionGrayNormal12),
               Text(line2,
-                  style: TobetoTextStyle.poppins.bodyGrayDarkSemiBold16),
+                  style:
+                      TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
             ],
           ),
         ),
@@ -442,7 +448,7 @@ class DialogCard extends StatelessWidget {
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding16px),
           child: Text(skill,
-              style: TobetoTextStyle.poppins.bodyGrayDarkSemiBold16),
+              style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
         ),
       ),
     );

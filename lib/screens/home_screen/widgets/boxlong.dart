@@ -54,7 +54,7 @@ class Boxlong extends StatelessWidget {
               children: [
                 Text(
                   text,
-                  style: TobetoTextStyle.poppins.captionWhiteBold15,
+                  style: TobetoTextStyle.poppins(context).captionWhiteBold15,
                   textAlign: TextAlign.center,
                 ),
               ],
@@ -70,7 +70,7 @@ class Boxlong extends StatelessWidget {
                   onPressed: onPressed,
                   child: Text(
                     buttonText,
-                    style: TobetoTextStyle.poppins.bodyWhiteBold16,
+                    style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
                   ),
                 ),
               ],

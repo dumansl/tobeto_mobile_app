@@ -81,7 +81,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
         children: [
           Text(
             TobetoText.passwordResetTitle,
-            style: TobetoTextStyle.inter.headlineGrayMediumBold32,
+            style: TobetoTextStyle.inter(context).headlineGrayMediumBold32,
           ),
           InputTextFormField(
             hintText: TobetoText.passwordResetBoxText,

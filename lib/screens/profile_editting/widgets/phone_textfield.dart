@@ -17,7 +17,7 @@ class PhoneTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return IntlPhoneField(
-      style: TobetoTextStyle.poppins.bodyBlackBold16,
+      style: TobetoTextStyle.poppins(context).bodyBlackBold16,
       onSaved: onSaved,
       controller: controller,
       invalidNumberMessage: null,
@@ -35,8 +35,9 @@ class PhoneTextField extends StatelessWidget {
           borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
         labelText: TobetoText.profileEditPhoneNumber,
-        labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
-        floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
+        labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
+        floatingLabelStyle:
+            TobetoTextStyle.poppins(context).captionPurpleNormal18,
       ),
 
       initialCountryCode: 'TR', //Bütün sorumluluk Şule'dedir.

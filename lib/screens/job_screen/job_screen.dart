@@ -37,7 +37,7 @@ class _JobScreenState extends State<JobScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text('İş Süreçlerim',
-            style: TobetoTextStyle.poppins.headlineBlackBold32),
+            style: TobetoTextStyle.poppins(context).headlineBlackBold32),
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,

@@ -169,7 +169,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: ElevatedButton(
-              style: elevatedButtonStyle(),
+              style: elevatedButtonStyle(context),
               onPressed: _saveAnswers,
               child: const Text('Kaydet'),
             ),

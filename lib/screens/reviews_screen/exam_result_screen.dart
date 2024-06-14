@@ -17,26 +17,27 @@ class ExamResultScreen extends StatelessWidget {
         children: [
           Expanded(
               flex: 25,
-              child: _resultCard(
+              child: _resultCard(context,
                   assetName: ImagePath.trueLight, text: "18\nDoğru")),
           Expanded(
               flex: 25,
-              child: _resultCard(
+              child: _resultCard(context,
                   assetName: ImagePath.falseLight, text: "7\nYanlış")),
           Expanded(
               flex: 25,
-              child:
-                  _resultCard(assetName: ImagePath.emptyLight, text: "0\nBoş")),
+              child: _resultCard(context,
+                  assetName: ImagePath.emptyLight, text: "0\nBoş")),
           Expanded(
               flex: 25,
-              child: _resultCard(
+              child: _resultCard(context,
                   assetName: ImagePath.pointLight, text: "72\nPuan")),
         ],
       ),
     );
   }
 
-  Widget _resultCard({required String assetName, required String text}) {
+  Widget _resultCard(BuildContext context,
+      {required String assetName, required String text}) {
     return Container(
       width: double.infinity,
       margin: EdgeInsets.symmetric(
@@ -62,7 +63,7 @@ class ExamResultScreen extends StatelessWidget {
       child: Center(
         child: Text(
           text,
-          style: TobetoTextStyle.poppins.headlinePurpleSemiBold32,
+          style: TobetoTextStyle.poppins(context).headlinePurpleSemiBold32,
           textAlign: TextAlign.center,
         ),
       ),

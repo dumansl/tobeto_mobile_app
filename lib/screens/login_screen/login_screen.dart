@@ -179,7 +179,8 @@ class _LoginScreenState extends State<LoginScreen> {
                 ? const SizedBox()
                 : Text(
                     TobetoText.loginForgotPassword,
-                    style: TobetoTextStyle.inter.captionGrayDarkSemiBold15,
+                    style: TobetoTextStyle.inter(context)
+                        .captionGrayDarkSemiBold15,
                   ),
           ),
           CustomButton(
@@ -221,7 +222,8 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                     Text(
                       TobetoText.loginGuestButton,
-                      style: TobetoTextStyle.inter.captionGrayLightNormal15,
+                      style: TobetoTextStyle.inter(context)
+                          .captionGrayLightNormal15,
                     ),
                   ],
                 ),
@@ -276,7 +278,7 @@ class _LoginScreenState extends State<LoginScreen> {
           padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding8px),
           child: Text(
             text,
-            style: TobetoTextStyle.inter.captionGrayDarkSemiBold15,
+            style: TobetoTextStyle.inter(context).captionGrayDarkSemiBold15,
           ),
         ),
         Expanded(

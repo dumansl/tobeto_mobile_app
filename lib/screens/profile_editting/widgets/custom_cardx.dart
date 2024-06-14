@@ -43,7 +43,7 @@ class CustomCardx extends StatelessWidget {
                 ),
                 Text(
                   date,
-                  style: TobetoTextStyle.poppins.captionPurpleBold15,
+                  style: TobetoTextStyle.poppins(context).captionPurpleBold15,
                 ),
                 const Icon(Icons.delete),
                 const Icon(Icons.edit),
@@ -57,7 +57,7 @@ class CustomCardx extends StatelessWidget {
               children: [
                 Text(
                   title,
-                  style: TobetoTextStyle.poppins.bodyGrayLightNormal16,
+                  style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
                 ),
               ],
             ),
@@ -65,27 +65,31 @@ class CustomCardx extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(content, style: TobetoTextStyle.poppins.bodyBlackBold16),
+              Text(content,
+                  style: TobetoTextStyle.poppins(context).bodyBlackBold16),
             ],
           ),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Text(title2,
-                style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
           ),
-          Text(content2, style: TobetoTextStyle.poppins.bodyBlackBold16),
+          Text(content2,
+              style: TobetoTextStyle.poppins(context).bodyBlackBold16),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Text(title3,
-                style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
           ),
-          Text(content3, style: TobetoTextStyle.poppins.bodyBlackBold16),
+          Text(content3,
+              style: TobetoTextStyle.poppins(context).bodyBlackBold16),
           Padding(
             padding: const EdgeInsets.only(top: 10),
             child: Text(title4,
-                style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
           ),
-          Text(content4, style: TobetoTextStyle.poppins.bodyBlackBold16),
+          Text(content4,
+              style: TobetoTextStyle.poppins(context).bodyBlackBold16),
         ],
       ),
     );

@@ -44,7 +44,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
   Widget _subHeadlineText() {
     return Text(
       TobetoText.evaluationHeadlineSubTitle3,
-      style: TobetoTextStyle.poppins.titleGrayMediumBold24,
+      style: TobetoTextStyle.poppins(context).titleGrayMediumBold24,
     );
   }
 
@@ -176,7 +176,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
               child: Center(
                 child: Text(
                   "$score",
-                  style: TobetoTextStyle.poppins.captionWhiteNormal12,
+                  style: TobetoTextStyle.poppins(context).captionWhiteNormal12,
                 ),
               ),
             ),
@@ -186,7 +186,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
             Expanded(
               child: Text(
                 text,
-                style: TobetoTextStyle.poppins.captionGrayNormal12,
+                style: TobetoTextStyle.poppins(context).captionGrayNormal12,
               ),
             ),
           ],
@@ -230,7 +230,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
       children: [
         Text(
           title,
-          style: TobetoTextStyle.poppins.captionPurpleBold12,
+          style: TobetoTextStyle.poppins(context).captionPurpleBold12,
         ),
         Container(
           padding: EdgeInsets.symmetric(
@@ -245,7 +245,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
           ),
           child: Text(
             "${TobetoText.evaluationScore} : $score",
-            style: TobetoTextStyle.poppins.captionWhiteBold12,
+            style: TobetoTextStyle.poppins(context).captionWhiteBold12,
           ),
         ),
       ],
@@ -285,7 +285,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
               children: [
                 Text(
                   title,
-                  style: TobetoTextStyle.poppins.captionPurpleBold12,
+                  style: TobetoTextStyle.poppins(context).captionPurpleBold12,
                 ),
                 Icon(
                   _isExpanded
@@ -311,7 +311,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                 ),
                 child: Text(
                   description,
-                  style: TobetoTextStyle.poppins.captionGrayBold12,
+                  style: TobetoTextStyle.poppins(context).captionGrayBold12,
                   textAlign: TextAlign.justify,
                 ),
               )

@@ -36,7 +36,8 @@ class _EducationDetailsState extends State<EducationDetails> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(TobetoText.bottomIconEducation, style: TobetoTextStyle.poppins.subHeadlineBlackBold28),
+        title: Text(TobetoText.bottomIconEducation,
+            style: TobetoTextStyle.poppins(context).subHeadlineBlackBold28),
       ),
       body: Column(
         children: [
@@ -58,7 +59,9 @@ class _EducationDetailsState extends State<EducationDetails> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text(widget.videoName, style: TobetoTextStyle.poppins.subtitleBlackBold20),
+                  child: Text(widget.videoName,
+                      style:
+                          TobetoTextStyle.poppins(context).subtitleBlackBold20),
                 ),
                 Row(
                   children: [
@@ -104,13 +107,16 @@ class _EducationDetailsState extends State<EducationDetails> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: _selectedIndex == 0 ? TobetoColor.purple : Colors.grey[200],
+                          color: _selectedIndex == 0
+                              ? TobetoColor.purple
+                              : Colors.grey[200],
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(30.0),
                             bottomLeft: Radius.circular(30.0),
                           ),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
                         child: Center(
                           child: Text(
                             'Liste',
@@ -118,7 +124,9 @@ class _EducationDetailsState extends State<EducationDetails> {
                               fontFamily: 'Poppins',
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
-                              color: _selectedIndex == 0 ? Colors.white : TobetoColor.purple,
+                              color: _selectedIndex == 0
+                                  ? Colors.white
+                                  : TobetoColor.purple,
                             ),
                           ),
                         ),
@@ -134,13 +142,16 @@ class _EducationDetailsState extends State<EducationDetails> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: _selectedIndex == 1 ? TobetoColor.purple : Colors.grey[200],
+                          color: _selectedIndex == 1
+                              ? TobetoColor.purple
+                              : Colors.grey[200],
                           borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(30.0),
                             bottomRight: Radius.circular(30.0),
                           ),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
                         child: Center(
                           child: Text(
                             'Detay',
@@ -148,7 +159,9 @@ class _EducationDetailsState extends State<EducationDetails> {
                               fontFamily: 'Poppins',
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
-                              color: _selectedIndex == 1 ? Colors.white : TobetoColor.purple,
+                              color: _selectedIndex == 1
+                                  ? Colors.white
+                                  : TobetoColor.purple,
                             ),
                           ),
                         ),
@@ -174,10 +187,13 @@ class _EducationDetailsState extends State<EducationDetails> {
         return ListTile(
           leading: Icon(
             Icons.play_circle_fill,
-            color: _selectedVideoIndex == index ? TobetoColor.purple : Colors.grey,
+            color:
+                _selectedVideoIndex == index ? TobetoColor.purple : Colors.grey,
           ),
-          title: Text('Video $index', style: TobetoTextStyle.poppins.captionBlackNormal18),
-          subtitle: Text('Açıklama açıklama açıklama açıklama', style: TobetoTextStyle.poppins.captionGrayLightLight15),
+          title: Text('Video $index',
+              style: TobetoTextStyle.poppins(context).captionBlackNormal18),
+          subtitle: Text('Açıklama açıklama açıklama açıklama',
+              style: TobetoTextStyle.poppins(context).captionGrayLightLight15),
           onTap: () {
             setState(() {
               _selectedVideoIndex = index;
@@ -197,13 +213,16 @@ class _EducationDetailsState extends State<EducationDetails> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              _buildDetailItem(Icons.access_time, '${widget.videoDuration} dakika'),
-              _buildDetailItem(Icons.subscriptions_outlined, '${widget.videoPoints} puan'),
+              _buildDetailItem(
+                  Icons.access_time, '${widget.videoDuration} dakika'),
+              _buildDetailItem(
+                  Icons.subscriptions_outlined, '${widget.videoPoints} puan'),
               _buildDetailItem(Icons.language, widget.videoLanguage),
             ],
           ),
           const SizedBox(height: 16.0),
-          Text('Eğitim İçeriği', style: TobetoTextStyle.poppins.captionBlackBold18),
+          Text('Eğitim İçeriği',
+              style: TobetoTextStyle.poppins(context).captionBlackBold18),
           const Divider(
             color: Colors.black,
             thickness: 2,
@@ -211,7 +230,7 @@ class _EducationDetailsState extends State<EducationDetails> {
           const SizedBox(height: 8.0),
           Text(
             widget.educationContent,
-            style: TobetoTextStyle.poppins.captionGrayThin18,
+            style: TobetoTextStyle.poppins(context).captionGrayThin18,
           ),
         ],
       ),

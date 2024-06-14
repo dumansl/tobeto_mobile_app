@@ -75,10 +75,10 @@ class _CertificateScreenState extends State<CertificateScreen> {
                               BorderSide(color: TobetoColor.purple, width: 2.0),
                         ),
                         labelText: TobetoText.profileEditStartJobDate,
-                        labelStyle:
-                            TobetoTextStyle.poppins.bodyGrayLightNormal16,
-                        floatingLabelStyle:
-                            TobetoTextStyle.poppins.captionPurpleNormal18,
+                        labelStyle: TobetoTextStyle.poppins(context)
+                            .bodyGrayLightNormal16,
+                        floatingLabelStyle: TobetoTextStyle.poppins(context)
+                            .captionPurpleNormal18,
                         border: const OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(12)),
                         ),
@@ -90,7 +90,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
                       ),
                       type: DateFormatType.type2,
                       onComplete: (date) {
-                        print(date.toString());
+                        debugPrint(date.toString());
                       },
                     ),
                   ),
@@ -107,7 +107,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
                     },
                     child: Text(
                       'Dosya Yükle',
-                      style: TobetoTextStyle.poppins.titlePurpleBold24,
+                      style: TobetoTextStyle.poppins(context).titlePurpleBold24,
                     ),
                   ),
                   Padding(

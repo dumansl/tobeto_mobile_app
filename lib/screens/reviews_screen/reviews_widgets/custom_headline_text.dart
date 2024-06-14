@@ -9,7 +9,7 @@ class CustomHeadlineText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       TobetoText.evaluationCard1Title,
-      style: TobetoTextStyle.poppins.titlePurpleBold24,
+      style: TobetoTextStyle.poppins(context).titlePurpleBold24,
     );
   }
 }

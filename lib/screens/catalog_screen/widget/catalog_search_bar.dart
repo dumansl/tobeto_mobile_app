@@ -43,7 +43,8 @@ class CategorySearchBar extends StatelessWidget {
             child: TextField(
               decoration: InputDecoration(
                 hintText: TobetoText.mainSearch,
-                hintStyle: TobetoTextStyle.poppins.captionLightGrayThin18,
+                hintStyle:
+                    TobetoTextStyle.poppins(context).captionLightGrayThin18,
                 prefixIcon: const Icon(Icons.search),
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(100),

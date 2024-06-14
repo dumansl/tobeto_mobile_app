@@ -66,7 +66,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
                   padding: EdgeInsets.all(ScreenPadding.padding8px),
                   child: Text(
                     courseName,
-                    style: TobetoTextStyle.poppins.captionBlackBold12,
+                    style: TobetoTextStyle.poppins(context).captionBlackBold12,
                   ),
                 ),
                 Container(
@@ -88,12 +88,14 @@ class CatalogCourseCardsmall extends StatelessWidget {
                       SizedBox(width: ScreenUtil.getWidth(context) * 0.00),
                       Text(
                         courseTeacher,
-                        style: TobetoTextStyle.poppins.captionBlackBold12,
+                        style:
+                            TobetoTextStyle.poppins(context).captionBlackBold12,
                       ),
                       SizedBox(width: ScreenUtil.getWidth(context) * 0.045),
                       const Icon(Icons.star, color: Colors.black, size: 16),
                       Text(rank,
-                          style: TobetoTextStyle.poppins.captionBlackBold12),
+                          style: TobetoTextStyle.poppins(context)
+                              .captionBlackBold12),
                     ],
                   ),
                 ),

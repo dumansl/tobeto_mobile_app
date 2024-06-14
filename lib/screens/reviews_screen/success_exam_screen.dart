@@ -81,7 +81,8 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
                     SizedBox(width: ScreenPadding.padding8px),
                     Text(
                       "${_currentQuestionIndex + 1} / $totalQuestions",
-                      style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+                      style:
+                          TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
                     ),
                   ],
                 ),
@@ -109,7 +110,8 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
                           ? TobetoText.successExamButtonEnd
                           : TobetoText.successExamButtonNext,
                       backgroundColor: TobetoColor.purple,
-                      style: TobetoTextStyle.poppins.bodyWhiteSemiBold16,
+                      style:
+                          TobetoTextStyle.poppins(context).bodyWhiteSemiBold16,
                       onPressed: _selectedAnswers
                               .containsKey(_currentQuestionIndex)
                           ? () async {
@@ -144,7 +146,7 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
   Text _questionText(currentQuestion) {
     return Text(
       currentQuestion,
-      style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+      style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
       textAlign: TextAlign.justify,
     );
   }
@@ -211,7 +213,7 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
             SizedBox(width: ScreenPadding.padding8px),
             Text(
               answerText,
-              style: TobetoTextStyle.poppins.bodyWhiteBold16,
+              style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
             ),
           ],
         ),

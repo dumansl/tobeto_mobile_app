@@ -14,7 +14,7 @@ class ProjectPhotosCard extends StatelessWidget {
       children: [
         CenteredText(
           text: 'Projeden Kareler',
-          style: TobetoTextStyle.poppins.captionBlackBold24,
+          style: TobetoTextStyle.poppins(context).captionBlackBold24,
         ),
         const VerticalPadding(),
         const Row(

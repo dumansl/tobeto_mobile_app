@@ -144,13 +144,13 @@ class _IntroScreenState extends State<IntroScreen> {
         Text(
           headLine,
           textAlign: TextAlign.center,
-          style: TobetoTextStyle.inter.titlePurpleSemiBold24,
+          style: TobetoTextStyle.inter(context).titlePurpleSemiBold24,
         ),
         const Spacer(flex: 10),
         Text(
           content,
           textAlign: TextAlign.center,
-          style: TobetoTextStyle.inter.captionGrayMediumNormal15,
+          style: TobetoTextStyle.inter(context).captionGrayMediumNormal15,
         ),
         const Spacer(flex: 15),
       ],
@@ -181,7 +181,7 @@ class _IntroScreenState extends State<IntroScreen> {
         ),
         child: Text(
           text,
-          style: TobetoTextStyle.inter.bodyWhiteSemiBold16,
+          style: TobetoTextStyle.inter(context).bodyWhiteSemiBold16,
         ),
       ),
     );
@@ -195,7 +195,7 @@ class _IntroScreenState extends State<IntroScreen> {
       onPressed: onPressed,
       child: Text(
         text,
-        style: TobetoTextStyle.inter.bodyPurpleSemiBold16,
+        style: TobetoTextStyle.inter(context).bodyPurpleSemiBold16,
       ),
     );
   }

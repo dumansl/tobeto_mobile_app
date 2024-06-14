@@ -51,7 +51,7 @@ class Box extends StatelessWidget {
               fit: BoxFit.contain,
               child: Text(
                 text,
-                style: TobetoTextStyle.poppins.captionWhiteBold12,
+                style: TobetoTextStyle.poppins(context).captionWhiteBold12,
                 // Adjust text color as needed
 
                 textAlign: TextAlign.center,

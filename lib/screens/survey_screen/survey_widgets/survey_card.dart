@@ -42,7 +42,7 @@ class SurveyCard extends StatelessWidget {
         children: [
           Text(
             headline,
-            style: TobetoTextStyle.poppins.subtitleWhiteSemiBold20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
             textAlign: TextAlign.center,
           ),
         ],
@@ -51,10 +51,10 @@ class SurveyCard extends StatelessWidget {
   }
 }
 
-ButtonStyle elevatedButtonStyle() {
+ButtonStyle elevatedButtonStyle(BuildContext context) {
   return ElevatedButton.styleFrom(
     backgroundColor: TobetoColor.purple,
-    textStyle: TobetoTextStyle.poppins.bodyWhiteBold16,
+    textStyle: TobetoTextStyle.poppins(context).bodyWhiteBold16,
     shape: RoundedRectangleBorder(
       borderRadius: BorderRadius.circular(10.0),
     ),

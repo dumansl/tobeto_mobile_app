@@ -20,7 +20,7 @@ class ExamsCard extends StatelessWidget {
           padding: EdgeInsets.only(left: ScreenPadding.padding8px),
           child: Text(
             "Sınavlarım",
-            style: TobetoTextStyle.poppins.bodyBlackBold16,
+            style: TobetoTextStyle.poppins(context).bodyBlackBold16,
           ),
         ),
         Row(
@@ -40,14 +40,16 @@ class ExamsCard extends StatelessWidget {
                         children: [
                           Text(
                             "Herkes için Kodlama",
-                            style: TobetoTextStyle.poppins.captionBlackBold24,
+                            style: TobetoTextStyle.poppins(context)
+                                .captionBlackBold24,
                           )
                         ],
                       ),
                       Row(
                         children: [
                           Text("Herkes için Kodlama",
-                              style: TobetoTextStyle.poppins.captionBlackBold24)
+                              style: TobetoTextStyle.poppins(context)
+                                  .captionBlackBold24)
                         ],
                       ),
                       Row(
@@ -62,8 +64,8 @@ class ExamsCard extends StatelessWidget {
                             // ignore: prefer_const_constructors
                             child: Text(
                               "45 Dakika",
-                              style:
-                                  TobetoTextStyle.poppins.bodyGrayLightLight16,
+                              style: TobetoTextStyle.poppins(context)
+                                  .bodyGrayLightLight16,
                             ),
                           )
                         ],

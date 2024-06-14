@@ -15,7 +15,7 @@ class ReviewsAppbar extends StatelessWidget implements PreferredSizeWidget {
       automaticallyImplyLeading: false,
       title: Text(
         title,
-        style: TobetoTextStyle.poppins.subtitleWhiteSemiBold20,
+        style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
       ),
       actions: [
         IconButton(

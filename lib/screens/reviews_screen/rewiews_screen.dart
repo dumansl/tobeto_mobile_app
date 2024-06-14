@@ -28,7 +28,7 @@ class RewiewsScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                _reviewsHeadline(),
+                _reviewsHeadline(context),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding32px),
                   child: _reviewsCard(
@@ -84,7 +84,7 @@ class RewiewsScreen extends StatelessWidget {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding8px),
-                  child: _reviewsHeadline2(),
+                  child: _reviewsHeadline2(context),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding32px),
@@ -118,24 +118,24 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  Widget _reviewsHeadline() {
+  Widget _reviewsHeadline(BuildContext context) {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
         text: TobetoText.evaluationHeadline1part1,
-        style: TobetoTextStyle.poppins.titlePurpleNormal24,
+        style: TobetoTextStyle.poppins(context).titlePurpleNormal24,
         children: <TextSpan>[
           TextSpan(
             text: TobetoText.evaluationHeadline1part2,
-            style: TobetoTextStyle.poppins.titleGrayDarkNormal24,
+            style: TobetoTextStyle.poppins(context).titleGrayDarkNormal24,
           ),
           TextSpan(
             text: TobetoText.evaluationHeadline1part3,
-            style: TobetoTextStyle.poppins.titlePurpleNormal24,
+            style: TobetoTextStyle.poppins(context).titlePurpleNormal24,
           ),
           TextSpan(
             text: TobetoText.evaluationHeadline1part4,
-            style: TobetoTextStyle.poppins.titleGrayDarkNormal24,
+            style: TobetoTextStyle.poppins(context).titleGrayDarkNormal24,
           ),
         ],
       ),
@@ -177,12 +177,12 @@ class RewiewsScreen extends StatelessWidget {
         children: [
           Text(
             headline,
-            style: TobetoTextStyle.poppins.subtitleWhiteSemiBold20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
             textAlign: TextAlign.center,
           ),
           Text(
             subheading,
-            style: TobetoTextStyle.poppins.captionWhiteNormal14,
+            style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
             textAlign: TextAlign.center,
           ),
           isThereButton
@@ -191,7 +191,8 @@ class RewiewsScreen extends StatelessWidget {
                   child: CustomReviewButton(
                     buttonText: TobetoText.evaluationCardButton,
                     backgroundColor: TobetoColor.purple,
-                    style: TobetoTextStyle.poppins.captionWhiteNormal14,
+                    style:
+                        TobetoTextStyle.poppins(context).captionWhiteNormal14,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -207,7 +208,8 @@ class RewiewsScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                       child: Text(
                         dividerText,
-                        style: TobetoTextStyle.poppins.bodyWhiteNormal16,
+                        style:
+                            TobetoTextStyle.poppins(context).bodyWhiteNormal16,
                       ),
                     )
                   : const SizedBox(),
@@ -216,7 +218,7 @@ class RewiewsScreen extends StatelessWidget {
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                   child: Text(
                     title,
-                    style: TobetoTextStyle.poppins.bodyWhiteSemiBold16,
+                    style: TobetoTextStyle.poppins(context).bodyWhiteSemiBold16,
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -226,7 +228,8 @@ class RewiewsScreen extends StatelessWidget {
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                   child: Text(
                     subTitle,
-                    style: TobetoTextStyle.poppins.captionWhiteSemiBold8,
+                    style:
+                        TobetoTextStyle.poppins(context).captionWhiteSemiBold8,
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -266,7 +269,7 @@ class RewiewsScreen extends StatelessWidget {
           Expanded(
             child: Text(
               title,
-              style: TobetoTextStyle.poppins.subtitleWhiteSemiBold20,
+              style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
               overflow: TextOverflow.ellipsis,
             ),
           ),
@@ -277,7 +280,7 @@ class RewiewsScreen extends StatelessWidget {
             },
             backgroundColor: TobetoColor.card.white,
             buttonText: TobetoText.evaluationCardButton,
-            style: TobetoTextStyle.poppins.captionBlackBold12,
+            style: TobetoTextStyle.poppins(context).captionBlackBold12,
           ),
         ],
       ),
@@ -304,16 +307,16 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  Widget _reviewsHeadline2() {
+  Widget _reviewsHeadline2(BuildContext context) {
     return RichText(
       textAlign: TextAlign.center,
       text: TextSpan(
         text: TobetoText.evaluationHeadlineTitle2,
-        style: TobetoTextStyle.poppins.titlePurpleNormal24,
+        style: TobetoTextStyle.poppins(context).titlePurpleNormal24,
         children: <TextSpan>[
           TextSpan(
             text: TobetoText.evaluationHeadlineSubTitle2,
-            style: TobetoTextStyle.poppins.titleGrayDarkNormal24,
+            style: TobetoTextStyle.poppins(context).titleGrayDarkNormal24,
           ),
         ],
       ),
@@ -330,17 +333,19 @@ class RewiewsScreen extends StatelessWidget {
               children: [
                 TextSpan(
                   text: 'Front End\n',
-                  style: TobetoTextStyle.poppins.subtitleBlackSemiBold20,
+                  style:
+                      TobetoTextStyle.poppins(context).subtitleBlackSemiBold20,
                 ),
                 TextSpan(
                   text:
                       'Bu sınav 25 sorudan oluşmakta olup sınav süresi 30 dakikadır. Sınav çoktan seçmeli test şeklinde olup sınavı yarıda bıraktığınız taktirde çözdüğünüz kısım kadarıyla değerlendirileceksiniz.\n\n',
-                  style: TobetoTextStyle.poppins.captionBlackNormal15,
+                  style: TobetoTextStyle.poppins(context).captionBlackNormal15,
                 ),
                 TextSpan(
                   text:
                       'Sınav Süresi : 30 Dakika Soru\nSayısı : 25\nSoru Tipi : Çoktan Seçmeli',
-                  style: TobetoTextStyle.poppins.captionBlackSemiBold15,
+                  style:
+                      TobetoTextStyle.poppins(context).captionBlackSemiBold15,
                 ),
               ],
             ),
@@ -349,7 +354,7 @@ class RewiewsScreen extends StatelessWidget {
             CustomReviewButton(
                 buttonText: TobetoText.evaluationCardButton,
                 backgroundColor: TobetoColor.purple,
-                style: TobetoTextStyle.poppins.captionWhiteBold12,
+                style: TobetoTextStyle.poppins(context).captionWhiteBold12,
                 onPressed: () {
                   Navigator.push(
                     context,

@@ -80,7 +80,7 @@ class CustomStepRow extends StatelessWidget {
           const SizedBox(width: 20),
           Text(
             text,
-            style: TobetoTextStyle.poppins.bodyWhiteBold16,
+            style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
           ),
         ],
       ),

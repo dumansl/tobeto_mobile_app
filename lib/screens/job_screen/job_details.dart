@@ -22,7 +22,7 @@ class JobDetails extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('İş Detayları',
-            style: TobetoTextStyle.poppins.captionLightGrayBold24),
+            style: TobetoTextStyle.poppins(context).captionLightGrayBold24),
         backgroundColor: Colors.white,
       ),
       body: Padding(
@@ -30,25 +30,27 @@ class JobDetails extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(jobTitle, style: TobetoTextStyle.poppins.titlePurpleBold24),
+            Text(jobTitle,
+                style: TobetoTextStyle.poppins(context).titlePurpleBold24),
             const SizedBox(height: 10),
             Text('$companyName - $location',
-                style: TobetoTextStyle.poppins.captionGrayNormal18),
+                style: TobetoTextStyle.poppins(context).captionGrayNormal18),
             const SizedBox(height: 10),
             Text(
               'İş Tipi: $jobType',
-              style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+              style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
             ),
             const SizedBox(height: 10),
             Text(
               'Başvuru Tarihi: $appliedDate',
-              style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+              style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
             ),
             const SizedBox(height: 20),
-            Text('İş Tanımı', style: TobetoTextStyle.poppins.titlePurpleBold24),
+            Text('İş Tanımı',
+                style: TobetoTextStyle.poppins(context).titlePurpleBold24),
             const SizedBox(height: 10),
             Text('Detaylar...',
-                style: TobetoTextStyle.poppins.bodyGrayDarkNormal16),
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16),
           ],
         ),
       ),

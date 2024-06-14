@@ -41,7 +41,7 @@
 //               Center(
 //                 child: Text(
 //                   TobetoText.profileEditCommunitySubtitle,
-//                   style: TobetoTextStyle.poppins.bodyGrayMediumSemiBold16,
+//                   style: TobetoTextStyle.poppins(context).bodyGrayMediumSemiBold16,
 //                 ),
 //               )
 //             ],

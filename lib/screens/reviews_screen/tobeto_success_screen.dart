@@ -49,11 +49,12 @@ class TobetoSuccesScreen extends StatelessWidget {
                   children: [
                     Text(
                       TobetoText.evaluationMain1,
-                      style: TobetoTextStyle.poppins.bodyGrayDarkNormal16,
+                      style:
+                          TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
                       textAlign: TextAlign.justify,
                     ),
                     SizedBox(height: ScreenPadding.padding16px),
-                    _tobetoSuccesTable(),
+                    _tobetoSuccesTable(context),
                   ],
                 ),
               ),
@@ -98,14 +99,14 @@ class TobetoSuccesScreen extends StatelessWidget {
         child: Center(
           child: Text(
             TobetoText.evaluationCard5,
-            style: TobetoTextStyle.poppins.captionWhiteNormal14,
+            style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
           ),
         ),
       ),
     );
   }
 
-  Widget _tobetoSuccesTable() {
+  Widget _tobetoSuccesTable(BuildContext context) {
     return Column(
       mainAxisSize: MainAxisSize.min,
       children: [
@@ -117,24 +118,25 @@ class TobetoSuccesScreen extends StatelessWidget {
           },
           children: [
             TableRow(children: [
-              _tableCell('--'),
-              _tableCell('Bu konuda hiç ama hiç iyi değilim'),
+              _tableCell(context, '--'),
+              _tableCell(context, 'Bu konuda hiç ama hiç iyi değilim'),
             ]),
             TableRow(children: [
-              _tableCell('-'),
-              _tableCell('Bu konuda pek iyi değilim'),
+              _tableCell(context, '-'),
+              _tableCell(context, 'Bu konuda pek iyi değilim'),
             ]),
             TableRow(children: [
-              _tableCell('0'),
-              _tableCell('Bu konuda ortalama düzeydeyim, ne iyi ne kötü'),
+              _tableCell(context, '0'),
+              _tableCell(
+                  context, 'Bu konuda ortalama düzeydeyim, ne iyi ne kötü'),
             ]),
             TableRow(children: [
-              _tableCell('+'),
-              _tableCell('Bu konuda iyiyim'),
+              _tableCell(context, '+'),
+              _tableCell(context, 'Bu konuda iyiyim'),
             ]),
             TableRow(children: [
-              _tableCell('++'),
-              _tableCell('Bu konuda çok ama çok iyiyim.'),
+              _tableCell(context, '++'),
+              _tableCell(context, 'Bu konuda çok ama çok iyiyim.'),
             ]),
           ],
         ),
@@ -142,10 +144,11 @@ class TobetoSuccesScreen extends StatelessWidget {
     );
   }
 
-  Widget _tableCell(String text) {
+  Widget _tableCell(BuildContext context, String text) {
     return Padding(
       padding: EdgeInsets.all(ScreenPadding.padding8px),
-      child: Text(text, style: TobetoTextStyle.poppins.captionGrayDarkLight15),
+      child: Text(text,
+          style: TobetoTextStyle.poppins(context).captionGrayDarkLight15),
     );
   }
 }

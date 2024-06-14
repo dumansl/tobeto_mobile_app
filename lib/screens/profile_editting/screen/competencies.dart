@@ -38,7 +38,7 @@ class _CompetenciesState extends State<Competencies> {
         });
       }
     } catch (e) {
-      print("Failed to load skills: $e");
+      debugPrint("Failed to load skills: $e");
     }
   }
 
@@ -93,7 +93,7 @@ class _CompetenciesState extends State<Competencies> {
                 title: skill,
               ),
             );
-          }).toList(),
+          }),
         ],
       ),
     );

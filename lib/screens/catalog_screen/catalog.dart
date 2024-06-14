@@ -60,7 +60,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   padding: const EdgeInsets.only(top: 5),
                   child: Text(
                     TobetoText.catalogHeadline1,
-                    style: TobetoTextStyle.poppins.headlineBlackNormal32,
+                    style:
+                        TobetoTextStyle.poppins(context).headlineBlackNormal32,
                   ),
                 ),
                 SizedBox(
@@ -76,7 +77,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                 ),
                 Text(
                   TobetoText.catalogCategory,
-                  style: TobetoTextStyle.poppins.headlineBlackNormal32,
+                  style: TobetoTextStyle.poppins(context).headlineBlackNormal32,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -94,7 +95,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       onTap: () {},
                       child: Text(
                         TobetoText.catalogSeeAll,
-                        style: TobetoTextStyle.poppins.captionBlackBold15,
+                        style:
+                            TobetoTextStyle.poppins(context).captionBlackBold15,
                       ),
                     ),
                   ],

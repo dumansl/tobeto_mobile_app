@@ -4,7 +4,7 @@ import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
-    Key? key,
+    super.key,
     required this.startDate,
     required this.endDate,
     required this.title,
@@ -15,7 +15,7 @@ class CustomCard extends StatelessWidget {
     this.content3,
     this.title4,
     this.content4,
-  }) : super(key: key);
+  });
 
   final String startDate;
   final String endDate;
@@ -46,7 +46,8 @@ class CustomCard extends StatelessWidget {
                 ),
                 RichText(
                   text: TextSpan(
-                      style: TobetoTextStyle.poppins.captionPurpleBold15,
+                      style:
+                          TobetoTextStyle.poppins(context).captionPurpleBold15,
                       children: <TextSpan>[
                         TextSpan(text: startDate),
                         TextSpan(text: ' - $endDate'),
@@ -59,24 +60,28 @@ class CustomCard extends StatelessWidget {
           ),
           RichText(
               text: TextSpan(
-                  style: TobetoTextStyle.poppins.bodyBlackBold16,
+                  style: TobetoTextStyle.poppins(context).bodyBlackBold16,
                   children: <TextSpan>[
                 TextSpan(text: title),
                 TextSpan(
                     text: content,
-                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                    style:
+                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
                 TextSpan(text: title2),
                 TextSpan(
                     text: content2,
-                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                    style:
+                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
                 TextSpan(text: title3),
                 TextSpan(
                     text: content3,
-                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                    style:
+                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
                 TextSpan(text: title4),
                 TextSpan(
                     text: content4,
-                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                    style:
+                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
               ])),
         ],
       ),

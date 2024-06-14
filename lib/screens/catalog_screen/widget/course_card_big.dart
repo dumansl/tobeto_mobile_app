@@ -66,7 +66,7 @@ class CatalogCourseCardBig extends StatelessWidget {
                   margin: EdgeInsets.only(left: ScreenPadding.padding16px),
                   child: Text(
                     courseName,
-                    style: TobetoTextStyle.poppins.titleBlackBold24,
+                    style: TobetoTextStyle.poppins(context).titleBlackBold24,
                   ),
                 ),
                 Container(
@@ -89,7 +89,8 @@ class CatalogCourseCardBig extends StatelessWidget {
                           ),
                           Text(
                             courseTeacher,
-                            style: TobetoTextStyle.poppins.bodyBlackNormal16,
+                            style: TobetoTextStyle.poppins(context)
+                                .bodyBlackNormal16,
                           ),
                         ],
                       ),
@@ -107,8 +108,8 @@ class CatalogCourseCardBig extends StatelessWidget {
                               width: ScreenUtil.getWidth(context) * 0.01,
                             ),
                             Text(rank,
-                                style:
-                                    TobetoTextStyle.poppins.bodyBlackNormal16),
+                                style: TobetoTextStyle.poppins(context)
+                                    .bodyBlackNormal16),
                           ],
                         ),
                       ),

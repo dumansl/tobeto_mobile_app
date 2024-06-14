@@ -63,7 +63,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
               children: [
                 Text(
                   widget.title,
-                  style: TobetoTextStyle.poppins.captionPurpleBold12,
+                  style: TobetoTextStyle.poppins(context).captionPurpleBold12,
                 ),
                 Icon(
                   _isExpanded
@@ -89,7 +89,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
                 ),
                 child: Text(
                   widget.description!,
-                  style: TobetoTextStyle.poppins.captionGrayBold12,
+                  style: TobetoTextStyle.poppins(context).captionGrayBold12,
                   textAlign: TextAlign.justify,
                 ),
               )

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -27,12 +26,12 @@ class CustomDropDownInput extends StatelessWidget {
         ),
       ),
       items: items,
-      style: TobetoTextStyle.poppins.bodyBlackBold16,
+      style: TobetoTextStyle.poppins(context).bodyBlackBold16,
       hint: Text(
         title,
         style: controller.text.isNotEmpty
-            ? TobetoTextStyle.poppins.bodyBlackBold16
-            : TobetoTextStyle.poppins.bodyGrayLightNormal16,
+            ? TobetoTextStyle.poppins(context).bodyBlackBold16
+            : TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
       ),
       onChanged: onChanged,
       decoration: const InputDecoration(

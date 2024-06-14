@@ -23,9 +23,9 @@ class SitemapAndResourcesScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              _siteMap(),
+              _siteMap(context),
               SizedBox(height: ScreenPadding.padding32px),
-              _resources(),
+              _resources(context),
             ],
           ),
         ),
@@ -33,10 +33,10 @@ class SitemapAndResourcesScreen extends StatelessWidget {
     );
   }
 
-  Widget _siteMap() {
+  Widget _siteMap(BuildContext context) {
     return Column(
       children: [
-        _textDivider(text: TobetoText.tmapTitle),
+        _textDivider(context, text: TobetoText.tmapTitle),
         SizedBox(height: ScreenPadding.padding8px),
         const DescriptionTitleContent(
             title: "Hakkımızda", description: "description"),
@@ -49,10 +49,10 @@ class SitemapAndResourcesScreen extends StatelessWidget {
     );
   }
 
-  Widget _resources() {
+  Widget _resources(BuildContext context) {
     return Column(
       children: [
-        _textDivider(text: TobetoText.tsourceTitle),
+        _textDivider(context, text: TobetoText.tsourceTitle),
         SizedBox(height: ScreenPadding.padding8px),
         const DescriptionTitleContent(
             title: "Üyelik Sözleşmesi ve Kullanım Koşulları",
@@ -61,13 +61,13 @@ class SitemapAndResourcesScreen extends StatelessWidget {
     );
   }
 
-  Widget _textDivider({required String text}) {
+  Widget _textDivider(BuildContext context, {required String text}) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
           text,
-          style: TobetoTextStyle.poppins.subtitleGrayDarkBold20,
+          style: TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
         ),
         Divider(color: TobetoColor.frame.lightGrey),
       ],

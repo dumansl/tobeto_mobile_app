@@ -25,7 +25,7 @@ class IntroductionCard extends StatelessWidget {
           const VerticalPadding(),
           CenteredText(
             text: 'İlk Kampüs Buluşması \n Gerçekleşti',
-            style: TobetoTextStyle.poppins.subtitleWhiteLight20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteLight20,
           ),
           const VerticalPadding(),
           const CustomRichText(
@@ -54,23 +54,25 @@ class CustomRichText extends StatelessWidget {
         children: [
           TextSpan(
             text: textParts[0],
-            style: TobetoTextStyle.poppins.subtitleWhiteBold20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
           ),
           const TextSpan(
             text: '“',
-            style: TextStyle(color: Color.fromARGB(255, 0, 231, 170), fontSize: 20),
+            style: TextStyle(
+                color: Color.fromARGB(255, 0, 231, 170), fontSize: 20),
           ),
           TextSpan(
             text: textParts[2],
-            style: TobetoTextStyle.poppins.subtitleWhiteBold20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
           ),
           const TextSpan(
             text: '”',
-            style: TextStyle(color: Color.fromARGB(255, 0, 231, 170), fontSize: 20),
+            style: TextStyle(
+                color: Color.fromARGB(255, 0, 231, 170), fontSize: 20),
           ),
           TextSpan(
             text: textParts[4],
-            style: TobetoTextStyle.poppins.subtitleWhiteBold20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
           ),
         ],
       ),

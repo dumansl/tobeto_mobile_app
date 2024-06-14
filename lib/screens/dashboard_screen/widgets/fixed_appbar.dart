@@ -5,7 +5,8 @@ import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
-  const FixedAppbar({super.key, this.bottom, this.height = 75, required this.title});
+  const FixedAppbar(
+      {super.key, this.bottom, this.height = 75, required this.title});
   final TabBar? bottom;
   final double height;
   final String title;
@@ -15,7 +16,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
       toolbarHeight: ScreenUtil.getHeight(context) * 0.090,
       title: Text(
         title,
-        style: TobetoTextStyle.poppins.subHeadlinePurpleBold28,
+        style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
       ),
       centerTitle: true,
       leading: IconButton(
@@ -63,5 +64,6 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(height); // Sabit bir yükseklik değeri kullanın
+  Size get preferredSize =>
+      Size.fromHeight(height); // Sabit bir yükseklik değeri kullanın
 }

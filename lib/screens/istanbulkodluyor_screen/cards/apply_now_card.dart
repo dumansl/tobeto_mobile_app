@@ -26,7 +26,8 @@ class ApplyNowCard extends StatelessWidget {
         const VerticalPadding(),
         CustomContainer(
           backgroundColor: const Color(0xFF1E0F41),
-          borderRadius: const BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
+          borderRadius: const BorderRadius.only(
+              topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -35,7 +36,7 @@ class ApplyNowCard extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 90),
                   child: CenteredText(
                     text: 'Sende Hemen Başvur!',
-                    style: TobetoTextStyle.poppins.captionWhiteBold18,
+                    style: TobetoTextStyle.poppins(context).captionWhiteBold18,
                   ),
                 ),
                 const SizedBox(width: 55),
@@ -53,7 +54,7 @@ class ApplyNowCard extends StatelessWidget {
         const VerticalPadding(),
         PaddedText(
           text: 'Yazılım ve Teknoloji Alanında',
-          style: TobetoTextStyle.poppins.subtitleWhiteBold20,
+          style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
           padding: const EdgeInsets.all(0),
         ),
         const VerticalPadding(),
@@ -106,7 +107,7 @@ class CustomNumberedText extends StatelessWidget {
             ),
             TextSpan(
               text: '    $text',
-              style: TobetoTextStyle.poppins.bodyWhiteBold16,
+              style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
             ),
           ],
         ),

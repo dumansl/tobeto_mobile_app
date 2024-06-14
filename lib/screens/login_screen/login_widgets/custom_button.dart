@@ -22,7 +22,7 @@ class CustomButton extends StatelessWidget {
       onPressed: onPressed,
       child: Text(
         text,
-        style: TobetoTextStyle.inter.captionWhiteSemiBold15,
+        style: TobetoTextStyle.inter(context).captionWhiteSemiBold15,
       ),
     );
   }

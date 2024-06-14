@@ -42,7 +42,7 @@ class CategoryCard extends StatelessWidget {
                 child: Center(
                     child: Text(
                   categoryText,
-                  style: TobetoTextStyle.poppins.captionBlackBold18,
+                  style: TobetoTextStyle.poppins(context).captionBlackBold18,
                 )),
               ),
             ),

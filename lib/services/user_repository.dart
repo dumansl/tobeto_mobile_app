@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:path/path.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/screen/certificate.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/education_life.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/work_life.dart';
@@ -99,12 +98,11 @@ class UserRepository {
 
   Future uploadFile(BuildContext context) async {
     if (pickedfile == null) {
-      print("No file selected");
+      debugPrint("No file selected");
       return;
     }
 
     // Check file extension
-  
 
     final path = 'certificate/$userId/${basename(pickedfile!.name)}';
     final file = File(pickedfile!.path!);
@@ -113,7 +111,8 @@ class UserRepository {
     // Upload file to Firebase Storage
     await ref.putFile(file);
     String downloadURL = await ref.getDownloadURL();
-    print("Dosya $userId'nin kimliği altında Firebase Storage'a yüklendi.");
+    debugPrint(
+        "Dosya $userId'nin kimliği altında Firebase Storage'a yüklendi.");
 
     // Check if a document with the same file name exists in Firestore
     final QuerySnapshot existingFiles = await db
@@ -127,14 +126,14 @@ class UserRepository {
       // If the document exists, update it
       await existingFiles.docs.first.reference
           .update({'certificateUrl': downloadURL});
-      print("Mevcut belge güncellendi.");
+      debugPrint("Mevcut belge güncellendi.");
     } else {
       // If the document doesn't exist, create a new document
       await db.collection('users').doc(userId).collection('certificates').add({
         'fileName': pickedfile!.name,
         'certificateUrl': downloadURL,
       });
-      print("Yeni belge oluşturuldu.");
+      debugPrint("Yeni belge oluşturuldu.");
     }
   }
 }

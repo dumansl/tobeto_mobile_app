@@ -26,13 +26,15 @@ class CustomMiniCard extends StatelessWidget {
             child: imagepath,
           ),
           RichText(
-              text: TextSpan(style: TobetoTextStyle.poppins.bodyBlackBold16, children: <TextSpan>[
-            TextSpan(text: title),
-            TextSpan(
-              text: content,
-              style: TobetoTextStyle.poppins.bodyGrayLightNormal16,
-            ),
-          ])),
+              text: TextSpan(
+                  style: TobetoTextStyle.poppins(context).bodyBlackBold16,
+                  children: <TextSpan>[
+                TextSpan(text: title),
+                TextSpan(
+                  text: content,
+                  style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
+                ),
+              ])),
           IconButton(
               onPressed: onpressed,
               icon: const Icon(

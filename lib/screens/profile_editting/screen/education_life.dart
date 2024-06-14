@@ -25,9 +25,12 @@ bool isChecked = false;
 
 final TextEditingController educationStatuController = TextEditingController();
 final TextEditingController univercityController = TextEditingController();
-final TextEditingController graduatedDepartmentController = TextEditingController();
-final TextEditingController startUnivercityDateController = TextEditingController();
-final TextEditingController graduateUnivercityDateController = TextEditingController();
+final TextEditingController graduatedDepartmentController =
+    TextEditingController();
+final TextEditingController startUnivercityDateController =
+    TextEditingController();
+final TextEditingController graduateUnivercityDateController =
+    TextEditingController();
 final TextEditingController checkBoxController = TextEditingController();
 
 class _EducationLifeState extends State<EducationLife> {
@@ -46,7 +49,8 @@ class _EducationLifeState extends State<EducationLife> {
               InputText(
                   child: CustomDropDownInput(
                 onChanged: (newValue) {
-                  educationStatuController.text = newValue ?? educationStatuController.text;
+                  educationStatuController.text =
+                      newValue ?? educationStatuController.text;
                 },
                 items: TobetoText.educationStatu
                     .map((label) => DropdownMenuItem(
@@ -63,7 +67,8 @@ class _EducationLifeState extends State<EducationLife> {
                   child: CustomTextField(
                 title: TobetoText.profileEditUnivercity,
                 onSaved: (newValue) {
-                  univercityController.text = newValue ?? univercityController.text;
+                  univercityController.text =
+                      newValue ?? univercityController.text;
                 },
                 controller: univercityController,
               )),
@@ -71,7 +76,8 @@ class _EducationLifeState extends State<EducationLife> {
                   child: CustomTextField(
                 title: TobetoText.profileEditGraduatedDepartment,
                 onSaved: (newValue) {
-                  graduatedDepartmentController.text = newValue ?? graduatedDepartmentController.text;
+                  graduatedDepartmentController.text =
+                      newValue ?? graduatedDepartmentController.text;
                 },
                 controller: graduatedDepartmentController,
               )),
@@ -81,7 +87,8 @@ class _EducationLifeState extends State<EducationLife> {
                 keyboardType: TextInputType.number,
                 maxLength: 4,
                 onSaved: (newValue) {
-                  startUnivercityDateController.text = newValue ?? startUnivercityDateController.text;
+                  startUnivercityDateController.text =
+                      newValue ?? startUnivercityDateController.text;
                 },
                 controller: startUnivercityDateController,
               )),
@@ -91,7 +98,8 @@ class _EducationLifeState extends State<EducationLife> {
                 keyboardType: TextInputType.number,
                 maxLength: 4,
                 onSaved: (newValue) {
-                  graduateUnivercityDateController.text = newValue ?? graduateUnivercityDateController.text;
+                  graduateUnivercityDateController.text =
+                      newValue ?? graduateUnivercityDateController.text;
                 },
                 controller: graduateUnivercityDateController,
               )),
@@ -102,13 +110,14 @@ class _EducationLifeState extends State<EducationLife> {
                       setState(() {
                         isChecked = value!;
                       });
-                      checkBoxController.text = value.toString() ?? checkBoxController.text;
+                      checkBoxController.text = value.toString();
                     },
                     value: isChecked,
                   ),
                   Text(
                     TobetoText.profileEditEducationContinueBox,
-                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16,
+                    style:
+                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
                   ),
                 ],
               ),

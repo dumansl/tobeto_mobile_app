@@ -32,7 +32,7 @@ class CustomTextField extends StatelessWidget {
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
       maxLength: maxLength,
-      style: TobetoTextStyle.poppins.bodyBlackBold16,
+      style: TobetoTextStyle.poppins(context).bodyBlackBold16,
       decoration: InputDecoration(
         counterText: "",
         focusedBorder: const OutlineInputBorder(
@@ -40,8 +40,9 @@ class CustomTextField extends StatelessWidget {
           borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
         labelText: title,
-        labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
-        floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
+        labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
+        floatingLabelStyle:
+            TobetoTextStyle.poppins(context).captionPurpleNormal18,
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
           Radius.circular(12),

@@ -20,11 +20,11 @@ class CustomTextButton extends StatelessWidget {
           children: [
             TextSpan(
               text: "$text ",
-              style: TobetoTextStyle.inter.captionGrayLightNormal15,
+              style: TobetoTextStyle.inter(context).captionGrayLightNormal15,
             ),
             TextSpan(
               text: textbold,
-              style: TobetoTextStyle.inter.captionGrayDarkNormal15,
+              style: TobetoTextStyle.inter(context).captionGrayDarkNormal15,
             ),
           ],
         ),

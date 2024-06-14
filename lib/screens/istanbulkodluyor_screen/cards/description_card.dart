@@ -16,7 +16,9 @@ class DescriptionCard extends StatelessWidget {
       children: [
         CustomContainer(
           backgroundColor: const Color.fromARGB(255, 0, 231, 170),
-          borderRadius: const BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
+          borderRadius: const BorderRadius.only(
+              bottomRight: Radius.circular(30),
+              bottomLeft: Radius.circular(30)),
           boxShadow: [
             BoxShadow(
               color: TobetoColor.card.grey.withOpacity(0.3),
@@ -29,14 +31,15 @@ class DescriptionCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.only(top: 30),
               child: CenteredText(
-                text: 'Türkiye’nin İlk Sosyal Etki Tahvili: “İstanbul Kodluyor” Projesi',
-                style: TobetoTextStyle.poppins.subtitleWhiteBold20,
+                text:
+                    'Türkiye’nin İlk Sosyal Etki Tahvili: “İstanbul Kodluyor” Projesi',
+                style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
               ),
             ),
             PaddedText(
               text:
                   'Sanayi ve Teknoloji Bakanlığı Kalkınma Ajansları Genel Müdürlüğü koordinasyonunda İstanbul Kalkınma Ajansı (İSTKA) ve İngiltere merkezli Bridges Outcomes Partnerships iş birliğinde başladı!',
-              style: TobetoTextStyle.poppins.bodyWhiteBold16,
+              style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
               padding: const EdgeInsets.all(30),
             ),
           ],
@@ -82,7 +85,9 @@ class FAQButton extends StatelessWidget {
       padding: const EdgeInsets.only(left: 30, right: 30),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: TobetoColor.purple, elevation: 6, shadowColor: TobetoColor.card.lightGrey),
+            backgroundColor: TobetoColor.purple,
+            elevation: 6,
+            shadowColor: TobetoColor.card.lightGrey),
         onPressed: () {
           Navigator.push(
             context,
@@ -93,7 +98,7 @@ class FAQButton extends StatelessWidget {
         },
         child: Text(
           text,
-          style: TobetoTextStyle.poppins.captionWhiteBold12,
+          style: TobetoTextStyle.poppins(context).captionWhiteBold12,
           textAlign: TextAlign.center,
         ),
       ),
@@ -115,7 +120,9 @@ class TobetoButton extends StatelessWidget {
       padding: const EdgeInsets.only(left: 30, right: 30),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: TobetoColor.purple, elevation: 6, shadowColor: TobetoColor.card.lightGrey),
+            backgroundColor: TobetoColor.purple,
+            elevation: 6,
+            shadowColor: TobetoColor.card.lightGrey),
         onPressed: () {
           Navigator.push(
             context,
@@ -126,7 +133,7 @@ class TobetoButton extends StatelessWidget {
         },
         child: Text(
           text,
-          style: TobetoTextStyle.poppins.captionWhiteBold12,
+          style: TobetoTextStyle.poppins(context).captionWhiteBold12,
           textAlign: TextAlign.center,
         ),
       ),

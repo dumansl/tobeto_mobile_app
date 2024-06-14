@@ -36,9 +36,9 @@
 //                   borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
 //                 ),
 //                 labelText: TobetoText.profileEditCertificatesDate,
-//                 labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
+//                 labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
 //                 floatingLabelStyle:
-//                     TobetoTextStyle.poppins.captionPurpleNormal18,
+//                     TobetoTextStyle.poppins(context).captionPurpleNormal18,
 //                 border: const OutlineInputBorder(
 //                     borderRadius: BorderRadius.all(
 //                   Radius.circular(12),
@@ -69,7 +69,7 @@
 //               Center(
 //                 child: Text(
 //                   TobetoText.profileEditCommunitySubtitle,
-//                   style: TobetoTextStyle.poppins.bodyGrayMediumSemiBold16,
+//                   style: TobetoTextStyle.poppins(context).bodyGrayMediumSemiBold16,
 //                 ),
 //               )
 //             ],

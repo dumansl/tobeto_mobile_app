@@ -30,22 +30,27 @@ class TobetoHomeScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     _drawerTextButton(
+                      context,
                       text: TobetoText.hambugerMenuAboutUs,
                       onPressed: () {},
                     ),
                     _drawerTextButton(
+                      context,
                       text: TobetoText.hambugerMenuWhatDoWeOffer,
                       onPressed: () {},
                     ),
                     _drawerTextButton(
+                      context,
                       text: TobetoText.hambugerMenuOurTrainings,
                       onPressed: () {},
                     ),
                     _drawerTextButton(
+                      context,
                       text: TobetoText.hambugerMenuWhatHappeningTobeto,
                       onPressed: () {},
                     ),
                     _drawerTextButton(
+                      context,
                       text: TobetoText.hambugerMenuSitemapAndResources,
                       onPressed: () {
                         Navigator.pop(context);
@@ -59,6 +64,7 @@ class TobetoHomeScreen extends StatelessWidget {
                       },
                     ),
                     _drawerTextButton(
+                      context,
                       text: TobetoText.hambugerMenuAboutUsCommunication,
                       onPressed: () {},
                     ),
@@ -82,13 +88,13 @@ class TobetoHomeScreen extends StatelessWidget {
     );
   }
 
-  Widget _drawerTextButton(
+  Widget _drawerTextButton(BuildContext context,
       {required String text, required VoidCallback onPressed}) {
     return TextButton(
       onPressed: onPressed,
       child: Text(
         text,
-        style: TobetoTextStyle.poppins.captionGrayBold18,
+        style: TobetoTextStyle.poppins(context).captionGrayBold18,
       ),
     );
   }

@@ -84,12 +84,13 @@ class NestedScroll extends StatelessWidget {
                           : Alignment.bottomCenter,
                       child: RichText(
                         text: TextSpan(
-                            style: TobetoTextStyle.poppins.captionBlackBold18,
+                            style: TobetoTextStyle.poppins(context)
+                                .captionBlackBold18,
                             children: <TextSpan>[
                               TextSpan(
                                   text: "TOBETO",
-                                  style: TobetoTextStyle
-                                      .poppins.captionPurpleBold18),
+                                  style: TobetoTextStyle.poppins(context)
+                                      .captionPurpleBold18),
                               const TextSpan(
                                 text: "'ya hoş geldin Enes",
                               ),

@@ -24,10 +24,10 @@ class CustomDropDownInput extends StatelessWidget {
         ),
       ),
       items: items,
-      style: TobetoTextStyle.poppins.bodyBlackBold16,
+      style: TobetoTextStyle.poppins(context).bodyBlackBold16,
       hint: Text(
         title,
-        style: TobetoTextStyle.poppins.bodyGrayLightNormal16,
+        style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
       ),
       onChanged: onChanged,
       decoration: InputDecoration(
@@ -35,8 +35,9 @@ class CustomDropDownInput extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
-        labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
-        floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
+        labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
+        floatingLabelStyle:
+            TobetoTextStyle.poppins(context).captionPurpleNormal18,
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
           Radius.circular(12),
