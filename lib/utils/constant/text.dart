@@ -134,7 +134,7 @@ abstract class TobetoText {
   static String profileEditAboutMeBox = "Lütfen kendinizi kısaca tanıtınız...";
   static String profileEditSaveButton = "Kaydet";
   // profile edit page/experiences
-  static String profileEditWorkplaceName = "Kurum Adı*";
+  static String profileEditWorkplaceName = "Kurum Adı* \n";
   static String profileEditWorkplaceNameBox = "Lütfen kurum adı giriniz...";
   static String profileEditPosition = "Pozisyon*";
   static String profileEditPositionBox = "Lütfen pozisyon bilgisi giriniz...";

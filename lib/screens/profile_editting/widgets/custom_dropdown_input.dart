@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -8,10 +9,12 @@ class CustomDropDownInput extends StatelessWidget {
     required this.onChanged,
     required this.items,
     required this.title,
+    required this.controller,
   });
   final Function(String?)? onChanged;
   final List<DropdownMenuItem<String>>? items;
   final String title;
+  final TextEditingController controller;
 
   @override
   Widget build(BuildContext context) {
@@ -27,21 +30,21 @@ class CustomDropDownInput extends StatelessWidget {
       style: TobetoTextStyle.poppins.bodyBlackBold16,
       hint: Text(
         title,
-        style: TobetoTextStyle.poppins.bodyGrayLightNormal16,
+        style: controller.text.isNotEmpty
+            ? TobetoTextStyle.poppins.bodyBlackBold16
+            : TobetoTextStyle.poppins.bodyGrayLightNormal16,
       ),
       onChanged: onChanged,
-      decoration: InputDecoration(
-        focusedBorder: const OutlineInputBorder(
+      decoration: const InputDecoration(
+        focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
-        labelStyle: TobetoTextStyle.poppins.bodyGrayLightNormal16,
-        floatingLabelStyle: TobetoTextStyle.poppins.captionPurpleNormal18,
-        border: const OutlineInputBorder(
+        border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
           Radius.circular(12),
         )),
-        enabledBorder: const OutlineInputBorder(
+        enabledBorder: OutlineInputBorder(
           borderSide: BorderSide(color: Colors.transparent, width: 1.0),
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),

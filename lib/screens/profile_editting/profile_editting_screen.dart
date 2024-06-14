@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/education_life.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
 import 'package:tobeto_mobile_app/screens/profile_screen/profile_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -11,8 +12,7 @@ class ProfileEditPage extends StatefulWidget {
   State<ProfileEditPage> createState() => _ProfileEditPageState();
 }
 
-class _ProfileEditPageState extends State<ProfileEditPage>
-    with SingleTickerProviderStateMixin {
+class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -63,10 +63,10 @@ class _ProfileEditPageState extends State<ProfileEditPage>
         padding: const EdgeInsets.symmetric(horizontal: 12),
         child: TabBarView(
           controller: _tabController,
-          children: const [
-            PersonalInformation(),
+          children: [
+            PersonalInformationForm(),
             ProfileScreen(),
-            // EducationLife(),
+            EducationLife(),
             // Competencies(),
             // EducationTab(),
             // SkillsTab(),

@@ -3,17 +3,17 @@ import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 
 class CustomCheckbox extends StatelessWidget {
   final Function(bool?) onChanged;
-  final bool isChecked;
+  final bool value;
+  // final TextEditingController controller;
 
-  const CustomCheckbox(
-      {super.key, required this.onChanged, this.isChecked = false});
+  const CustomCheckbox({super.key, required this.onChanged, this.value = false});
 
   @override
   Widget build(BuildContext context) {
     return Checkbox(
       activeColor: TobetoColor.purple,
       checkColor: TobetoColor.button.white,
-      value: isChecked,
+      value: value,
       onChanged: onChanged,
     );
   }

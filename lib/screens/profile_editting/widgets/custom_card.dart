@@ -1,21 +1,32 @@
 import 'package:flutter/material.dart';
+
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomCard extends StatelessWidget {
   const CustomCard({
-    super.key,
-    required this.date,
+    Key? key,
+    required this.startDate,
+    required this.endDate,
     required this.title,
     required this.content,
     required this.title2,
     required this.content2,
-  });
+    this.title3,
+    this.content3,
+    this.title4,
+    this.content4,
+  }) : super(key: key);
 
-  final String date;
+  final String startDate;
+  final String endDate;
   final String title;
   final String content;
   final String title2;
   final String content2;
+  final String? title3;
+  final String? content3;
+  final String? title4;
+  final String? content4;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +44,13 @@ class CustomCard extends StatelessWidget {
                   padding: EdgeInsets.only(right: 10),
                   child: Icon(Icons.date_range_outlined),
                 ),
-                Text(
-                  date,
-                  style: TobetoTextStyle.poppins.captionPurpleBold15,
+                RichText(
+                  text: TextSpan(
+                      style: TobetoTextStyle.poppins.captionPurpleBold15,
+                      children: <TextSpan>[
+                        TextSpan(text: startDate),
+                        TextSpan(text: ' - $endDate'),
+                      ]),
                 ),
                 const Icon(Icons.delete),
                 const Icon(Icons.edit),
@@ -43,12 +58,26 @@ class CustomCard extends StatelessWidget {
             ),
           ),
           RichText(
-              text: TextSpan(style: TobetoTextStyle.poppins.bodyBlackBold16, children: <TextSpan>[
-            TextSpan(text: title),
-            TextSpan(text: content, style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
-            TextSpan(text: title2),
-            TextSpan(text: content2, style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
-          ])),
+              text: TextSpan(
+                  style: TobetoTextStyle.poppins.bodyBlackBold16,
+                  children: <TextSpan>[
+                TextSpan(text: title),
+                TextSpan(
+                    text: content,
+                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                TextSpan(text: title2),
+                TextSpan(
+                    text: content2,
+                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                TextSpan(text: title3),
+                TextSpan(
+                    text: content3,
+                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+                TextSpan(text: title4),
+                TextSpan(
+                    text: content4,
+                    style: TobetoTextStyle.poppins.bodyGrayLightNormal16),
+              ])),
         ],
       ),
     );

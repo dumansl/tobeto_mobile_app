@@ -11,6 +11,7 @@ class CustomTextField extends StatelessWidget {
     this.maxLines,
     required this.onSaved,
     required this.controller,
+    this.iconButton,
   });
 
   final TextInputType keyboardType;
@@ -19,6 +20,7 @@ class CustomTextField extends StatelessWidget {
   final int? maxLines;
   final TextEditingController controller;
   final dynamic Function(String?)? onSaved;
+  final IconButton? iconButton;
 
   @override
   Widget build(BuildContext context) {
