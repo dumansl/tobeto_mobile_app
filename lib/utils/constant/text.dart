@@ -311,6 +311,8 @@ abstract class TobetoText {
   static String evaluationspiderChartDescription8 =
       "Anlıyorum ve anlaşılıyorum";
   static String evaluationScore = "Yetkinlik Puanı";
+  static String successExamButtonNext = "İleri";
+  static String successExamButtonEnd = "Bitir";
   // catalog page/main
   static String catalogAppBar = "Katalog";
   static String catalogSearchBox = "Eğitim arayın...";
@@ -538,4 +540,11 @@ abstract class TobetoText {
   static String tsourceApplicationBox = "İlgili Kişi Başvuru Formu";
   static String tsourceCookieBox = "Çerez Politikası";
   static String tsourceEscapeBox = "Cayma Formu";
+  // Hamburger Menu
+  static String hambugerMenuAboutUs = "Biz Kimiz";
+  static String hambugerMenuWhatDoWeOffer = "Neler Sunuyoruz?";
+  static String hambugerMenuOurTrainings = "Eğitimlerimiz";
+  static String hambugerMenuWhatHappeningTobeto = "Tobeto'da Neler Oluyor?";
+  static String hambugerMenuSitemapAndResources = "Site Haritası & Kaynaklar";
+  static String hambugerMenuAboutUsCommunication = "İletişim";
 }

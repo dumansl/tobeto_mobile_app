@@ -70,9 +70,7 @@ class TobetoSuccesScreen extends StatelessWidget {
         Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const ExamScreen(
-                examType: "",
-              ),
+              builder: (context) => const SuccessExamScreen(),
             ));
       },
       child: Container(

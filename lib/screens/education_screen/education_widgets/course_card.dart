@@ -71,7 +71,8 @@ class CourseCard extends StatelessWidget {
               style: ElevatedButton.styleFrom(
                 backgroundColor: TobetoColor.purple,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 7),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 22, vertical: 7),
                 textStyle: const TextStyle(fontSize: 14),
               ),
               child: const Text('Eğitime Git'),
