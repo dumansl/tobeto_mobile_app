@@ -1,30 +1,48 @@
-// bloc/user_bloc.dart
+
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter/foundation.dart';
-import 'package:tobeto_mobile_app/model/user_model.dart';
+import 'package:tobeto_mobile_app/blocs/user_bloc/user_event.dart';
+import 'package:tobeto_mobile_app/blocs/user_bloc/user_state.dart';
 import 'package:tobeto_mobile_app/services/user_services.dart';
-import 'user_event.dart';
-import 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final UserServices userRepository = UserServices();
+  final UserServices _userServices = UserServices();
 
   UserBloc() : super(UserInitial()) {
     on<FetchUserData>(_onFetchUserData);
   }
 
-  void _onFetchUserData(FetchUserData event, Emitter<UserState> emit) async {
-    emit(UserLoading());
+  Future<void> _onFetchUserData(
+      FetchUserData event, Emitter<UserState> emit) async {
     try {
-      UserModel? userData = await userRepository.getUserData();
-      if (userData != null) {
-        emit(UserLoaded(userData));
+      emit(UserLoading());
+
+      final user = await _userServices.getUserData();
+      final experiences = await _userServices.getUserExperiences();
+      final education = await _userServices.getUserEducation();
+      final competencies = await _userServices.getUserCompetencies();
+      final certificates = await _userServices.getUserCertificates();
+      final communities = await _userServices.getUserCommunities();
+      final projectsAndAwards = await _userServices.getUserProjectsAndAwards();
+      final mediaAccounts = await _userServices.getUserMediaAccounts();
+      final foreignLanguages = await _userServices.getUserForeignLanguages();
+
+      if (user != null) {
+        emit(UserLoaded(
+          user: user,
+          experiences: experiences,
+          education: education!,
+          competencies: competencies!,
+          certificates: certificates,
+          communities: communities,
+          projectsAndAwards: projectsAndAwards,
+          mediaAccounts: mediaAccounts!,
+          foreignLanguages: foreignLanguages!,
+        ));
       } else {
-        emit(UserError("Kullanıcı verisi bulunamadı."));
+        emit(UserError('User not found'));
       }
     } catch (e) {
-      debugPrint(e.toString());
       emit(UserError(e.toString()));
     }
   }

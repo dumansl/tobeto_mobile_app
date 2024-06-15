@@ -5,6 +5,7 @@ import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/review_bloc/review_bloc.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/profile_editting_screen.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/themes/theme.dart';
 import 'firebase_options.dart';
