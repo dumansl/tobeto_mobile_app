@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/catalog_bloc/catalog_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/catalog_bloc/catalog_state.dart';
+import 'package:tobeto_mobile_app/model/catalog_model.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/catalog_search_bar.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/category_card.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/course_card.dart';
@@ -24,9 +25,10 @@ class _CatalogScreenState extends State<CatalogScreen> {
       if (state is CatalogLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state is CatalogLoaded) {
+        List<CatalogModel> data = state.catalogModel;
         final List<Widget> boxWidgets = [
           CatalogCourseCardsmall(
-            courseName: 'istanbul Kodluyor',
+            courseName: data[0].educationName,
             courseTeacher: 'Gürkan İŞİTEN',
             rank: '4.5',
             width: ScreenUtil.getWidth(context) * 0.43,
