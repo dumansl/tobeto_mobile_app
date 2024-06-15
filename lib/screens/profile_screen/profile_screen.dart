@@ -49,10 +49,8 @@ class ProfileScreen extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfileEditPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => UserPage()));
                 },
                 icon: Image.asset(ImagePath.organizer),
               ),

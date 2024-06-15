@@ -4,7 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/user_bloc/user_event.dart';
 import 'package:tobeto_mobile_app/blocs/review_bloc/review_bloc.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/themes/theme.dart';
@@ -29,8 +28,6 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<CourseBloc>(create: (context) => CourseBloc()),
         BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
-        BlocProvider<UserBloc>(
-            create: (context) => UserBloc()..add(LoadUserData())),
         BlocProvider<ExamBloc>(create: (context) => ExamBloc()),
         BlocProvider<ReviewBloc>(create: (context) => ReviewBloc()),
       ],
