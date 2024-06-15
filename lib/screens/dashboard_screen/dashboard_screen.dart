@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:tobeto_mobile_app/screens/catalog_screen/catalog_screen.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/custom_navbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -46,7 +47,7 @@ class _HomeState extends State<DashboardScreen> {
                 ),
               )),
           PersistentTabConfig(
-              screen: const SplashScreen(),
+              screen: CatalogScreen(),
               item: ItemConfig(
                 icon: Image.asset(ImagePath.catalogActive),
                 title: TobetoText.bottomIconCatalog,
