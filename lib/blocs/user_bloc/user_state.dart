@@ -1,11 +1,3 @@
-import 'package:tobeto_mobile_app/model/certificate_model.dart';
-import 'package:tobeto_mobile_app/model/community_model.dart';
-import 'package:tobeto_mobile_app/model/competency_model.dart';
-import 'package:tobeto_mobile_app/model/education_model.dart';
-import 'package:tobeto_mobile_app/model/experince_model.dart';
-import 'package:tobeto_mobile_app/model/foreignLanguageModel.dart';
-import 'package:tobeto_mobile_app/model/mediaaccount.dart';
-import 'package:tobeto_mobile_app/model/projectorawards.dart';
 import 'package:tobeto_mobile_app/model/user_model.dart';
 
 abstract class UserState {}

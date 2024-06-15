@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/user_bloc/user_event.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_state.dart';
-
-import '../../blocs/user_bloc/user_event.dart';
 
 class UserPage extends StatelessWidget {
   @override
@@ -53,8 +52,8 @@ class UserPage extends StatelessWidget {
                     ListTile(
                       title: const Text('Eğitim'),
                       subtitle: ListTile(
-                        title: Text(education.university),
-                        subtitle: Text(education.section),
+                        title: Text(education.university ?? 'Bilinmiyor'),
+                        subtitle: Text(education.section ?? 'Bilinmiyor'),
                       ),
                     ),
                     const Divider(),
@@ -111,23 +110,23 @@ class UserPage extends StatelessWidget {
                         children: [
                           ListTile(
                             title: const Text('Behance'),
-                            subtitle: Text(mediaAccounts.behance),
+                            subtitle: Text(mediaAccounts.behance ?? 'Bilinmiyor'),
                           ),
                           ListTile(
                             title: const Text('Dribble'),
-                            subtitle: Text(mediaAccounts.dribble),
+                            subtitle: Text(mediaAccounts.dribble ?? 'Bilinmiyor'),
                           ),
                           ListTile(
                             title: const Text('Instagram'),
-                            subtitle: Text(mediaAccounts.instagram),
+                            subtitle: Text(mediaAccounts.instagram ?? 'Bilinmiyor'),
                           ),
                           ListTile(
                             title: const Text('LinkedIn'),
-                            subtitle: Text(mediaAccounts.linkedIn),
+                            subtitle: Text(mediaAccounts.linkedIn ?? 'Bilinmiyor'),
                           ),
                           ListTile(
                             title: const Text('Twitter'),
-                            subtitle: Text(mediaAccounts.twitter),
+                            subtitle: Text(mediaAccounts.twitter ?? 'Bilinmiyor'),
                           ),
                         ],
                       ),
@@ -136,9 +135,27 @@ class UserPage extends StatelessWidget {
                     ListTile(
                       title: const Text('Yabancı Diller'),
                       subtitle: ListTile(
-                        title: Text(foreignLanguages.languageName),
-                        subtitle: Text(foreignLanguages.languageLevel),
+                        title: Text(foreignLanguages.languageName ?? 'Bilinmiyor'),
+                        subtitle: Text(foreignLanguages.languageLevel ?? 'Bilinmiyor'),
                       ),
+                    ),
+                    // Diğer kullanıcı bilgileri burada gösterilebilir
+                    // Örneğin: Ad, Soyad, Email, Telefon gibi
+                    ListTile(
+                      title: const Text('Ad'),
+                      subtitle: Text(user.firstName ?? 'Bilinmiyor'),
+                    ),
+                    ListTile(
+                      title: const Text('Soyad'),
+                      subtitle: Text(user.lastName ?? 'Bilinmiyor'),
+                    ),
+                    ListTile(
+                      title: const Text('Email'),
+                      subtitle: Text(user.email ?? 'Bilinmiyor'),
+                    ),
+                    ListTile(
+                      title: const Text('Telefon Numarası'),
+                      subtitle: Text(user.phoneNumber ?? 'Bilinmiyor'),
                     ),
                   ],
                 ),
