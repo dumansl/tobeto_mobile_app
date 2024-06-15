@@ -4,6 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_event.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_state.dart';
+import 'package:tobeto_mobile_app/model/user_model.dart';
 import 'package:tobeto_mobile_app/services/user_repository.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdown_input.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
@@ -17,8 +18,7 @@ class PersonalInformationForm extends StatefulWidget {
   const PersonalInformationForm({super.key});
 
   @override
-  State<PersonalInformationForm> createState() =>
-      _PersonalInformationFormState();
+  State<PersonalInformationForm> createState() => _PersonalInformationFormState();
 }
 
 final TextEditingController firstNameController = TextEditingController();
@@ -47,7 +47,6 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
         if (state is UserLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is UserLoaded) {
-          UserRepository().getData();
           return Form(
             key: _formKey,
             child: ListView(
@@ -60,8 +59,7 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                     child: CustomTextField(
                   title: TobetoText.profileEditName,
                   onSaved: (newValue) {
-                    firstNameController.text =
-                        newValue ?? firstNameController.text;
+                    firstNameController.text = newValue ?? firstNameController.text;
                   },
                   controller: firstNameController,
                 )),
@@ -69,8 +67,7 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                     child: CustomTextField(
                   title: TobetoText.profileEditSurname,
                   onSaved: (newValue) {
-                    lastNameController.text =
-                        newValue ?? lastNameController.text;
+                    lastNameController.text = newValue ?? lastNameController.text;
                   },
                   controller: lastNameController,
                 )),
@@ -87,23 +84,18 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                         decoration: InputDecoration(
                           focusedBorder: const OutlineInputBorder(
                             borderRadius: BorderRadius.all(Radius.circular(10)),
-                            borderSide: BorderSide(
-                                color: TobetoColor.purple, width: 2.0),
+                            borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
                           ),
                           labelText: TobetoText.profileEditBirthday,
-                          labelStyle: TobetoTextStyle.poppins(context)
-                              .bodyGrayLightNormal16,
-                          floatingLabelStyle: TobetoTextStyle.poppins(context)
-                              .captionPurpleNormal18,
+                          labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
+                          floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
                           border: const OutlineInputBorder(
                               borderRadius: BorderRadius.all(
                             Radius.circular(12),
                           )),
                           enabledBorder: const OutlineInputBorder(
-                            borderSide: BorderSide(
-                                color: Colors.transparent, width: 1.0),
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(10.0)),
+                            borderSide: BorderSide(color: Colors.transparent, width: 1.0),
+                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
                           ),
                         ),
                         type: DateFormatType.type2,
@@ -116,8 +108,7 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                   keyboardType: TextInputType.number,
                   maxLength: 11,
                   onSaved: (newValue) {
-                    identificationController.text =
-                        newValue ?? identificationController.text;
+                    identificationController.text = newValue ?? identificationController.text;
                   },
                   controller: identificationController,
                 )),
@@ -141,17 +132,14 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                               child: Text(label),
                             ))
                         .toList(),
-                    title: genderController.text.isNotEmpty
-                        ? genderController.text
-                        : TobetoText.profileEditGender,
+                    title: genderController.text.isNotEmpty ? genderController.text : TobetoText.profileEditGender,
                     controller: genderController,
                   ),
                 ),
                 InputText(
                     child: CustomDropDownInput(
                   onChanged: (newValue) {
-                    militaryStatuController.text =
-                        newValue ?? militaryStatuController.text;
+                    militaryStatuController.text = newValue ?? militaryStatuController.text;
                   },
                   items: TobetoText.militaryStatu
                       .map((label) => DropdownMenuItem(
@@ -167,8 +155,7 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                 InputText(
                     child: CustomDropDownInput(
                   onChanged: (newValue) {
-                    disabledStatuController.text =
-                        newValue ?? disabledStatuController.text;
+                    disabledStatuController.text = newValue ?? disabledStatuController.text;
                   },
                   items: TobetoText.disableStatu
                       .map((label) => DropdownMenuItem(
@@ -209,8 +196,7 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                     child: CustomTextField(
                   title: TobetoText.profileEditDistrict,
                   onSaved: (newValue) {
-                    districtController.text =
-                        newValue ?? districtController.text;
+                    districtController.text = newValue ?? districtController.text;
                   },
                   controller: districtController,
                 )),
