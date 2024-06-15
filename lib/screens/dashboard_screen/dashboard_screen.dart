@@ -12,7 +12,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<DashboardScreen> {
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 2);
+  final PersistentTabController _controller =
+      PersistentTabController(initialIndex: 2);
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +21,7 @@ class _HomeState extends State<DashboardScreen> {
         controller: _controller,
         tabs: [
           PersistentTabConfig(
-              screen: const ProfileScreen(),
+              screen: ProfileEditScreen(),
               item: ItemConfig(
                 icon: Image.asset(ImagePath.profileActive),
                 title: TobetoText.bottomIconProfile,
