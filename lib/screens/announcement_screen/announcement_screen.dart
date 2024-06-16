@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/services/announcement_service.dart';
 import 'package:tobeto_mobile_app/blocs/announcement_bloc/announcement_bloc.dart';
-import 'announcement_widgets/announcement_card.dart';
+import '../announcement_screen/announcement_widgets/announcement_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
-import 'package:tobeto_mobile_app/model/announcement_model.dart';
 
 class AnnouncementScreen extends StatelessWidget {
-  const AnnouncementScreen({Key? key}) : super(key: key);
+  const AnnouncementScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AnnouncementBloc()..add(LoadAnnouncements()),
+      create: (context) => AnnouncementBloc(AnnouncementService())..add(LoadAnnouncements()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Duyuru ve Haberlerim"),
@@ -22,17 +22,17 @@ class AnnouncementScreen extends StatelessWidget {
             },
           ),
         ),
-        body: AnnouncementView(),
+        body: const AnnouncementView(),
       ),
     );
   }
 }
 
 class AnnouncementView extends StatefulWidget {
-  const AnnouncementView({Key? key}) : super(key: key);
+  const AnnouncementView({super.key});
 
   @override
-  _AnnouncementViewState createState() => _AnnouncementViewState();
+  State<AnnouncementView> createState() => _AnnouncementViewState();
 }
 
 class _AnnouncementViewState extends State<AnnouncementView> {
@@ -109,6 +109,31 @@ class _AnnouncementViewState extends State<AnnouncementView> {
         Expanded(
           child: BlocBuilder<AnnouncementBloc, AnnouncementState>(
             builder: (context, state) {
+              if (state is AnnouncementsLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
+                final announcements =
+                    state is AnnouncementsLoaded ? state.announcements : (state as AnnouncementsFiltered).announcements;
+                if (announcements.isEmpty) {
+                  return const Center(child: Text('No announcements available.'));
+                }
+                return ListView.builder(
+                  itemCount: announcements.length,
+                  itemBuilder: (context, index) {
+                    return AnnouncementCard(announcement: announcements[index], focusNode: _focusNode);
+                  },
+                );
+              } else if (state is AnnouncementsError) {
+                return Center(child: Text(state.message));
+              } else {
+                return const Center(child: Text('Unexpected state.'));
+              }
+            },
+          ),
+        ),
+        /*Expanded(
+          child: BlocBuilder<AnnouncementBloc, AnnouncementState>(
+            builder: (context, state) {
               if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
                 final announcements =
                     state is AnnouncementsLoaded ? state.announcements : (state as AnnouncementsFiltered).announcements;
@@ -123,7 +148,7 @@ class _AnnouncementViewState extends State<AnnouncementView> {
               }
             },
           ),
-        ),
+        ), */
       ],
     );
   }

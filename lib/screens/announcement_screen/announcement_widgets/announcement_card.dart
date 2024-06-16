@@ -1,70 +1,74 @@
 import 'package:flutter/material.dart';
-import '../announcement_screen.dart';
-import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/announcement_bloc/announcement_bloc.dart';
+import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
+import 'package:tobeto_mobile_app/model/announcement_model.dart';
 
-class AnnouncementCard extends StatefulWidget {
+class AnnouncementCard extends StatelessWidget {
   final Announcement announcement;
   final FocusNode focusNode;
 
-  const AnnouncementCard(
-      {super.key, required this.announcement, required this.focusNode});
+  const AnnouncementCard({Key? key, required this.announcement, required this.focusNode});
 
-  @override
-  State<AnnouncementCard> createState() => _AnnouncementCardState();
-}
-
-class _AnnouncementCardState extends State<AnnouncementCard> {
   String _formatDate(DateTime date) {
     return "${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}";
   }
 
   void _showDetails(BuildContext context) {
-    setState(() {
-      widget.announcement.markAsRead();
-    });
-
-    widget.focusNode.unfocus();
-
+    context.read<AnnouncementBloc>().add(MarkAsRead(announcement.copyWith(isRead: true)));
+    focusNode.unfocus();
     showModalBottomSheet(
       context: context,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
       ),
+      isScrollControlled: true,
       builder: (BuildContext context) {
-        return SingleChildScrollView(
-          child: Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  widget.announcement.title,
-                  style: const TextStyle(
-                      fontSize: 24, fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(height: 16),
-                Text(widget.announcement.description),
-                const SizedBox(height: 16),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        return DraggableScrollableSheet(
+          initialChildSize: 0.8,
+          minChildSize: 0.5,
+          maxChildSize: 0.95,
+          expand: false,
+          builder: (BuildContext context, ScrollController scrollController) {
+            return SingleChildScrollView(
+              controller: scrollController,
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      announcement.title,
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                    ),
+                    const SizedBox(height: 16),
+                    //Text(announcement.description),
+                    Text(
+                      announcement.description.replaceAll('\\n', '\n'),
+                      style: const TextStyle(fontSize: 16),
+                    ),
+                    const SizedBox(height: 16),
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Icon(Icons.calendar_today,
-                            size: 16, color: Colors.grey),
-                        const SizedBox(width: 4),
-                        Text(
-                          'Tarih: ${_formatDate(widget.announcement.date)}',
-                          style: const TextStyle(color: Colors.grey),
+                        Row(
+                          children: [
+                            const Icon(Icons.calendar_today, size: 16, color: Colors.grey),
+                            const SizedBox(width: 4),
+                            Text(
+                              'Tarih: ${_formatDate(announcement.date)}',
+                              style: const TextStyle(color: Colors.grey),
+                            ),
+                          ],
                         ),
                       ],
                     ),
                   ],
                 ),
-              ],
-            ),
-          ),
+              ),
+            );
+          },
         );
       },
     );
@@ -77,12 +81,9 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
       child: Container(
         margin: const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
         decoration: BoxDecoration(
-          color: widget.announcement.isRead
-              ? TobetoColor.card.lightGrey
-              : TobetoColor.card.cream,
+          color: announcement.isRead ? TobetoColor.card.lightGrey : TobetoColor.card.cream,
           borderRadius: BorderRadius.circular(16.0),
-          border: Border(
-              left: BorderSide(color: TobetoColor.card.lightGreen, width: 7)),
+          border: Border(left: BorderSide(color: TobetoColor.card.lightGreen, width: 7)),
         ),
         child: Padding(
           padding: const EdgeInsets.all(16.0),
@@ -92,12 +93,10 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
-                    'Duyuru',
-                    style: TobetoTextStyle.poppins(context)
-                        .captionBlackNormal12
-                        .copyWith(color: TobetoColor.card.lightGreen),
-                  ),
+                  Text('Duyuru',
+                      style: TobetoTextStyle.poppins(context)
+                          .captionBlackNormal12
+                          .copyWith(color: TobetoColor.card.lightGreen)),
                   Text(
                     'İstanbul Kodluyor',
                     style: TobetoTextStyle.poppins(context)
@@ -108,7 +107,7 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
               ),
               const SizedBox(height: 18),
               Text(
-                widget.announcement.title,
+                announcement.title,
                 style: TobetoTextStyle.poppins(context).captionBlackBold18,
               ),
               const SizedBox(height: 12),
@@ -117,11 +116,10 @@ class _AnnouncementCardState extends State<AnnouncementCard> {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.calendar_month,
-                          size: 16, color: Colors.grey),
+                      const Icon(Icons.calendar_month, size: 16, color: Colors.grey),
                       const SizedBox(width: 4),
                       Text(
-                        'Tarih: ${_formatDate(widget.announcement.date)}',
+                        'Tarih: ${_formatDate(announcement.date)}',
                         style: const TextStyle(color: Colors.grey),
                       ),
                     ],
