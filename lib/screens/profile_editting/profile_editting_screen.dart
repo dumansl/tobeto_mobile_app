@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/competencies.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/education_life.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/work_life.dart';
@@ -68,7 +69,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProv
             PersonalInformationForm(),
             WorkLife(),
             // EducationLife(),
-            // Competencies(),
+            Competencies(),
             // EducationTab(),
             // SkillsTab(),
             // CertificatesTab(),

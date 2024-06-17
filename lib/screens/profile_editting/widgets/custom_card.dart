@@ -15,6 +15,7 @@ class CustomCard extends StatelessWidget {
     this.content3,
     this.title4,
     this.content4,
+    required this.onpressed,
   });
 
   final String startDate;
@@ -27,6 +28,7 @@ class CustomCard extends StatelessWidget {
   final String? content3;
   final String? title4;
   final String? content4;
+  final VoidCallback onpressed;
 
   @override
   Widget build(BuildContext context) {
@@ -45,44 +47,29 @@ class CustomCard extends StatelessWidget {
                   child: Icon(Icons.date_range_outlined),
                 ),
                 RichText(
-                  text: TextSpan(
-                      style:
-                          TobetoTextStyle.poppins(context).captionPurpleBold15,
-                      children: <TextSpan>[
-                        TextSpan(text: startDate),
-                        TextSpan(text: ' - $endDate'),
-                      ]),
+                  text: TextSpan(style: TobetoTextStyle.poppins(context).captionPurpleBold15, children: <TextSpan>[
+                    TextSpan(text: startDate),
+                    TextSpan(text: ' - $endDate'),
+                  ]),
                 ),
-                const Icon(Icons.delete),
-                const Icon(Icons.edit),
+                IconButton(
+                  onPressed: onpressed,
+                  icon: const Icon(Icons.delete, color: Colors.red),
+                ),
               ],
             ),
           ),
           RichText(
-              text: TextSpan(
-                  style: TobetoTextStyle.poppins(context).bodyBlackBold16,
-                  children: <TextSpan>[
-                TextSpan(text: title),
-                TextSpan(
-                    text: content,
-                    style:
-                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
-                TextSpan(text: title2),
-                TextSpan(
-                    text: content2,
-                    style:
-                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
-                TextSpan(text: title3),
-                TextSpan(
-                    text: content3,
-                    style:
-                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
-                TextSpan(text: title4),
-                TextSpan(
-                    text: content4,
-                    style:
-                        TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
-              ])),
+              text: TextSpan(style: TobetoTextStyle.poppins(context).bodyBlackBold16, children: <TextSpan>[
+            TextSpan(text: title, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
+            TextSpan(text: '$content\n'),
+            TextSpan(text: title2, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
+            TextSpan(text: '\n$content2\n'),
+            TextSpan(text: title3, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
+            TextSpan(text: '\n$content3\n'),
+            TextSpan(text: title4, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
+            TextSpan(text: '\n$content4'),
+          ])),
         ],
       ),
     );

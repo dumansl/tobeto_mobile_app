@@ -29,14 +29,14 @@ class UserModel {
   final String workDescription;
   final bool workStatu;
   //Eğitim Hayatı
-//   final String educationStatu;
-//   final String univercity;
-//   final String graduatedDepartment;
-//   final String startUnivercityDate;
-//   final String graduateUnivercityDate;
-//   bool continueUnivercity; // Devam ediyorum checkBox
-//   //Yetkinlikler
-//   final String skill;
+  // final String educationStatu;
+  // final String univercity;
+  // final String graduatedDepartment;
+  // final String startUnivercityDate;
+  // final String graduateUnivercityDate;
+  // final bool continueUnivercity; // Devam ediyorum checkBox
+  //Yetkinlikler
+  final String skill;
 // //Sertifikalar
 //   final String certificateName;
 //   final String certificatesDate; // dosya yükleme kutusu
@@ -83,6 +83,13 @@ class UserModel {
     required this.endWork,
     required this.workDescription,
     required this.workStatu,
+    // required this.educationStatu,
+    // required this.univercity,
+    // required this.graduatedDepartment,
+    // required this.startUnivercityDate,
+    // required this.graduateUnivercityDate,
+    // required this.continueUnivercity,
+    required this.skill,
   });
 
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
@@ -111,6 +118,13 @@ class UserModel {
       endWork: doc['endWork'],
       workDescription: doc['workDescription'],
       workStatu: doc['workStatu'],
+      // educationStatu: doc['educationStatu'],
+      // univercity: doc['univercity'],
+      // graduatedDepartment: doc['graduatedDepartment'],
+      // startUnivercityDate: doc['startUnivercityDate'],
+      // graduateUnivercityDate: doc['graduateUnivercityDate'],
+      // continueUnivercity: doc['continueUnivercity'],
+      skill: doc['skill'],
     );
   }
 
@@ -141,27 +155,20 @@ class UserModel {
       endWork: data['endWork'],
       workDescription: data['workDescription'],
       workStatu: data['workStatu'],
+      // educationStatu: data['educationStatu'],
+      // univercity: data['univercity'],
+      // graduatedDepartment: data['graduatedDepartment'],
+      // startUnivercityDate: data['startUnivercityDate'],
+      // graduateUnivercityDate: data['graduateUnivercityDate'],
+      // continueUnivercity: data['continueUnivercity'],
+      skill: data['skill'],
     );
   }
 }
 
 
-// //Deneyimler
-//   String companyName;
-//   String position;
-//   String? experienceType;
-//   String? sector;
-//   String? workCity;
-//   String? startWork;
-//   String? endWork; //Çalışmaya devam ediyorum checkBox
-//   String? workDescription;
-//   //Eğitim Hayatı
-//   String? educationStatu;
-//   String? univercity;
-//   String? graduatedDepartment;
-//   String? startUnivercityDate;
-//   String? graduateUnivercityDate;
-//   bool? continueUnivercity; // Devam ediyorum checkBox
+
+
 //   //Yetkinlikler
 //   String? skill;
 // //Sertifikalar

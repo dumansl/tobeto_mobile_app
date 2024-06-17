@@ -11,10 +11,79 @@ import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_infor
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/work_life.dart';
 
 class UserRepository {
-  final userId = FirebaseAuth.instance.currentUser!.uid;
+  final String userId;
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-  // PlatformFile? pickedfile;
+  UserRepository() : userId = FirebaseAuth.instance.currentUser!.uid;
+
+  Stream<List<dynamic>?> _getCollectionStream(String collectionName) {
+    return db.collection('users').doc(userId).snapshots().map((snapshot) {
+      var data = snapshot.data() as Map<String, dynamic>;
+      return data[collectionName];
+    });
+  }
+
+  Future<void> _updateCollection(String collectionName, dynamic dataToUpdate) async {
+    await db.collection('users').doc(userId).update({
+      collectionName: dataToUpdate,
+    });
+  }
+
+  Stream<List<String>> get skillsStream {
+    return _getCollectionStream('skill').map((data) {
+      return List<String>.from(data ?? []);
+    });
+  }
+
+  Future<void> addSkill(String skill) async {
+    await _updateCollection('skill', FieldValue.arrayUnion([skill]));
+  }
+
+  Future<void> removeSkill(String skill) async {
+    await _updateCollection('skill', FieldValue.arrayRemove([skill]));
+  }
+
+  Stream<List<Map<String, dynamic>>> get workLifeStream {
+    return _getCollectionStream('workLife').map((data) {
+      return List<Map<String, dynamic>>.from(data ?? []);
+    });
+  }
+
+  Future<void> addWorkLife(Map<String, dynamic> workLife) async {
+    await _updateCollection(
+        'workLife',
+        FieldValue.arrayUnion([
+          workLife = {
+            'workplaceName': workplaceNameController.text,
+            'position': positionController.text,
+            'experienceType': experienceTypeController.text,
+            'sector': sectorController.text,
+            'workplaceLocation': workplaceLocationController.text,
+            'worklifeStart': worklifeStartController.text,
+            'worklifeEnd': worklifeEndController.text,
+            'jobDescription': jobDescriptionController.text,
+            'workStatu': workStatuController.text,
+          },
+        ]));
+  }
+
+  Future<void> removeWorkLife(Map<String, dynamic> workLife) async {
+    await _updateCollection('workLife', FieldValue.arrayRemove([workLife]));
+  }
+
+  Stream<List<Map<String, dynamic>>> get educationLifeStream {
+    return _getCollectionStream('educationLife').map((data) {
+      return List<Map<String, dynamic>>.from(data ?? []);
+    });
+  }
+
+  Future<void> addEducationLife(Map<String, dynamic> educationLife) async {
+    await _updateCollection('educationLife', FieldValue.arrayUnion([educationLife]));
+  }
+
+  Future<void> removeEducationLife(Map<String, dynamic> educationLife) async {
+    await _updateCollection('educationLife', FieldValue.arrayRemove([educationLife]));
+  }
 
   Future<void> updateProfileEdit() async {
     await db.collection('users').doc(userId).update({
@@ -33,15 +102,6 @@ class UserRepository {
       'gender': genderController.text,
       'militaryStatu': militaryStatuController.text,
       'disabledStatu': disabledStatuController.text,
-      'companyName': workplaceNameController.text,
-      'position': positionController.text,
-      'experienceType': experienceTypeController.text,
-      'sector': sectorController.text,
-      'workCity': workplaceLocationController.text,
-      'startWork': worklifeStartController.text,
-      'endWork': worklifeEndController.text,
-      'workDescription': jobDescriptionController.text,
-      'workStatu': workStatuController.text,
 
       // 'educationStatu': educationStatuController.text,
       // 'univercity': univercityController.text,
@@ -70,15 +130,7 @@ class UserRepository {
       genderController.text = userDoc['gender'] ?? '';
       militaryStatuController.text = userDoc['militaryStatu'] ?? '';
       disabledStatuController.text = userDoc['disabledStatu'] ?? '';
-      workplaceNameController.text = userDoc['companyName'] ?? '';
-      positionController.text = userDoc['position'] ?? '';
-      experienceTypeController.text = userDoc['experienceType'] ?? '';
-      sectorController.text = userDoc['sector'] ?? '';
-      workplaceLocationController.text = userDoc['workCity'] ?? '';
-      worklifeStartController.text = userDoc['startWork'] ?? '';
-      worklifeEndController.text = userDoc['endWork'] ?? '';
-      jobDescriptionController.text = userDoc['workDescription'] ?? '';
-      workStatuController.text = userDoc['workStatu'] ?? '';
+
       // educationStatuController.text = userDoc['educationStatu'] ?? '';
       // univercityController.text = userDoc['univercity'] ?? '';
       // graduatedDepartmentController.text = userDoc['graduatedDepartment'] ?? '';
