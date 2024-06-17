@@ -1,55 +1,49 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/services/announcement_service.dart';
+import 'package:tobeto_mobile_app/blocs/announcement_bloc/announcement_bloc.dart';
 import '../announcement_screen/announcement_widgets/announcement_card.dart';
-import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 
-class Announcement {
-  final String title;
-  final String description;
-  final DateTime date;
-  bool isRead;
-
-  Announcement({required this.title, required this.description, required this.date, this.isRead = false});
-
-  void markAsRead() {
-    isRead = true;
-  }
-}
-
-class AnnouncementScreen extends StatefulWidget {
+class AnnouncementScreen extends StatelessWidget {
   const AnnouncementScreen({super.key});
 
   @override
-  State<AnnouncementScreen> createState() => _AnnouncementScreenState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => AnnouncementBloc(AnnouncementService())..add(LoadAnnouncements()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text("Duyuru ve Haberlerim"),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.of(context).pop();
+            },
+          ),
+        ),
+        body: const AnnouncementView(),
+      ),
+    );
+  }
 }
 
-class _AnnouncementScreenState extends State<AnnouncementScreen> {
+class AnnouncementView extends StatefulWidget {
+  const AnnouncementView({super.key});
+
+  @override
+  State<AnnouncementView> createState() => _AnnouncementViewState();
+}
+
+class _AnnouncementViewState extends State<AnnouncementView> {
   final TextEditingController _searchController = TextEditingController();
   final FocusNode _focusNode = FocusNode();
   bool _showOnlyUnread = false;
-
-  List<Announcement> announcements = [
-    Announcement(
-        title: "Mentor Oturumları Hk.",
-        description:
-            "Önümüzdeki haftadan itibaren proje sürecinde mentor oturumlarını 3 ayrı gruba ayırıyoruz. İstanbul Kodluyor çerçevesinde şu an; eğitimi devam edenler, mezun olanlar, işe başlayanlar olarak 3 ana kategori var. Her grubun mentor oturumlarında sohbetleri, ihtiyaçları ve dinleyecekleri değişiyor. Aynı anda her grubu mentor oturumuna almak yerine aşağıdaki gibi tarihleri belirledik ve platformda atamalarınızı yaptık. 1) Eğitimi devam edenler: Her hafta perşembeleri saat 12.00 - 13.00 . Not: eskiden zorunlu değildi ama önümüzdeki 2 hafta için eğitimi devam edenlere zorunlu. 2) Mezun olanlar: 2 haftada 1 yapılacak olup, çarşambaları saat 15.00 -16.00 arasında. Zorunlu demeyelim ama katılmanızı canı gönülden istiyoruz ki istihdam sürecinde hepimiz hayallerimize ulaşalım. 3) İşe başlayanlar: Ayda 1 olup, her ayın 2.pazartesisi saat 12.00-13.00 arasında. Zorunlu değil ancak genel durumunuzu görmek ve destek olmak için kıymetli. Sevgiler,",
-        date: DateTime.now(),
-        isRead: false),
-    Announcement(
-        title: "Mezunlar için İstanbul Kodluyor Süreci", description: "Açıklama 2", date: DateTime.now(), isRead: true),
-    Announcement(title: "6 Mart Sınavları Hk.", description: "Açıklama 3", date: DateTime.now(), isRead: true),
-    Announcement(
-        title: "20 Şubat Kampüs Buluşması Hk.", description: "Açıklama 4", date: DateTime.now(), isRead: false),
-    Announcement(title: "Mindset Anketi", description: "Açıklama 5", date: DateTime.now(), isRead: true),
-  ];
-
-  List<Announcement> filteredAnnouncements = [];
 
   @override
   void initState() {
     super.initState();
     _searchController.addListener(_filterAnnouncements);
-    filteredAnnouncements = announcements;
   }
 
   @override
@@ -62,83 +56,100 @@ class _AnnouncementScreenState extends State<AnnouncementScreen> {
 
   void _filterAnnouncements() {
     final query = _searchController.text.toLowerCase();
-    setState(() {
-      if (query.isEmpty) {
-        filteredAnnouncements = announcements;
-      } else {
-        filteredAnnouncements =
-            announcements.where((announcement) => announcement.title.toLowerCase().contains(query)).toList();
-      }
-      if (_showOnlyUnread) {
-        filteredAnnouncements = filteredAnnouncements.where((announcement) => !announcement.isRead).toList();
-      }
-    });
+    context.read<AnnouncementBloc>().add(FilterAnnouncements(query));
+    if (_showOnlyUnread) {
+      context.read<AnnouncementBloc>().add(ToggleShowUnread(true));
+    }
   }
 
   void _toggleShowUnread() {
     setState(() {
       _showOnlyUnread = !_showOnlyUnread;
-      _filterAnnouncements();
     });
+    context.read<AnnouncementBloc>().add(ToggleShowUnread(_showOnlyUnread));
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text("Duyuru ve Haberlerim"),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-        ),
-      ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                Expanded(
-                  flex: 9,
-                  child: TextField(
-                    controller: _searchController,
-                    focusNode: _focusNode,
-                    decoration: InputDecoration(
-                      hintText: _focusNode.hasFocus ? '' : 'Ara...',
-                      prefixIcon: const Icon(Icons.search),
-                      border: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                      ),
-                      focusedBorder: const OutlineInputBorder(
-                        borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                        borderSide: BorderSide(color: TobetoColor.purple),
-                      ),
+    return Column(
+      children: [
+        Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
+            children: [
+              Expanded(
+                flex: 9,
+                child: TextField(
+                  controller: _searchController,
+                  focusNode: _focusNode,
+                  decoration: InputDecoration(
+                    hintText: _focusNode.hasFocus ? '' : 'Ara...',
+                    prefixIcon: const Icon(Icons.search),
+                    border: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                    ),
+                    focusedBorder: const OutlineInputBorder(
+                      borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                      borderSide: BorderSide(color: TobetoColor.purple),
                     ),
                   ),
                 ),
-                Expanded(
-                  flex: 1,
-                  child: IconButton(
-                    icon: Icon(_showOnlyUnread ? Icons.visibility_off : Icons.visibility),
-                    onPressed: _toggleShowUnread,
-                    tooltip: _showOnlyUnread ? 'Hepsini Göster' : 'Okunmuş Olanları Gizle',
-                  ),
+              ),
+              Expanded(
+                flex: 1,
+                child: IconButton(
+                  icon: Icon(_showOnlyUnread ? Icons.visibility_off : Icons.visibility),
+                  onPressed: _toggleShowUnread,
+                  tooltip: _showOnlyUnread ? 'Hepsini Göster' : 'Okunmuş Olanları Gizle',
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
-          Expanded(
-            child: ListView.builder(
-              itemCount: filteredAnnouncements.length,
-              itemBuilder: (context, index) {
-                return AnnouncementCard(announcement: filteredAnnouncements[index], focusNode: _focusNode);
-              },
-            ),
+        ),
+        Expanded(
+          child: BlocBuilder<AnnouncementBloc, AnnouncementState>(
+            builder: (context, state) {
+              if (state is AnnouncementsLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
+                final announcements =
+                    state is AnnouncementsLoaded ? state.announcements : (state as AnnouncementsFiltered).announcements;
+                if (announcements.isEmpty) {
+                  return const Center(child: Text('No announcements available.'));
+                }
+                return ListView.builder(
+                  itemCount: announcements.length,
+                  itemBuilder: (context, index) {
+                    return AnnouncementCard(announcement: announcements[index], focusNode: _focusNode);
+                  },
+                );
+              } else if (state is AnnouncementsError) {
+                return Center(child: Text(state.message));
+              } else {
+                return const Center(child: Text('Unexpected state.'));
+              }
+            },
           ),
-        ],
-      ),
+        ),
+        /*Expanded(
+          child: BlocBuilder<AnnouncementBloc, AnnouncementState>(
+            builder: (context, state) {
+              if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
+                final announcements =
+                    state is AnnouncementsLoaded ? state.announcements : (state as AnnouncementsFiltered).announcements;
+                return ListView.builder(
+                  itemCount: announcements.length,
+                  itemBuilder: (context, index) {
+                    return AnnouncementCard(announcement: announcements[index], focusNode: _focusNode);
+                  },
+                );
+              } else {
+                return const Center(child: CircularProgressIndicator());
+              }
+            },
+          ),
+        ), */
+      ],
     );
   }
 }
