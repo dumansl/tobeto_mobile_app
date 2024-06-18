@@ -21,17 +21,3 @@ class UserError extends UserState {
 
   const UserError(this.message);
 }
-
-class WorkLifeAdded extends UserState {}
-
-class WorkLifeRemoved extends UserState {}
-
-class SkillAdded extends UserState {}
-
-class SkillRemoved extends UserState {}
-
-class UploadUserData extends UserState {}
-
-class FileFormatDontMatch extends UserState {}
-
-class UserFileUploaded extends UserState {}

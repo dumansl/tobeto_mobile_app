@@ -1,87 +1,73 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/competencies_bloc/competencies_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/competencies_bloc/competencies_event.dart';
+import 'package:tobeto_mobile_app/blocs/competencies_bloc/competencies_state.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_card.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/services/user_service.dart';
-import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/text.dart';
 
-class Competencies extends StatefulWidget {
+class Competencies extends StatelessWidget {
   const Competencies({super.key});
 
   @override
-  State<Competencies> createState() => _CompetenciesState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => CompetenciesBloc(userRepository: UserRepository())..add(LoadSkills()),
+      child: CompetenciesView(),
+    );
+  }
 }
 
-class _CompetenciesState extends State<Competencies> {
-  final _formKey = GlobalKey<FormState>();
+class CompetenciesView extends StatelessWidget {
   final TextEditingController skillController = TextEditingController();
-  final UserRepository userRepository = UserRepository();
+
+  CompetenciesView({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      key: _formKey,
-      child: Column(
-        children: [
-          InputText(
-            child: CustomTextField(
-              title: TobetoText.profileEditSkill,
-              onSaved: (newValue) {
-                skillController.text = newValue ?? skillController.text;
-              },
-              controller: skillController,
-            ),
-          ),
-          CustomElevatedButton(
-            text: "Ekle",
-            onPressed: () {
-              if (skillController.text.isNotEmpty) {
-                userRepository.addSkill(skillController.text);
-                skillController.clear();
-              }
-            },
-          ),
-          Expanded(
-            child: StreamBuilder<List<String>>(
-              stream: userRepository.skillsStream,
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
-                  return Text('Error: ${snapshot.error}');
-                } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        Image.asset(ImagePath.profileEditNote),
-                        Text('Henüz ekledğiniz bir yetkinliğiniz bulunmamaktadır.')
-                      ],
-                    ),
-                  );
-                }
+    return BlocBuilder<CompetenciesBloc, CompetenciesState>(
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
 
-                List<String> skills = snapshot.data!;
-                return ListView.builder(
-                  itemCount: skills.length,
-                  itemBuilder: (context, index) {
-                    String skill = skills[index];
-                    return InputText(
-                      child: CustomMiniCard(
-                        onpressed: () {
-                          userRepository.removeSkill(skill);
-                        },
-                        title: skill,
-                      ),
-                    );
-                  },
-                );
+        if (state.error != null) {
+          return Center(child: Text('Error: ${state.error}'));
+        }
+
+        return ListView(
+          children: [
+            InputText(
+              child: CustomTextField(
+                title: "Skill",
+                controller: skillController,
+              ),
+            ),
+            CustomElevatedButton(
+              text: "Ekle",
+              onPressed: () {
+                if (skillController.text.isNotEmpty) {
+                  context.read<CompetenciesBloc>().add(AddSkill(skillController.text));
+                  skillController.clear();
+                }
               },
             ),
-          ),
-        ],
-      ),
+            ...state.skills.map((skill) {
+              return InputText(
+                child: CustomMiniCard(
+                  onpressed: () {
+                    context.read<CompetenciesBloc>().add(RemoveSkill(skill));
+                  },
+                  title: skill,
+                ),
+              );
+            }),
+          ],
+        );
+      },
     );
   }
 }

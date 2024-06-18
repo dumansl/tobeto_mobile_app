@@ -58,7 +58,7 @@ class _AnnouncementViewState extends State<AnnouncementView> {
     final query = _searchController.text.toLowerCase();
     context.read<AnnouncementBloc>().add(FilterAnnouncements(query));
     if (_showOnlyUnread) {
-      context.read<AnnouncementBloc>().add(ToggleShowUnread(true));
+      context.read<AnnouncementBloc>().add(const ToggleShowUnread(true));
     }
   }
 

@@ -1,14 +1,7 @@
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:path/path.dart';
 import 'package:tobeto_mobile_app/model/user_model.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/screen/education_life.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/screen/work_life.dart';
 
 class UserRepository {
   final String userId;
@@ -16,11 +9,10 @@ class UserRepository {
 
   UserRepository() : userId = FirebaseAuth.instance.currentUser!.uid;
 
-  Stream<List<dynamic>?> _getCollectionStream(String collectionName) {
-    return db.collection('users').doc(userId).snapshots().map((snapshot) {
-      var data = snapshot.data() as Map<String, dynamic>;
-      return data[collectionName];
-    });
+  Future<List<dynamic>?> _getCollectionData(String collectionName) async {
+    final DocumentSnapshot snapshot = await db.collection('users').doc(userId).get();
+    var data = snapshot.data() as Map<String, dynamic>;
+    return data[collectionName];
   }
 
   Future<void> _updateCollection(String collectionName, dynamic dataToUpdate) async {
@@ -29,60 +21,62 @@ class UserRepository {
     });
   }
 
-  Stream<List<String>> get skillsStream {
-    return _getCollectionStream('skill').map((data) {
-      return List<String>.from(data ?? []);
-    });
+  Future<void> _addToCollection(String collectionName, dynamic dataToAdd) async {
+    await _updateCollection(collectionName, FieldValue.arrayUnion([dataToAdd]));
+  }
+
+  Future<void> _removeFromCollection(String collectionName, dynamic dataToRemove) async {
+    await _updateCollection(collectionName, FieldValue.arrayRemove([dataToRemove]));
+  }
+
+  Future<List<String>> loadSkills() async {
+    final data = await _getCollectionData('skill');
+    return List<String>.from(data ?? []);
   }
 
   Future<void> addSkill(String skill) async {
-    await _updateCollection('skill', FieldValue.arrayUnion([skill]));
+    await _addToCollection('skill', skill);
   }
 
   Future<void> removeSkill(String skill) async {
-    await _updateCollection('skill', FieldValue.arrayRemove([skill]));
+    await _removeFromCollection('skill', skill);
   }
 
-  Stream<List<Map<String, dynamic>>> get workLifeStream {
-    return _getCollectionStream('workLife').map((data) {
-      return List<Map<String, dynamic>>.from(data ?? []);
-    });
+  Future<List<Map<String, dynamic>>> loadWorkLife() async {
+    final data = await _getCollectionData('workLife');
+    return List<Map<String, dynamic>>.from(data ?? []);
   }
 
   Future<void> addWorkLife(Map<String, dynamic> workLife) async {
-    await _updateCollection(
-        'workLife',
-        FieldValue.arrayUnion([
-          workLife = {
-            'workplaceName': workplaceNameController.text,
-            'position': positionController.text,
-            'experienceType': experienceTypeController.text,
-            'sector': sectorController.text,
-            'workplaceLocation': workplaceLocationController.text,
-            'worklifeStart': worklifeStartController.text,
-            'worklifeEnd': worklifeEndController.text,
-            'jobDescription': jobDescriptionController.text,
-            'workStatu': workStatuController.text,
-          },
-        ]));
+    final workLifeData = {
+      'workplaceName': workLife['workplaceName'],
+      'position': workLife['position'],
+      'experienceType': workLife['experienceType'],
+      'sector': workLife['sector'],
+      'workplaceLocation': workLife['workplaceLocation'],
+      'worklifeStart': workLife['worklifeStart'],
+      'worklifeEnd': workLife['worklifeEnd'],
+      'jobDescription': workLife['jobDescription'],
+      'workStatu': workLife['workStatu'],
+    };
+    await _addToCollection('workLife', workLifeData);
   }
 
   Future<void> removeWorkLife(Map<String, dynamic> workLife) async {
-    await _updateCollection('workLife', FieldValue.arrayRemove([workLife]));
+    await _removeFromCollection('workLife', workLife);
   }
 
-  Stream<List<Map<String, dynamic>>> get educationLifeStream {
-    return _getCollectionStream('educationLife').map((data) {
-      return List<Map<String, dynamic>>.from(data ?? []);
-    });
+  Future<List<Map<String, dynamic>>> getEducationLife() async {
+    final data = await _getCollectionData('educationLife');
+    return List<Map<String, dynamic>>.from(data ?? []);
   }
 
   Future<void> addEducationLife(Map<String, dynamic> educationLife) async {
-    await _updateCollection('educationLife', FieldValue.arrayUnion([educationLife]));
+    await _addToCollection('educationLife', educationLife);
   }
 
   Future<void> removeEducationLife(Map<String, dynamic> educationLife) async {
-    await _updateCollection('educationLife', FieldValue.arrayRemove([educationLife]));
+    await _removeFromCollection('educationLife', educationLife);
   }
 
   Future<void> updateProfileEdit() async {
@@ -102,13 +96,6 @@ class UserRepository {
       'gender': genderController.text,
       'militaryStatu': militaryStatuController.text,
       'disabledStatu': disabledStatuController.text,
-
-      // 'educationStatu': educationStatuController.text,
-      // 'univercity': univercityController.text,
-      // 'graduatedDepartment': graduatedDepartmentController.text,
-      // 'startUnivercityDate': startUnivercityDateController.text,
-      // 'graduateUnivercityDate': graduateUnivercityDateController.text,
-      // 'continueUnivercity': checkBoxController.value,
     });
   }
 
@@ -130,58 +117,7 @@ class UserRepository {
       genderController.text = userDoc['gender'] ?? '';
       militaryStatuController.text = userDoc['militaryStatu'] ?? '';
       disabledStatuController.text = userDoc['disabledStatu'] ?? '';
-
-      // educationStatuController.text = userDoc['educationStatu'] ?? '';
-      // univercityController.text = userDoc['univercity'] ?? '';
-      // graduatedDepartmentController.text = userDoc['graduatedDepartment'] ?? '';
-      // startUnivercityDateController.text = userDoc['startUnivercityDate'] ?? '';
-      // graduateUnivercityDateController.text = userDoc['graduateUnivercityDate'] ?? '';
-      // checkBoxController.value = userDoc['continueUnivercity'] ?? '';
     }
+    return null;
   }
-
-  // Future selectFile() async {
-  //   final result = await FilePicker.platform.pickFiles();
-  //   if (result == null) return;
-  //   pickedfile = result.files.first;
-  // }
-
-  // Future uploadFile(BuildContext context) async {
-  //   if (pickedfile == null) {
-  //     debugPrint("No file selected");
-  //     return;
-  //   }
-
-  //   // Check file extension
-
-  //   final path = 'certificate/$userId/${basename(pickedfile!.name)}';
-  //   final file = File(pickedfile!.path!);
-  //   final ref = FirebaseStorage.instance.ref().child(path);
-
-  //   // Upload file to Firebase Storage
-  //   await ref.putFile(file);
-  //   String downloadURL = await ref.getDownloadURL();
-  //   debugPrint("Dosya $userId'nin kimliği altında Firebase Storage'a yüklendi.");
-
-  //   // Check if a document with the same file name exists in Firestore
-  //   final QuerySnapshot existingFiles = await db
-  //       .collection('users')
-  //       .doc(userId)
-  //       .collection('certificates')
-  //       .where('fileName', isEqualTo: pickedfile!.name)
-  //       .get();
-
-  //   if (existingFiles.docs.isNotEmpty) {
-  //     // If the document exists, update it
-  //     await existingFiles.docs.first.reference.update({'certificateUrl': downloadURL});
-  //     debugPrint("Mevcut belge güncellendi.");
-  //   } else {
-  //     // If the document doesn't exist, create a new document
-  //     await db.collection('users').doc(userId).collection('certificates').add({
-  //       'fileName': pickedfile!.name,
-  //       'certificateUrl': downloadURL,
-  //     });
-  //     debugPrint("Yeni belge oluşturuldu.");
-  //   }
-  // }
 }

@@ -9,7 +9,7 @@ class CustomTextField extends StatelessWidget {
     required this.title,
     this.maxLength,
     this.maxLines,
-    required this.onSaved,
+    this.onSaved,
     required this.controller,
     this.iconButton,
   });
@@ -41,8 +41,7 @@ class CustomTextField extends StatelessWidget {
         ),
         labelText: title,
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
-        floatingLabelStyle:
-            TobetoTextStyle.poppins(context).captionPurpleNormal18,
+        floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
           Radius.circular(12),
