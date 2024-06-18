@@ -18,7 +18,8 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
     on<MarkAsRead>(_onMarkAsRead);
   }
 
-  void _onLoadAnnouncements(LoadAnnouncements event, Emitter<AnnouncementState> emit) async {
+  void _onLoadAnnouncements(
+      LoadAnnouncements event, Emitter<AnnouncementState> emit) async {
     try {
       final announcements = await _announcementService.getAnnouncements();
       print("Loaded ${announcements.length} announcements");
@@ -28,13 +29,16 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
     }
   }
 
-  void _onFilterAnnouncements(FilterAnnouncements event, Emitter<AnnouncementState> emit) {
+  void _onFilterAnnouncements(
+      FilterAnnouncements event, Emitter<AnnouncementState> emit) {
     if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
       final originalAnnouncements = state is AnnouncementsLoaded
           ? (state as AnnouncementsLoaded).announcements
           : (state as AnnouncementsFiltered).originalAnnouncements;
       final filteredAnnouncements = originalAnnouncements
-          .where((announcement) => announcement.title.toLowerCase().contains(event.query.toLowerCase()))
+          .where((announcement) => announcement.title
+              .toLowerCase()
+              .contains(event.query.toLowerCase()))
           .toList();
       emit(AnnouncementsFiltered(
         filteredAnnouncements,
@@ -43,13 +47,16 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
     }
   }
 
-  void _onToggleShowUnread(ToggleShowUnread event, Emitter<AnnouncementState> emit) {
+  void _onToggleShowUnread(
+      ToggleShowUnread event, Emitter<AnnouncementState> emit) {
     if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
       final originalAnnouncements = state is AnnouncementsLoaded
           ? (state as AnnouncementsLoaded).announcements
           : (state as AnnouncementsFiltered).originalAnnouncements;
       final filteredAnnouncements = event.showOnlyUnread
-          ? originalAnnouncements.where((announcement) => !announcement.isRead).toList()
+          ? originalAnnouncements
+              .where((announcement) => !announcement.isRead)
+              .toList()
           : originalAnnouncements;
       emit(AnnouncementsFiltered(
         filteredAnnouncements,
@@ -64,7 +71,9 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
           ? (state as AnnouncementsLoaded).announcements
           : (state as AnnouncementsFiltered).originalAnnouncements;
       final updatedAnnouncements = originalAnnouncements.map((announcement) {
-        return announcement.title == event.announcement.title ? announcement.copyWith(isRead: true) : announcement;
+        return announcement.title == event.announcement.title
+            ? announcement.copyWith(isRead: true)
+            : announcement;
       }).toList();
       emit(AnnouncementsLoaded(announcements: updatedAnnouncements));
     }
