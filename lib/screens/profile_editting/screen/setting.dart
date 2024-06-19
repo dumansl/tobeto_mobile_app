@@ -66,32 +66,16 @@ class _SettingState extends State<Setting> {
               if (state is DeleteAccountProgress) {
                 return const Center(child: CircularProgressIndicator());
               }
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    ElevatedButton(
-                      onPressed: () {
-                        _showDeleteConfirmationDialog(context);
-                      },
-                      child: const Text(
-                        'Hesabımı Sil',
-                        style: TextStyle(color: Colors.black),
-                      ),
-                    ),
-                  ],
+              return Padding(
+                padding: const EdgeInsets.symmetric(vertical: 10),
+                child: CustomButton(
+                  text: TobetoText.profileEditSettingsFinalButton,
+                  onPressed: () {
+                    _showDeleteConfirmationDialog(context);
+                  },
                 ),
               );
             },
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: CustomButton(
-              text: TobetoText.profileEditSettingsFinalButton,
-              onPressed: () {
-                _showDeleteConfirmationDialog(context);
-              },
-            ),
           ),
         ],
       ),
@@ -108,7 +92,7 @@ class _SettingState extends State<Setting> {
             style: const TextStyle(color: Colors.black),
           ),
           content: const Text(
-            'Hesabı silmek istediğinize emin misiniz?',
+            'Üyeliği sonlandırmak istediğinize emin misiniz?',
             style: TextStyle(color: Colors.black),
           ),
           actions: <Widget>[
