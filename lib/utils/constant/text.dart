@@ -108,7 +108,7 @@ abstract class TobetoText {
   static String profileEditGender = "Cinsiyet*";
   static List<String> genderStatu = ['Erkek', 'Kadın'];
   static String profileEditGenderBox = "Cinsiyet seçiniz...";
-  static String profileEditMilitaryStuation = "Akerlik Durumu";
+  static String profileEditMilitaryStuation = "Akerlik Durumu*";
   static List<String> militaryStatu = ['Yapıldı', 'Yapılmadı', 'Muaf'];
   static String profileEditMilitaryStuationBox = "Askerlik durumu seçiniz...";
   static String profileEditDisableStuation = "Engellilik Durumu*";

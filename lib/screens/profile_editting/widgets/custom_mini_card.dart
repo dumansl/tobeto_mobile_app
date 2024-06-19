@@ -23,17 +23,17 @@ class CustomMiniCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            child: imagepath,
+            child: SizedBox(height: 35, width: 35, child: imagepath),
           ),
           RichText(
-              text: TextSpan(
-                  style: TobetoTextStyle.poppins(context).bodyBlackBold16,
-                  children: <TextSpan>[
+              textAlign: TextAlign.center,
+              text: TextSpan(style: TobetoTextStyle.poppins(context).bodyBlackBold16, children: <TextSpan>[
                 TextSpan(text: title),
-                TextSpan(
-                  text: content,
-                  style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
-                ),
+                if (content != null)
+                  TextSpan(
+                    text: '\n$content',
+                    style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
+                  ),
               ])),
           IconButton(
               onPressed: onpressed,

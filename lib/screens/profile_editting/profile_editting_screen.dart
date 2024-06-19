@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/club_cominites.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/competencies.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/education_life.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/languages.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/projects_prize.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/social_media.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/work_life.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
@@ -66,15 +71,12 @@ class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProv
           children: const [
             PersonalInformationForm(),
             WorkLife(),
-            // EducationLife(),
+            EducationLife(),
             Competencies(),
-            // EducationTab(),
-            // SkillsTab(),
-            // CertificatesTab(),
-            // CommunitiesTab(),
-            // HobbiesTab(),
-            // SocialMedia(),
-            // Languages(),
+            ClubCominities(),
+            ProjectsPrize(),
+            SocialMedia(),
+            Languages(),
             // SettingsTab(),
           ],
         ),

@@ -1,42 +1,28 @@
+import 'package:date_format_field/date_format_field.dart';
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
-class CustomTextField extends StatelessWidget {
-  const CustomTextField({
+class CustomDateInput extends StatelessWidget {
+  const CustomDateInput({
     super.key,
-    this.keyboardType = TextInputType.text,
-    required this.title,
-    this.maxLength,
-    this.maxLines,
     required this.controller,
-    this.iconButton,
+    required this.labelText,
   });
 
-  final TextInputType keyboardType;
-  final String title;
-  final int? maxLength;
-  final int? maxLines;
   final TextEditingController controller;
-  final IconButton? iconButton;
+  final String labelText;
 
   @override
   Widget build(BuildContext context) {
-    return TextFormField(
+    return DateFormatField(
       controller: controller,
-      maxLines: maxLines,
-      cursorColor: TobetoColor.card.grey,
-      keyboardType: keyboardType,
-      textInputAction: TextInputAction.next,
-      maxLength: maxLength,
-      style: TobetoTextStyle.poppins(context).bodyBlackBold16,
       decoration: InputDecoration(
-        counterText: "",
         focusedBorder: const OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(10)),
           borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
-        labelText: title,
+        labelText: labelText,
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
         floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
         border: const OutlineInputBorder(
@@ -48,6 +34,10 @@ class CustomTextField extends StatelessWidget {
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
+      type: DateFormatType.type2,
+      onComplete: (date) {
+        debugPrint("$date");
+      },
     );
   }
 }

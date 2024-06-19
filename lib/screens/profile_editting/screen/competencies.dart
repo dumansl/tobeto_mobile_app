@@ -3,11 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/competencies_bloc/competencies_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/competencies_bloc/competencies_event.dart';
 import 'package:tobeto_mobile_app/blocs/competencies_bloc/competencies_state.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_column.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_card.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/services/user_service.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class Competencies extends StatelessWidget {
   const Competencies({super.key});
@@ -15,10 +17,14 @@ class Competencies extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CompetenciesBloc(userRepository: UserRepository())..add(LoadSkills()),
+      create: (context) => CompetenciesBloc(userService: UserService())..add(LoadSkills()),
       child: CompetenciesView(),
     );
   }
+}
+
+class UserRepository {
+  loadSkills() {}
 }
 
 class CompetenciesView extends StatelessWidget {
@@ -32,9 +38,7 @@ class CompetenciesView extends StatelessWidget {
       builder: (context, state) {
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
-        }
-
-        if (state.error != null) {
+        } else if (state.error != null) {
           return Center(child: Text('Error: ${state.error}'));
         }
 
@@ -42,7 +46,7 @@ class CompetenciesView extends StatelessWidget {
           children: [
             InputText(
               child: CustomTextField(
-                title: "Skill",
+                title: TobetoText.profileEditSkill,
                 controller: skillController,
               ),
             ),
@@ -55,16 +59,19 @@ class CompetenciesView extends StatelessWidget {
                 }
               },
             ),
-            ...state.skills.map((skill) {
-              return InputText(
-                child: CustomMiniCard(
-                  onpressed: () {
-                    context.read<CompetenciesBloc>().add(RemoveSkill(skill));
-                  },
-                  title: skill,
-                ),
-              );
-            }),
+            if (state.skills.isEmpty)
+              const CustomColumn(title: "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.")
+            else
+              ...state.skills.map((skill) {
+                return InputText(
+                  child: CustomMiniCard(
+                    onpressed: () {
+                      context.read<CompetenciesBloc>().add(RemoveSkill(skill));
+                    },
+                    title: skill,
+                  ),
+                );
+              }),
           ],
         );
       },
