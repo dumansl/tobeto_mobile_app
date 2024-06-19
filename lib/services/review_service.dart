@@ -1,13 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_mobile_app/model/review_model.dart';
 
 class ReviewService {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
+  final userId = FirebaseAuth.instance.currentUser!.uid;
 
   Future<Review> getReviews() async {
     DocumentReference userReviewRef = firestore
         .collection('users')
-        .doc('oSnY5kwmb3ggcrwKginND1kPwk92')
+        .doc(userId)
         .collection('my_reviews')
         .doc('cUibAXvAfcAVX8D6jvnS');
 
