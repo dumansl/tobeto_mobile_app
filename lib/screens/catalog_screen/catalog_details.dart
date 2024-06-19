@@ -16,24 +16,24 @@ class CatalogDetail extends StatefulWidget {
 
 class _CatalogDetailState extends State<CatalogDetail> {
   CustomVideoPlayerController? _customVideoPlayerController;
-  VideoPlayerController? _videoPlayerController;
+  CachedVideoPlayerController? _cachedVideoPlayerController;
 
   @override
   void dispose() {
     _customVideoPlayerController?.dispose();
-    _videoPlayerController?.dispose();
+    _cachedVideoPlayerController?.dispose();
     super.dispose();
   }
 
   Future<void> initializeVideoPlayer(String videoUrl) async {
-    _videoPlayerController =
-        VideoPlayerController.networkUrl(Uri.parse(videoUrl));
-    await _videoPlayerController!.initialize();
+    _cachedVideoPlayerController =
+        CachedVideoPlayerController.network(videoUrl);
+    await _cachedVideoPlayerController!.initialize();
     _customVideoPlayerController = CustomVideoPlayerController(
       context: context,
-      videoPlayerController: _videoPlayerController!,
+      videoPlayerController: _cachedVideoPlayerController!,
     );
-    _videoPlayerController!.pause();
+    _cachedVideoPlayerController!.pause();
   }
 
   @override
