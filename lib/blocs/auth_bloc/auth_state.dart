@@ -23,3 +23,13 @@ class ResetPasswordError extends AuthState {
 
   ResetPasswordError({this.errorMessage});
 }
+
+class DeleteAccountProgress extends AuthState {}
+
+class DeleteAccountSuccess extends AuthState {}
+
+class DeleteAccountError extends AuthState {
+  String? errorMessage;
+
+  DeleteAccountError({this.errorMessage});
+}

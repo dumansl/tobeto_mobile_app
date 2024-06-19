@@ -27,7 +27,8 @@ class _LanguagesState extends State<Languages> {
   }
 
   bool _areControllersValid() {
-    return languageNameController.text.isNotEmpty && languageLevelController.text.isNotEmpty;
+    return languageNameController.text.isNotEmpty &&
+        languageLevelController.text.isNotEmpty;
   }
 
   void _addEducationLife() {
@@ -41,7 +42,8 @@ class _LanguagesState extends State<Languages> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguagesBloc, LanguagesState>(builder: (context, state) {
+    return BlocBuilder<LanguagesBloc, LanguagesState>(
+        builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -52,7 +54,8 @@ class _LanguagesState extends State<Languages> {
           InputText(
               child: CustomDropDownInput(
             onChanged: (newValue) {
-              languageNameController.text = newValue ?? languageNameController.text;
+              languageNameController.text =
+                  newValue ?? languageNameController.text;
             },
             items: TobetoText.languageList
                 .map((label) => DropdownMenuItem(
@@ -66,7 +69,8 @@ class _LanguagesState extends State<Languages> {
           InputText(
               child: CustomDropDownInput(
             onChanged: (newValue) {
-              languageLevelController.text = newValue ?? languageLevelController.text;
+              languageLevelController.text =
+                  newValue ?? languageLevelController.text;
             },
             items: TobetoText.languageLevel
                 .map((label) => DropdownMenuItem(
@@ -86,7 +90,8 @@ class _LanguagesState extends State<Languages> {
             },
           ),
           if (state.languages.isEmpty)
-            const CustomColumn(title: "Henüz eklediğiniz bir dil bulunmamaktadır.")
+            const CustomColumn(
+                title: "Henüz eklediğiniz bir dil bulunmamaktadır.")
           else
             ...state.languages.map((languages) {
               return InputText(
@@ -101,7 +106,6 @@ class _LanguagesState extends State<Languages> {
             })
         ],
       );
-      ;
     });
   }
 }

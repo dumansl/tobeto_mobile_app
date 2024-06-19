@@ -11,6 +11,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     on<GuestLoginEvent>(_onGuestLogin);
     on<RegisterEvent>(_onRegister);
     on<ResetPasswordEvent>(_onResetPassword);
+    on<DeleteAccountEvent>(_onDeleteAccount); // Yeni event işleyici
   }
 
   final AuthService _authService = AuthService();
@@ -75,6 +76,18 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       emit(ResetPasswordSuccess());
     } catch (e) {
       emit(ResetPasswordError(errorMessage: e.toString()));
+    }
+  }
+
+  Future<void> _onDeleteAccount(
+      DeleteAccountEvent event, Emitter<AuthState> emit) async {
+    try {
+      emit(DeleteAccountProgress());
+      await _authService.deleteAccount();
+      emit(DeleteAccountSuccess());
+      emit(NotAuthenticated());
+    } catch (e) {
+      emit(DeleteAccountError(errorMessage: e.toString()));
     }
   }
 }

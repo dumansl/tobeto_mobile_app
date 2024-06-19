@@ -164,4 +164,28 @@ class AuthService {
       throw Exception("Şifre sıfırlama işlemi başarısız oldu.");
     }
   }
+
+  // Hesap silme işlemi
+  Future<void> deleteAccount() async {
+    try {
+      User? user = currentUser;
+      if (user != null) {
+        // Firestore'dan kullanıcı verilerini silme
+        await _db.collection("users").doc(user.uid).delete();
+
+        // Authentication'dan kullanıcıyı silme
+        await user.delete();
+      }
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'requires-recent-login') {
+        throw Exception(
+            "Hesabınızı silmek için yeniden giriş yapmanız gerekiyor.");
+      } else {
+        throw Exception("Hesap silme hatası: ${e.message}");
+      }
+    } catch (e) {
+      debugPrint("Hesap silme hatası: $e");
+      throw Exception("Bir hata oluştu: $e");
+    }
+  }
 }

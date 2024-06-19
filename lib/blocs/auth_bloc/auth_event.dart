@@ -38,3 +38,7 @@ class ResetPasswordEvent extends AuthEvent {
 
   const ResetPasswordEvent({required this.email});
 }
+
+class DeleteAccountEvent extends AuthEvent {
+  const DeleteAccountEvent();
+}
