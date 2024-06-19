@@ -20,20 +20,30 @@
 //   State<EducationLife> createState() => _EducationLifeState();
 // }
 
-// String? selectedEducation;
-// bool isChecked = false;
-
 // final TextEditingController educationStatuController = TextEditingController();
 // final TextEditingController univercityController = TextEditingController();
-// final TextEditingController graduatedDepartmentController =
-//     TextEditingController();
-// final TextEditingController startUnivercityDateController =
-//     TextEditingController();
-// final TextEditingController graduateUnivercityDateController =
-//     TextEditingController();
-// final TextEditingController checkBoxController = TextEditingController();
+// final TextEditingController graduatedDepartmentController = TextEditingController();
+// final TextEditingController startUnivercityDateController = TextEditingController();
+// final TextEditingController graduateUnivercityDateController = TextEditingController();
+// final TextEditingController continueUnivercityController = TextEditingController();
+// bool _isChecked = false;
 
 // class _EducationLifeState extends State<EducationLife> {
+//   void _clearControllers() {
+//     educationStatuController.clear();
+//     univercityController.clear();
+//     graduatedDepartmentController.clear();
+//     startUnivercityDateController.clear();
+//     graduateUnivercityDateController.clear();
+//     continueUnivercityController.clear();
+//   }
+
+//   @override
+//   void initState() {
+//     super.initState();
+//     _isChecked = continueUnivercityController.text.toLowerCase() == 'true';
+//   }
+
 //   final _formKey = GlobalKey<FormState>();
 //   @override
 //   Widget build(BuildContext context) {
@@ -49,8 +59,7 @@
 //               InputText(
 //                   child: CustomDropDownInput(
 //                 onChanged: (newValue) {
-//                   educationStatuController.text =
-//                       newValue ?? educationStatuController.text;
+//                   educationStatuController.text = newValue ?? educationStatuController.text;
 //                 },
 //                 items: TobetoText.educationStatu
 //                     .map((label) => DropdownMenuItem(
@@ -67,8 +76,7 @@
 //                   child: CustomTextField(
 //                 title: TobetoText.profileEditUnivercity,
 //                 onSaved: (newValue) {
-//                   univercityController.text =
-//                       newValue ?? univercityController.text;
+//                   univercityController.text = newValue ?? univercityController.text;
 //                 },
 //                 controller: univercityController,
 //               )),
@@ -76,8 +84,7 @@
 //                   child: CustomTextField(
 //                 title: TobetoText.profileEditGraduatedDepartment,
 //                 onSaved: (newValue) {
-//                   graduatedDepartmentController.text =
-//                       newValue ?? graduatedDepartmentController.text;
+//                   graduatedDepartmentController.text = newValue ?? graduatedDepartmentController.text;
 //                 },
 //                 controller: graduatedDepartmentController,
 //               )),
@@ -87,8 +94,7 @@
 //                 keyboardType: TextInputType.number,
 //                 maxLength: 4,
 //                 onSaved: (newValue) {
-//                   startUnivercityDateController.text =
-//                       newValue ?? startUnivercityDateController.text;
+//                   startUnivercityDateController.text = newValue ?? startUnivercityDateController.text;
 //                 },
 //                 controller: startUnivercityDateController,
 //               )),
@@ -98,8 +104,7 @@
 //                 keyboardType: TextInputType.number,
 //                 maxLength: 4,
 //                 onSaved: (newValue) {
-//                   graduateUnivercityDateController.text =
-//                       newValue ?? graduateUnivercityDateController.text;
+//                   graduateUnivercityDateController.text = newValue ?? graduateUnivercityDateController.text;
 //                 },
 //                 controller: graduateUnivercityDateController,
 //               )),
@@ -108,16 +113,15 @@
 //                   CustomCheckbox(
 //                     onChanged: (value) {
 //                       setState(() {
-//                         isChecked = value!;
+//                         _isChecked = value!;
 //                       });
-//                       checkBoxController.text = value.toString();
+//                       continueUnivercityController.text = value.toString();
 //                     },
-//                     value: isChecked,
+//                     value: _isChecked,
 //                   ),
 //                   Text(
 //                     TobetoText.profileEditEducationContinueBox,
-//                     style:
-//                         TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
+//                     style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
 //                   ),
 //                 ],
 //               ),

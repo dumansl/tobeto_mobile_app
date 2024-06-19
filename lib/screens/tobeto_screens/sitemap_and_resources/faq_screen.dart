@@ -1,53 +1,92 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_event.dart';
+import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_state.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/sitemap_and_resources/sitemap_and_resources_widget/custom_dropdown_input.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/sitemap_and_resources/sitemap_and_resources_widget/description_title_content.dart';
-import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
-class FAQScreen extends StatelessWidget {
+class FAQScreen extends StatefulWidget {
   const FAQScreen({super.key});
+
+  @override
+  State<FAQScreen> createState() => _FAQScreenState();
+}
+
+class _FAQScreenState extends State<FAQScreen> {
+  String selectedCategory = 'tobeto';
+  final Map<String, String> categoryTitles = {
+    'tobeto': 'Tobeto',
+    'education': 'Eğitim',
+    'support': 'Destek'
+  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Sıkça Sorular Sorular"),
+        title: const Text("Sıkça Sorulan Sorular"),
       ),
-      body: Padding(
-        padding: EdgeInsets.all(ScreenPadding.padding24px),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: EdgeInsets.only(bottom: ScreenPadding.padding16px),
-              child: Text(
-                "S.S.S.",
-                style: TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
+      body: BlocProvider(
+        create: (context) => FAQBloc()..add(FetchFAQs()),
+        child: Padding(
+          padding: EdgeInsets.all(ScreenPadding.padding24px),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Padding(
+                padding: EdgeInsets.only(bottom: ScreenPadding.padding16px),
+                child: Text(
+                  "S.S.S.",
+                  style:
+                      TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(bottom: ScreenPadding.padding24px),
-              child: CustomDropDownInput(
-                items: ['Tobeto', 'Eğitim', 'Destek']
-                    .map((label) => DropdownMenuItem(
-                          value: label,
-                          child: Text(label),
-                        ))
-                    .toList(),
-                title: "Tobeto",
-                onChanged: (value) {},
+              Padding(
+                padding: EdgeInsets.only(bottom: ScreenPadding.padding24px),
+                child: CustomDropDownInput(
+                  items: categoryTitles.keys.map((label) {
+                    return DropdownMenuItem(
+                      value: label,
+                      child: Text(categoryTitles[label]!),
+                    );
+                  }).toList(),
+                  title: "Tobeto",
+                  onChanged: (value) {
+                    setState(() {
+                      selectedCategory = value!;
+                    });
+                  },
+                ),
               ),
-            ),
-            const DescriptionTitleContent(
-                title: "Neden Tobeto’yu tercih etmeliyim?",
-                description:
-                    "Platformda profil bilgilerindeki ayarlar sekmesinden hesabını silebilirsin. Hesabını sildiğinde kazandığın tüm rozetlerin silineceğini ve eğitim yolculuğunun sıfırlanacağını unutma."),
-            const DescriptionTitleContent(
-                title: "Neden Tobeto’yu tercih etmeliyim?",
-                description:
-                    "Platformda profil bilgilerindeki ayarlar sekmesinden hesabını silebilirsin. Hesabını sildiğinde kazandığın tüm rozetlerin silineceğini ve eğitim yolculuğunun sıfırlanacağını unutma."),
-          ],
+              Expanded(
+                child: BlocBuilder<FAQBloc, FAQState>(
+                  builder: (context, state) {
+                    if (state is FAQLoading) {
+                      return const Center(child: CircularProgressIndicator());
+                    } else if (state is FAQLoaded) {
+                      final faqs = state.faqs[selectedCategory]!;
+                      return ListView.builder(
+                        itemCount: faqs.questions.length,
+                        itemBuilder: (context, index) {
+                          return DescriptionTitleContent(
+                            title: faqs.questions[index],
+                            description: faqs.answers[index],
+                          );
+                        },
+                      );
+                    } else if (state is FAQError) {
+                      return Center(child: Text('Error: ${state.message}'));
+                    } else {
+                      return const Center(child: Text('Blinmedik durum'));
+                    }
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

@@ -61,9 +61,11 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  widget.title,
-                  style: TobetoTextStyle.poppins(context).captionPurpleBold12,
+                Expanded(
+                  child: Text(
+                    widget.title,
+                    style: TobetoTextStyle.poppins(context).captionPurpleBold12,
+                  ),
                 ),
                 Icon(
                   _isExpanded

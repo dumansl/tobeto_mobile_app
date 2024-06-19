@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/announcement_model.dart';
 
 class AnnouncementService {
@@ -17,7 +18,7 @@ class AnnouncementService {
       }).toList();
       return announcements;
     } catch (e) {
-      print('Error getting announcements: $e');
+      debugPrint('Error getting announcements: $e');
       return [];
     }
   }

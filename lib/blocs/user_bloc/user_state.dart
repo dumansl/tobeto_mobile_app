@@ -21,9 +21,3 @@ class UserError extends UserState {
 
   const UserError(this.message);
 }
-
-class UploadUserData extends UserState {}
-
-class FileFormatDontMatch extends UserState {}
-
-class UserFileUploaded extends UserState {}

@@ -9,7 +9,7 @@ class AnnouncementCard extends StatelessWidget {
   final Announcement announcement;
   final FocusNode focusNode;
 
-  const AnnouncementCard({Key? key, required this.announcement, required this.focusNode});
+  const AnnouncementCard({super.key, required this.announcement, required this.focusNode});
 
   String _formatDate(DateTime date) {
     return "${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}";

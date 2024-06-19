@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/announcement_bloc/announcement_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/application_bloc/application_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_bloc.dart';
@@ -13,6 +14,12 @@ import 'package:tobeto_mobile_app/screens/catalog_screen/catalog_details.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/services/announcement_service.dart';
 import 'package:tobeto_mobile_app/services/video_repositort.dart';
+import 'package:tobeto_mobile_app/blocs/work_life_bloc/work_life_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/work_life_bloc/work_life_event.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
+import 'package:tobeto_mobile_app/services/announcement_service.dart';
+import 'package:tobeto_mobile_app/services/application_service.dart';
+import 'package:tobeto_mobile_app/services/user_service.dart';
 import 'package:tobeto_mobile_app/utils/themes/theme.dart';
 import 'firebase_options.dart';
 
@@ -45,6 +52,10 @@ class TobetoMobileApp extends StatelessWidget {
           create: (context) =>
               VideoBloc(VideoRepository(FirebaseStorage.instance)),
         ),
+        BlocProvider<AnnouncementBloc>(create: (context) => AnnouncementBloc(AnnouncementService())),
+        BlocProvider<ApplicationBloc>(create: (context) => ApplicationBloc(ApplicationService())),
+        BlocProvider<WorkLifeBloc>(
+            create: (context) => WorkLifeBloc(userRepository: UserRepository())..add(LoadWorkLife())),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {

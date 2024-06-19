@@ -1,10 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
 import 'package:tobeto_mobile_app/model/announcement_model.dart';
 import 'package:tobeto_mobile_app/services/announcement_service.dart';
-
 part 'announcement_event.dart';
 part 'announcement_state.dart';
 
@@ -22,10 +21,10 @@ class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
       LoadAnnouncements event, Emitter<AnnouncementState> emit) async {
     try {
       final announcements = await _announcementService.getAnnouncements();
-      print("Loaded ${announcements.length} announcements");
+      debugPrint("Loaded ${announcements.length} announcements");
       emit(AnnouncementsLoaded(announcements: announcements));
     } catch (e) {
-      emit(AnnouncementsError('Failed to load announcements'));
+      emit(const AnnouncementsError('Failed to load announcements'));
     }
   }
 

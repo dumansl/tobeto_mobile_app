@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tobeto_mobile_app/model/user_model.dart';
-import 'package:tobeto_mobile_app/services/user_repository.dart';
+import 'package:tobeto_mobile_app/services/user_service.dart';
 import 'user_event.dart';
 import 'user_state.dart';
 
