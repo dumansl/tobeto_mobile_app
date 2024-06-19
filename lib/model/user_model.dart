@@ -18,31 +18,11 @@ class UserModel {
   final String district;
   final String street;
   final String aboutMe;
-  //Deneyimler
-  final String companyName;
-  final String position;
-  final String experienceType;
-  final String sector;
-  final String workCity;
-  final String startWork;
-  final String endWork; //Çalışmaya devam ediyorum checkBox
-  final String workDescription;
-  final bool workStatu;
-  //Eğitim Hayatı
-  // final String educationStatu;
-  // final String univercity;
-  // final String graduatedDepartment;
-  // final String startUnivercityDate;
-  // final String graduateUnivercityDate;
-  // final bool continueUnivercity; // Devam ediyorum checkBox
-  //Yetkinlikler
   final String skill;
 // //Sertifikalar
 //   final String certificateName;
 //   final String certificatesDate; // dosya yükleme kutusu
-//   //Üye ve Topluluklar
-//   final String communityName;
-//   final String communityStatu;
+
 //   //Projeler ve Ödüller
 //   final String projectName;
 //   final String projectDate;
@@ -74,21 +54,6 @@ class UserModel {
     required this.district,
     required this.street,
     required this.aboutMe,
-    required this.companyName,
-    required this.position,
-    required this.experienceType,
-    required this.sector,
-    required this.workCity,
-    required this.startWork,
-    required this.endWork,
-    required this.workDescription,
-    required this.workStatu,
-    // required this.educationStatu,
-    // required this.univercity,
-    // required this.graduatedDepartment,
-    // required this.startUnivercityDate,
-    // required this.graduateUnivercityDate,
-    // required this.continueUnivercity,
     required this.skill,
   });
 
@@ -109,21 +74,6 @@ class UserModel {
       district: doc['district'],
       street: doc['street'],
       aboutMe: doc['aboutMe'],
-      companyName: doc['companyName'],
-      position: doc['position'],
-      experienceType: doc['experienceType'],
-      sector: doc['sector'],
-      workCity: doc['workCity'],
-      startWork: doc['startWork'],
-      endWork: doc['endWork'],
-      workDescription: doc['workDescription'],
-      workStatu: doc['workStatu'],
-      // educationStatu: doc['educationStatu'],
-      // univercity: doc['univercity'],
-      // graduatedDepartment: doc['graduatedDepartment'],
-      // startUnivercityDate: doc['startUnivercityDate'],
-      // graduateUnivercityDate: doc['graduateUnivercityDate'],
-      // continueUnivercity: doc['continueUnivercity'],
       skill: doc['skill'],
     );
   }
@@ -146,21 +96,6 @@ class UserModel {
       district: data['district'],
       street: data['street'],
       aboutMe: data['aboutMe'],
-      companyName: data['companyName'],
-      position: data['position'],
-      experienceType: data['experienceType'],
-      sector: data['sector'],
-      workCity: data['workCity'],
-      startWork: data['startWork'],
-      endWork: data['endWork'],
-      workDescription: data['workDescription'],
-      workStatu: data['workStatu'],
-      // educationStatu: data['educationStatu'],
-      // univercity: data['univercity'],
-      // graduatedDepartment: data['graduatedDepartment'],
-      // startUnivercityDate: data['startUnivercityDate'],
-      // graduateUnivercityDate: data['graduateUnivercityDate'],
-      // continueUnivercity: data['continueUnivercity'],
       skill: data['skill'],
     );
   }

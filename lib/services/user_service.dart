@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/user_model.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
 
-class UserRepository {
+class UserService {
   final String userId;
   FirebaseFirestore db = FirebaseFirestore.instance;
 
-  UserRepository() : userId = FirebaseAuth.instance.currentUser!.uid;
+  UserService() : userId = FirebaseAuth.instance.currentUser!.uid;
 
   Future<List<dynamic>?> _getCollectionData(String collectionName) async {
     final DocumentSnapshot snapshot = await db.collection('users').doc(userId).get();
@@ -66,17 +67,94 @@ class UserRepository {
     await _removeFromCollection('workLife', workLife);
   }
 
-  Future<List<Map<String, dynamic>>> getEducationLife() async {
+  Future<List<Map<String, dynamic>>> loadEducationLife() async {
     final data = await _getCollectionData('educationLife');
     return List<Map<String, dynamic>>.from(data ?? []);
   }
 
   Future<void> addEducationLife(Map<String, dynamic> educationLife) async {
-    await _addToCollection('educationLife', educationLife);
+    final educationLifeData = {
+      'educationStatu': educationLife['educationStatu'],
+      'univercity': educationLife['univercity'],
+      'graduatedDepartment': educationLife['graduatedDepartment'],
+      'startUnivercityDate': educationLife['startUnivercityDate'],
+      'graduateUnivercityDate': educationLife['graduateUnivercityDate'],
+      'continueUnivercity': educationLife['continueUnivercity'],
+    };
+    await _addToCollection('educationLife', educationLifeData);
   }
 
   Future<void> removeEducationLife(Map<String, dynamic> educationLife) async {
     await _removeFromCollection('educationLife', educationLife);
+  }
+
+  Future<List<Map<String, dynamic>>> loadClubCominities() async {
+    final data = await _getCollectionData('clubCominities');
+    return List<Map<String, dynamic>>.from(data ?? []);
+  }
+
+  Future<void> addClubCominities(Map<String, dynamic> clubCominities) async {
+    final clubCominitiesData = {
+      'communityName': clubCominities['communityName'],
+      'communityTitle': clubCominities['communityTitle'],
+    };
+    debugPrint(clubCominitiesData.toString());
+    await _addToCollection('clubCominities', clubCominitiesData);
+  }
+
+  Future<void> removeClubCominities(Map<String, dynamic> clubCominities) async {
+    await _removeFromCollection('clubCominities', clubCominities);
+  }
+
+  Future<List<Map<String, dynamic>>> loadProjectsPrize() async {
+    final data = await _getCollectionData('projectsPrize');
+    return List<Map<String, dynamic>>.from(data ?? []);
+  }
+
+  Future<void> addProjectsPrize(Map<String, dynamic> projectsPrize) async {
+    final projectsPrizeData = {
+      'projectAwardName': projectsPrize['projectAwardName'],
+      'certificatesDate': projectsPrize['certificatesDate'],
+    };
+    await _addToCollection('projectsPrize', projectsPrizeData);
+  }
+
+  Future<void> removeProjectsPrize(Map<String, dynamic> projectsPrize) async {
+    await _removeFromCollection('projectsPrize', projectsPrize);
+  }
+
+  Future<List<Map<String, dynamic>>> loadSocialMedia() async {
+    final data = await _getCollectionData('socialMedia');
+    return List<Map<String, dynamic>>.from(data ?? []);
+  }
+
+  Future<void> addSocialMedia(Map<String, dynamic> socialMedia) async {
+    final socialMediaData = {
+      'socialMediaName': socialMedia['socialMediaName'],
+      'socialMediaLink': socialMedia['socialMediaLink'],
+    };
+    await _addToCollection('socialMedia', socialMediaData);
+  }
+
+  Future<void> removeSocialMedia(Map<String, dynamic> socialMedia) async {
+    await _removeFromCollection('socialMedia', socialMedia);
+  }
+
+  Future<List<Map<String, dynamic>>> loadLanguages() async {
+    final data = await _getCollectionData('languages');
+    return List<Map<String, dynamic>>.from(data ?? []);
+  }
+
+  Future<void> addLanguages(Map<String, dynamic> languages) async {
+    final languagesData = {
+      'languageName': languages['languageName'],
+      'languageLevel': languages['languageLevel'],
+    };
+    await _addToCollection('languages', languagesData);
+  }
+
+  Future<void> removeLanguages(Map<String, dynamic> languages) async {
+    await _removeFromCollection('languages', languages);
   }
 
   Future<void> updateProfileEdit() async {

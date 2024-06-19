@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomCard extends StatelessWidget {
@@ -47,10 +46,13 @@ class CustomCard extends StatelessWidget {
                   child: Icon(Icons.date_range_outlined),
                 ),
                 RichText(
-                  text: TextSpan(style: TobetoTextStyle.poppins(context).captionPurpleBold15, children: <TextSpan>[
-                    TextSpan(text: startDate),
-                    TextSpan(text: ' - $endDate'),
-                  ]),
+                  text: TextSpan(
+                    style: TobetoTextStyle.poppins(context).captionPurpleBold15,
+                    children: <TextSpan>[
+                      TextSpan(text: startDate),
+                      TextSpan(text: ' - $endDate'),
+                    ],
+                  ),
                 ),
                 IconButton(
                   onPressed: onpressed,
@@ -60,16 +62,22 @@ class CustomCard extends StatelessWidget {
             ),
           ),
           RichText(
-              text: TextSpan(style: TobetoTextStyle.poppins(context).bodyBlackBold16, children: <TextSpan>[
-            TextSpan(text: title, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
-            TextSpan(text: '$content\n'),
-            TextSpan(text: title2, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
-            TextSpan(text: '\n$content2\n'),
-            TextSpan(text: title3, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
-            TextSpan(text: '\n$content3\n'),
-            TextSpan(text: title4, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
-            TextSpan(text: '\n$content4'),
-          ])),
+            text: TextSpan(
+              style: TobetoTextStyle.poppins(context).bodyBlackBold16,
+              children: <TextSpan>[
+                TextSpan(text: title, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
+                TextSpan(text: '$content\n'),
+                TextSpan(text: title2, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
+                TextSpan(text: '\n$content2\n'),
+                if (title3 != null)
+                  TextSpan(text: title3, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
+                if (content3 != null) TextSpan(text: '\n$content3\n'),
+                if (title4 != null)
+                  TextSpan(text: title4, style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16),
+                if (content4 != null) TextSpan(text: '\n$content4'),
+              ],
+            ),
+          ),
         ],
       ),
     );

@@ -1,155 +1,164 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:tobeto_mobile_app/blocs/user_bloc/user_bloc.dart';
-// import 'package:tobeto_mobile_app/blocs/user_bloc/user_event.dart';
-// import 'package:tobeto_mobile_app/blocs/user_bloc/user_state.dart';
-// import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_card.dart';
-// import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_checkbox.dart';
-// import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdown_input.dart';
-// import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
-// import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
-// import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
-// import 'package:tobeto_mobile_app/services/user_repository.dart';
-// import 'package:tobeto_mobile_app/utils/constant/text.dart';
-// import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/education_life_bloc/education_life_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/education_life_bloc/education_life_event.dart';
+import 'package:tobeto_mobile_app/blocs/education_life_bloc/education_life_state.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_card.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_checkbox.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_date_input.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdown_input.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
-// class EducationLife extends StatefulWidget {
-//   const EducationLife({super.key});
+class EducationLife extends StatefulWidget {
+  const EducationLife({super.key});
 
-//   @override
-//   State<EducationLife> createState() => _EducationLifeState();
-// }
+  @override
+  State<EducationLife> createState() => _EducationLifeState();
+}
 
-// final TextEditingController educationStatuController = TextEditingController();
-// final TextEditingController univercityController = TextEditingController();
-// final TextEditingController graduatedDepartmentController = TextEditingController();
-// final TextEditingController startUnivercityDateController = TextEditingController();
-// final TextEditingController graduateUnivercityDateController = TextEditingController();
-// final TextEditingController continueUnivercityController = TextEditingController();
-// bool _isChecked = false;
+class _EducationLifeState extends State<EducationLife> {
+  final TextEditingController educationStatuController = TextEditingController();
+  final TextEditingController univercityController = TextEditingController();
+  final TextEditingController graduatedDepartmentController = TextEditingController();
+  final TextEditingController startUnivercityDateController = TextEditingController();
+  final TextEditingController graduateUnivercityDateController = TextEditingController();
+  final TextEditingController continueUnivercityController = TextEditingController();
+  bool _isChecked = false;
 
-// class _EducationLifeState extends State<EducationLife> {
-//   void _clearControllers() {
-//     educationStatuController.clear();
-//     univercityController.clear();
-//     graduatedDepartmentController.clear();
-//     startUnivercityDateController.clear();
-//     graduateUnivercityDateController.clear();
-//     continueUnivercityController.clear();
-//   }
+  void _clearControllers() {
+    educationStatuController.clear();
+    univercityController.clear();
+    graduatedDepartmentController.clear();
+    startUnivercityDateController.clear();
+    graduateUnivercityDateController.clear();
+    continueUnivercityController.clear();
+  }
 
-//   @override
-//   void initState() {
-//     super.initState();
-//     _isChecked = continueUnivercityController.text.toLowerCase() == 'true';
-//   }
+  bool _areControllersValid() {
+    return educationStatuController.text.isNotEmpty &&
+        univercityController.text.isNotEmpty &&
+        graduatedDepartmentController.text.isNotEmpty &&
+        startUnivercityDateController.text.isNotEmpty &&
+        (_isChecked || continueUnivercityController.text.isNotEmpty);
+  }
 
-//   final _formKey = GlobalKey<FormState>();
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<UserBloc, UserState>(builder: (context, state) {
-//       if (state is UserLoading) {
-//         return const Center(child: CircularProgressIndicator());
-//       } else if (state is UserLoaded) {
-//         UserRepository().getData();
-//         return Form(
-//           key: _formKey,
-//           child: ListView(
-//             children: [
-//               InputText(
-//                   child: CustomDropDownInput(
-//                 onChanged: (newValue) {
-//                   educationStatuController.text = newValue ?? educationStatuController.text;
-//                 },
-//                 items: TobetoText.educationStatu
-//                     .map((label) => DropdownMenuItem(
-//                           value: label,
-//                           child: Text(label),
-//                         ))
-//                     .toList(),
-//                 title: educationStatuController.text.isNotEmpty
-//                     ? educationStatuController.text
-//                     : TobetoText.profileEditEducationStatu,
-//                 controller: educationStatuController,
-//               )),
-//               InputText(
-//                   child: CustomTextField(
-//                 title: TobetoText.profileEditUnivercity,
-//                 onSaved: (newValue) {
-//                   univercityController.text = newValue ?? univercityController.text;
-//                 },
-//                 controller: univercityController,
-//               )),
-//               InputText(
-//                   child: CustomTextField(
-//                 title: TobetoText.profileEditGraduatedDepartment,
-//                 onSaved: (newValue) {
-//                   graduatedDepartmentController.text = newValue ?? graduatedDepartmentController.text;
-//                 },
-//                 controller: graduatedDepartmentController,
-//               )),
-//               InputText(
-//                   child: CustomTextField(
-//                 title: TobetoText.profileEditStartUnivercityDate,
-//                 keyboardType: TextInputType.number,
-//                 maxLength: 4,
-//                 onSaved: (newValue) {
-//                   startUnivercityDateController.text = newValue ?? startUnivercityDateController.text;
-//                 },
-//                 controller: startUnivercityDateController,
-//               )),
-//               InputText(
-//                   child: CustomTextField(
-//                 title: TobetoText.profileEditGraduateUnivercityDate,
-//                 keyboardType: TextInputType.number,
-//                 maxLength: 4,
-//                 onSaved: (newValue) {
-//                   graduateUnivercityDateController.text = newValue ?? graduateUnivercityDateController.text;
-//                 },
-//                 controller: graduateUnivercityDateController,
-//               )),
-//               Row(
-//                 children: [
-//                   CustomCheckbox(
-//                     onChanged: (value) {
-//                       setState(() {
-//                         _isChecked = value!;
-//                       });
-//                       continueUnivercityController.text = value.toString();
-//                     },
-//                     value: _isChecked,
-//                   ),
-//                   Text(
-//                     TobetoText.profileEditEducationContinueBox,
-//                     style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
-//                   ),
-//                 ],
-//               ),
-//               CustomElevatedButton(
-//                 text: TobetoText.profileEditSaveButton,
-//                 onPressed: () {
-//                   _formKey.currentState!.save();
-//                   context.read<UserBloc>().add(UpdateUserData());
-//                 },
-//               ),
-//               InputText(
-//                 child: CustomCard(
-//                   startDate: startUnivercityDateController.text,
-//                   endDate: graduateUnivercityDateController.text,
-//                   title: 'Üniversite\n',
-//                   content: univercityController.text,
-//                   title2: '\nBölüm\n',
-//                   content2: graduatedDepartmentController.text,
-//                 ),
-//               )
-//             ],
-//           ),
-//         );
-//       } else if (state is UserError) {
-//         return Center(child: Text('Error: ${state.message}'));
-//       } else {
-//         return const Center(child: Text('Bir hata oluştu.'));
-//       }
-//     });
-//   }
-// }
+  void _addEducationLife() {
+    final educationLife = {
+      'educationStatu': educationStatuController.text,
+      'univercity': univercityController.text,
+      'graduatedDepartment': graduatedDepartmentController.text,
+      'startUnivercityDate': startUnivercityDateController.text,
+      'graduateUnivercityDate': graduateUnivercityDateController.text,
+      'continueUnivercity': _isChecked.toString(),
+    };
+    context.read<EducationLifeBloc>().add(AddEducationLife(educationLife));
+    _clearControllers();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _isChecked = continueUnivercityController.text.toLowerCase() == 'true';
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocBuilder<EducationLifeBloc, EducationLifeState>(builder: (context, state) {
+      if (state.isLoading) {
+        return const Center(child: CircularProgressIndicator());
+      } else if (state.error != null) {
+        return Center(child: Text('Error: ${state.error}'));
+      }
+      return ListView(
+        children: [
+          InputText(
+              child: CustomDropDownInput(
+            onChanged: (newValue) {
+              educationStatuController.text = newValue ?? educationStatuController.text;
+            },
+            items: TobetoText.educationStatu
+                .map((label) => DropdownMenuItem(
+                      value: label,
+                      child: Text(label),
+                    ))
+                .toList(),
+            title: educationStatuController.text.isNotEmpty
+                ? educationStatuController.text
+                : TobetoText.profileEditEducationStatu,
+            controller: educationStatuController,
+          )),
+          InputText(
+              child: CustomTextField(
+            title: TobetoText.profileEditUnivercity,
+            controller: univercityController,
+          )),
+          InputText(
+              child: CustomTextField(
+            title: TobetoText.profileEditGraduatedDepartment,
+            controller: graduatedDepartmentController,
+          )),
+          InputText(
+              child: CustomDateInput(
+                  controller: startUnivercityDateController, labelText: TobetoText.profileEditStartUnivercityDate)),
+          if (!_isChecked) ...[
+            InputText(
+                child: CustomDateInput(
+              controller: graduateUnivercityDateController,
+              labelText: TobetoText.profileEditGraduateUnivercityDate,
+            ))
+          ],
+          Row(
+            children: [
+              CustomCheckbox(
+                onChanged: (value) {
+                  setState(() {
+                    _isChecked = value!;
+                    if (_isChecked) {
+                      graduateUnivercityDateController.clear();
+                    }
+                  });
+                  continueUnivercityController.text = value.toString();
+                },
+                value: _isChecked,
+                controller: continueUnivercityController,
+              ),
+              Text(
+                TobetoText.profileEditEducationContinueBox,
+                style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
+              ),
+            ],
+          ),
+          CustomElevatedButton(
+            text: "Ekle",
+            onPressed: () {
+              if (_areControllersValid()) {
+                _addEducationLife();
+              }
+            },
+          ),
+          if (state.education.isNotEmpty)
+            ...state.education.map((education) {
+              return InputText(
+                child: CustomCard(
+                  startDate: education['startUnivercityDate'],
+                  endDate:
+                      education['continueUnivercity'] == 'true' ? 'Devam ediyor' : education['graduateUnivercityDate'],
+                  title: '${TobetoText.profileEditUnivercity}\n',
+                  content: education['univercity'],
+                  title2: TobetoText.profileEditGraduatedDepartment,
+                  content2: education['graduatedDepartment'],
+                  onpressed: () {
+                    context.read<EducationLifeBloc>().add(RemoveEducationLife(education));
+                  },
+                ),
+              );
+            })
+        ],
+      );
+    });
+  }
+}

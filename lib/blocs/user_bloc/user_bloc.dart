@@ -8,7 +8,7 @@ import 'user_event.dart';
 import 'user_state.dart';
 
 class UserBloc extends Bloc<UserEvent, UserState> {
-  final UserRepository userRepository = UserRepository();
+  final UserService userService = UserService();
 
   UserBloc() : super(UserInitial()) {
     on<LoadUserData>(_onLoadUserData);
@@ -22,7 +22,7 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   void _onLoadUserData(LoadUserData event, Emitter<UserState> emit) async {
     emit(UserLoading());
     try {
-      final UserModel? userModel = await userRepository.getData();
+      final UserModel? userModel = await userService.getData();
       emit(UserLoaded(userModel: userModel));
     } catch (e) {
       debugPrint(e.toString());
@@ -33,9 +33,9 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   void _onUpdateUserData(UpdateUserData event, Emitter<UserState> emit) async {
     emit(UserLoading());
     try {
-      await userRepository.updateProfileEdit();
+      await userService.updateProfileEdit();
       // Veriyi güncelledikten sonra tekrar yükle
-      final UserModel? userModel = await userRepository.getData();
+      final UserModel? userModel = await userService.getData();
       emit(UserUpdated());
       emit(UserLoaded(userModel: userModel));
     } catch (e) {
@@ -46,8 +46,8 @@ class UserBloc extends Bloc<UserEvent, UserState> {
   // void _onUploadFile(UploadUserDAte event, Emitter<UserState> emit) async {
   //   emit(UserLoading());
   //   try {
-  //     await userRepository.uploadFile(event.context);
-  //     await userRepository.getData();
+  //     await userService.uploadFile(event.context);
+  //     await userService.getData();
   //     emit(UserFileUploaded());
   //   } catch (e) {
   //     emit(UserError(e.toString()));
