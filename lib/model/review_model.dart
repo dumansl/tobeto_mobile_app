@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class Review {
   final bool isCompleted;
-  final double score;
+  final double? score;
   final Map<String, dynamic> answers;
   final List<dynamic> questions;
 

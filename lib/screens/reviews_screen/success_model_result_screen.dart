@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/review_bloc/review_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/review_bloc/review_event.dart';
+import 'package:tobeto_mobile_app/blocs/review_bloc/review_state.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/custom_headline_text.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/spider_chart.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -14,6 +18,13 @@ class SuccessModelResultScreen extends StatefulWidget {
 
 class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
   bool _isExpanded = false;
+
+  @override
+  void initState() {
+    context.read<ReviewBloc>().add(FetchReviews());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,28 +75,50 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
       child: Column(
         children: [
           _purpleDivider(context),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: ScreenPadding.padding24px,
-                    ),
-                    child: const SpiderChart(
-                      values: [0.9, 0.65, 0.5, 0.95, 0.97, 1, 0.8, 0.75],
+          BlocBuilder<ReviewBloc, ReviewState>(
+            builder: (context, state) {
+              if (state is ReviewLoaded) {
+                return Expanded(
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: ScreenPadding.padding24px,
+                          ),
+                          child: const SpiderChart(
+                            values: [
+                              0.86,
+                              0.95,
+                              0.90,
+                              0.95,
+                              0.68,
+                              0.89,
+                              0.95,
+                              0.98,
+                            ],
+                          ),
+                        ),
+                        _spiderDescription(state.reviews.score!),
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                            vertical: ScreenPadding.padding16px,
+                          ),
+                          child: _successModelDescription(
+                              score: (state.reviews.score! * 10).round() / 10),
+                        ),
+                      ],
                     ),
                   ),
-                  _spiderDescription(),
-                  Padding(
-                    padding: EdgeInsets.symmetric(
-                      vertical: ScreenPadding.padding16px,
-                    ),
-                    child: _successModelDescription(),
-                  ),
-                ],
-              ),
-            ),
+                );
+              } else if (state is ReviewLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is ReviewError) {
+                return Center(child: Text('Error: ${state.message}'));
+              } else {
+                return Container();
+              }
+            },
           ),
         ],
       ),
@@ -111,47 +144,47 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
     );
   }
 
-  Widget _spiderDescription() {
+  Widget _spiderDescription(double score) {
     return Column(
       children: [
         _spiderChartDescription(
           color: TobetoColor.card.turquoise,
-          score: 4.2,
+          score: (score * 10).round() / 10,
           text: TobetoText.evaluationspiderChartDescription1,
         ),
         _spiderChartDescription(
           color: TobetoColor.card.darkGreen,
-          score: 4.2,
+          score: (score * 10).round() / 10,
           text: TobetoText.evaluationspiderChartDescription2,
         ),
         _spiderChartDescription(
           color: TobetoColor.card.yellow,
-          score: 4.2,
+          score: (score * 10).round() / 10,
           text: TobetoText.evaluationspiderChartDescription3,
         ),
         _spiderChartDescription(
           color: TobetoColor.card.darkPurple,
-          score: 4.2,
+          score: (score * 10).round() / 10,
           text: TobetoText.evaluationspiderChartDescription4,
         ),
         _spiderChartDescription(
           color: TobetoColor.card.pink,
-          score: 4.2,
+          score: (score * 10).round() / 10,
           text: TobetoText.evaluationspiderChartDescription5,
         ),
         _spiderChartDescription(
           color: TobetoColor.card.lightBrown,
-          score: 4.2,
+          score: (score * 10).round() / 10,
           text: TobetoText.evaluationspiderChartDescription6,
         ),
         _spiderChartDescription(
           color: TobetoColor.card.fuchsia,
-          score: 4.2,
+          score: (score * 10).round() / 10,
           text: TobetoText.evaluationspiderChartDescription7,
         ),
         _spiderChartDescription(
           color: TobetoColor.card.peach,
-          score: 4.2,
+          score: (score * 10).round() / 10,
           text: TobetoText.evaluationspiderChartDescription8,
         ),
       ],
@@ -196,12 +229,12 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
     );
   }
 
-  Widget _successModelDescription() {
+  Widget _successModelDescription({required double score}) {
     return Column(
       children: [
         _successModelDescriptionTitle(
           title: TobetoText.evaluationspiderChartDescription1,
-          score: 4,
+          score: score,
         ),
         Padding(
           padding: EdgeInsets.only(

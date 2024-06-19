@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/screens/announcement_screen/announcement_screen.dart';
-import 'package:tobeto_mobile_app/screens/application_screen/application_screen.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/nested_scroll.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';

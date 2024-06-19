@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/review_bloc/review_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/review_bloc/review_event.dart';
+import 'package:tobeto_mobile_app/blocs/review_bloc/review_state.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/custom_headline_text.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -9,7 +13,9 @@ class TobetoSuccesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint(ScreenUtil.getHeight(context).toString());
+    // Dispatch FetchReviews event to load reviews when the screen is built
+    context.read<ReviewBloc>().add(FetchReviews());
+
     return Scaffold(
       backgroundColor: TobetoColor.background.lightGrey,
       body: SafeArea(
@@ -66,43 +72,95 @@ class TobetoSuccesScreen extends StatelessWidget {
   }
 
   Widget _startEvaluateButton(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SuccessExamScreen(),
-            ));
+    return BlocBuilder<ReviewBloc, ReviewState>(
+      builder: (context, state) {
+        if (state is InitialState) {
+          return Container(
+            height: ScreenUtil.getHeight(context) * 0.12,
+            width: double.infinity,
+            padding: EdgeInsets.symmetric(
+                horizontal: ScreenPadding.padding16px,
+                vertical: ScreenPadding.padding32px),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  TobetoColor.purple,
+                  TobetoColor.purple.withOpacity(0.8),
+                  TobetoColor.purple.withOpacity(0.6),
+                  TobetoColor.purple.withOpacity(0.4),
+                ],
+                begin: Alignment.topCenter,
+                end: Alignment.bottomCenter,
+              ),
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(SizeRadius.radius30px),
+                topRight: Radius.circular(SizeRadius.radius30px),
+              ),
+            ),
+            child: Center(
+              child: Text(
+                'Initializing...',
+                style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
+              ),
+            ),
+          );
+        } else if (state is ReviewLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state is ReviewLoaded) {
+          return InkWell(
+            onTap: () {
+              if (state.reviews.isCompleted) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SuccessModelResultScreen(),
+                  ),
+                );
+              } else {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const SuccessExamScreen(),
+                  ),
+                );
+              }
+            },
+            child: Container(
+              height: ScreenUtil.getHeight(context) * 0.12,
+              width: double.infinity,
+              padding: EdgeInsets.symmetric(
+                  horizontal: ScreenPadding.padding16px,
+                  vertical: ScreenPadding.padding32px),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  colors: [
+                    TobetoColor.purple,
+                    TobetoColor.purple.withOpacity(0.8),
+                    TobetoColor.purple.withOpacity(0.6),
+                    TobetoColor.purple.withOpacity(0.4),
+                  ],
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                ),
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(SizeRadius.radius30px),
+                  topRight: Radius.circular(SizeRadius.radius30px),
+                ),
+              ),
+              child: Center(
+                child: Text(
+                  TobetoText.evaluationCard5,
+                  style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
+                ),
+              ),
+            ),
+          );
+        } else if (state is ReviewError) {
+          return Center(child: Text('Error: ${state.message}'));
+        } else {
+          return Container(); // Default case to handle other states if necessary
+        }
       },
-      child: Container(
-        height: ScreenUtil.getHeight(context) * 0.12,
-        width: double.infinity,
-        padding: EdgeInsets.symmetric(
-            horizontal: ScreenPadding.padding16px,
-            vertical: ScreenPadding.padding32px),
-        decoration: BoxDecoration(
-          gradient: LinearGradient(
-            colors: [
-              TobetoColor.purple,
-              TobetoColor.purple.withOpacity(0.8),
-              TobetoColor.purple.withOpacity(0.6),
-              TobetoColor.purple.withOpacity(0.4),
-            ],
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-          ),
-          borderRadius: BorderRadius.only(
-            bottomLeft: Radius.circular(SizeRadius.radius30px),
-            topRight: Radius.circular(SizeRadius.radius30px),
-          ),
-        ),
-        child: Center(
-          child: Text(
-            TobetoText.evaluationCard5,
-            style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
-          ),
-        ),
-      ),
     );
   }
 
