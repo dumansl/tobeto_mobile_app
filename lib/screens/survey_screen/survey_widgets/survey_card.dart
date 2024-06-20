@@ -20,9 +20,7 @@ class SurveyCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-          horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding.padding32px),
+      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px, vertical: ScreenPadding.padding32px),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -49,15 +47,4 @@ class SurveyCard extends StatelessWidget {
       ),
     );
   }
-}
-
-ButtonStyle elevatedButtonStyle(BuildContext context) {
-  return ElevatedButton.styleFrom(
-    backgroundColor: TobetoColor.purple,
-    textStyle: TobetoTextStyle.poppins(context).bodyWhiteBold16,
-    shape: RoundedRectangleBorder(
-      borderRadius: BorderRadius.circular(10.0),
-    ),
-    padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
-  );
 }

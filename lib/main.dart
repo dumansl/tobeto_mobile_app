@@ -16,6 +16,7 @@ import 'package:tobeto_mobile_app/blocs/projects_prize_bloc/projects_prize_bloc.
 import 'package:tobeto_mobile_app/blocs/projects_prize_bloc/projects_prize_event.dart';
 import 'package:tobeto_mobile_app/blocs/social_media_bloc/social_media_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/social_media_bloc/social_media_event.dart';
+import 'package:tobeto_mobile_app/blocs/survey_bloc/survey_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_event.dart';
 import 'package:tobeto_mobile_app/blocs/review_bloc/review_bloc.dart';
@@ -67,6 +68,7 @@ class TobetoMobileApp extends StatelessWidget {
             create: (context) => SocialMediaBloc(userService: UserService())..add(LoadSocialMedia())),
         BlocProvider<LanguagesBloc>(
             create: (context) => LanguagesBloc(userService: UserService())..add(LoadLanguages())),
+        BlocProvider<SurveyBloc>(create: (context) => SurveyBloc()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {
