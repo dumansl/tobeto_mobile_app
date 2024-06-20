@@ -1,49 +1,99 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:tobeto_mobile_app/blocs/survey_bloc/survey_bloc.dart';
+import 'package:tobeto_mobile_app/model/survey_model.dart';
 import '../survey_screen/survey_widgets/survey_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/services/survey_service.dart';
 
-class SurveyScreen extends StatelessWidget {
-  final List<String> surveys = [
-    'Anket 1',
-    'Anket 2',
-    'Anket 3',
-  ];
+class SurveyScreen extends StatefulWidget {
+  @override
+  _SurveyScreenState createState() => _SurveyScreenState();
+}
 
-  SurveyScreen({super.key});
+class _SurveyScreenState extends State<SurveyScreen> {
+  String? userId;
+  String? surveyId;
 
-  void navigateToSurvey(BuildContext context, String surveyTitle) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SurveyDetailScreen(surveyTitle: surveyTitle),
-      ),
-    );
+  @override
+  void initState() {
+    super.initState();
+    _initializeUserAndSurvey();
+  }
+
+  Future<void> _initializeUserAndSurvey() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      userId = user.uid;
+      DocumentSnapshot surveyDoc =
+          await FirebaseFirestore.instance.collection('surveys').doc('uVhMmvdqeWXX3AW5oGTI').get();
+
+      surveyId = surveyDoc.id;
+
+      setState(() {});
+    } else {
+      // Kullanıcı oturum açmamışsa hata ver
+      throw Exception('User is not authenticated');
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Anketler'),
-      ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: ListView.builder(
-          itemCount: surveys.length,
-          itemBuilder: (context, index) {
-            return Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0),
-              child: GestureDetector(
-                onTap: () => navigateToSurvey(context, surveys[index]),
-                child: SurveyCard(
-                  headline: surveys[index],
-                  lineerColor1: TobetoColor.purple,
-                  lineerColor2: TobetoColor.purple,
-                  isThereButton: true,
-                ),
-              ),
-            );
-          },
+    if (userId == null || surveyId == null) {
+      return Scaffold(
+        body: Center(child: CircularProgressIndicator()),
+      );
+    }
+
+    return BlocProvider(
+      create: (_) => SurveyBloc()..add(LoadSurveys()),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('Anketler'),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: BlocBuilder<SurveyBloc, SurveyState>(
+            builder: (context, state) {
+              if (state is SurveyLoading) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (state is SurveyLoaded) {
+                return ListView.builder(
+                  itemCount: state.surveys.length,
+                  itemBuilder: (context, index) {
+                    final survey = state.surveys[index];
+                    return Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      child: GestureDetector(
+                        onTap: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => SurveyDetailScreen(
+                              userId: userId!,
+                              surveyId: surveyId!,
+                              surveyTitle: survey.title,
+                            ),
+                          ),
+                        ),
+                        child: SurveyCard(
+                          headline: survey.title,
+                          lineerColor1: TobetoColor.purple,
+                          lineerColor2: TobetoColor.purple,
+                          isThereButton: true,
+                        ),
+                      ),
+                    );
+                  },
+                );
+              } else if (state is SurveyError) {
+                return Center(child: Text(state.error));
+              } else {
+                return const Center(child: Text('Bir hata oluştu.'));
+              }
+            },
+          ),
         ),
       ),
     );
@@ -51,59 +101,28 @@ class SurveyScreen extends StatelessWidget {
 }
 
 class SurveyDetailScreen extends StatefulWidget {
+  final String userId;
+  final String surveyId;
   final String surveyTitle;
 
-  const SurveyDetailScreen({super.key, required this.surveyTitle});
+  const SurveyDetailScreen({
+    Key? key,
+    required this.userId,
+    required this.surveyId,
+    required this.surveyTitle,
+  }) : super(key: key);
 
   @override
-  State<SurveyDetailScreen> createState() => _SurveyDetailScreenState();
+  _SurveyDetailScreenState createState() => _SurveyDetailScreenState();
 }
 
 class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
-  final List<Map<String, dynamic>> questions = [
-    {
-      'question': 'Bu eğitimden ne kadar memnun kaldınız?',
-      'options': [
-        'Çok memnun',
-        'Memnun',
-        'Kararsız',
-        'Memnun değil',
-        'Hiç memnun değil'
-      ],
-      'selected': null,
-    },
-    {
-      'question': 'Eğitimin içeriği yeterli miydi?',
-      'options': [
-        'Çok yeterli',
-        'Yeterli',
-        'Kararsız',
-        'Yetersiz',
-        'Çok yetersiz'
-      ],
-      'selected': null,
-    },
-    {
-      'question': 'Eğitmen konuları iyi anlattı mı?',
-      'options': ['Evet, çok iyi', 'Evet', 'Kısmen', 'Hayır', 'Hiç iyi değil'],
-      'selected': null,
-    },
-  ];
+  List<SurveyModel> surveyQuestions = [];
 
-  void _handleRadioValueChange(int questionIndex, String? value) {
-    setState(() {
-      questions[questionIndex]['selected'] = value;
-    });
-  }
-
-  void _saveAnswers() {
-    for (var question in questions) {
-      debugPrint('Soru: ${question['question']}');
-      debugPrint('Seçilen: ${question['selected']}');
-    }
-    ScaffoldMessenger.of(context).showSnackBar(
-      const SnackBar(content: Text('Cevaplar kaydedildi!')),
-    );
+  @override
+  void initState() {
+    super.initState();
+    BlocProvider.of<SurveyBloc>(context).add(LoadSurveyDetails(surveyId: widget.surveyId));
   }
 
   @override
@@ -112,69 +131,106 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
       appBar: AppBar(
         title: Text(widget.surveyTitle),
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
+          icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
         ),
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              padding: const EdgeInsets.all(8.0),
-              itemCount: questions.length,
-              itemBuilder: (context, index) {
-                return Card(
-                  color: TobetoColor.card.cream,
-                  elevation: 2.0,
-                  margin: const EdgeInsets.symmetric(vertical: 10.0),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          questions[index]['question'],
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
+      body: BlocBuilder<SurveyBloc, SurveyState>(
+        builder: (context, state) {
+          if (state is SurveyLoading) {
+            return Center(child: CircularProgressIndicator());
+          } else if (state is SurveyDetailsLoaded) {
+            surveyQuestions = state.questions;
+            return Column(
+              children: [
+                Expanded(
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8.0),
+                    itemCount: surveyQuestions.length,
+                    itemBuilder: (context, index) {
+                      final question = surveyQuestions[index];
+                      return Card(
+                        color: TobetoColor.card.cream,
+                        elevation: 2.0,
+                        margin: const EdgeInsets.symmetric(vertical: 10.0),
+                        child: Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                question.question,
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 18.0,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 10.0),
+                              ...question.options.map((option) {
+                                return ListTile(
+                                  title: Text(option),
+                                  textColor: Colors.black,
+                                  leading: Radio<String>(
+                                    value: option,
+                                    groupValue: question.selected,
+                                    onChanged: (value) {
+                                      setState(() {
+                                        question.selected = value;
+                                      });
+                                    },
+                                    activeColor: TobetoColor.purple,
+                                  ),
+                                  onTap: () {
+                                    setState(() {
+                                      question.selected = option;
+                                    });
+                                  },
+                                );
+                              }).toList(),
+                            ],
                           ),
                         ),
-                        const SizedBox(height: 10.0),
-                        ...questions[index]['options'].map<Widget>((option) {
-                          return ListTile(
-                            title: Text(option),
-                            textColor: Colors.black,
-                            leading: Radio<String>(
-                              value: option,
-                              groupValue: questions[index]['selected'],
-                              onChanged: (value) {
-                                _handleRadioValueChange(index, value);
-                              },
-                              materialTapTargetSize:
-                                  MaterialTapTargetSize.shrinkWrap,
-                              activeColor: TobetoColor.purple,
-                            ),
-                          );
-                        }).toList(),
-                      ],
-                    ),
+                      );
+                    },
                   ),
-                );
-              },
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: ElevatedButton(
-              style: elevatedButtonStyle(context),
-              onPressed: _saveAnswers,
-              child: const Text('Kaydet'),
-            ),
-          ),
-        ],
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      BlocProvider.of<SurveyBloc>(context).add(SaveAnswers(
+                        userId: widget.userId,
+                        surveyId: widget.surveyId,
+                      ));
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('Cevaplar kaydedildi!')),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: TobetoColor.purple,
+                      textStyle: TextStyle(
+                        fontSize: 16.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                    ),
+                    child: const Text('Kaydet'),
+                  ),
+                ),
+              ],
+            );
+          } else if (state is SurveyError) {
+            return Center(child: Text(state.error));
+          } else {
+            return const Center(child: Text('Bir hata oluştu.'));
+          }
+        },
       ),
     );
   }
