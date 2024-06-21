@@ -1,22 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/model/job_model.dart';
 import '../job_details.dart';
 
 class JobCard extends StatelessWidget {
-  final String jobType;
-  final String jobTitle;
-  final String companyName;
-  final String location;
-  final String appliedDate;
+  final Job job;
 
-  const JobCard({
-    super.key,
-    required this.jobType,
-    required this.jobTitle,
-    required this.companyName,
-    required this.location,
-    required this.appliedDate,
-  });
+  const JobCard({super.key, required this.job});
 
   @override
   Widget build(BuildContext context) {
@@ -28,16 +17,16 @@ class JobCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              jobType,
+              job.jobType,
               style: const TextStyle(
                 fontFamily: 'Poppins',
                 fontWeight: FontWeight.bold,
-                color: TobetoColor.purple,
+                color: Colors.purple,
               ),
             ),
             const SizedBox(height: 5),
             Text(
-              jobTitle,
+              job.jobTitle,
               style: const TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 18,
@@ -46,7 +35,7 @@ class JobCard extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             Text(
-              '$companyName - $location',
+              '${job.companyName} - ${job.location}',
               style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 16,
@@ -58,7 +47,7 @@ class JobCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  appliedDate,
+                  job.appliedDate.toLocal().toString().split(' ')[0],
                   style: TextStyle(
                     fontFamily: 'Poppins',
                     color: Colors.grey[600],
@@ -69,13 +58,7 @@ class JobCard extends StatelessWidget {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => JobDetails(
-                          jobType: jobType,
-                          jobTitle: jobTitle,
-                          companyName: companyName,
-                          location: location,
-                          appliedDate: appliedDate,
-                        ),
+                        builder: (context) => JobDetails(job: job),
                       ),
                     );
                   },

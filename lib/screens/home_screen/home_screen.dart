@@ -75,11 +75,25 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
       Box(
         text: TobetoText.mainCard4,
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => SurveyScreen(),
+            ),
+          );
+        },
       ),
       Box(
         text: TobetoText.mainCard5,
-        onTap: () {},
+        onTap: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const JobScreen(),
+            ),
+          );
+        },
       ),
     ];
 
@@ -119,8 +133,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: boxWidgets.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
-                    return boxWidgets[
-                        index]; // Belirlenen Box widget'larını kullan
+                    return boxWidgets[index]; // Belirlenen Box widget'larını kullan
                   },
                 ),
               ),
