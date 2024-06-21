@@ -33,6 +33,16 @@ class RegisterEvent extends AuthEvent {
       required this.lastName});
 }
 
+class ChangePasswordEvent extends AuthEvent {
+  final String currentPassword;
+  final String newPassword;
+
+  const ChangePasswordEvent({
+    required this.currentPassword,
+    required this.newPassword,
+  });
+}
+
 class ResetPasswordEvent extends AuthEvent {
   final String email;
 

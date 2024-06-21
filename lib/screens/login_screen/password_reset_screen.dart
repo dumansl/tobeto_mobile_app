@@ -45,7 +45,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
             const CustomBackground(),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: ScreenPadding.screenpadding,
+                horizontal: ScreenPadding.screenpadding * 2,
                 vertical: ScreenPadding.screenpadding * 2,
               ),
               child: Column(
@@ -86,7 +86,7 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
           InputTextFormField(
             hintText: TobetoText.passwordResetBoxText,
             keyboardType: TextInputType.emailAddress,
-            onSave: (newValue) {
+            onSaved: (newValue) {
               _email = newValue!;
             },
             validator: (value) {
@@ -100,7 +100,10 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
           ),
           CustomButton(
             onPressed: () {
-              context.read<AuthBloc>().add(ResetPasswordEvent(email: _email));
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                context.read<AuthBloc>().add(ResetPasswordEvent(email: _email));
+              }
             },
             text: TobetoText.passwordResetButtonText,
           ),

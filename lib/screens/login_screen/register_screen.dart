@@ -31,10 +31,25 @@ class _RegisterScreenState extends State<RegisterScreen> {
   String _name = "";
   String _lastName = "";
 
+  final FocusNode _nameFocusNode = FocusNode();
+  final FocusNode _lastNameFocusNode = FocusNode();
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _confirmPasswordFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _nameFocusNode.dispose();
+    _lastNameFocusNode.dispose();
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+    _confirmPasswordFocusNode.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      resizeToAvoidBottomInset: false,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
@@ -56,26 +71,24 @@ class _RegisterScreenState extends State<RegisterScreen> {
             const CustomBackground(),
             Padding(
               padding: EdgeInsets.symmetric(
-                horizontal: ScreenPadding.screenpadding,
+                horizontal: ScreenPadding.screenpadding * 2,
                 vertical: ScreenPadding.screenpadding * 2,
               ),
-              child: Column(
-                children: [
-                  const Expanded(
-                    flex: 20,
-                    child: CustomLogo(),
-                  ),
-                  Expanded(
-                    flex: 70,
-                    child: _registerContent(),
-                  ),
-                  Expanded(
-                    flex: 10,
-                    child: Align(
-                        alignment: AlignmentDirectional.topCenter,
-                        child: _loginScreenNavigator()),
-                  ),
-                ],
+              child: Center(
+                child: ListView(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  children: [
+                    CustomLogo(
+                      width: ScreenUtil.getWidth(context) * 0.37,
+                      height: ScreenUtil.getHeight(context) * 0.09,
+                    ),
+                    const SizedBox(height: 20),
+                    _registerContent(),
+                    const SizedBox(height: 10),
+                    _loginScreenNavigator(),
+                  ],
+                ),
               ),
             ),
           ],
@@ -88,96 +101,143 @@ class _RegisterScreenState extends State<RegisterScreen> {
     return Form(
       key: formKey,
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.end,
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          InputTextFormField(
-            hintText: TobetoText.signUpName,
-            onSave: (newValue) {
-              _name = newValue!;
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Lütfen adınızı girin';
-              }
-              return null;
-            },
-          ),
-          InputTextFormField(
-            hintText: TobetoText.signUpSurname,
-            onSave: (newValue) {
-              _lastName = newValue!;
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Lütfen soyadınızı girin';
-              }
-              return null;
-            },
-          ),
-          InputTextFormField(
-            keyboardType: TextInputType.emailAddress,
-            hintText: TobetoText.signUpEmail,
-            onSave: (newValue) {
-              _email = newValue!;
-            },
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Lütfen e-posta adresinizi girin';
-              } else if (!value.contains('@')) {
-                return 'Geçerli bir e-posta adresi girin';
-              }
-              return null;
-            },
-          ),
-          InputTextFormField(
-            hintText: TobetoText.signUpPassword,
-            obscureText: !_showPassword,
-            suffixIcon: IconButton(
-              icon: Icon(
-                _showPassword ? Icons.visibility : Icons.visibility_off,
-                color: Theme.of(context).colorScheme.onSecondary,
-              ),
-              onPressed: () {
-                setState(() {
-                  _showPassword = !_showPassword;
-                });
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: InputTextFormField(
+              hintText: TobetoText.signUpName,
+              focusNode: _nameFocusNode,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_lastNameFocusNode);
+              },
+              onSaved: (newValue) {
+                _name = newValue!;
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen adınızı girin';
+                }
+                return null;
               },
             ),
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Lütfen bir şifre girin';
-              } else if (value.length < 6) {
-                return 'Şifreniz en az 6 karakter olmalıdır';
-              }
-              return null;
-            },
-            onSave: (newValue) {
-              _password = newValue!;
-            },
           ),
-          InputTextFormField(
-            hintText: TobetoText.signUpPasswordAgain,
-            obscureText: !_showConfirmPassword,
-            suffixIcon: IconButton(
-              icon: Icon(
-                _showConfirmPassword ? Icons.visibility : Icons.visibility_off,
-                color: Theme.of(context).colorScheme.onSecondary,
-              ),
-              onPressed: () {
-                setState(() {
-                  _showConfirmPassword = !_showConfirmPassword;
-                });
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: InputTextFormField(
+              hintText: TobetoText.signUpSurname,
+              focusNode: _lastNameFocusNode,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_emailFocusNode);
+              },
+              onSaved: (newValue) {
+                _lastName = newValue!;
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen soyadınızı girin';
+                }
+                return null;
               },
             ),
-            onSave: (newValue) {
-              _confirmPassword = newValue!;
-            },
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: InputTextFormField(
+              keyboardType: TextInputType.emailAddress,
+              hintText: TobetoText.signUpEmail,
+              focusNode: _emailFocusNode,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_passwordFocusNode);
+              },
+              onSaved: (newValue) {
+                _email = newValue!;
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen e-posta adresinizi girin';
+                } else if (!value.contains('@')) {
+                  return 'Geçerli bir e-posta adresi girin';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: InputTextFormField(
+              hintText: TobetoText.signUpPassword,
+              focusNode: _passwordFocusNode,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_confirmPasswordFocusNode);
+              },
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _showPassword ? Icons.visibility : Icons.visibility_off,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _showPassword = !_showPassword;
+                  });
+                },
+              ),
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen bir şifre girin';
+                } else if (value.length < 6) {
+                  return 'Şifreniz en az 6 karakter olmalıdır';
+                }
+                return null;
+              },
+              obscureText: !_showPassword,
+              onSaved: (newValue) {
+                _password = newValue!;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: InputTextFormField(
+              hintText: TobetoText.signUpPasswordAgain,
+              focusNode: _confirmPasswordFocusNode,
+              textInputAction: TextInputAction.done,
+              obscureText: !_showConfirmPassword,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _showConfirmPassword
+                      ? Icons.visibility
+                      : Icons.visibility_off,
+                  color: Theme.of(context).colorScheme.onSecondary,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _showConfirmPassword = !_showConfirmPassword;
+                  });
+                },
+              ),
+              onSaved: (newValue) {
+                _confirmPassword = newValue!;
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen şifrenizi tekrar girin';
+                }
+                return null;
+              },
+            ),
           ),
           CustomButton(
             onPressed: () {
-              formKey.currentState!.save();
-              if (_password == _confirmPassword) {
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+                if (_password != _confirmPassword) {
+                  snackBar(context, 'Parolalar uyuşmuyor');
+                  return;
+                }
                 context.read<AuthBloc>().add(
                       RegisterEvent(
                         email: _email,
@@ -186,10 +246,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         lastName: _lastName,
                       ),
                     );
-              } else {
-                snackBar(
-                  context,
-                  "Parolalar uyuşmuyor",
+                showDialog(
+                  context: context,
+                  barrierDismissible: false,
+                  builder: (BuildContext context) {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  },
                 );
               }
             },

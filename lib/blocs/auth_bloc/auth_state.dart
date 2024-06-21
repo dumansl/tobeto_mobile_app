@@ -7,9 +7,21 @@ class LoginProgress extends AuthState {}
 class LoginSuccess extends AuthState {}
 
 class LoginError extends AuthState {
-  String? errorMessage;
+  final String? errorMessage;
 
-  LoginError({this.errorMessage});
+  LoginError({required this.errorMessage});
+}
+
+// Change Password
+
+class ChangePasswordProgress extends AuthState {}
+
+class ChangePasswordSuccess extends AuthState {}
+
+class ChangePasswordError extends AuthState {
+  final String? errorMessage;
+
+  ChangePasswordError({this.errorMessage});
 }
 
 // Send Reset Password
