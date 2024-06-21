@@ -25,7 +25,9 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
           color: TobetoColor.purple,
           size: IconSize.size35px,
         ),
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pop(context);
+        },
       ),
       actions: [
         Padding(
