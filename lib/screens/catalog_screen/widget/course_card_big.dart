@@ -29,7 +29,7 @@ class CatalogCourseCardBig extends StatelessWidget {
       child: Container(
         width: width,
         height: height, // Use the width parameter
-        margin: EdgeInsets.only(right: ScreenPadding.padding8px),
+
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
@@ -51,7 +51,8 @@ class CatalogCourseCardBig extends StatelessWidget {
                   borderRadius:
                       const BorderRadius.vertical(top: Radius.circular(16)),
                   image: DecorationImage(
-                    image: AssetImage(imagePath), // Use the imagePath parameter
+                    image:
+                        NetworkImage(imagePath), // Use the imagePath parameter
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -94,24 +95,20 @@ class CatalogCourseCardBig extends StatelessWidget {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding:
-                            EdgeInsets.only(right: ScreenPadding.padding6px),
-                        child: Row(
-                          children: [
-                            Icon(
-                              Icons.star,
-                              color: TobetoColor.purple,
-                              size: ScreenUtil.getWidth(context) * 0.08,
-                            ),
-                            SizedBox(
-                              width: ScreenUtil.getWidth(context) * 0.01,
-                            ),
-                            Text(rank,
-                                style: TobetoTextStyle.poppins(context)
-                                    .bodyBlackNormal16),
-                          ],
-                        ),
+                      Row(
+                        children: [
+                          Icon(
+                            Icons.star,
+                            color: TobetoColor.purple,
+                            size: ScreenUtil.getWidth(context) * 0.08,
+                          ),
+                          SizedBox(
+                            width: ScreenUtil.getWidth(context) * 0.01,
+                          ),
+                          Text(rank,
+                              style: TobetoTextStyle.poppins(context)
+                                  .bodyBlackNormal16),
+                        ],
                       ),
                     ],
                   ),

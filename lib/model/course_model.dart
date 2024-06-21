@@ -21,4 +21,6 @@ class Course extends Equatable {
 
   @override
   List<Object?> get props => [title, image];
+
+  static fromFirestore(Map<String, dynamic> data) {}
 }

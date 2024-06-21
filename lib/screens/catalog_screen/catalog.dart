@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/catalog_bloc/catalog_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/catalog_bloc/catalog_event.dart';
+import 'package:tobeto_mobile_app/blocs/catalog_bloc/catalog_state.dart';
+import 'package:tobeto_mobile_app/model/catalog_model.dart';
+import 'package:tobeto_mobile_app/screens/catalog_screen/catalog_details.dart';
+import 'package:tobeto_mobile_app/screens/catalog_screen/catalog_video.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/catalog_search_bar.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/category_card.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/course_card.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/course_card_big.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/services/catalog_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -17,114 +25,111 @@ class CatalogScreen extends StatefulWidget {
 class _CatalogScreenState extends State<CatalogScreen> {
   @override
   Widget build(BuildContext context) {
-    final List<Widget> boxWidgets = [
-      CatalogCourseCardsmall(
-        courseName: 'istanbul Kodluyor',
-        courseTeacher: 'Gürkan İŞİTEN',
-        rank: '4.5',
-        width: ScreenUtil.getWidth(context) * 0.43,
-        imagePath: ImagePath.howToTraining,
-        height: ScreenUtil.getHeight(context) * 0.2,
-      ),
-      CatalogCourseCardsmall(
-        courseName: 'Ağ ve Güvenlik',
-        courseTeacher: 'Gürkan İŞİTEN',
-        rank: '4.1',
-        width: ScreenUtil.getWidth(context) * 0.43,
-        imagePath: ImagePath.biz3,
-        height: ScreenUtil.getHeight(context) * 0.2,
-      ),
-      CatalogCourseCardsmall(
-        courseName: 'Web Tasarımı',
-        courseTeacher: 'Gürkan İŞİTEN',
-        rank: '4.5',
-        width: ScreenUtil.getWidth(context) * 0.43,
-        imagePath: ImagePath.biz2,
-        height: ScreenUtil.getHeight(context) * 0.2,
-      )
-    ];
-
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding12px),
+    return BlocProvider(
+      create: (context) =>
+          CatalogBloc(courseRepository: CourseRepository())..add(Fetch()),
       child: Scaffold(
         appBar: const FixedAppbar(
           title: 'Catalog',
         ),
-        body: ListView(
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const CategorySearchBar(),
-                Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: Text(
-                    TobetoText.catalogHeadline1,
-                    style:
-                        TobetoTextStyle.poppins(context).headlineBlackNormal32,
-                  ),
-                ),
-                SizedBox(
+        body: BlocBuilder<CatalogBloc, CatalogState>(
+          builder: (context, state) {
+            if (state is CatalogNotLoaded) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (state is CatalogLoaded) {
+              final List<CatalogCourse> courses = state.catalogCourse;
+
+              final List<Widget> boxWidgets = courses.map((course) {
+                return CatalogCourseCardsmall(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CatalogDetails(catalogCourse: course),
+                        ));
+                  },
+                  courseName: course.courseName,
+                  courseTeacher: course.courseTeacher,
+                  rank: course.rank.toString(),
+                  width: ScreenUtil.getWidth(context) * 0.43,
+                  imagePath: course.imagePath,
                   height: ScreenUtil.getHeight(context) * 0.2,
-                  child: ListView.builder(
-                    itemCount: boxWidgets.length,
-                    scrollDirection: Axis.horizontal,
-                    itemBuilder: (BuildContext context, int index) {
-                      return boxWidgets[
-                          index]; // Belirlenen Box widget'larını kullan
-                    },
-                  ),
-                ),
-                Text(
-                  TobetoText.catalogCategory,
-                  style: TobetoTextStyle.poppins(context).headlineBlackNormal32,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    const CategoryCard(
-                      categoryText: 'Java',
-                    ),
-                    const CategoryCard(
-                      categoryText: 'Flutter',
-                    ),
-                    const CategoryCard(
-                      categoryText: 'SQL',
-                    ),
-                    InkWell(
-                      onTap: () {},
-                      child: Text(
-                        TobetoText.catalogSeeAll,
-                        style:
-                            TobetoTextStyle.poppins(context).captionBlackBold15,
+                );
+              }).toList();
+
+              return ListView(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const CategorySearchBar(),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5),
+                        child: Text(
+                          TobetoText.catalogHeadline1,
+                          style: TobetoTextStyle.poppins(context)
+                              .headlineBlackNormal32,
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-                CatalogCourseCardBig(
-                    courseName: 'Veri Bilimi',
-                    courseTeacher: 'Gürkan İŞİTEN',
-                    rank: '4.9',
-                    width: ScreenUtil.getWidth(context) * 1,
-                    imagePath: ImagePath.blog1,
-                    height: ScreenUtil.getHeight(context) * 0.28),
-                CatalogCourseCardBig(
-                    courseName: 'Veri Bilimi',
-                    courseTeacher: 'Gürkan İŞİTEN',
-                    rank: '4.9',
-                    width: ScreenUtil.getWidth(context) * 1,
-                    imagePath: ImagePath.blog2,
-                    height: ScreenUtil.getHeight(context) * 0.28),
-                CatalogCourseCardBig(
-                    courseName: 'Veri Bilimi',
-                    courseTeacher: 'Gürkan İŞİTEN',
-                    rank: '4.9',
-                    width: ScreenUtil.getWidth(context) * 1,
-                    imagePath: ImagePath.blog3,
-                    height: ScreenUtil.getHeight(context) * 0.28),
-              ],
-            ),
-          ],
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0),
+                        child: SizedBox(
+                          height: ScreenUtil.getHeight(context) * 0.2,
+                          child: ListView.builder(
+                            itemCount: boxWidgets.length,
+                            scrollDirection: Axis.horizontal,
+                            itemBuilder: (BuildContext context, int index) {
+                              return boxWidgets[index];
+                            },
+                          ),
+                        ),
+                      ),
+                      Text(
+                        TobetoText.catalogCategory,
+                        style: TobetoTextStyle.poppins(context)
+                            .headlineBlackNormal32,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: [
+                          const CategoryCard(
+                            categoryText: 'Java',
+                          ),
+                          const CategoryCard(
+                            categoryText: 'Flutter',
+                          ),
+                          const CategoryCard(
+                            categoryText: 'SQL',
+                          ),
+                          InkWell(
+                            onTap: () {},
+                            child: Text(
+                              TobetoText.catalogSeeAll,
+                              style: TobetoTextStyle.poppins(context)
+                                  .captionBlackBold15,
+                            ),
+                          ),
+                        ],
+                      ),
+                      // Assuming you also want to display big cards from the fetched data
+                      for (var course in courses)
+                        CatalogCourseCardBig(
+                          courseName: course.courseName,
+                          courseTeacher: course.courseTeacher,
+                          rank: course.rank.toString(),
+                          width: ScreenUtil.getWidth(context) * 1,
+                          imagePath: course.imagePath,
+                          height: ScreenUtil.getHeight(context) * 0.28,
+                        ),
+                    ],
+                  ),
+                ],
+              );
+            } else {
+              return const Center(child: Text('Something went wrong!'));
+            }
+          },
         ),
       ),
     );
