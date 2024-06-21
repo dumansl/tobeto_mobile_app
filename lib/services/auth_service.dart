@@ -118,10 +118,13 @@ class AuthService {
           email: email, password: password);
       debugPrint(userCredential.user?.uid);
     } on FirebaseAuthException catch (e) {
-      if (e.code == 'user-not-found') {
-        debugPrint('Bu e-posta için kullanıcı bulunamadı.');
-      } else if (e.code == 'wrong-password') {
-        debugPrint('Bu kullanıcı için yanlış şifre girildi.');
+      debugPrint(e.toString());
+      if (e.code == 'invalid-email') {
+        throw Exception(
+            'E-posta adresi geçersizdir, bilgilerinizi kontrol ediniz.');
+      } else if (e.code == 'invalid-credential') {
+        throw Exception(
+            'Kimlik doğrulama bilgileriniz yanlış, bilgilerinizi kontrol ediniz.');
       } else {
         throw Exception("Bir hata oluştu: ${e.message}");
       }
@@ -185,6 +188,37 @@ class AuthService {
       }
     } catch (e) {
       debugPrint("Hesap silme hatası: $e");
+      throw Exception("Bir hata oluştu: $e");
+    }
+  }
+
+  // Şifre değiştirme işlemi
+  Future<void> changePassword(
+      String currentPassword, String newPassword) async {
+    try {
+      User? user = _auth.currentUser;
+      if (user != null) {
+        final cred = EmailAuthProvider.credential(
+          email: user.email!,
+          password: currentPassword,
+        );
+
+        // Kullanıcının mevcut şifresini doğrulamak için re-authentication yapıyoruz.
+        await user.reauthenticateWithCredential(cred);
+        // Yeni şifreyi ayarlıyoruz.
+        await user.updatePassword(newPassword);
+
+        debugPrint("Şifre başarıyla güncellendi.");
+      }
+    } on FirebaseAuthException catch (e) {
+      debugPrint("Şifre değiştirme hatası: ${e.message}");
+      if (e.code == 'wrong-password') {
+        throw Exception("Mevcut şifre yanlış.");
+      } else {
+        throw Exception("Şifre değiştirme hatası: ${e.message}");
+      }
+    } catch (e) {
+      debugPrint("Şifre değiştirme hatası: $e");
       throw Exception("Bir hata oluştu: $e");
     }
   }

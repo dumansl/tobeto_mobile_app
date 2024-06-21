@@ -39,6 +39,17 @@ class _LoginScreenState extends State<LoginScreen> {
   String _email = "";
   String _password = "";
 
+  final FocusNode _emailFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+
+  @override
+  void dispose() {
+    _emailFocusNode.dispose();
+    _passwordFocusNode.dispose();
+
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -60,10 +71,17 @@ class _LoginScreenState extends State<LoginScreen> {
               );
             }
           } else if (state is LoginError) {
-            snackBar(
-              context,
-              "Giriş yaparken bir hata oluştu! Lütfen tekrar deneyin.",
-            );
+            if (state.errorMessage != null) {
+              snackBar(
+                context,
+                state.errorMessage!,
+              );
+            } else {
+              snackBar(
+                context,
+                "Giriş yaparken bir hata oluştu! Lütfen tekrar deneyin.",
+              );
+            }
           }
         },
         child: Stack(
@@ -88,11 +106,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: CustomLogo(),
                   ),
                   Expanded(
-                    flex: 40,
+                    flex: 43,
                     child: _loginContent(),
                   ),
                   Expanded(
-                    flex: 35,
+                    flex: 32,
                     child: _educatorSwitch ? const SizedBox() : _anotherLogin(),
                   ),
                 ],
@@ -146,13 +164,27 @@ class _LoginScreenState extends State<LoginScreen> {
           InputTextFormField(
             hintText: TobetoText.loginUserEmail,
             keyboardType: TextInputType.emailAddress,
-            onSave: (newValue) {
+            focusNode: _emailFocusNode,
+            textInputAction: TextInputAction.next,
+            onFieldSubmitted: (_) {
+              FocusScope.of(context).requestFocus(_passwordFocusNode);
+            },
+            onSaved: (newValue) {
               _email = newValue!;
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'E-posta adresinizi giriniz';
+              }
+
+              return null;
             },
           ),
           InputTextFormField(
             hintText: TobetoText.loginUserPassword,
             obscureText: !_showPassword,
+            focusNode: _passwordFocusNode,
+            textInputAction: TextInputAction.done,
             suffixIcon: IconButton(
               icon: Icon(
                 _showPassword ? Icons.visibility : Icons.visibility_off,
@@ -164,8 +196,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 });
               },
             ),
-            onSave: (newValue) {
+            onSaved: (newValue) {
               _password = newValue!;
+            },
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return 'Şifrenizi giriniz';
+              }
+              return null;
             },
           ),
           TextButton(
@@ -185,10 +223,13 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
           CustomButton(
             onPressed: () {
-              formKey.currentState!.save();
-              context
-                  .read<AuthBloc>()
-                  .add(LoginEvent(email: _email, password: _password));
+              if (formKey.currentState!.validate()) {
+                formKey.currentState!.save();
+
+                context
+                    .read<AuthBloc>()
+                    .add(LoginEvent(email: _email, password: _password));
+              }
             },
             text: TobetoText.loginButton,
           ),
@@ -199,7 +240,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   Widget _anotherLogin() {
     return Column(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      mainAxisAlignment: MainAxisAlignment.end,
       children: [
         _loginTitleDivider(
           text: TobetoText.loginAlternative,
@@ -230,22 +271,24 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               Padding(
                 padding: EdgeInsets.only(top: ScreenPadding.padding8px),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    _customframe(
-                      width: ScreenUtil.getWidth(context) * 0.35,
-                      onTap: () {
-                        context.read<AuthBloc>().add(const GoogleLoginEvent());
-                      },
-                      child: Image.asset(ImagePath.googleIcon),
-                    ),
-                    _customframe(
-                      width: ScreenUtil.getWidth(context) * 0.35,
-                      onTap: () {},
-                      child: Image.asset(ImagePath.facebookIcon),
-                    ),
-                  ],
+                child: _customframe(
+                  onTap: () {
+                    context.read<AuthBloc>().add(const GoogleLoginEvent());
+                  },
+                  child: Row(
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ScreenPadding.padding16px),
+                        child: Image.asset(ImagePath.googleIcon),
+                      ),
+                      Text(
+                        TobetoText.loginGoogleButton,
+                        style: TobetoTextStyle.inter(context)
+                            .captionGrayLightNormal15,
+                      ),
+                    ],
+                  ),
                 ),
               )
             ],

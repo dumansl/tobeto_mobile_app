@@ -46,6 +46,13 @@ class _SplashScreenState extends State<SplashScreen> {
           ),
         );
       }
+    } else if (_sharedPreferencesService.isLoggedIn()) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (context) => const DashboardScreen(),
+        ),
+      );
     } else {
       Navigator.pushReplacement(
         context,

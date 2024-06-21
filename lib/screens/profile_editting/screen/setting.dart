@@ -5,6 +5,7 @@ import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_screen.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_button.dart';
+import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/input_text_form_field.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
@@ -18,34 +19,101 @@ class Setting extends StatefulWidget {
 
 class _SettingState extends State<Setting> {
   final _formKey = GlobalKey<FormState>();
+  String _oldPassword = "";
+  String _password = "";
+  String _confirmPassword = "";
+
+  final FocusNode _oldPasswordFocusNode = FocusNode();
+  final FocusNode _passwordFocusNode = FocusNode();
+  final FocusNode _confirmPasswordFocusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
     return Form(
       key: _formKey,
       child: ListView(
         children: [
-          // InputText(
-          //   child: CustomTextField(
-          //     title: TobetoText.profileEditSettingsOldPassword,
-          //   ),
-          // ),
-          // InputText(
-          //   child: CustomTextField(
-          //     title: TobetoText.profileEditSettingsNewPassword,
-          //   ),
-          // ),
-          // InputText(
-          //   child: CustomTextField(
-          //     title: TobetoText.profileEditSettingsOldPasswordAgain,
-          //   ),
-          // ),
-          // Padding(
-          //   padding: const EdgeInsets.symmetric(vertical: 10),
-          //   child: CustomButton(
-          //     text: TobetoText.profileEditSaveButton,
-          //     onPressed: () {},
-          //   ),
-          // ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: InputTextFormField(
+              hintText: TobetoText.signUpPassword,
+              focusNode: _oldPasswordFocusNode,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_passwordFocusNode);
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen bir şifre girin';
+                } else if (value.length < 6) {
+                  return 'Şifreniz en az 6 karakter olmalıdır';
+                }
+                return null;
+              },
+              onSaved: (newValue) {
+                _oldPassword = newValue!;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: InputTextFormField(
+              hintText: TobetoText.signUpPassword,
+              focusNode: _passwordFocusNode,
+              textInputAction: TextInputAction.next,
+              onFieldSubmitted: (_) {
+                FocusScope.of(context).requestFocus(_confirmPasswordFocusNode);
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen bir şifre girin';
+                } else if (value.length < 6) {
+                  return 'Şifreniz en az 6 karakter olmalıdır';
+                }
+                return null;
+              },
+              onSaved: (newValue) {
+                _password = newValue!;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: InputTextFormField(
+              hintText: TobetoText.signUpPasswordAgain,
+              focusNode: _confirmPasswordFocusNode,
+              textInputAction: TextInputAction.done,
+              onSaved: (newValue) {
+                _confirmPassword = newValue!;
+              },
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Lütfen şifrenizi tekrar girin';
+                }
+                return null;
+              },
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            child: CustomButton(
+              text: TobetoText.profileEditSaveButton,
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  if (_password != _confirmPassword) {
+                    snackBar(context, 'Parolalar uyuşmuyor');
+                    return;
+                  }
+                  context.read<AuthBloc>().add(
+                        ChangePasswordEvent(
+                          currentPassword: _oldPassword,
+                          newPassword: _password,
+                        ),
+                      );
+                }
+              },
+            ),
+          ),
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is DeleteAccountSuccess) {

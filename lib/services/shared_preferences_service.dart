@@ -18,4 +18,12 @@ class SharedPreferencesService {
   Future<void> setFirstTime(bool value) async {
     await _prefs.setBool('isFirstTime', value);
   }
+
+  bool isLoggedIn() {
+    return _prefs.getBool('isLoggedIn') ?? false;
+  }
+
+  Future<void> setLoggedIn(bool value) async {
+    await _prefs.setBool('isLoggedIn', value);
+  }
 }
