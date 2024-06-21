@@ -35,7 +35,7 @@ class _SettingState extends State<Setting> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: InputTextFormField(
-              hintText: TobetoText.signUpPassword,
+              hintText: TobetoText.profileEditSettingsOldPassword,
               focusNode: _oldPasswordFocusNode,
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) {
@@ -57,7 +57,7 @@ class _SettingState extends State<Setting> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: InputTextFormField(
-              hintText: TobetoText.signUpPassword,
+              hintText: TobetoText.profileEditSettingsNewPassword,
               focusNode: _passwordFocusNode,
               textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) {
@@ -79,7 +79,7 @@ class _SettingState extends State<Setting> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: InputTextFormField(
-              hintText: TobetoText.signUpPasswordAgain,
+              hintText: TobetoText.profileEditSettingsOldPasswordAgain,
               focusNode: _confirmPasswordFocusNode,
               textInputAction: TextInputAction.done,
               onSaved: (newValue) {
