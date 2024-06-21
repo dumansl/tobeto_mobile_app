@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/blocs/education_life_bloc/education_life_bloc.
 import 'package:tobeto_mobile_app/blocs/education_life_bloc/education_life_event.dart';
 import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/job_bloc/job_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/languages_bloc/languages_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/languages_bloc/languages_event.dart';
 import 'package:tobeto_mobile_app/blocs/projects_prize_bloc/projects_prize_bloc.dart';
@@ -23,6 +24,7 @@ import 'package:tobeto_mobile_app/blocs/review_bloc/review_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_bloc.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/catalog_details.dart';
 import 'package:tobeto_mobile_app/services/announcement_service.dart';
+import 'package:tobeto_mobile_app/services/job_service.dart';
 import 'package:tobeto_mobile_app/services/video_repositort.dart';
 import 'package:tobeto_mobile_app/blocs/work_life_bloc/work_life_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/work_life_bloc/work_life_event.dart';
@@ -69,6 +71,7 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<LanguagesBloc>(
             create: (context) => LanguagesBloc(userService: UserService())..add(LoadLanguages())),
         BlocProvider<SurveyBloc>(create: (context) => SurveyBloc()),
+        BlocProvider<JobBloc>(create: (context) => JobBloc(JobService())),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {
