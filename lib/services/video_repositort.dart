@@ -5,11 +5,11 @@ class VideoRepository {
 
   VideoRepository(this.storage);
 
-  Future<String> fetchVideoUrl() async {
+  // Mevcut URL'yi kullanarak video URL'sini döndüren yöntem
+  Future<String> fetchVideoUrl(String videoUrl) async {
     try {
-      final ref = storage.ref().child('educations/VID_20231031_160327.mp4');
-      final url = await ref.getDownloadURL();
-      return url;
+      // Doğrudan URL'yi döndür
+      return videoUrl;
     } catch (e) {
       throw Exception('Failed to fetch video URL: $e');
     }

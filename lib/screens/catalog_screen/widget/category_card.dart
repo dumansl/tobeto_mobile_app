@@ -4,8 +4,10 @@ import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard({super.key, required this.categoryText});
+  const CategoryCard(
+      {super.key, required this.categoryText, required this.onpressed});
   final String categoryText;
+  final VoidCallback onpressed;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -32,7 +34,7 @@ class CategoryCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
             ),
             child: InkWell(
-              onTap: () {},
+              onTap: onpressed,
               child: Container(
                 height: ScreenUtil.getHeight(context) * 0.056,
                 decoration: BoxDecoration(

@@ -326,7 +326,7 @@ abstract class TobetoText {
   static String catalogHeadline2 = "Kategori";
   static String catalogSeeAll = "Tümünü \n Göster";
   // catalog page/filter
-  static String catalogCategory = "Kategori";
+  static String catalogCategory = "Tüm Kurslar";
   static String catalogCategoryBox = "Lütfen kategori seçiniz...";
   static String catalogInstructors = "Eğitmenler";
   static String catalogInstructorsBox = "Lütfen eğitmen seçiniz...";
