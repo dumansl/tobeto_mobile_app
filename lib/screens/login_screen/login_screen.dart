@@ -5,7 +5,7 @@ import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_logo.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/home/tobeto_home_screen.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/we_in_the_press/we_in_the_press_screen.dart';
 import 'package:tobeto_mobile_app/services/auth_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/horizontal_page_route.dart';
@@ -61,7 +61,7 @@ class _LoginScreenState extends State<LoginScreen> {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const TobetoHomeScreen()),
+                    builder: (context) => const WeInThePressScreen()),
               );
             } else {
               Navigator.pushReplacement(
