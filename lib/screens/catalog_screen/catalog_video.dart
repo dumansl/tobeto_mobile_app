@@ -50,7 +50,7 @@ class _CatalogDetailState extends State<CatalogVideo> {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => VideoBloc(VideoRepository(FirebaseStorage.instance))
-        ..add(FetchVideo()),
+        ..add(FetchVideo(widget.catalogCourse.videoUrl)),
       child: Scaffold(
         appBar: const FixedAppbar(title: 'Catalog'),
         body: BlocBuilder<VideoBloc, VideoState>(

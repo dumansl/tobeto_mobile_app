@@ -23,6 +23,7 @@ class CatalogScreen extends StatefulWidget {
 }
 
 class _CatalogScreenState extends State<CatalogScreen> {
+  String selectedCourse = '';
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
@@ -38,6 +39,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
               return const Center(child: CircularProgressIndicator());
             } else if (state is CatalogLoaded) {
               final List<CatalogCourse> courses = state.catalogCourse;
+              debugPrint(courses.toString());
 
               final List<Widget> boxWidgets = courses.map((course) {
                 return CatalogCourseCardsmall(
@@ -52,7 +54,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   courseName: course.courseName,
                   courseTeacher: course.courseTeacher,
                   rank: course.rank.toString(),
-                  width: ScreenUtil.getWidth(context) * 0.43,
+                  width: ScreenUtil.getWidth(context) * 0.44,
                   imagePath: course.imagePath,
                   height: ScreenUtil.getHeight(context) * 0.2,
                 );
@@ -90,38 +92,43 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         style: TobetoTextStyle.poppins(context)
                             .headlineBlackNormal32,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          const CategoryCard(
-                            categoryText: 'Java',
-                          ),
-                          const CategoryCard(
-                            categoryText: 'Flutter',
-                          ),
-                          const CategoryCard(
-                            categoryText: 'SQL',
-                          ),
-                          InkWell(
-                            onTap: () {},
-                            child: Text(
-                              TobetoText.catalogSeeAll,
-                              style: TobetoTextStyle.poppins(context)
-                                  .captionBlackBold15,
-                            ),
-                          ),
-                        ],
-                      ),
+
                       // Assuming you also want to display big cards from the fetched data
                       for (var course in courses)
-                        CatalogCourseCardBig(
-                          courseName: course.courseName,
-                          courseTeacher: course.courseTeacher,
-                          rank: course.rank.toString(),
-                          width: ScreenUtil.getWidth(context) * 1,
-                          imagePath: course.imagePath,
-                          height: ScreenUtil.getHeight(context) * 0.28,
-                        ),
+                        if (course.courseName == selectedCourse)
+                          CatalogCourseCardBig(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CatalogDetails(catalogCourse: course),
+                                  ));
+                            },
+                            courseName: course.courseName,
+                            courseTeacher: course.courseTeacher,
+                            rank: course.rank.toString(),
+                            width: ScreenUtil.getWidth(context) * 1,
+                            imagePath: course.imagePath,
+                            height: ScreenUtil.getHeight(context) * 0.28,
+                          )
+                        else
+                          CatalogCourseCardBig(
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        CatalogDetails(catalogCourse: course),
+                                  ));
+                            },
+                            courseName: course.courseName,
+                            courseTeacher: course.courseTeacher,
+                            rank: course.rank.toString(),
+                            width: ScreenUtil.getWidth(context) * 1,
+                            imagePath: course.imagePath,
+                            height: ScreenUtil.getHeight(context) * 0.28,
+                          )
                     ],
                   ),
                 ],
