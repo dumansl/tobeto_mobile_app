@@ -1,27 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:tobeto_mobile_app/model/catalog_model.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/services/video_repositort.dart';
+import 'package:tobeto_mobile_app/services/video_repository.dart';
 import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_event.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_state.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CatalogVideo extends StatefulWidget {
   const CatalogVideo({super.key, required this.catalogCourse});
   final CatalogCourse catalogCourse;
+
   @override
   State<CatalogVideo> createState() => _CatalogDetailState();
 }
-
-int _selectedindex = 0;
-int _selectedVideoIndex = -1;
-bool isPlaylistPage = true;
 
 class _CatalogDetailState extends State<CatalogVideo> {
   CustomVideoPlayerController? _customVideoPlayerController;
@@ -34,15 +32,19 @@ class _CatalogDetailState extends State<CatalogVideo> {
     super.dispose();
   }
 
-  void name(params) {}
   Future<void> initializeVideoPlayer(String videoUrl) async {
+    _cachedVideoPlayerController?.dispose();
+    _customVideoPlayerController?.dispose();
+
     _cachedVideoPlayerController =
         CachedVideoPlayerController.network(videoUrl);
     await _cachedVideoPlayerController!.initialize();
-    _customVideoPlayerController = CustomVideoPlayerController(
-      context: context,
-      videoPlayerController: _cachedVideoPlayerController!,
-    );
+    setState(() {
+      _customVideoPlayerController = CustomVideoPlayerController(
+        context: context,
+        videoPlayerController: _cachedVideoPlayerController!,
+      );
+    });
     _cachedVideoPlayerController!.pause();
   }
 
@@ -53,28 +55,21 @@ class _CatalogDetailState extends State<CatalogVideo> {
         ..add(FetchVideo(widget.catalogCourse.videoUrl)),
       child: Scaffold(
         appBar: const FixedAppbar(title: 'Catalog'),
-        body: BlocBuilder<VideoBloc, VideoState>(
+        body: BlocConsumer<VideoBloc, VideoState>(
+          listener: (context, state) {
+            if (state is VideoLoaded) {
+              initializeVideoPlayer(state.videoUrl);
+            }
+          },
           builder: (context, state) {
             if (state is VideoLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is VideoLoaded) {
-              return FutureBuilder(
-                future: initializeVideoPlayer(state.videoUrl),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.done) {
-                    if (snapshot.hasError) {
-                      return Center(
-                        child: Text(
-                            'Video yüklenirken bir hata oluştu: ${snapshot.error}'),
-                      );
-                    }
-                    return CatalogContent(
-                      customVideoPlayerController: _customVideoPlayerController,
-                      catalogCourse: widget.catalogCourse,
-                    );
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
+              return CatalogContent(
+                customVideoPlayerController: _customVideoPlayerController,
+                catalogCourse: widget.catalogCourse,
+                onVideoSelected: (videoUrl) {
+                  initializeVideoPlayer(videoUrl);
                 },
               );
             } else if (state is VideoError) {
@@ -94,144 +89,216 @@ class CatalogContent extends StatelessWidget {
     super.key,
     required CustomVideoPlayerController? customVideoPlayerController,
     required this.catalogCourse,
+    required this.onVideoSelected,
   }) : _customVideoPlayerController = customVideoPlayerController;
-  final CatalogCourse catalogCourse;
 
+  final CatalogCourse catalogCourse;
   final CustomVideoPlayerController? _customVideoPlayerController;
+  final Function(String) onVideoSelected;
 
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Column(children: [
-        Center(
-          child: Container(
-            width: ScreenUtil.getWidth(context) * 0.92,
-            height: ScreenUtil.getHeight(context) * 0.26,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5.0),
-              gradient: LinearGradient(
-                colors: [
-                  TobetoColor.purple,
-                  TobetoColor.rainbow.lineargreen,
-                  TobetoColor.rainbow.linaergreenv2,
-                  TobetoColor.rainbow.linearyellow,
-                  TobetoColor.purple
+      child: Column(
+        children: [
+          Center(
+            child: Container(
+              width: ScreenUtil.getWidth(context) * 0.94,
+              height: ScreenUtil.getHeight(context) * 0.26,
+              decoration: BoxDecoration(
+                boxShadow: [
+                  BoxShadow(
+                    color: TobetoColor.card.shadowColor.withOpacity(0.5),
+                    spreadRadius: -3,
+                    blurRadius: 6,
+                    offset: const Offset(0, 4), // changes position of shadow
+                  ),
                 ],
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                borderRadius: BorderRadius.circular(15.0),
               ),
-            ),
-            child: Padding(
-              padding: const EdgeInsets.only(left: 4.0, top: 3),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Align(
-                        alignment: Alignment
-                            .bottomCenter, // Center the white container
-                        child: Container(
-                          margin: const EdgeInsets.only(top: 2),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 4.0, top: 3),
+                child: Column(
+                  children: [
+                    Row(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.only(top: 1, left: 4),
                           width: ScreenUtil.getWidth(context) * 0.9,
                           height: ScreenUtil.getHeight(context) * 0.25,
                           decoration: BoxDecoration(
-                            color: Colors.white,
                             borderRadius: BorderRadius.circular(24.0),
                           ),
-                          child: CustomVideoPlayer(
-                            customVideoPlayerController:
-                                _customVideoPlayerController!,
-                          ),
+                          child: _customVideoPlayerController != null
+                              ? CustomVideoPlayer(
+                                  customVideoPlayerController:
+                                      _customVideoPlayerController!,
+                                )
+                              : const Center(
+                                  child: CircularProgressIndicator(),
+                                ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+          Padding(
+            padding:
+                EdgeInsets.symmetric(horizontal: ScreenPadding.padding24px),
+            child: Row(
+              children: [
+                SizedBox(
+                  width: ScreenUtil.getWidth(context) * 0.8,
+                  child: Text(
+                    catalogCourse.courseName,
+                    style: TobetoTextStyle.poppins(context).headlineBlackBold32,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Container(
+            height: 60,
+            decoration: BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: TobetoColor.card.shadowColor.withOpacity(0.5),
+                  spreadRadius: 3,
+                  blurRadius: 5,
+                  offset: const Offset(0, 6), // changes position of shadow
+                ),
+              ],
+              color: TobetoColor.purple,
+            ),
+            child: Row(
+              children: [
+                Padding(
+                  padding: EdgeInsets.only(left: ScreenPadding.padding24px),
+                  child: Text(
+                    'playlist',
+                    style: TobetoTextStyle.poppins(context).captionWhiteBold30,
+                  ),
+                )
+              ],
+            ),
+          ),
+          Expanded(
+            child: DefaultTabController(
+              length: 1,
+              child: Column(
+                children: [
+                  Expanded(
+                    child: TabBarView(
+                      children: [
+                        Playlist(
+                          catalogCourse: catalogCourse,
+                          onVideoSelected: onVideoSelected,
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
             ),
           ),
-        ),
-        Padding(
-          padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px),
-          child: Row(
-            children: [
-              SizedBox(
-                width: ScreenUtil.getWidth(context) * 0.8,
-                child: Text(
-                  catalogCourse.courseName,
-                  style: TobetoTextStyle.poppins(context).headlineBlackBold32,
-                ),
-              )
-            ],
-          ),
-        ),
-        Container(
-          color: Colors.amber,
-          child: Row(
-            children: [
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("data"),
-              ),
-              ElevatedButton(
-                onPressed: () {},
-                child: const Text("data"),
-              ),
-            ],
-          ),
-        )
-      ]),
+        ],
+      ),
     );
   }
 }
 
-class playlist extends StatelessWidget {
-  const playlist({
+class Playlist extends StatelessWidget {
+  final CatalogCourse catalogCourse;
+  final Function(String) onVideoSelected;
+
+  const Playlist({
     super.key,
+    required this.catalogCourse,
+    required this.onVideoSelected,
   });
+
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => VideoBloc(VideoRepository(FirebaseStorage.instance)),
+      child: PlaylistContent(
+          catalogCourse: catalogCourse, onVideoSelected: onVideoSelected),
+    );
+  }
+}
+
+class PlaylistContent extends StatefulWidget {
+  final CatalogCourse catalogCourse;
+  final Function(String) onVideoSelected;
+
+  const PlaylistContent({
+    super.key,
+    required this.catalogCourse,
+    required this.onVideoSelected,
+  });
+
+  @override
+  State<PlaylistContent> createState() => _PlaylistContentState();
+}
+
+class _PlaylistContentState extends State<PlaylistContent> {
+  int _selectedVideoIndex = -1;
+  late ScrollController playlistController;
+
+  @override
+  void initState() {
+    super.initState();
+    playlistController = ScrollController();
+    playlistController.addListener(_scrollListener);
+  }
+
+  void _scrollListener() {
+    if (playlistController.position.atEdge) {
+      if (playlistController.position.pixels != 0) {
+        // Firebase'den yeni veri çekme işlemini başlatabilirsin
+      }
+    }
+  }
+
+  @override
+  void dispose() {
+    playlistController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemCount: 9,
+      controller: playlistController,
+      itemCount: widget.catalogCourse.playlist.length,
       itemBuilder: (context, index) {
         return ListTile(
           leading: Icon(
-            Icons.play_circle_filled,
+            _selectedVideoIndex == index
+                ? Icons.pause
+                : Icons.play_circle_filled,
             color: _selectedVideoIndex == index ? Colors.purple : Colors.grey,
-            size: 40,
+            size: 50,
           ),
-          title: const Text(
-            'Gurkan isiten',
-            style: TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          subtitle: const Text(
-            'Gurkan isiten gurkan isiten',
-            style: TextStyle(color: Colors.black),
-          ),
+          title: Text('${widget.catalogCourse.courseName} ${index + 1}',
+              style: _selectedVideoIndex == index
+                  ? TobetoTextStyle.poppins(context).titleBlackLight24
+                  : TobetoTextStyle.poppins(context).captionGrayThin24),
+          subtitle: Text('${widget.catalogCourse.courseTeacher} ',
+              style: _selectedVideoIndex == index
+                  ? TobetoTextStyle.poppins(context).bodyBlackLight16
+                  : TobetoTextStyle.poppins(context).bodyGrayDarkLight16),
           onTap: () {
-            _selectedVideoIndex = index;
+            setState(() {
+              _selectedVideoIndex = index;
+            });
+            widget.onVideoSelected(widget.catalogCourse.playlist[index]);
           },
         );
       },
-    );
-  }
-}
-
-class content extends StatelessWidget {
-  const content({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      alignment: Alignment.center,
-      child: const Text('Content Container'), // İçerik sayfası
     );
   }
 }

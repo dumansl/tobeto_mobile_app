@@ -10,7 +10,7 @@ import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_event.d
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/services/announcement_service.dart';
 import 'package:tobeto_mobile_app/services/job_service.dart';
-import 'package:tobeto_mobile_app/services/video_repositort.dart';
+import 'package:tobeto_mobile_app/services/video_repository.dart';
 import 'package:tobeto_mobile_app/services/application_service.dart';
 import 'package:tobeto_mobile_app/services/user_service.dart';
 import 'package:tobeto_mobile_app/utils/themes/theme.dart';
@@ -37,31 +37,48 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<CourseBloc>(create: (context) => CourseBloc()),
         BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
-        BlocProvider<UserBloc>(create: (context) => UserBloc()..add(LoadUserData())),
+        BlocProvider<UserBloc>(
+            create: (context) => UserBloc()..add(LoadUserData())),
         BlocProvider<ExamBloc>(create: (context) => ExamBloc()),
         BlocProvider<ReviewBloc>(create: (context) => ReviewBloc()),
-        BlocProvider<AnnouncementBloc>(create: (context) => AnnouncementBloc(AnnouncementService())),
-        BlocProvider<VideoBloc>(create: (context) => VideoBloc(VideoRepository(FirebaseStorage.instance))),
-        BlocProvider<AnnouncementBloc>(create: (context) => AnnouncementBloc(AnnouncementService())),
-        BlocProvider<ApplicationBloc>(create: (context) => ApplicationBloc(ApplicationService())),
-        BlocProvider<WorkLifeBloc>(create: (context) => WorkLifeBloc(userService: UserService())..add(LoadWorkLife())),
+        BlocProvider<AnnouncementBloc>(
+            create: (context) => AnnouncementBloc(AnnouncementService())),
+        BlocProvider<VideoBloc>(
+            create: (context) =>
+                VideoBloc(VideoRepository(FirebaseStorage.instance))),
+        BlocProvider<AnnouncementBloc>(
+            create: (context) => AnnouncementBloc(AnnouncementService())),
+        BlocProvider<ApplicationBloc>(
+            create: (context) => ApplicationBloc(ApplicationService())),
+        BlocProvider<WorkLifeBloc>(
+            create: (context) =>
+                WorkLifeBloc(userService: UserService())..add(LoadWorkLife())),
         BlocProvider<EducationLifeBloc>(
-            create: (context) => EducationLifeBloc(userService: UserService())..add(LoadEducationLife())),
+            create: (context) => EducationLifeBloc(userService: UserService())
+              ..add(LoadEducationLife())),
         BlocProvider<ClubCominitiesBloc>(
-            create: (context) => ClubCominitiesBloc(userService: UserService())..add(LoadClubCominities())),
+            create: (context) => ClubCominitiesBloc(userService: UserService())
+              ..add(LoadClubCominities())),
         BlocProvider<ProjectsPrizeBloc>(
-            create: (context) => ProjectsPrizeBloc(userService: UserService())..add(LoadProjectsPrize())),
+            create: (context) => ProjectsPrizeBloc(userService: UserService())
+              ..add(LoadProjectsPrize())),
         BlocProvider<SocialMediaBloc>(
-            create: (context) => SocialMediaBloc(userService: UserService())..add(LoadSocialMedia())),
+            create: (context) => SocialMediaBloc(userService: UserService())
+              ..add(LoadSocialMedia())),
         BlocProvider<LanguagesBloc>(
-            create: (context) => LanguagesBloc(userService: UserService())..add(LoadLanguages())),
+            create: (context) => LanguagesBloc(userService: UserService())
+              ..add(LoadLanguages())),
         BlocProvider<SurveyBloc>(create: (context) => SurveyBloc()),
         BlocProvider<JobBloc>(create: (context) => JobBloc(JobService())),
         BlocProvider<CompetenciesBloc>(
-            create: (context) => CompetenciesBloc(userService: UserService())..add(LoadSkills())),
+            create: (context) => CompetenciesBloc(userService: UserService())
+              ..add(LoadSkills())),
         BlocProvider<CertificateBloc>(
-            create: (context) => CertificateBloc(userService: UserService())..add(LoadCertificate())),
-        BlocProvider<ProfilePhotoBloc>(create: (context) => ProfilePhotoBloc(UserService())..add(LoadProfilePhoto())),
+            create: (context) => CertificateBloc(userService: UserService())
+              ..add(LoadCertificate())),
+        BlocProvider<ProfilePhotoBloc>(
+            create: (context) =>
+                ProfilePhotoBloc(UserService())..add(LoadProfilePhoto())),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {

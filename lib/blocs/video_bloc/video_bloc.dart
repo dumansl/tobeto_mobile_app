@@ -1,24 +1,22 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/services/video_repositort.dart';
-import 'video_event.dart';
-import 'video_state.dart';
+import 'package:tobeto_mobile_app/blocs/video_bloc/video_event.dart';
+import 'package:tobeto_mobile_app/blocs/video_bloc/video_state.dart';
+import 'package:tobeto_mobile_app/services/video_repository.dart';
 
 class VideoBloc extends Bloc<VideoEvent, VideoState> {
-  final VideoRepository repository;
+  final VideoRepository videoRepository;
 
-  VideoBloc(this.repository) : super(VideoLoading()) {
-    on<FetchVideo>((event, emit) async {
-      emit(VideoLoading());
-      try {
-        final videoUrl = await repository.fetchVideoUrl(event.videoUrl);
-        if (videoUrl.isNotEmpty) {
-          emit(VideoLoaded(videoUrl));
-        } else {
-          emit(VideoError('Video URL is empty'));
-        }
-      } catch (e) {
-        emit(VideoError('Failed to load video: $e'));
-      }
-    });
+  VideoBloc(this.videoRepository) : super(VideoInitial()) {
+    on<FetchVideo>(_onFetchVideo);  // FetchVideo olayını işleyiciye kaydediyoruz
+  }
+
+  Future<void> _onFetchVideo(FetchVideo event, Emitter<VideoState> emit) async {
+    emit(VideoLoading());
+    try {
+      final videoUrl = await videoRepository.fetchVideoUrl(event.videoUrl);
+      emit(VideoLoaded(videoUrl: videoUrl));
+    } catch (e) {
+      emit(VideoError(message: e.toString()));
+    }
   }
 }
