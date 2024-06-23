@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/screen/certificate.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/club_cominites.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/competencies.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/education_life.dart';
@@ -18,8 +19,7 @@ class ProfileEditPage extends StatefulWidget {
   State<ProfileEditPage> createState() => _ProfileEditPageState();
 }
 
-class _ProfileEditPageState extends State<ProfileEditPage>
-    with SingleTickerProviderStateMixin {
+class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -75,6 +75,7 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             WorkLife(),
             EducationLife(),
             Competencies(),
+            CertificateScreen(),
             ClubCominities(),
             ProjectsPrize(),
             SocialMedia(),

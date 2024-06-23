@@ -1,5 +1,8 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/user_model.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
@@ -7,6 +10,8 @@ import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_infor
 class UserService {
   final String userId;
   FirebaseFirestore db = FirebaseFirestore.instance;
+  final FirebaseStorage storage = FirebaseStorage.instance;
+  // final String userId = 'YOUR_USER_ID'; // Bu userId'yi kullanıcıya göre dinamik olarak alın.
 
   UserService() : userId = FirebaseAuth.instance.currentUser!.uid;
 
@@ -155,6 +160,41 @@ class UserService {
 
   Future<void> removeLanguages(Map<String, dynamic> languages) async {
     await _removeFromCollection('languages', languages);
+  }
+
+  Future<List<Map<String, dynamic>>> loadCertificate() async {
+    final data = await _getCollectionData('certificate');
+    return List<Map<String, dynamic>>.from(data ?? []);
+  }
+
+  Future<void> addCertificate(Map<String, dynamic> certificate) async {
+    final certificateData = {
+      'certificatesName': certificate['certificatesName'],
+      'certificateDate': certificate['certificateDate'],
+    };
+    debugPrint(certificateData.toString());
+    await _addToCollection('certificate', certificateData);
+  }
+
+  Future<void> removeCertificate(Map<String, dynamic> certificate) async {
+    await _removeFromCollection('certificate', certificate);
+  }
+
+  Future<String> getPhoto() async {
+    final DocumentSnapshot userDoc = await db.collection('users').doc(userId).get();
+    if (userDoc.exists) {
+      return userDoc['avatarUrl'] ?? '';
+    }
+    return '';
+  }
+
+  Future<String> updateProfilePhoto(File image) async {
+    final ref = storage.ref().child('avatars').child('$userId.jpg');
+    final uploadTask = ref.putFile(image);
+    final snapshot = await uploadTask.whenComplete(() => null);
+    final imageUrl = await snapshot.ref.getDownloadURL();
+    await db.collection('users').doc(userId).update({'avatarUrl': imageUrl});
+    return imageUrl;
   }
 
   Future<void> updateProfileEdit() async {

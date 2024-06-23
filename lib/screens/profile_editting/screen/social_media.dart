@@ -9,6 +9,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevat
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_card.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 
@@ -58,6 +59,7 @@ class _SocialMediaState extends State<SocialMedia> {
       }
       return ListView(
         children: [
+          CustomTitle(title: TobetoText.profileEditSocialMedia),
           InputText(
               child: CustomDropDownInput(
             onChanged: (newValue) {
@@ -78,7 +80,6 @@ class _SocialMediaState extends State<SocialMedia> {
             controller: socialMediaLinkController,
           )),
           CustomElevatedButton(
-            text: "Ekle",
             onPressed: () {
               if (_areControllersValid()) {
                 _addEducationLife();
@@ -86,7 +87,7 @@ class _SocialMediaState extends State<SocialMedia> {
             },
           ),
           if (state.media.isEmpty)
-            const CustomColumn(title: "Henüz eklediğiniz bir sosyal medyanız bulunmamaktadır.")
+            CustomColumn(title: TobetoText.emptySocialMedia)
           else
             ...state.media.map((media) {
               final socialMediaName = media['socialMediaName'];

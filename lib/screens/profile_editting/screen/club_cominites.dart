@@ -8,6 +8,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevat
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_card.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class ClubCominities extends StatefulWidget {
@@ -49,6 +50,7 @@ class _ClubCominitiesState extends State<ClubCominities> {
       }
       return ListView(
         children: [
+          CustomTitle(title: TobetoText.profileEditCommunity),
           InputText(
             child: CustomTextField(
               title: TobetoText.profileEditCommunityName,
@@ -62,7 +64,6 @@ class _ClubCominitiesState extends State<ClubCominities> {
             ),
           ),
           CustomElevatedButton(
-            text: "Ekle",
             onPressed: () {
               if (_areControllersValid()) {
                 _addClubCominities();
@@ -70,8 +71,8 @@ class _ClubCominitiesState extends State<ClubCominities> {
             },
           ),
           if (state.club.isEmpty)
-            const CustomColumn(
-              title: "Henüz eklediğiniz bir kulüp veya topluluğunuz bulunmamaktadır.",
+            CustomColumn(
+              title: TobetoText.emptyCommunity,
             )
           else
             ...state.club.map((club) {

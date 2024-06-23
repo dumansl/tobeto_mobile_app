@@ -6,6 +6,10 @@ import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_screen.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_button.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/input_text_form_field.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
@@ -32,12 +36,10 @@ class _SettingState extends State<Setting> {
       key: _formKey,
       child: ListView(
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: InputTextFormField(
-              hintText: TobetoText.profileEditSettingsOldPassword,
+          CustomTitle(title: TobetoText.profileEditSettings),
+          InputText(
+            child: CustomTextField(
               focusNode: _oldPasswordFocusNode,
-              textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_passwordFocusNode);
               },
@@ -52,14 +54,12 @@ class _SettingState extends State<Setting> {
               onSaved: (newValue) {
                 _oldPassword = newValue!;
               },
+              title: TobetoText.profileEditSettingsOldPassword,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: InputTextFormField(
-              hintText: TobetoText.profileEditSettingsNewPassword,
+          InputText(
+            child: CustomTextField(
               focusNode: _passwordFocusNode,
-              textInputAction: TextInputAction.next,
               onFieldSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_confirmPasswordFocusNode);
               },
@@ -74,14 +74,12 @@ class _SettingState extends State<Setting> {
               onSaved: (newValue) {
                 _password = newValue!;
               },
+              title: TobetoText.profileEditSettingsNewPassword,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
-            child: InputTextFormField(
-              hintText: TobetoText.profileEditSettingsOldPasswordAgain,
+          InputText(
+            child: CustomTextField(
               focusNode: _confirmPasswordFocusNode,
-              textInputAction: TextInputAction.done,
               onSaved: (newValue) {
                 _confirmPassword = newValue!;
               },
@@ -91,28 +89,26 @@ class _SettingState extends State<Setting> {
                 }
                 return null;
               },
+              title: TobetoText.profileEditSettingsOldPasswordAgain,
             ),
           ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 10),
-            child: CustomButton(
-              text: TobetoText.profileEditSaveButton,
-              onPressed: () {
-                if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  if (_password != _confirmPassword) {
-                    snackBar(context, 'Parolalar uyuşmuyor');
-                    return;
-                  }
-                  context.read<AuthBloc>().add(
-                        ChangePasswordEvent(
-                          currentPassword: _oldPassword,
-                          newPassword: _password,
-                        ),
-                      );
+          CustomElevatedButton(
+            text: TobetoText.profileEditSaveButton,
+            onPressed: () {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                if (_password != _confirmPassword) {
+                  snackBar(context, 'Parolalar uyuşmuyor');
+                  return;
                 }
-              },
-            ),
+                context.read<AuthBloc>().add(
+                      ChangePasswordEvent(
+                        currentPassword: _oldPassword,
+                        newPassword: _password,
+                      ),
+                    );
+              }
+            },
           ),
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
@@ -134,14 +130,11 @@ class _SettingState extends State<Setting> {
               if (state is DeleteAccountProgress) {
                 return const Center(child: CircularProgressIndicator());
               }
-              return Padding(
-                padding: const EdgeInsets.symmetric(vertical: 10),
-                child: CustomButton(
-                  text: TobetoText.profileEditSettingsFinalButton,
-                  onPressed: () {
-                    _showDeleteConfirmationDialog(context);
-                  },
-                ),
+              return CustomElevatedButton(
+                text: TobetoText.profileEditSettingsFinalButton,
+                onPressed: () {
+                  _showDeleteConfirmationDialog(context);
+                },
               );
             },
           ),

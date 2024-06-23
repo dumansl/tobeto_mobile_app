@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdo
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -75,6 +76,7 @@ class _EducationLifeState extends State<EducationLife> {
       }
       return ListView(
         children: [
+          CustomTitle(title: TobetoText.profileEducations),
           InputText(
               child: CustomDropDownInput(
             onChanged: (newValue) {
@@ -133,7 +135,6 @@ class _EducationLifeState extends State<EducationLife> {
             ],
           ),
           CustomElevatedButton(
-            text: "Ekle",
             onPressed: () {
               if (_areControllersValid()) {
                 _addEducationLife();

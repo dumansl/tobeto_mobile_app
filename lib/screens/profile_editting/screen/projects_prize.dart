@@ -9,6 +9,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevat
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_card.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 
 class ProjectsPrize extends StatefulWidget {
@@ -19,10 +20,8 @@ class ProjectsPrize extends StatefulWidget {
 }
 
 class _ProjectsPrizeState extends State<ProjectsPrize> {
-  final TextEditingController projectAwardNameController =
-      TextEditingController();
-  final TextEditingController certificatesDateController =
-      TextEditingController();
+  final TextEditingController projectAwardNameController = TextEditingController();
+  final TextEditingController certificatesDateController = TextEditingController();
 
   void _clearControllers() {
     projectAwardNameController.clear();
@@ -30,8 +29,7 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
   }
 
   bool _areControllersValid() {
-    return projectAwardNameController.text.isNotEmpty &&
-        certificatesDateController.text.isNotEmpty;
+    return projectAwardNameController.text.isNotEmpty && certificatesDateController.text.isNotEmpty;
   }
 
   void _addEducationLife() {
@@ -45,8 +43,7 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProjectsPrizeBloc, ProjectsPrizeState>(
-        builder: (context, state) {
+    return BlocBuilder<ProjectsPrizeBloc, ProjectsPrizeState>(builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -54,6 +51,7 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
       }
       return ListView(
         children: [
+          CustomTitle(title: TobetoText.profileProjectAwards),
           InputText(
             child: CustomTextField(
               title: TobetoText.profileEditProjectAwardName,
@@ -62,11 +60,9 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
           ),
           InputText(
             child: CustomDateInput(
-                controller: certificatesDateController,
-                labelText: TobetoText.profileEditCertificatesDate),
+                controller: certificatesDateController, labelText: TobetoText.profileEditCertificatesDate),
           ),
           CustomElevatedButton(
-            text: "Ekle",
             onPressed: () {
               if (_areControllersValid()) {
                 _addEducationLife();
@@ -74,17 +70,13 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
             },
           ),
           if (state.projects.isEmpty)
-            const CustomColumn(
-                title:
-                    "Henüz eklediğiniz bir proje veya ödülünüz bulunmamaktadır.")
+            CustomColumn(title: TobetoText.profileEditProjectAwardSubtitle)
           else
             ...state.projects.map((projects) {
               return InputText(
                   child: CustomMiniCard(
                 onpressed: () {
-                  context
-                      .read<ProjectsPrizeBloc>()
-                      .add(RemoveProjectsPrize(projects));
+                  context.read<ProjectsPrizeBloc>().add(RemoveProjectsPrize(projects));
                 },
                 title: projects['projectAwardName'],
                 content: projects['certificatesDate'],

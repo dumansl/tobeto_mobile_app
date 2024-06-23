@@ -9,6 +9,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevat
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/phone_textfield.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class PersonalInformationForm extends StatefulWidget {
@@ -35,8 +36,6 @@ final TextEditingController militaryStatuController = TextEditingController();
 final TextEditingController disabledStatuController = TextEditingController();
 
 class _PersonalInformationFormState extends State<PersonalInformationForm> {
-  final _formKey = GlobalKey<FormState>();
-
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<UserBloc, UserState>(
@@ -44,130 +43,127 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
         if (state is UserLoading) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is UserLoaded) {
-          return Form(
-            key: _formKey,
-            child: ListView(
-              children: [
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditName,
-                  controller: firstNameController,
-                )),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditSurname,
-                  controller: lastNameController,
-                )),
-                InputText(
-                    child: PhoneTextField(
-                  controller: phoneNumberController,
-                )),
-                InputText(
-                    child: CustomDateInput(controller: birthDateController, labelText: TobetoText.profileEditBirthday)),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditIdentificationNumber,
-                  keyboardType: TextInputType.number,
-                  maxLength: 11,
-                  controller: identificationController,
-                )),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditEmail,
-                  keyboardType: TextInputType.emailAddress,
-                  controller: emailController,
-                )),
-                InputText(
+          return ListView(
+            children: [
+              CustomTitle(title: TobetoText.personalInformationTitle),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditName,
+                controller: firstNameController,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditSurname,
+                controller: lastNameController,
+              )),
+              InputText(
+                  child: PhoneTextField(
+                controller: phoneNumberController,
+              )),
+              InputText(
+                  child: CustomDateInput(controller: birthDateController, labelText: TobetoText.profileEditBirthday)),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditIdentificationNumber,
+                keyboardType: TextInputType.number,
+                maxLength: 11,
+                controller: identificationController,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditEmail,
+                keyboardType: TextInputType.emailAddress,
+                controller: emailController,
+              )),
+              InputText(
+                child: CustomDropDownInput(
+                  onChanged: (newValue) {
+                    genderController.text = newValue ?? genderController.text;
+                  },
+                  items: TobetoText.genderStatu
+                      .map((label) => DropdownMenuItem(
+                            value: label,
+                            child: Text(label),
+                          ))
+                      .toList(),
+                  title: genderController.text.isNotEmpty ? genderController.text : TobetoText.profileEditGender,
+                  controller: genderController,
+                  labelText: TobetoText.profileEditGender,
+                ),
+              ),
+              InputText(
                   child: CustomDropDownInput(
-                    onChanged: (newValue) {
-                      genderController.text = newValue ?? genderController.text;
-                    },
-                    items: TobetoText.genderStatu
-                        .map((label) => DropdownMenuItem(
-                              value: label,
-                              child: Text(label),
-                            ))
-                        .toList(),
-                    title: genderController.text.isNotEmpty ? genderController.text : TobetoText.profileEditGender,
-                    controller: genderController,
-                    labelText: TobetoText.profileEditGender,
-                  ),
-                ),
-                InputText(
-                    child: CustomDropDownInput(
-                  onChanged: (newValue) {
-                    militaryStatuController.text = newValue ?? militaryStatuController.text;
-                  },
-                  items: TobetoText.militaryStatu
-                      .map((label) => DropdownMenuItem(
-                            value: label,
-                            child: Text(label),
-                          ))
-                      .toList(),
-                  title: militaryStatuController.text.isNotEmpty
-                      ? militaryStatuController.text
-                      : TobetoText.profileEditMilitaryStuation,
-                  controller: militaryStatuController,
-                  labelText: TobetoText.profileEditMilitaryStuation,
-                )),
-                InputText(
-                    child: CustomDropDownInput(
-                  onChanged: (newValue) {
-                    disabledStatuController.text = newValue ?? disabledStatuController.text;
-                  },
-                  items: TobetoText.disableStatu
-                      .map((label) => DropdownMenuItem(
-                            value: label,
-                            child: Text(label),
-                          ))
-                      .toList(),
-                  title: disabledStatuController.text.isNotEmpty
-                      ? disabledStatuController.text
-                      : TobetoText.profileEditDisableStuation,
-                  controller: disabledStatuController,
-                  labelText: TobetoText.profileEditDisableStuation,
-                )),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditGithubAdress,
-                  controller: githubController,
-                )),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditCountry,
-                  controller: countryController,
-                )),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditCity,
-                  controller: cityController,
-                )),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditDistrict,
-                  controller: districtController,
-                )),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditStreet,
-                  maxLines: 4,
-                  controller: streetController,
-                )),
-                InputText(
-                    child: CustomTextField(
-                  title: TobetoText.profileEditAboutMe,
-                  maxLines: 4,
-                  controller: aboutMeController,
-                )),
-                CustomElevatedButton(
-                  text: TobetoText.profileEditSaveButton,
-                  onPressed: () {
-                    _formKey.currentState!.save();
-                    context.read<UserBloc>().add(UpdateUserData());
-                  },
-                ),
-              ],
-            ),
+                onChanged: (newValue) {
+                  militaryStatuController.text = newValue ?? militaryStatuController.text;
+                },
+                items: TobetoText.militaryStatu
+                    .map((label) => DropdownMenuItem(
+                          value: label,
+                          child: Text(label),
+                        ))
+                    .toList(),
+                title: militaryStatuController.text.isNotEmpty
+                    ? militaryStatuController.text
+                    : TobetoText.profileEditMilitaryStuation,
+                controller: militaryStatuController,
+                labelText: TobetoText.profileEditMilitaryStuation,
+              )),
+              InputText(
+                  child: CustomDropDownInput(
+                onChanged: (newValue) {
+                  disabledStatuController.text = newValue ?? disabledStatuController.text;
+                },
+                items: TobetoText.disableStatu
+                    .map((label) => DropdownMenuItem(
+                          value: label,
+                          child: Text(label),
+                        ))
+                    .toList(),
+                title: disabledStatuController.text.isNotEmpty
+                    ? disabledStatuController.text
+                    : TobetoText.profileEditDisableStuation,
+                controller: disabledStatuController,
+                labelText: TobetoText.profileEditDisableStuation,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditGithubAdress,
+                controller: githubController,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditCountry,
+                controller: countryController,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditCity,
+                controller: cityController,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditDistrict,
+                controller: districtController,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditStreet,
+                maxLines: 4,
+                controller: streetController,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditAboutMe,
+                maxLines: 4,
+                controller: aboutMeController,
+              )),
+              CustomElevatedButton(
+                text: TobetoText.profileEditSaveButton,
+                onPressed: () {
+                  context.read<UserBloc>().add(UpdateUserData());
+                },
+              ),
+            ],
           );
         } else if (state is UserError) {
           return Center(child: Text('Error: ${state.message}'));
