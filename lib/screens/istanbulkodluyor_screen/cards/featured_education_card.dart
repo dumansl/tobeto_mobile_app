@@ -1,43 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/centered_text.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
-import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class FeaturedEducationCard extends StatelessWidget {
   const FeaturedEducationCard({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
       children: [
-        VerticalPadding(),
+        const VerticalPadding(),
         CenteredText(
-          text: 'ÖNE ÇIKAN EĞİTİMLER',
+          text: TobetoText.istanbulHeadline5,
           style: TextStyle(
-            color: Color.fromARGB(255, 0, 231, 170),
+            color: TobetoColor.card.shineGreen,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        VerticalPadding(),
+        const VerticalPadding(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CustomIconButton(
               imagePath: ImagePath.siber,
-              title: 'Siber Güvenlik Eğitimi',
-              description: 'Siber güvenlik alanında kapsamlı eğitim.',
+              title: TobetoText.istanbulCyberSecurity,
+              description: TobetoText.istanbulCyberSecurityDescription,
             ),
             CustomIconButton(
               imagePath: ImagePath.uiux,
-              title: 'UI/UX Tasarım Eğitimi',
-              description: 'Kullanıcı arayüzü ve deneyimi tasarım eğitimleri.',
+              title: TobetoText.istanbulUIUXDesign,
+              description: TobetoText.istanbulUIUXDesignDescription,
             ),
             CustomIconButton(
               imagePath: ImagePath.oyun,
-              title: 'Oyun Geliştirme Eğitimi',
-              description: 'Oyun geliştirme konusunda kapsamlı eğitimler.',
+              title: TobetoText.istanbulGame,
+              description: TobetoText.istanbulGameDescription,
             ),
           ],
         ),
@@ -46,13 +45,13 @@ class FeaturedEducationCard extends StatelessWidget {
           children: [
             CustomIconButton(
               imagePath: ImagePath.yazilim,
-              title: 'Yazılım Geliştirme Eğitimi',
-              description: 'Yazılım geliştirme alanında kapsamlı eğitim.',
+              title: TobetoText.istanbulSoftware,
+              description: TobetoText.istanbulSoftwareDescription,
             ),
             CustomIconButton(
               imagePath: ImagePath.mobil,
-              title: 'Mobil Uygulama Geliştirme Eğitimi',
-              description: 'Mobil uygulama geliştirme konusunda eğitimler.',
+              title: TobetoText.istanbulMobil,
+              description: TobetoText.istanbulMobilDescription,
             ),
           ],
         ),
@@ -61,22 +60,22 @@ class FeaturedEducationCard extends StatelessWidget {
           children: [
             CustomIconButton(
               imagePath: ImagePath.dijital,
-              title: 'Dijital Pazarlama Eğitimi',
-              description: 'Dijital pazarlama stratejileri eğitimi.',
+              title: TobetoText.istanbulDigitalMarketing,
+              description: TobetoText.istanbulDigitalMarketingDescription,
             ),
             CustomIconButton(
               imagePath: ImagePath.veri,
-              title: 'Veri Bilimi Eğitimi',
-              description: 'Veri bilimi ve analiz konularında eğitimler.',
+              title: TobetoText.istanbulDataScience,
+              description: TobetoText.istanbulDataScienceDescription,
             ),
             CustomIconButton(
               imagePath: ImagePath.ag,
-              title: 'Ağ Yönetimi Eğitimi',
-              description: 'Ağ yönetimi ve güvenliği konusunda eğitimler.',
+              title: TobetoText.istanbulNetwork,
+              description: TobetoText.istanbulNetworkDescription,
             ),
           ],
         ),
-        VerticalPadding(),
+        const VerticalPadding(),
       ],
     );
   }
@@ -117,7 +116,7 @@ class CustomIconButton extends StatelessWidget {
                   TextButton(
                     style: ButtonStyle(backgroundColor: WidgetStateProperty.all<Color>(TobetoColor.purple)),
                     onPressed: () {
-                      Navigator.of(context).pop(); // Close the dialog
+                      Navigator.of(context).pop();
                     },
                     child: Text(
                       'Kapat',

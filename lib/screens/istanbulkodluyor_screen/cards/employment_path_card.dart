@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/center
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom_container.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class EmploymentPathCard extends StatelessWidget {
@@ -11,37 +12,35 @@ class EmploymentPathCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
-      backgroundColor: const Color.fromARGB(255, 0, 231, 170),
-      borderRadius: const BorderRadius.only(
-          bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
+      backgroundColor: TobetoColor.card.shineGreen,
+      borderRadius: const BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
       boxShadow: [
         BoxShadow(
           color: TobetoColor.card.grey.withOpacity(0.45),
           spreadRadius: 7,
           blurRadius: 25,
-          offset: const Offset(2, 4), // changes position of shadow
+          offset: const Offset(2, 4),
         ),
       ],
       children: [
         const VerticalPadding(),
         CustomContainer(
-          backgroundColor: const Color(0xFF1E0F41),
-          borderRadius: const BorderRadius.only(
-              topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
+          backgroundColor: TobetoColor.card.navyBlue,
+          borderRadius: const BorderRadius.only(topLeft: Radius.circular(30), bottomLeft: Radius.circular(30)),
           children: [
             Row(
               children: [
-                const Padding(
-                  padding: EdgeInsets.all(3),
+                Padding(
+                  padding: const EdgeInsets.all(3),
                   child: CircleAvatar(
                     radius: 17.5,
-                    backgroundColor: Color.fromARGB(255, 0, 231, 170),
+                    backgroundColor: TobetoColor.card.shineGreen,
                   ),
                 ),
                 Padding(
                   padding: const EdgeInsets.only(left: 60),
                   child: CenteredText(
-                    text: 'İstihtama Giden Yol',
+                    text: TobetoText.istanbulHeadline4,
                     style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
                   ),
                 ),
@@ -52,21 +51,17 @@ class EmploymentPathCard extends StatelessWidget {
         Column(
           children: [
             PaddedText(
-              text:
-                  'Yazılım ve Teknoloji Alanında Meslek \n        Edinmeye Yönelik Eğitimler',
+              text: TobetoText.istanbulCard3Title1,
               style: TobetoTextStyle.poppins(context).captionWhiteBold18,
               padding: const EdgeInsets.only(top: 30, bottom: 20, left: 10),
             ),
             PaddedText(
-              text: 'Mesleki Eğitimler',
+              text: TobetoText.istanbulCard3Title2,
               style: TobetoTextStyle.poppins(context).captionWhiteBold18,
               padding: const EdgeInsets.only(bottom: 10),
             ),
             PaddedText(
-              text: '•  Online Canlı Dersler\n'
-                  '•  Video İçerikler\n'
-                  '•  İstanbul’da Kampüs Buluşmaları\n'
-                  '•  Proje Uygulamaları',
+              text: TobetoText.istanbulCard3Body1,
               style: TobetoTextStyle.poppins(context).bodyWhiteNormal16,
               padding: const EdgeInsets.only(bottom: 10),
             ),
@@ -76,15 +71,12 @@ class EmploymentPathCard extends StatelessWidget {
               size: 60,
             ),
             PaddedText(
-              text: 'Profesyonel Gelişim Eğitimleri',
+              text: TobetoText.istanbulCard3Title3,
               style: TobetoTextStyle.poppins(context).captionWhiteBold18,
               padding: const EdgeInsets.only(bottom: 10, top: 20),
             ),
             PaddedText(
-              text: '•  İşte Başarı Eğitimleri\n'
-                  '•  Sektör Buluşmaları ve Webinarlar\n'
-                  '•  Kariyer Gelişim Desteği\n'
-                  '•  Mentörlük',
+              text: TobetoText.istanbulCard3Body2,
               style: TobetoTextStyle.poppins(context).bodyWhiteNormal16,
               padding: const EdgeInsets.only(bottom: 20),
             ),

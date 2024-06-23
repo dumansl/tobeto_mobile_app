@@ -317,12 +317,12 @@ abstract class TobetoText {
   static String calendarEducationBox4 = "Henüz Başlanmamış Dersler";
   static String calendarCleanButton = "Temizle";
   // istanbul is coding page
-  static String istanbulHeadline1 = "İlk Kampüs Buluşması Gerçekleşti";
+  static String istanbulHeadline1 = "İlk Kampüs Buluşması \n Gerçekleşti";
   static String istanbulHeadline2 = "Aradığın “İş” Burada!";
   static String istanbulCard1Title = "Türkiye’nin İlk Sosyal Etki Tahvili: “İstanbul Kodluyor” Projesi";
   static String istanbulCard1Body =
       "Sanayi ve Teknoloji Bakanlığı Kalkınma Ajansları Genel Müdürlüğü koordinasyonunda İstanbul Kalkınma Ajansı (İSTKA) ve İngiltere merkezli Bridges Outcomes Partnerships iş birliğinde başladı!";
-  static String istanbulFAQButton = "Sıkça Sorulan Sorular";
+  static String istanbulFAQButton = "Sıkça Sorulan \n Sorular";
   static String istanbulGoPlatformButton = "Platforma Git";
   static String istanbulHeadline3 = "İstanbul Kodluyor Projesi Hakkında";
   static String istanbulCard2Body =
@@ -334,7 +334,7 @@ abstract class TobetoText {
   static String istanbulProcessBox4 = "Mesleki ve Profesyonel Gelişim Eğitimleri";
   static String istanbulProcessBox5 = "İstihdam";
   static String istanbulHeadline4 = "İstihdama Giden Yol";
-  static String istanbulCard3Title1 = "Yazılım ve Teknoloji Alanında Meslek Edinmeye Yönelik Eğitimler";
+  static String istanbulCard3Title1 = "Yazılım ve Teknoloji Alanında Meslek \n        Edinmeye Yönelik Eğitimler";
   static String istanbulCard3Title2 = "Mesleki Eğitimler";
   static String istanbulCard3Body1 = "• Online Canlı Dersler\n"
       "• Video İçerikler\n"
@@ -348,9 +348,9 @@ abstract class TobetoText {
   static String istanbulHeadline5 = "ÖNE ÇIKAN EĞİTİMLER";
   static String istanbulHeadline6 = "Sende Hemen Başvur!";
   static String istanbulCard4Title = "Yazılım ve Teknoloji Alanında";
-  static String istanbulCard4Body = "1-) Online Canlı Dersler\n"
-      "2-) Profesyonel yetkinlikler kazan\n"
-      "3-) Yeni mesleğinle işe başla!\n";
+  static String istanbulCard4Body1 = "Online Canlı Dersler";
+  static String istanbulCard4Body2 = "Profesyonel yetkinlikler kazan";
+  static String istanbulCard4Body3 = "Yeni mesleğinle işe başla!";
   static String istanbulReport5Title = "Bu Proje Nasıl Destekleniyor?";
   static String istanbulCard5Body =
       "İstanbul Kodluyor, Türkiye’nin ilk sosyal etki tahvili projesidir. Sosyal etki tahvilleri, sosyal sorunlara çözüm bulan, performansa dayalı sözleşmelerdir ve ölçülebilir, pozitif, sosyal ve çevresel etki yaratacak sonuçlara ulaşılmayı amaçlamaktadır.";
@@ -359,6 +359,22 @@ abstract class TobetoText {
   static String istanbulCard6Body =
       "Yazılım ve teknoloji alanında meslek sahibi olmak isteyen genç yetişkinlere, ücretsiz ve kapsamlı eğitimlerle gerekli bilgi ve becerileri kazandıran, Türkiye’nin önde gelen kurumlarında işe yerleşmelerini sağlayan bir projedir. ";
   static String istanbulHeadline8 = "Projeden Kareler";
+  static String istanbulCyberSecurity = "Siber Güvenlik Eğitimi";
+  static String istanbulCyberSecurityDescription = "Siber güvenlik alanında kapsamlı eğitim.";
+  static String istanbulUIUXDesign = "UI/UX Tasarım Eğitimi";
+  static String istanbulUIUXDesignDescription = "Kullanıcı arayüzü ve deneyimi tasarım eğitimleri.";
+  static String istanbulGame = "Oyun Geliştirme Eğitimi";
+  static String istanbulGameDescription = "Oyun geliştirme konusunda kapsamlı eğitimler.";
+  static String istanbulSoftware = "Yazılım Geliştirme Eğitimi";
+  static String istanbulSoftwareDescription = "Yazılım geliştirme alanında kapsamlı eğitim.";
+  static String istanbulMobil = "Mobil Uygulama Geliştirme Eğitimi";
+  static String istanbulMobilDescription = "Mobil uygulama geliştirme konusunda eğitimler.";
+  static String istanbulDigitalMarketing = "Dijital Pazarlama Eğitimi";
+  static String istanbulDigitalMarketingDescription = "Dijital pazarlama stratejileri eğitimi.";
+  static String istanbulDataScience = "Veri Bilimi Eğitimi";
+  static String istanbulDataScienceDescription = "Veri bilimi ve analiz konularında eğitimler.";
+  static String istanbulNetwork = "Ağ Yönetimi Eğitimi";
+  static String istanbulNetworkDescription = "Ağ yönetimi ve güvenliği konusunda eğitimler.";
 
 // --------------------------------------------------------------------------TOBETO----------------------------------------------------------------------------------
 // main page
@@ -377,13 +393,13 @@ abstract class TobetoText {
       "Günümüzde meslek hayatında yer almak ve kariyerinde yükselmek için en önemli unsurların başında dijital beceri sahibi olmak geliyor. Bu ihtiyaçların tamamını karşılamak için içeriklerimizi Tobeto Platform’da birleştirdik.";
   static String twawBody2 =
       "Öğrencilerin teoriyi anlamalarını önemsemekle beraber uygulamayı merkeze alan bir öğrenme yolculuğu sunuyoruz. Öğrenciyi sürekli gelişim, geri bildirim döngüsünde tutarak yetenek ve beceri kazanımını hızlandırıyoruz.";
-  static String twawTeams = "Ekibimiz";
+  static String twawTeams = "EKİBİMİZ";
   static String twawTeamsCard1Subtitle = "Kurucu Direktör";
   static String twawTeamsCard2Subtitle = "Eğitim ve Proje Koordinatörü";
   static String twawTeamsCard3Subtitle = "İş Geliştirme Yöneticisi";
   static String twawTeamsCard4Subtitle = "Eğitim Teknolojileri ve Platform Sorumlusu";
   static String twawTeamsCard5Subtitle = "Operasyon Uzman Yardımcısı";
-  static String twawTeamsCard6OfficeHeadline = "Ofisimiz";
+  static String twawTeamsCard6OfficeHeadline = "OFİSİMİZ";
   static String twawTeamsCard6OfficeBody =
       "Kavacık, Rüzgarlıbahçe Mah. Çampınarı Sok. No:4 Smart Plaza B Blok Kat:3 34805, Beykoz, İstanbul";
   // what do we offer/personal

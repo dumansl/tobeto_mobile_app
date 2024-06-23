@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/center
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom_container.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class FAQCard extends StatefulWidget {
@@ -22,7 +23,7 @@ class _FAQCardState extends State<FAQCard> {
       children: [
         const VerticalPadding(),
         CenteredText(
-          text: 'Sıkça Sorulan Sorular',
+          text: TobetoText.istanbulHeadline7,
           style: TobetoTextStyle.poppins(context).captionBlackBold24,
         ),
         const VerticalPadding(),
@@ -33,7 +34,7 @@ class _FAQCardState extends State<FAQCard> {
             });
           },
           child: CustomContainer(
-            backgroundColor: const Color(0xFF1E0F41),
+            backgroundColor: TobetoColor.card.navyBlue,
             borderRadius: const BorderRadius.all(Radius.circular(30)),
             children: [
               Row(
@@ -41,15 +42,12 @@ class _FAQCardState extends State<FAQCard> {
                 children: [
                   Expanded(
                     child: CenteredText(
-                      text: 'Başvuru ve Ön-değerlendirme',
-                      style:
-                          TobetoTextStyle.poppins(context).captionWhiteBold15,
+                      text: TobetoText.istanbulApplicationButton,
+                      style: TobetoTextStyle.poppins(context).captionWhiteBold15,
                     ),
                   ),
                   Icon(
-                    _isExpanded
-                        ? Icons.keyboard_arrow_up
-                        : Icons.keyboard_arrow_down,
+                    _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
                     color: TobetoColor.text.white,
                     size: 50,
                   ),
@@ -59,16 +57,16 @@ class _FAQCardState extends State<FAQCard> {
           ),
         ),
         if (_isExpanded)
-          const CustomContainer(
-            backgroundColor: Colors.white,
-            borderRadius: BorderRadius.all(Radius.circular(30)),
+          CustomContainer(
+            backgroundColor: TobetoColor.card.white,
+            borderRadius: const BorderRadius.all(Radius.circular(30)),
             children: [
               Padding(
-                padding: EdgeInsets.all(16.0),
+                padding: const EdgeInsets.all(16.0),
                 child: Text(
-                  'Yazılım ve teknoloji alanında meslek sahibi olmak isteyen genç yetişkinlere, ücretsiz ve kapsamlı eğitimlerle gerekli bilgi ve becerileri kazandıran, Türkiye’nin önde gelen kurumlarında işe yerleşmelerini  sağlayan bir projedir.',
+                  TobetoText.istanbulCard6Body,
                   style: TextStyle(
-                    color: Colors.black,
+                    color: TobetoColor.text.black,
                     fontSize: 16,
                   ),
                 ),

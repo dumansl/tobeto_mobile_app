@@ -4,6 +4,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/center
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom_container.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class ProcessCard extends StatelessWidget {
@@ -12,13 +13,13 @@ class ProcessCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomContainer(
-      backgroundColor: const Color(0xFF1E0F41),
+      backgroundColor: TobetoColor.card.navyBlue,
       children: [
         const VerticalPadding(),
-        const CenteredText(
-          text: 'SÜREÇ',
+        CenteredText(
+          text: TobetoText.istanbulProcess,
           style: TextStyle(
-            color: Color.fromARGB(255, 0, 231, 170),
+            color: TobetoColor.card.shineGreen,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
@@ -38,12 +39,12 @@ class ProcessCard extends StatelessWidget {
     );
   }
 
-  static const List<Map<String, String>> _steps = [
-    {'number': '1', 'text': 'Başvuru ve Ön Değerlendirme'},
-    {'number': '2', 'text': '"Herkes için Kodlama" Eğitimleri'},
-    {'number': '3', 'text': 'Seçme ve Değerlendirme'},
-    {'number': '4', 'text': 'Mesleki ve Profesyonel Eğitimler'},
-    {'number': '5', 'text': 'İstihdam'},
+  static final List<Map<String, String>> _steps = [
+    {'number': '1', 'text': TobetoText.istanbulProcessBox1},
+    {'number': '2', 'text': TobetoText.istanbulProcessBox2},
+    {'number': '3', 'text': TobetoText.istanbulProcessBox3},
+    {'number': '4', 'text': TobetoText.istanbulProcessBox4},
+    {'number': '5', 'text': TobetoText.istanbulProcessBox5},
   ];
 }
 
@@ -70,7 +71,7 @@ class CustomStepRow extends StatelessWidget {
               child: Text(
                 number,
                 style: GoogleFonts.poppins(
-                  color: const Color.fromARGB(255, 0, 231, 170),
+                  color: TobetoColor.card.shineGreen,
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),

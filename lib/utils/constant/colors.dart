@@ -31,6 +31,8 @@ class CardColor {
   final Color white = Colors.white;
   final Color black = Colors.black;
   final Color grey = Colors.grey;
+  final Color shineGreen = const Color.fromARGB(255, 0, 231, 170);
+  final Color navyBlue = const Color(0xFF1E0F41);
   final Color cream = const Color(0xffF5F5F5);
   final Color lightGrey = const Color(0xffCCCCCC);
   final Color darkGrey = const Color(0xff1E1E1E);
@@ -87,6 +89,7 @@ class TextColor {
   final Color red = Colors.red;
   final Color blackOpacity = const Color.fromRGBO(0, 0, 0, 200);
   final Color grey = Colors.grey;
+  final Color darkGreen = const Color.fromARGB(230, 31, 127, 10);
 }
 
 class RainbowColor {

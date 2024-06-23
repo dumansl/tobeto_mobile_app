@@ -4,6 +4,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
+import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class ProjectSupportCard extends StatelessWidget {
@@ -20,23 +21,21 @@ class ProjectSupportCard extends StatelessWidget {
           borderRadius: const BorderRadius.all(Radius.circular(30)),
           boxShadow: [
             BoxShadow(
-              color: TobetoColor.card.grey.withOpacity(0.65),
-              spreadRadius: 5,
-              blurRadius: 12,
-              offset: const Offset(6, 8), // changes position of shadow
-            ),
+                color: TobetoColor.card.grey.withOpacity(0.65),
+                spreadRadius: 5,
+                blurRadius: 12,
+                offset: const Offset(6, 8)),
           ],
           children: [
             const VerticalPadding(),
             PaddedText(
-              text: 'Bu Proje Nasıl Destekleniyor?',
+              text: TobetoText.istanbulReport5Title,
               style: TobetoTextStyle.poppins(context).captionBlackBold18,
               padding: EdgeInsets.zero,
             ),
             const VerticalPadding(),
             PaddedText(
-              text:
-                  'İstanbul Kodluyor, Türkiye’nin ilk sosyal etki tahvili projesidir. Sosyal etki tahvilleri, sosyal sorunlara çözüm bulan, performansa dayalı sözleşmelerdir ve ölçülebilir, pozitif, sosyal ve çevresel etki yaratacak sonuçlara ulaşılmayı amaçlamaktadır.',
+              text: TobetoText.istanbulCard5Body,
               style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
               padding: const EdgeInsets.only(left: 30, right: 30),
             ),
