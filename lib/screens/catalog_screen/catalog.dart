@@ -5,9 +5,6 @@ import 'package:tobeto_mobile_app/blocs/catalog_bloc/catalog_event.dart';
 import 'package:tobeto_mobile_app/blocs/catalog_bloc/catalog_state.dart';
 import 'package:tobeto_mobile_app/model/catalog_model.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/catalog_details.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/catalog_video.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/widget/catalog_search_bar.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/widget/category_card.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/course_card.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/widget/course_card_big.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
@@ -65,7 +62,6 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const CategorySearchBar(),
                       Padding(
                         padding: const EdgeInsets.only(top: 5),
                         child: Text(

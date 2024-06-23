@@ -8,6 +8,7 @@ class CatalogCourse {
   final String? certification;
   final String videoUrl;
   final String? description;
+  final List<String> playlist;
 
   CatalogCourse({
     required this.courseName,
@@ -19,6 +20,7 @@ class CatalogCourse {
     this.certification,
     required this.videoUrl,
     this.description,
+    required this.playlist,
   });
 
   factory CatalogCourse.fromMap(Map<String, dynamic> data) {
@@ -32,6 +34,7 @@ class CatalogCourse {
       certification: data['certification'] ?? '',
       videoUrl: data['VideoUrl'] ?? '',
       description: data['description'] ?? '',
+      playlist: List<String>.from(data['playlist'] ?? []),
     );
   }
   @override
