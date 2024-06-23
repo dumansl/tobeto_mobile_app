@@ -187,7 +187,7 @@ abstract class ImagePath {
 
   static const String facebook = "assets/icons/facebook.png";
   static const String whiteFacebook = "assets/icons/white-facebook.png";
-  static const String blackX = "assets/icons/black-x.png";
+  static const String blackX = "assets/icons/twitter.png";
   static const String whiteX = "assets/icons/white-x.png";
   static const String whatsapp = "assets/icons/whatsapp.png";
   static const String instagram = "assets/icons/instagram.png";

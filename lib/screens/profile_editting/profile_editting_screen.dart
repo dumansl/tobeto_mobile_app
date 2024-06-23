@@ -25,7 +25,7 @@ class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProv
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 11, vsync: this);
+    _tabController = TabController(length: 10, vsync: this);
   }
 
   @override

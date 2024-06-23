@@ -44,7 +44,7 @@ class _SocialMediaState extends State<SocialMedia> {
 
   Map<String, String> socialMediaIcons = {
     'Facebook': ImagePath.facebook,
-    'Twitter': ImagePath.settings,
+    'Twitter': ImagePath.blackX,
     'Instagram': ImagePath.instagram,
     'LinkedIn': ImagePath.linkedIn,
   };
