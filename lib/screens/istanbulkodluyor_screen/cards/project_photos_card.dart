@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/center
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
+import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class ProjectPhotosCard extends StatelessWidget {
@@ -13,7 +14,7 @@ class ProjectPhotosCard extends StatelessWidget {
     return Column(
       children: [
         CenteredText(
-          text: 'Projeden Kareler',
+          text: TobetoText.istanbulHeadline8,
           style: TobetoTextStyle.poppins(context).captionBlackBold24,
         ),
         const VerticalPadding(),
@@ -91,11 +92,10 @@ class CustomImageContainer extends StatelessWidget {
         borderRadius: const BorderRadius.all(Radius.circular(30)),
         boxShadow: [
           BoxShadow(
-            color: TobetoColor.card.grey.withOpacity(0.8),
-            spreadRadius: 3,
-            blurRadius: 5,
-            offset: const Offset(0, 4), // changes position of shadow
-          ),
+              color: TobetoColor.card.grey.withOpacity(0.8),
+              spreadRadius: 3,
+              blurRadius: 5,
+              offset: const Offset(0, 4)),
         ],
         gradient: LinearGradient(
           colors: [
