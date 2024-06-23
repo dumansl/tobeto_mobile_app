@@ -8,29 +8,19 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevat
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_card.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/services/user_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
-class Competencies extends StatelessWidget {
+class Competencies extends StatefulWidget {
   const Competencies({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => CompetenciesBloc(userService: UserService())..add(LoadSkills()),
-      child: CompetenciesView(),
-    );
-  }
+  State<Competencies> createState() => _CompetenciesState();
 }
 
-class UserRepository {
-  loadSkills() {}
-}
-
-class CompetenciesView extends StatelessWidget {
+class _CompetenciesState extends State<Competencies> {
   final TextEditingController skillController = TextEditingController();
-
-  CompetenciesView({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +34,7 @@ class CompetenciesView extends StatelessWidget {
 
         return ListView(
           children: [
+            CustomTitle(title: TobetoText.profileMySkills),
             InputText(
               child: CustomTextField(
                 title: TobetoText.profileEditSkill,
@@ -51,7 +42,6 @@ class CompetenciesView extends StatelessWidget {
               ),
             ),
             CustomElevatedButton(
-              text: "Ekle",
               onPressed: () {
                 if (skillController.text.isNotEmpty) {
                   context.read<CompetenciesBloc>().add(AddSkill(skillController.text));
@@ -60,7 +50,7 @@ class CompetenciesView extends StatelessWidget {
               },
             ),
             if (state.skills.isEmpty)
-              const CustomColumn(title: "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.")
+              CustomColumn(title: TobetoText.emptySkill)
             else
               ...state.skills.map((skill) {
                 return InputText(

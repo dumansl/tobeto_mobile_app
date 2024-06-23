@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdo
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -87,6 +88,7 @@ class _WorkLifeState extends State<WorkLife> {
       }
       return ListView(
         children: [
+          CustomTitle(title: TobetoText.workLifeTitle),
           InputText(
             child: CustomTextField(
               title: TobetoText.profileEditWorkplaceName,
@@ -171,7 +173,6 @@ class _WorkLifeState extends State<WorkLife> {
             ),
           ),
           CustomElevatedButton(
-            text: "Ekle",
             onPressed: () {
               if (_areControllersValid()) {
                 _addWorkLife();

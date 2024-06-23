@@ -8,6 +8,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdo
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_card.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class Languages extends StatefulWidget {
@@ -27,8 +28,7 @@ class _LanguagesState extends State<Languages> {
   }
 
   bool _areControllersValid() {
-    return languageNameController.text.isNotEmpty &&
-        languageLevelController.text.isNotEmpty;
+    return languageNameController.text.isNotEmpty && languageLevelController.text.isNotEmpty;
   }
 
   void _addEducationLife() {
@@ -42,8 +42,7 @@ class _LanguagesState extends State<Languages> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguagesBloc, LanguagesState>(
-        builder: (context, state) {
+    return BlocBuilder<LanguagesBloc, LanguagesState>(builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -51,11 +50,11 @@ class _LanguagesState extends State<Languages> {
       }
       return ListView(
         children: [
+          CustomTitle(title: TobetoText.profileLanguages),
           InputText(
               child: CustomDropDownInput(
             onChanged: (newValue) {
-              languageNameController.text =
-                  newValue ?? languageNameController.text;
+              languageNameController.text = newValue ?? languageNameController.text;
             },
             items: TobetoText.languageList
                 .map((label) => DropdownMenuItem(
@@ -69,8 +68,7 @@ class _LanguagesState extends State<Languages> {
           InputText(
               child: CustomDropDownInput(
             onChanged: (newValue) {
-              languageLevelController.text =
-                  newValue ?? languageLevelController.text;
+              languageLevelController.text = newValue ?? languageLevelController.text;
             },
             items: TobetoText.languageLevel
                 .map((label) => DropdownMenuItem(
@@ -82,7 +80,6 @@ class _LanguagesState extends State<Languages> {
             controller: languageLevelController,
           )),
           CustomElevatedButton(
-            text: "Ekle",
             onPressed: () {
               if (_areControllersValid()) {
                 _addEducationLife();
@@ -90,8 +87,7 @@ class _LanguagesState extends State<Languages> {
             },
           ),
           if (state.languages.isEmpty)
-            const CustomColumn(
-                title: "Henüz eklediğiniz bir dil bulunmamaktadır.")
+            CustomColumn(title: TobetoText.emptyLanguage)
           else
             ...state.languages.map((languages) {
               return InputText(
