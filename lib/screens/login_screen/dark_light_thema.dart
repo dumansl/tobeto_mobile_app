@@ -11,12 +11,7 @@ class DarkLightThema extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
         actions: [
-          Switch(
-            value: context.read<ThemeBloc>().state == ThemeMode.dark,
-            onChanged: (value) {
-              context.read<ThemeBloc>().add(ThemeChanged(value));
-            },
-          )
+          
         ],
       ),
     );
