@@ -16,8 +16,7 @@ class CustomNavBar extends StatelessWidget {
   final NavBarConfig navBarConfig;
   final NavBarDecoration navBarDecoration;
 
-  Widget _buildItem(BuildContext context, ItemConfig item, bool isSelected) =>
-      Column(
+  Widget _buildItem(BuildContext context, ItemConfig item, bool isSelected) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
@@ -84,18 +83,14 @@ class CustomNavBar extends StatelessWidget {
           children: [
             SizedBox(height: IconSize.size25px),
             DecoratedNavBar(
-              decoration: NavBarDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: TobetoColor.card.shadowColor,
-                      blurRadius: SizeRadius.radius10px,
-                    ),
-                  ],
-                  borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(SizeRadius.radius20px))),
+              decoration: NavBarDecoration(boxShadow: [
+                BoxShadow(
+                  color: TobetoColor.card.shadowColor,
+                  blurRadius: SizeRadius.radius10px,
+                ),
+              ], borderRadius: BorderRadius.vertical(top: Radius.circular(SizeRadius.radius20px))),
               // ignore: deprecated_member_use
               filter: navBarConfig.selectedItem.filter,
-              // opacity: navBarConfig.selectedItem.opacity,
               height: IconSize.size60px,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
