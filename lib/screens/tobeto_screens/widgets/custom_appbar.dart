@@ -1,35 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
 import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 
-class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
-  const CustomAppBar({super.key});
-
-  @override
-  Size get preferredSize => const Size.fromHeight(70);
+class TobetoAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final bool isLeading;
+  const TobetoAppBar({super.key, this.isLeading = true});
 
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      backgroundColor: TobetoColor.card.cream,
+      iconTheme: const IconThemeData(
+        color: TobetoColor.purple,
+      ),
       title: Padding(
         padding: EdgeInsets.all(ScreenPadding.padding24px),
         child: Image.asset(ImagePath.greyTobeto),
       ),
       centerTitle: true,
-      leading: IconButton(
-        icon: Image.asset(ImagePath.purpleBack),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const LoginScreen(),
-            ),
-          );
-        },
-      ),
+      leading: isLeading
+          ? IconButton(
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: TobetoColor.purple,
+                size: IconSize.size25px,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            )
+          : null,
       actions: [
         IconButton(
           onPressed: () {},
@@ -42,4 +42,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
       ],
     );
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(75);
 }

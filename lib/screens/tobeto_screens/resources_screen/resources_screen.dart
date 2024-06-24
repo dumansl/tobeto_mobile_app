@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/tobeto_screens.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_appbar.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
-import 'sitemap_and_resources_widget/description_title_content.dart';
+import '../widgets/description_title_content.dart';
+import 'pdf_screen.dart';
+import 'webview_screen.dart';
 
-class SitemapAndResourcesScreen extends StatelessWidget {
-  const SitemapAndResourcesScreen({super.key});
+class ResourcesScreen extends StatelessWidget {
+  const ResourcesScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Site"),
-      ),
+      appBar: const TobetoAppBar(),
       body: Padding(
         padding: EdgeInsets.only(
           top: ScreenPadding.padding24px,
@@ -21,54 +21,9 @@ class SitemapAndResourcesScreen extends StatelessWidget {
           right: ScreenPadding.padding24px,
         ),
         child: SingleChildScrollView(
-          child: Column(
-            children: [
-              _siteMap(context),
-              SizedBox(height: ScreenPadding.padding32px),
-              _resources(context),
-            ],
-          ),
+          child: _resources(context),
         ),
       ),
-    );
-  }
-
-  Widget _siteMap(BuildContext context) {
-    return Column(
-      children: [
-        _textDivider(context, text: TobetoText.tmapTitle),
-        SizedBox(height: ScreenPadding.padding8px),
-        DescriptionTitleContent(
-          title: TobetoText.tmapAboutBox,
-          isButton: true,
-          navigatorScreen: const FAQScreen(),
-        ),
-        DescriptionTitleContent(
-          title: TobetoText.tmapPersonBox,
-          isButton: true,
-          navigatorScreen: const FAQScreen(),
-        ),
-        DescriptionTitleContent(
-          title: TobetoText.tmapCompaniesBox,
-          isButton: true,
-          navigatorScreen: const FAQScreen(),
-        ),
-        DescriptionTitleContent(
-          title: TobetoText.tmapCorporateBox,
-          isButton: true,
-          navigatorScreen: const FAQScreen(),
-        ),
-        DescriptionTitleContent(
-          title: TobetoText.tmapFAQBox,
-          isButton: true,
-          navigatorScreen: const FAQScreen(),
-        ),
-        DescriptionTitleContent(
-          title: TobetoText.tmapCommunicstionBox,
-          isButton: true,
-          navigatorScreen: const FAQScreen(),
-        ),
-      ],
     );
   }
 
