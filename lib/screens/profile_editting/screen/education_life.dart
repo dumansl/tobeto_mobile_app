@@ -44,7 +44,7 @@ class _EducationLifeState extends State<EducationLife> {
         univercityController.text.isNotEmpty &&
         graduatedDepartmentController.text.isNotEmpty &&
         startUnivercityDateController.text.isNotEmpty &&
-        (_isChecked || continueUnivercityController.text.isNotEmpty);
+        (_isChecked || graduateUnivercityDateController.text.isNotEmpty);
   }
 
   void _addEducationLife() {
@@ -138,6 +138,8 @@ class _EducationLifeState extends State<EducationLife> {
             onPressed: () {
               if (_areControllersValid()) {
                 _addEducationLife();
+              } else {
+                debugPrint("Form bilgileri eksik veya hatalı");
               }
             },
           ),

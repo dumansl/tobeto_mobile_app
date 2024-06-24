@@ -53,8 +53,6 @@ class ProfilePhotoView extends StatefulWidget {
 
 class _ProfilePhotoViewState extends State<ProfilePhotoView> {
   File? _selectedImage;
-  final String _defaultImagePath = 'assets/images/default_profile_photo.png';
-
   void _pickImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -89,8 +87,7 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
                         ? FileImage(_selectedImage!)
                         : hasImageUrl
                             ? NetworkImage(imageUrl)
-                            : const AssetImage(ImagePath.profilePhoto)
-                                as ImageProvider,
+                            : const AssetImage(ImagePath.defaultProfilePhoto) as ImageProvider,
                   ),
                   CircleAvatar(
                     backgroundColor: Colors.white,
@@ -108,12 +105,9 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
               if (_selectedImage != null)
                 ElevatedButton(
                   onPressed: () {
-                    context
-                        .read<ProfilePhotoBloc>()
-                        .add(UpdateProfilePhoto(_selectedImage!));
+                    context.read<ProfilePhotoBloc>().add(UpdateProfilePhoto(_selectedImage!));
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: TobetoColor.purple),
+                  style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
                   child: const Text('Kaydet'),
                 ),
             ],
@@ -143,10 +137,7 @@ class PersonalInfo extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const ProfileEditPage()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileEditPage()));
                 },
                 icon: Image.asset(ImagePath.organizer),
               ),
@@ -156,8 +147,7 @@ class PersonalInfo extends StatelessWidget {
                 IconAndText(
                   icon: ImagePath.user,
                   text: TobetoText.profileName,
-                  value:
-                      '${firstNameController.text} ${lastNameController.text}',
+                  value: '${firstNameController.text} ${lastNameController.text}',
                 ),
                 IconAndText(
                   icon: ImagePath.birthdate,
@@ -227,8 +217,7 @@ class CompetenciesView extends StatelessWidget {
               title: TobetoText.profileMySkills,
             ),
             if (state.skills.isEmpty)
-              const TwoLineCard(
-                  line2: "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.")
+              const TwoLineCard(line2: "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.")
             else
               ...state.skills.map((skill) {
                 return TwoLineCard(
@@ -258,8 +247,7 @@ class MyLanguages extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileLanguages),
             if (state.languages.isEmpty)
-              const TwoLineCard(
-                  line2: "Henüz eklediğiniz bir diliniz bulunmamaktadır.")
+              const TwoLineCard(line2: "Henüz eklediğiniz bir diliniz bulunmamaktadır.")
             else
               ...state.languages.map((languages) {
                 return TwoLineCard(
@@ -290,8 +278,7 @@ class MyCertificate extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileMyCertificate),
             if (state.certificate.isEmpty)
-              const TwoLineCard(
-                  line2: "Henüz eklediğiniz bir sertifikanız bulunmamaktadır.")
+              const TwoLineCard(line2: "Henüz eklediğiniz bir sertifikanız bulunmamaktadır.")
             else
               ...state.certificate.map((certificate) {
                 return TwoLineCard(
@@ -323,9 +310,7 @@ class Projects extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileProjectAwards),
             if (state.projects.isEmpty)
-              const TwoLineCard(
-                  line2:
-                      "Henüz eklediğiniz bir proje veya ödülünüz bulunmamaktadır.")
+              const TwoLineCard(line2: "Henüz eklediğiniz bir proje veya ödülünüz bulunmamaktadır.")
             else
               ...state.projects.map((projects) {
                 return TwoLineCard(
@@ -357,9 +342,7 @@ class WorkExperience extends StatelessWidget {
           children: [
             const CustomTitle(title: 'İş Deneyimleri'),
             if (state.works.isEmpty)
-              const TwoLineCard(
-                  line2:
-                      "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.")
+              const TwoLineCard(line2: "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.")
             else
               ...state.works.map((work) {
                 return TwoLineCard(
@@ -389,11 +372,9 @@ class Club extends StatelessWidget {
 
         return Column(
           children: [
-            CustomTitle(title: TobetoText.profileWorkExperiences),
+            CustomTitle(title: TobetoText.profileCommunity),
             if (state.club.isEmpty)
-              const TwoLineCard(
-                  line2:
-                      "Henüz eklediğiniz bir kulüp veya topluluğunuz bulunmamaktadır.")
+              const TwoLineCard(line2: "Henüz eklediğiniz bir kulüp veya topluluğunuz bulunmamaktadır.")
             else
               ...state.club.map((club) {
                 return TwoLineCard(
@@ -425,9 +406,7 @@ class Education extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileEducations),
             if (state.education.isEmpty)
-              const TwoLineCard(
-                  line2:
-                      "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.")
+              const TwoLineCard(line2: "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.")
             else
               ...state.education.map((education) {
                 return TwoLineCard(
@@ -450,8 +429,7 @@ class MainTitleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) =>
-            ConstrainedBox(
+        builder: (BuildContext context, BoxConstraints constraints) => ConstrainedBox(
               constraints: const BoxConstraints(
                 minHeight: 0,
                 maxHeight: double.infinity,
@@ -502,10 +480,9 @@ class IconAndText extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(text!,
-                style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
-            Text(value!,
-                style: TobetoTextStyle.poppins(context).captionGrayBold18),
+            Text(text!, style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
+            Text(value!, style: TobetoTextStyle.poppins(context).captionBlackBold18),
+            const SizedBox(height: 8)
           ],
         ),
       ],
@@ -542,8 +519,7 @@ class TitleCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(title,
-                      style: TobetoTextStyle.poppins(context).bodyBlackBold16),
+                  Text(title, style: TobetoTextStyle.poppins(context).bodyBlackBold16),
                   if (icon != null)
                     InkWell(
                       onTap: onTap,
@@ -594,51 +570,6 @@ class TwoLineCard extends StatelessWidget {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-}
-
-class PopUpDialog extends StatelessWidget {
-  const PopUpDialog({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: TobetoColor.card.cream,
-      title: Text(TobetoText.profileMySkills),
-      content: const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DialogCard(skill: 'Takım Yönetimi'),
-          DialogCard(skill: 'Mobil Geliştiricilik'),
-          DialogCard(skill: 'Çok Görevli Çalışma'),
-          DialogCard(skill: 'Aktif Dinleme'),
-          DialogCard(skill: 'İletişim'),
-        ],
-      ),
-    );
-  }
-}
-
-class DialogCard extends StatelessWidget {
-  final String skill;
-
-  const DialogCard({super.key, required this.skill});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        color: TobetoColor.card.white,
-        margin: const EdgeInsets.only(bottom: 5),
-        child: Padding(
-          padding: EdgeInsets.all(ScreenPadding.padding16px),
-          child: Text(skill,
-              style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
         ),
       ),
     );

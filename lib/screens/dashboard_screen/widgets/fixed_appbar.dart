@@ -73,7 +73,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                     radius: IconSize.size30px,
                     foregroundImage: state.imageUrl.isNotEmpty
                         ? NetworkImage(state.imageUrl)
-                        : const AssetImage(ImagePath.profilePhoto),
+                        : const AssetImage(ImagePath.defaultProfilePhoto),
                   ),
                 ),
               ]),

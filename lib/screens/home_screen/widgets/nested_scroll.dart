@@ -75,7 +75,7 @@ class NestedScroll extends StatelessWidget {
                                     radius: isTopRight ? IconSize.size30px : IconSize.size60px,
                                     foregroundImage: state.imageUrl.isNotEmpty
                                         ? NetworkImage(state.imageUrl)
-                                        : const AssetImage(ImagePath.profilePhoto),
+                                        : const AssetImage(ImagePath.defaultProfilePhoto),
                                   ),
                                 ),
                               );

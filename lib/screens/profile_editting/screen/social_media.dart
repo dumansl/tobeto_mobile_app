@@ -46,7 +46,7 @@ class _SocialMediaState extends State<SocialMedia> {
     'Facebook': ImagePath.facebook,
     'Twitter': ImagePath.blackX,
     'Instagram': ImagePath.instagram,
-    'LinkedIn': ImagePath.linkedIn,
+    'LinkedIn': ImagePath.linkedin,
   };
 
   @override
