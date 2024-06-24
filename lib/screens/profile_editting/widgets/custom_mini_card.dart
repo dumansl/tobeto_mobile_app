@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomMiniCard extends StatelessWidget {
@@ -18,12 +19,12 @@ class CustomMiniCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10),
+      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding10px),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            child: SizedBox(height: 30, width: 30, child: imagepath),
+            child: SizedBox(height: ScreenUtil.getHeight(context) * 0.06, child: imagepath),
           ),
           RichText(
               textAlign: TextAlign.center,

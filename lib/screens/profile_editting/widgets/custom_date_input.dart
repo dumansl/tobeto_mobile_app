@@ -1,6 +1,6 @@
 import 'package:date_format_field/date_format_field.dart';
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomDateInput extends StatelessWidget {
@@ -18,20 +18,20 @@ class CustomDateInput extends StatelessWidget {
     return DateFormatField(
       controller: controller,
       decoration: InputDecoration(
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
+          borderSide: const BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
         labelText: labelText,
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
         floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
-        border: const OutlineInputBorder(
+        border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
-          Radius.circular(12),
+          Radius.circular(SizeRadius.radius12px),
         )),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.transparent, width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: TobetoColor.background.transparent, width: 1.0),
+          borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
         ),
       ),
       type: DateFormatType.type2,

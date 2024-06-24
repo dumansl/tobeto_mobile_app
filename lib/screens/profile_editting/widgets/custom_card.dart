@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomCard extends StatelessWidget {
@@ -32,18 +33,18 @@ class CustomCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding20px, vertical: ScreenPadding.padding10px),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.only(bottom: 10),
+            padding: EdgeInsets.only(bottom: ScreenPadding.padding10px),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                const Padding(
-                  padding: EdgeInsets.only(right: 10),
-                  child: Icon(Icons.date_range_outlined),
+                Padding(
+                  padding: EdgeInsets.only(right: ScreenPadding.padding10px),
+                  child: const Icon(Icons.date_range_outlined),
                 ),
                 RichText(
                   text: TextSpan(

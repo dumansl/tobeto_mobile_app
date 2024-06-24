@@ -249,6 +249,13 @@ abstract class TobetoText {
   static String profileEditSettingsOldPasswordAgainBox = "Lütfen yeni şifrenizi tekrar giriniz...";
   static String profileEditSettingsChangeButton = "Şifre Değiştir";
   static String profileEditSettingsFinalButton = "Üyeliği Sonlandır";
+  static String passwordPlease = 'Lütfen bir şifre girin';
+  static String passwordCharachter = 'Şifreniz en az 6 karakter olmalıdır';
+  static String passwordAgain = 'Lütfen şifrenizi tekrar girin';
+  static String passwordWrong = 'Parolalar uyuşmuyor';
+  static String accountWrong = 'Hesap silinirken hata oluştu:';
+  static String accountEnd = 'Üyeliği sonlandırmak istediğinize emin misiniz?';
+
   // evaluation page
   static String evaluationAppBar = "Değerlendirmeler";
   static String evaluationHeadline1part1 = "Yetkinlik";
@@ -523,4 +530,6 @@ abstract class TobetoText {
   static String hambugerMenuResources = "Kaynaklar";
   static String hambugerMenuAboutUsCommunication = "İletişim";
   static String hambugerMenuIstanbulIsCodding = "İstanbul Kodluyor";
+  static String cancel = "İptal";
+  static String yes = "Evet";
 }

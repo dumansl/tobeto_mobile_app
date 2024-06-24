@@ -5,6 +5,7 @@ import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
@@ -42,9 +43,9 @@ class _SettingState extends State<Setting> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen bir şifre girin';
+                  return TobetoText.passwordPlease;
                 } else if (value.length < 6) {
-                  return 'Şifreniz en az 6 karakter olmalıdır';
+                  return TobetoText.passwordCharachter;
                 }
                 return null;
               },
@@ -62,9 +63,9 @@ class _SettingState extends State<Setting> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen bir şifre girin';
+                  return TobetoText.passwordPlease;
                 } else if (value.length < 6) {
-                  return 'Şifreniz en az 6 karakter olmalıdır';
+                  return TobetoText.passwordCharachter;
                 }
                 return null;
               },
@@ -82,7 +83,7 @@ class _SettingState extends State<Setting> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen şifrenizi tekrar girin';
+                  return TobetoText.passwordAgain;
                 }
                 return null;
               },
@@ -95,7 +96,7 @@ class _SettingState extends State<Setting> {
               if (_formKey.currentState!.validate()) {
                 _formKey.currentState!.save();
                 if (_password != _confirmPassword) {
-                  snackBar(context, 'Parolalar uyuşmuyor');
+                  snackBar(context, TobetoText.passwordWrong);
                   return;
                 }
                 context.read<AuthBloc>().add(
@@ -118,7 +119,7 @@ class _SettingState extends State<Setting> {
               } else if (state is DeleteAccountError) {
                 snackBar(
                   context,
-                  'Hesap silinirken hata oluştu: ${state.errorMessage}',
+                  '${TobetoText.accountWrong} ${state.errorMessage}',
                   bgColor: TobetoColor.state.error,
                 );
               }
@@ -147,20 +148,20 @@ class _SettingState extends State<Setting> {
         return AlertDialog(
           title: Text(
             TobetoText.profileEditSettingsFinalButton,
-            style: const TextStyle(color: Colors.black),
+            style: TextStyle(color: TobetoColor.card.black),
           ),
-          content: const Text(
-            'Üyeliği sonlandırmak istediğinize emin misiniz?',
-            style: TextStyle(color: Colors.black),
+          content: Text(
+            TobetoText.accountEnd,
+            style: TextStyle(color: TobetoColor.card.black),
           ),
           actions: <Widget>[
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text(
-                'İptal',
-                style: TextStyle(color: Colors.black),
+              child: Text(
+                TobetoText.cancel,
+                style: TextStyle(color: TobetoColor.card.black),
               ),
             ),
             TextButton(
@@ -168,9 +169,9 @@ class _SettingState extends State<Setting> {
                 context.read<AuthBloc>().add(const DeleteAccountEvent());
                 Navigator.of(context).pop();
               },
-              child: const Text(
-                'Evet',
-                style: TextStyle(color: Colors.black),
+              child: Text(
+                TobetoText.yes,
+                style: TextStyle(color: TobetoColor.card.black),
               ),
             ),
           ],

@@ -8,8 +8,8 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_date_i
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_card.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
-import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 
 class CertificateScreen extends StatefulWidget {
@@ -20,10 +20,8 @@ class CertificateScreen extends StatefulWidget {
 }
 
 class _CertificateScreenState extends State<CertificateScreen> {
-  final TextEditingController certificatesNameController =
-      TextEditingController();
-  final TextEditingController certificateDateController =
-      TextEditingController();
+  final TextEditingController certificatesNameController = TextEditingController();
+  final TextEditingController certificateDateController = TextEditingController();
 
   void _clearControllers() {
     certificatesNameController.clear();
@@ -31,8 +29,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
   }
 
   bool _areControllersValid() {
-    return certificatesNameController.text.isNotEmpty &&
-        certificateDateController.text.isNotEmpty;
+    return certificatesNameController.text.isNotEmpty && certificateDateController.text.isNotEmpty;
   }
 
   void _addClubCominities() {
@@ -46,8 +43,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CertificateBloc, CertificateState>(
-        builder: (context, state) {
+    return BlocBuilder<CertificateBloc, CertificateState>(builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -64,8 +60,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
           ),
           InputText(
             child: CustomDateInput(
-                controller: certificateDateController,
-                labelText: TobetoText.profileEditCertificatesDate),
+                controller: certificateDateController, labelText: TobetoText.profileEditCertificatesDate),
           ),
           CustomElevatedButton(
             onPressed: () {
@@ -83,9 +78,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
               return InputText(
                   child: CustomMiniCard(
                 onpressed: () {
-                  context
-                      .read<CertificateBloc>()
-                      .add(RemoveCertificate(certificate));
+                  context.read<CertificateBloc>().add(RemoveCertificate(certificate));
                 },
                 title: certificate['certificatesName'],
                 content: certificate['certificateDate'],
