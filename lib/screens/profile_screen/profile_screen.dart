@@ -1,8 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_state.dart';
@@ -91,7 +89,8 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
                         ? FileImage(_selectedImage!)
                         : hasImageUrl
                             ? NetworkImage(imageUrl)
-                            : const AssetImage(ImagePath.profilePhoto) as ImageProvider,
+                            : const AssetImage(ImagePath.profilePhoto)
+                                as ImageProvider,
                   ),
                   CircleAvatar(
                     backgroundColor: Colors.white,
@@ -228,9 +227,8 @@ class CompetenciesView extends StatelessWidget {
               title: TobetoText.profileMySkills,
             ),
             if (state.skills.isEmpty)
-
-              const TwoLineCard(line2: "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.")
-
+              const TwoLineCard(
+                  line2: "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.")
             else
               ...state.skills.map((skill) {
                 return TwoLineCard(
@@ -260,9 +258,8 @@ class MyLanguages extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileLanguages),
             if (state.languages.isEmpty)
-
-              const TwoLineCard(line2: "Henüz eklediğiniz bir diliniz bulunmamaktadır.")
-
+              const TwoLineCard(
+                  line2: "Henüz eklediğiniz bir diliniz bulunmamaktadır.")
             else
               ...state.languages.map((languages) {
                 return TwoLineCard(
@@ -293,9 +290,8 @@ class MyCertificate extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileMyCertificate),
             if (state.certificate.isEmpty)
-
-              const TwoLineCard(line2: "Henüz eklediğiniz bir sertifikanız bulunmamaktadır.")
-
+              const TwoLineCard(
+                  line2: "Henüz eklediğiniz bir sertifikanız bulunmamaktadır.")
             else
               ...state.certificate.map((certificate) {
                 return TwoLineCard(
@@ -327,9 +323,9 @@ class Projects extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileProjectAwards),
             if (state.projects.isEmpty)
-
-              const TwoLineCard(line2: "Henüz eklediğiniz bir proje veya ödülünüz bulunmamaktadır.")
-
+              const TwoLineCard(
+                  line2:
+                      "Henüz eklediğiniz bir proje veya ödülünüz bulunmamaktadır.")
             else
               ...state.projects.map((projects) {
                 return TwoLineCard(
@@ -361,9 +357,9 @@ class WorkExperience extends StatelessWidget {
           children: [
             const CustomTitle(title: 'İş Deneyimleri'),
             if (state.works.isEmpty)
-
-              const TwoLineCard(line2: "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.")
-
+              const TwoLineCard(
+                  line2:
+                      "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.")
             else
               ...state.works.map((work) {
                 return TwoLineCard(
@@ -395,9 +391,9 @@ class Club extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileWorkExperiences),
             if (state.club.isEmpty)
-
-              const TwoLineCard(line2: "Henüz eklediğiniz bir kulüp veya topluluğunuz bulunmamaktadır.")
-
+              const TwoLineCard(
+                  line2:
+                      "Henüz eklediğiniz bir kulüp veya topluluğunuz bulunmamaktadır.")
             else
               ...state.club.map((club) {
                 return TwoLineCard(
@@ -429,9 +425,9 @@ class Education extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileEducations),
             if (state.education.isEmpty)
-
-              const TwoLineCard(line2: "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.")
-
+              const TwoLineCard(
+                  line2:
+                      "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.")
             else
               ...state.education.map((education) {
                 return TwoLineCard(
@@ -579,17 +575,14 @@ class TwoLineCard extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
-
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
         color: Theme.of(context).colorScheme.onPrimary,
         margin: const EdgeInsets.only(bottom: 5),
-
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding12px),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-
               if (line1 != null && line1!.isNotEmpty)
                 Text(
                   line1!,
@@ -599,7 +592,6 @@ class TwoLineCard extends StatelessWidget {
                 line2,
                 style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16,
               ),
-
             ],
           ),
         ),
