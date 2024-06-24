@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.focusNode,
     this.onSaved,
+    this.readOnly = false,
   });
 
   final TextInputType keyboardType;
@@ -27,10 +28,12 @@ class CustomTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final FocusNode? focusNode;
   final void Function(String?)? onSaved;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly!,
       controller: controller,
       maxLines: maxLines,
       cursorColor: TobetoColor.card.grey,
