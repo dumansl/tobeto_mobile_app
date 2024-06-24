@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_state.dart';
@@ -108,9 +109,12 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
               if (_selectedImage != null)
                 ElevatedButton(
                   onPressed: () {
-                    context.read<ProfilePhotoBloc>().add(UpdateProfilePhoto(_selectedImage!));
+                    context
+                        .read<ProfilePhotoBloc>()
+                        .add(UpdateProfilePhoto(_selectedImage!));
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: TobetoColor.purple),
                   child: const Text('Kaydet'),
                 ),
             ],
@@ -140,7 +144,10 @@ class PersonalInfo extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileEditPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileEditPage()));
                 },
                 icon: Image.asset(ImagePath.organizer),
               ),
@@ -150,7 +157,8 @@ class PersonalInfo extends StatelessWidget {
                 IconAndText(
                   icon: ImagePath.user,
                   text: TobetoText.profileName,
-                  value: '${firstNameController.text} ${lastNameController.text}',
+                  value:
+                      '${firstNameController.text} ${lastNameController.text}',
                 ),
                 IconAndText(
                   icon: ImagePath.birthdate,
@@ -184,14 +192,12 @@ class PersonalInfo extends StatelessWidget {
                 ),
               ],
             ),
-            TitleCard(
-              title: TobetoText.profileAboutMe,
-              content: Text(
-                aboutMeController.text.isNotEmpty
-                    ? aboutMeController.text
-                    : 'Henüz eklediğiniz bir hakkımda bilginiz bulunmamaktadır.',
-                style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
-              ),
+            CustomTitle(title: TobetoText.profileAboutMe),
+            TwoLineCard(
+              line1: '',
+              line2: aboutMeController.text.isNotEmpty
+                  ? aboutMeController.text
+                  : 'Henüz eklediğiniz bir hakkımda bilginiz bulunmamaktadır.',
             ),
           ],
         );
@@ -222,7 +228,9 @@ class CompetenciesView extends StatelessWidget {
               title: TobetoText.profileMySkills,
             ),
             if (state.skills.isEmpty)
+
               const TwoLineCard(line2: "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.")
+
             else
               ...state.skills.map((skill) {
                 return TwoLineCard(
@@ -252,7 +260,9 @@ class MyLanguages extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileLanguages),
             if (state.languages.isEmpty)
+
               const TwoLineCard(line2: "Henüz eklediğiniz bir diliniz bulunmamaktadır.")
+
             else
               ...state.languages.map((languages) {
                 return TwoLineCard(
@@ -283,7 +293,9 @@ class MyCertificate extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileMyCertificate),
             if (state.certificate.isEmpty)
+
               const TwoLineCard(line2: "Henüz eklediğiniz bir sertifikanız bulunmamaktadır.")
+
             else
               ...state.certificate.map((certificate) {
                 return TwoLineCard(
@@ -315,7 +327,9 @@ class Projects extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileProjectAwards),
             if (state.projects.isEmpty)
+
               const TwoLineCard(line2: "Henüz eklediğiniz bir proje veya ödülünüz bulunmamaktadır.")
+
             else
               ...state.projects.map((projects) {
                 return TwoLineCard(
@@ -347,7 +361,9 @@ class WorkExperience extends StatelessWidget {
           children: [
             const CustomTitle(title: 'İş Deneyimleri'),
             if (state.works.isEmpty)
+
               const TwoLineCard(line2: "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.")
+
             else
               ...state.works.map((work) {
                 return TwoLineCard(
@@ -379,7 +395,9 @@ class Club extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileWorkExperiences),
             if (state.club.isEmpty)
+
               const TwoLineCard(line2: "Henüz eklediğiniz bir kulüp veya topluluğunuz bulunmamaktadır.")
+
             else
               ...state.club.map((club) {
                 return TwoLineCard(
@@ -411,7 +429,9 @@ class Education extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileEducations),
             if (state.education.isEmpty)
+
               const TwoLineCard(line2: "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.")
+
             else
               ...state.education.map((education) {
                 return TwoLineCard(
@@ -434,7 +454,8 @@ class MainTitleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) => ConstrainedBox(
+        builder: (BuildContext context, BoxConstraints constraints) =>
+            ConstrainedBox(
               constraints: const BoxConstraints(
                 minHeight: 0,
                 maxHeight: double.infinity,
@@ -443,7 +464,7 @@ class MainTitleCard extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Card(
-                    color: TobetoColor.card.white,
+                    color: Theme.of(context).colorScheme.onPrimary,
                     margin: const EdgeInsets.only(bottom: 5),
                     child: Padding(
                       padding: EdgeInsets.all(ScreenPadding.padding16px),
@@ -460,27 +481,35 @@ class MainTitleCard extends StatelessWidget {
 
 class IconAndText extends StatelessWidget {
   final String icon;
-  final String text;
-  final String value;
+  final String? text;
+  final String? value;
 
   const IconAndText({
     super.key,
     required this.icon,
-    required this.text,
-    required this.value,
+    this.text,
+    this.value,
   });
 
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
-        SizedBox(width: 40, height: 40, child: Image.asset(icon)),
+        SizedBox(
+            width: 40,
+            height: 40,
+            child: Image.asset(
+              icon,
+              color: Theme.of(context).colorScheme.onSurface,
+            )),
         const SizedBox(width: 15),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(text, style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
-            Text(value, style: TobetoTextStyle.poppins(context).captionGrayBold18),
+            Text(text!,
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
+            Text(value!,
+                style: TobetoTextStyle.poppins(context).captionGrayBold18),
           ],
         ),
       ],
@@ -507,7 +536,7 @@ class TitleCard extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
-        color: TobetoColor.card.white,
+        color: Theme.of(context).colorScheme.surface,
         margin: const EdgeInsets.only(bottom: 5),
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding16px),
@@ -517,7 +546,8 @@ class TitleCard extends StatelessWidget {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(title, style: TobetoTextStyle.poppins(context).bodyBlackBold16),
+                  Text(title,
+                      style: TobetoTextStyle.poppins(context).bodyBlackBold16),
                   if (icon != null)
                     InkWell(
                       onTap: onTap,
@@ -549,13 +579,17 @@ class TwoLineCard extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        color: TobetoColor.card.white,
+
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        color: Theme.of(context).colorScheme.onPrimary,
+        margin: const EdgeInsets.only(bottom: 5),
+
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding12px),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+
               if (line1 != null && line1!.isNotEmpty)
                 Text(
                   line1!,
@@ -565,6 +599,7 @@ class TwoLineCard extends StatelessWidget {
                 line2,
                 style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16,
               ),
+
             ],
           ),
         ),
@@ -610,7 +645,8 @@ class DialogCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 5),
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding16px),
-          child: Text(skill, style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
+          child: Text(skill,
+              style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
         ),
       ),
     );

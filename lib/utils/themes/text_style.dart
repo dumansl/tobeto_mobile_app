@@ -513,57 +513,57 @@ class Typography {
     captionMediumBlack12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack14 = baseStyle.copyWith(
       fontSize: 14,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack22 = baseStyle.copyWith(
       fontSize: 22,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack26 = baseStyle.copyWith(
       fontSize: 26,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.w500,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumGreen12 = baseStyle.copyWith(
       fontSize: 12,
@@ -648,47 +648,47 @@ class Typography {
     captionBlackThin12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w300,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackNormal12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayThin12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayNormal12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayThin12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayNormal12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionPurpleThin18 = baseStyle.copyWith(
       fontSize: 18,
@@ -723,47 +723,47 @@ class Typography {
     captionBlackThin18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w300,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackBold18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.bold,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackNormal18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.normal,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayThin18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayBold18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayNormal18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayThin18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayBold18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayNormal18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionPurpleThin24 = baseStyle.copyWith(
       fontSize: 24,
@@ -798,47 +798,47 @@ class Typography {
     captionBlackThin24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.w300,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackBold24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.bold,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackNormal24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.normal,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayThin24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayBold24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayNormal24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayThin24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayBold24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayNormal24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionPurpleThin30 = baseStyle.copyWith(
       fontSize: 30,
@@ -873,52 +873,52 @@ class Typography {
     captionBlackThin30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.w300,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackBold30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.bold,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackNormal30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.normal,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayThin30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayBold30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayNormal30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.grey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayThin30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayBold30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionLightGrayNormal30 = baseStyle.copyWith(
       fontSize: 30,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     headlineBlackBold32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     headlineGrayMediumBold32 = baseStyle.copyWith(
       fontSize: 32,
@@ -1023,32 +1023,32 @@ class Typography {
     headlineBlackSemiBold32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     headlineBlackNormal32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     headlineBlackLight32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subHeadlineBlackBold28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subHeadlineBlackSemiBold28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subHeadlineBlackNormal28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subHeadlineGrayMediumBold28 = baseStyle.copyWith(
       fontSize: 28,
@@ -1073,87 +1073,87 @@ class Typography {
     subHeadlineBlackLight28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     titleBlackBold24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     titleBlackSemiBold24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     titleBlackNormal24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     titleBlackLight24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleBlackBold20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleBlackSemiBold20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleBlackNormal20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleBlackLight20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyBlackBold16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyBlackSemiBold16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyBlackNormal16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyBlackLight16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackBold15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackSemiBold15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackNormal15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackLight15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     headlineWhiteBold32 = baseStyle.copyWith(
       fontSize: 32,
@@ -1532,112 +1532,112 @@ class Typography {
     headlineGrayLightBold32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     headlineGrayLightSemiBold32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     headlineGrayLightNormal32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     headlineGrayLightLight32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subHeadlineGrayLightBold28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subHeadlineGrayLightSemiBold28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subHeadlineGrayLightNormal28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subHeadlineGrayLightLight28 = baseStyle.copyWith(
       fontSize: 28,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     titleGrayLightBold24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     titleGrayLightSemiBold24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     titleGrayLightNormal24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     titleGrayLightLight24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleGrayLightBold20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleGrayLightSemiBold20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleGrayLightNormal20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleGrayLightLight20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyGrayLightBold16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyGrayLightSemiBold16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyGrayLightNormal16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyGrayLightLight16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayLightBold15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayLightSemiBold15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionGrayLightNormal15 = baseStyle.copyWith(
       fontSize: 15,
@@ -1647,12 +1647,12 @@ class Typography {
     captionGrayLightLight15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.lightGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionBlackNormal14 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.bold,
-      color: Colors.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
   }
 }

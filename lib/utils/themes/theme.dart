@@ -9,26 +9,28 @@ ThemeData darkTheme =
 
 ColorScheme lightColorScheme = ColorScheme(
   brightness: Brightness.light,
-  surface: TobetoColor.background.white, //Arka Plan Rengi
-  primary: TobetoColor.button.white, //  Button Rengi
-  onPrimary: TobetoColor.formField.white, // Text Form Field Rengi
-  secondary: TobetoColor.frame.lightGrey, // Çerceve Rengi
+  primary: TobetoColor.card.cream, //Arka Plan Rengi
+  surface: TobetoColor.card.white, //  card rengi
+  secondary: TobetoColor.formField.white, // Text Form Field Rengi
+  onPrimary: TobetoColor.text.white, // Çerceve Rengi
   onSecondary: TobetoColor.icon.darkGrey, // Icon Rengi
-  onSurface: TobetoColor.text.lightGrey, // Text Rengi
+  onSurface: TobetoColor.text.black, // Text Rengi//dashboardtext rengi
   inversePrimary: const Color(0xffb1d18a),
-  error: const Color(0xffba1a1a),
+  error: TobetoColor.state.error,
   onError: const Color(0xffffffff),
+  onTertiary: TobetoColor.text.black,
 );
 
 ColorScheme darkColorScheme = ColorScheme(
-  surface: TobetoColor.background.darkGrey,
-  primary: TobetoColor.button.darkGrey,
-  onPrimary: TobetoColor.formField.darkGrey,
-  secondary: TobetoColor.frame.grey,
-  onSecondary: TobetoColor.icon.white,
-  onSurface: TobetoColor.text.white,
   brightness: Brightness.dark,
-  error: const Color(0xffffb4ab),
+  primary: TobetoColor.background.darkGrey, //arka plan rengi
+  surface: TobetoColor.card.carddarkmode, //card rengi
+  secondary: TobetoColor.card.carddarkmode, // Text Form Field Rengi
+  onPrimary: TobetoColor.card.black,
+  onSecondary: TobetoColor.icon.darkGrey, // Icon Rengi
+  onSurface: TobetoColor.text.white, // Text Rengi//dashboardtext rengi
+  error: TobetoColor.state.error,
   onError: const Color(0xff690005),
   inversePrimary: const Color(0xff4c662b),
+  onTertiary: TobetoColor.text.black,
 );

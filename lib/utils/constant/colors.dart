@@ -25,12 +25,13 @@ class BackgroundColor {
   final Color darkGrey = const Color(0xff212529);
   final Color lightGrey = const Color(0xffF5F5F5);
   final Color transparent = Colors.transparent;
+  final Color darkbackground = const Color(0xff212529);
 }
 
 class CardColor {
   final Color white = Colors.white;
   final Color black = Colors.black;
-  final Color grey = Colors.grey;
+  final Color grey = const Color(0xffF1F1F1);
   final Color shineGreen = const Color.fromARGB(255, 0, 231, 170);
   final Color navyBlue = const Color(0xFF1E0F41);
   final Color cream = const Color(0xffF5F5F5);
@@ -51,6 +52,7 @@ class CardColor {
   final Color shadowColor = const Color.fromARGB(255, 117, 117, 117);
   final Color iknavyblue = const Color(0xff1E0F41);
   final Color ikgreen = const Color(0xff00D29B);
+  final Color carddarkmode = const Color(0xFF14171A);
 }
 
 class ButtonColor {

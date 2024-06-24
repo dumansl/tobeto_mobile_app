@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/theme_bloc/theme_bloc.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/nested_scroll.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';
@@ -118,6 +120,12 @@ class _HomeScreenState extends State<HomeScreen> {
                 style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
                 textAlign: TextAlign.center,
               ),
+              Switch(
+                value: context.read<ThemeBloc>().state == ThemeMode.dark,
+                onChanged: (value) {
+                  context.read<ThemeBloc>().add(ThemeChanged(value));
+                },
+              ),
               SizedBox(height: ScreenPadding.padding12px),
               Text(
                 TobetoText.mainHeadline3,
@@ -133,7 +141,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: boxWidgets.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
-                    return boxWidgets[index]; // Belirlenen Box widget'larını kullan
+                    return boxWidgets[
+                        index]; // Belirlenen Box widget'larını kullan
                   },
                 ),
               ),
