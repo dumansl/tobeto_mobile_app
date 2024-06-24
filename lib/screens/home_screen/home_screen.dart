@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/theme_bloc/theme_bloc.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/catalog.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/nested_scroll.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';

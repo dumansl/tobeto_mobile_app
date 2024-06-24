@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/catalog.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_appbar.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_logo.dart';

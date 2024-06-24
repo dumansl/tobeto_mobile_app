@@ -5,14 +5,15 @@ import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_state.d
 import 'package:tobeto_mobile_app/services/user_service.dart';
 
 class ProfilePhotoBloc extends Bloc<ProfilePhotoEvent, ProfilePhotoState> {
-  final UserService userService;
+  final UserService userService = UserService();
 
-  ProfilePhotoBloc(this.userService) : super(ProfilePhotoInitial()) {
+  ProfilePhotoBloc() : super(ProfilePhotoInitial()) {
     on<LoadProfilePhoto>(_onLoadProfilePhoto);
     on<UpdateProfilePhoto>(_onUpdateProfilePhoto);
   }
 
-  void _onLoadProfilePhoto(LoadProfilePhoto event, Emitter<ProfilePhotoState> emit) async {
+  void _onLoadProfilePhoto(
+      LoadProfilePhoto event, Emitter<ProfilePhotoState> emit) async {
     emit(ProfilePhotoLoading());
     try {
       final String imageUrl = await userService.getPhoto();
@@ -23,7 +24,8 @@ class ProfilePhotoBloc extends Bloc<ProfilePhotoEvent, ProfilePhotoState> {
     }
   }
 
-  void _onUpdateProfilePhoto(UpdateProfilePhoto event, Emitter<ProfilePhotoState> emit) async {
+  void _onUpdateProfilePhoto(
+      UpdateProfilePhoto event, Emitter<ProfilePhotoState> emit) async {
     emit(ProfilePhotoLoading());
     try {
       final String imageUrl = await userService.updateProfilePhoto(event.image);

@@ -8,14 +8,15 @@ part 'application_event.dart';
 part 'application_state.dart';
 
 class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
-  final ApplicationService _applicationService;
+  final ApplicationService _applicationService = ApplicationService();
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
-  ApplicationBloc(this._applicationService) : super(ApplicationInitial()) {
+  ApplicationBloc() : super(ApplicationInitial()) {
     on<LoadApplication>(_onLoadApplication);
   }
 
-  void _onLoadApplication(LoadApplication event, Emitter<ApplicationState> emit) async {
+  void _onLoadApplication(
+      LoadApplication event, Emitter<ApplicationState> emit) async {
     try {
       // Oturum açmış kullanıcının userId'si
       User? user = _auth.currentUser;
@@ -23,10 +24,12 @@ class ApplicationBloc extends Bloc<ApplicationEvent, ApplicationState> {
         final userId = user.uid;
 
         // Application ID'yi al
-        final applicationId = await _applicationService.getApplicationId(userId);
+        final applicationId =
+            await _applicationService.getApplicationId(userId);
 
         // ApplicationService aracılığıyla Firebase'den veri çekme işlemi
-        final application = await _applicationService.getApplication(userId, applicationId);
+        final application =
+            await _applicationService.getApplication(userId, applicationId);
 
         // Veri başarıyla çekildiyse
         emit(ApplicationLoaded(application));

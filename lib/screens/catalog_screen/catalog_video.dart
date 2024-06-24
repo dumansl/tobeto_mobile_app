@@ -22,21 +22,32 @@ class CatalogVideo extends StatefulWidget {
 class _CatalogDetailState extends State<CatalogVideo> {
   CustomVideoPlayerController? _customVideoPlayerController;
   CachedVideoPlayerController? _cachedVideoPlayerController;
+  bool _isDisposing = false;
 
   @override
   void dispose() {
-    _customVideoPlayerController?.dispose();
+    _isDisposing = true;
     _cachedVideoPlayerController?.dispose();
+    _customVideoPlayerController?.dispose();
     super.dispose();
   }
 
   Future<void> initializeVideoPlayer(String videoUrl) async {
-    _cachedVideoPlayerController?.dispose();
-    _customVideoPlayerController?.dispose();
+    if (_isDisposing) return;
+
+    // Mevcut kontrolcüyü temizlemeden önce durumu kontrol et
+    if (_cachedVideoPlayerController != null) {
+      _cachedVideoPlayerController!.removeListener(_onVideoPlayerChanged);
+      await _cachedVideoPlayerController!.dispose();
+    }
 
     _cachedVideoPlayerController =
         CachedVideoPlayerController.network(videoUrl);
+
+    _cachedVideoPlayerController!.addListener(_onVideoPlayerChanged);
     await _cachedVideoPlayerController!.initialize();
+    if (_isDisposing) return;
+
     setState(() {
       _customVideoPlayerController = CustomVideoPlayerController(
         context: context,
@@ -44,6 +55,11 @@ class _CatalogDetailState extends State<CatalogVideo> {
       );
     });
     _cachedVideoPlayerController!.pause();
+  }
+
+  void _onVideoPlayerChanged() {
+    if (_isDisposing) return;
+    setState(() {}); // Kontrolcünün durumu değiştiğinde ekranı yeniden çiz
   }
 
   @override

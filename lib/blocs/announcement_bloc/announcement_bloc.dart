@@ -8,9 +8,9 @@ part 'announcement_event.dart';
 part 'announcement_state.dart';
 
 class AnnouncementBloc extends Bloc<AnnouncementEvent, AnnouncementState> {
-  final AnnouncementService _announcementService;
+  final AnnouncementService _announcementService = AnnouncementService();
 
-  AnnouncementBloc(this._announcementService) : super(AnnouncementInitial()) {
+  AnnouncementBloc() : super(AnnouncementInitial()) {
     on<LoadAnnouncements>(_onLoadAnnouncements);
     on<FilterAnnouncements>(_onFilterAnnouncements);
     on<ToggleShowUnread>(_onToggleShowUnread);

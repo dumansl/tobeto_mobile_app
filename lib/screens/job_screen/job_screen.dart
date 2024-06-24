@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_mobile_app/blocs/job_bloc/job_bloc.dart';
-import 'package:tobeto_mobile_app/services/job_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import 'job_widgets/job_card.dart';
@@ -18,15 +17,16 @@ class JobScreen extends StatelessWidget {
         if (user == null) {
           // Kullanıcı giriş yapmamışsa giriş ekranına yönlendirin
           Navigator.of(context).pushReplacementNamed('/login');
-          return JobBloc(JobService());
+          return JobBloc();
         } else {
           // Kullanıcı kimliği ile JobBloc'u başlatın
-          return JobBloc(JobService())..add(LoadJobs(user.uid));
+          return JobBloc()..add(LoadJobs(user.uid));
         }
       },
       child: Scaffold(
         appBar: AppBar(
-          title: Text('İş Süreçlerim', style: TobetoTextStyle.poppins(context).headlineBlackBold32),
+          title: Text('İş Süreçlerim',
+              style: TobetoTextStyle.poppins(context).headlineBlackBold32),
           centerTitle: true,
           backgroundColor: Colors.white,
           elevation: 0,
@@ -52,18 +52,23 @@ class JobScreen extends StatelessWidget {
                         selectedBorderColor: Colors.transparent,
                         selectedColor: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        isSelected: [state.selectedIndex == 0, state.selectedIndex == 1],
+                        isSelected: [
+                          state.selectedIndex == 0,
+                          state.selectedIndex == 1
+                        ],
                         onPressed: (index) {
                           context.read<JobBloc>().add(ToggleTab(index));
                         },
                         children: const [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Text('Başvurularım', style: TextStyle(fontFamily: 'Poppins')),
+                            child: Text('Başvurularım',
+                                style: TextStyle(fontFamily: 'Poppins')),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Text('Mülakatlarım', style: TextStyle(fontFamily: 'Poppins')),
+                            child: Text('Mülakatlarım',
+                                style: TextStyle(fontFamily: 'Poppins')),
                           ),
                         ],
                       ),

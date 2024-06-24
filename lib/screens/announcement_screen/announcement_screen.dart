@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/services/announcement_service.dart';
 import 'package:tobeto_mobile_app/blocs/announcement_bloc/announcement_bloc.dart';
 import '../announcement_screen/announcement_widgets/announcement_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
@@ -11,7 +10,7 @@ class AnnouncementScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => AnnouncementBloc(AnnouncementService())..add(LoadAnnouncements()),
+      create: (context) => AnnouncementBloc()..add(LoadAnnouncements()),
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Duyuru ve Haberlerim"),
@@ -98,9 +97,13 @@ class _AnnouncementViewState extends State<AnnouncementView> {
               Expanded(
                 flex: 1,
                 child: IconButton(
-                  icon: Icon(_showOnlyUnread ? Icons.visibility_off : Icons.visibility),
+                  icon: Icon(_showOnlyUnread
+                      ? Icons.visibility_off
+                      : Icons.visibility),
                   onPressed: _toggleShowUnread,
-                  tooltip: _showOnlyUnread ? 'Hepsini Göster' : 'Okunmuş Olanları Gizle',
+                  tooltip: _showOnlyUnread
+                      ? 'Hepsini Göster'
+                      : 'Okunmuş Olanları Gizle',
                 ),
               ),
             ],
@@ -111,16 +114,21 @@ class _AnnouncementViewState extends State<AnnouncementView> {
             builder: (context, state) {
               if (state is AnnouncementsLoading) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
-                final announcements =
-                    state is AnnouncementsLoaded ? state.announcements : (state as AnnouncementsFiltered).announcements;
+              } else if (state is AnnouncementsLoaded ||
+                  state is AnnouncementsFiltered) {
+                final announcements = state is AnnouncementsLoaded
+                    ? state.announcements
+                    : (state as AnnouncementsFiltered).announcements;
                 if (announcements.isEmpty) {
-                  return const Center(child: Text('No announcements available.'));
+                  return const Center(
+                      child: Text('No announcements available.'));
                 }
                 return ListView.builder(
                   itemCount: announcements.length,
                   itemBuilder: (context, index) {
-                    return AnnouncementCard(announcement: announcements[index], focusNode: _focusNode);
+                    return AnnouncementCard(
+                        announcement: announcements[index],
+                        focusNode: _focusNode);
                   },
                 );
               } else if (state is AnnouncementsError) {
