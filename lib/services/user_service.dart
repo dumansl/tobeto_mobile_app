@@ -182,10 +182,11 @@ class UserService {
 
   Future<String> getPhoto() async {
     final DocumentSnapshot userDoc = await db.collection('users').doc(userId).get();
-    if (userDoc.exists) {
-      return userDoc['avatarUrl'] ?? '';
+    final data = userDoc.data() as Map<String, dynamic>?;
+    if (userDoc.exists && data != null && data.containsKey('avatarUrl')) {
+      return data['avatarUrl'] ?? '';
     }
-    return '';
+    return ''; // No profile photo
   }
 
   Future<String> updateProfilePhoto(File image) async {
@@ -220,21 +221,22 @@ class UserService {
   Future<UserModel?> getData() async {
     final DocumentSnapshot userDoc = await db.collection('users').doc(userId).get();
     if (userDoc.exists) {
-      firstNameController.text = userDoc['firstName'] ?? '';
-      lastNameController.text = userDoc['lastName'] ?? '';
-      emailController.text = userDoc['email'] ?? '';
-      identificationController.text = userDoc['identification'] ?? '';
-      githubController.text = userDoc['github'] ?? '';
-      countryController.text = userDoc['country'] ?? '';
-      cityController.text = userDoc['city'] ?? '';
-      districtController.text = userDoc['district'] ?? '';
-      streetController.text = userDoc['street'] ?? '';
-      aboutMeController.text = userDoc['aboutMe'] ?? '';
-      phoneNumberController.text = userDoc['phoneNumber'] ?? '';
-      birthDateController.text = userDoc['birthday'] ?? '';
-      genderController.text = userDoc['gender'] ?? '';
-      militaryStatuController.text = userDoc['militaryStatu'] ?? '';
-      disabledStatuController.text = userDoc['disabledStatu'] ?? '';
+      final data = userDoc.data() as Map<String, dynamic>;
+      firstNameController.text = data['firstName'] ?? '';
+      lastNameController.text = data['lastName'] ?? '';
+      emailController.text = data['email'] ?? '';
+      identificationController.text = data['identification'] ?? '';
+      githubController.text = data['github'] ?? '';
+      countryController.text = data['country'] ?? '';
+      cityController.text = data['city'] ?? '';
+      districtController.text = data['district'] ?? '';
+      streetController.text = data['street'] ?? '';
+      aboutMeController.text = data['aboutMe'] ?? '';
+      phoneNumberController.text = data['phoneNumber'] ?? '';
+      birthDateController.text = data['birthday'] ?? '';
+      genderController.text = data['gender'] ?? '';
+      militaryStatuController.text = data['militaryStatu'] ?? '';
+      disabledStatuController.text = data['disabledStatu'] ?? '';
     }
     return null;
   }

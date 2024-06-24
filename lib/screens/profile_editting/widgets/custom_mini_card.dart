@@ -23,7 +23,7 @@ class CustomMiniCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            child: SizedBox(height: 35, width: 35, child: imagepath),
+            child: SizedBox(height: 30, width: 30, child: imagepath),
           ),
           RichText(
               textAlign: TextAlign.center,

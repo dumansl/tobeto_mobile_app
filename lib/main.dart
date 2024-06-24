@@ -5,6 +5,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_event.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/press_bloc.dart/press_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_event.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
@@ -79,6 +80,7 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<ProfilePhotoBloc>(
             create: (context) =>
                 ProfilePhotoBloc(UserService())..add(LoadProfilePhoto())),
+        BlocProvider<PressBloc>(create: (context) => PressBloc()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {

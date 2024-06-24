@@ -4,9 +4,10 @@ import 'package:tobeto_mobile_app/blocs/press_bloc.dart/press_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/press_bloc.dart/press_state.dart';
 import 'package:tobeto_mobile_app/model/press_model.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/we_in_the_press/press_details_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
+
+import 'press_details_screen.dart';
 
 class WeInThePressScreen extends StatelessWidget {
   const WeInThePressScreen({super.key});
