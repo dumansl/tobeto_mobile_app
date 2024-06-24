@@ -1,137 +1,102 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_bloc/flutter_bloc.dart';
-// import 'package:table_calendar/table_calendar.dart';
-// import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_bloc.dart';
-// import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_event.dart';
-// import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_state.dart';
-// import 'package:tobeto_mobile_app/services/calendar_service.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_event.dart';
+import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_state.dart';
+import 'package:tobeto_mobile_app/model/calendar_model.dart';
+import 'package:tobeto_mobile_app/services/calendar_service.dart';
 
-// class CalendarScreen extends StatelessWidget {
-//   const CalendarScreen({super.key});
+class CalendarScreen extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (_) => CalendarBloc(CalendarRepository(CalendarService())),
+      child: CalendarView(),
+    );
+  }
+}
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title: const Text('Takvim'),
-//       ),
-//       body: BlocProvider(
-//         create: (context) =>
-//             LessonBloc(LessonRepository())..add(LessonsLoadRequested()),
-//         child: const CalendarView(),
-//       ),
-//     );
-//   }
-// }
-
-// class CalendarView extends StatelessWidget {
-//   const CalendarView({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return const Column(
-//       children: [
-//         CalendarWidget(),
-//         Expanded(child: LessonDetailView()),
-//       ],
-//     );
-//   }
-// }
-
-// class CalendarWidget extends StatelessWidget {
-//   const CalendarWidget({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<LessonBloc, LessonState>(
-//       builder: (context, state) {
-//         if (state is LessonLoadInProgress) {
-//           return const Center(child: CircularProgressIndicator());
-//         } else if (state is LessonLoadSuccess) {
-//           return TableCalendar(
-//             focusedDay: DateTime.now(),
-//             firstDay: DateTime.utc(2020, 10, 16),
-//             lastDay: DateTime.utc(2030, 3, 14),
-//             eventLoader: (day) {
-//               return state.lessons
-//                   .where((lesson) => isSameDay(lesson.date, day))
-//                   .toList();
-//             },
-//             onDaySelected: (selectedDay, focusedDay) {
-//               final selectedLessons = state.lessons
-//                   .where((lesson) => isSameDay(lesson.date, selectedDay))
-//                   .toList();
-//               if (selectedLessons.isNotEmpty) {
-//                 context
-//                     .read<LessonBloc>()
-//                     .add(LessonSelectedEvent(selectedLessons.first));
-//               }
-//             },
-//             calendarBuilders: CalendarBuilders(
-//               markerBuilder: (context, date, lessons) {
-//                 if (lessons.isNotEmpty) {
-//                   return ListView.builder(
-//                     shrinkWrap:
-//                         true, // Use shrinkWrap to prevent infinite height error
-//                     itemCount: lessons.length,
-//                     itemBuilder: (context, index) {
-//                       final colorString = lessons[index].color;
-//                       final colorValue = colorString.startsWith('#')
-//                           ? int.parse(colorString.replaceFirst('#', '0xFF'))
-//                           : int.parse('0xFF$colorString');
-// // 
-//                       return Container(
-//                         margin: const EdgeInsets.all(1.0),
-//                         decoration: BoxDecoration(
-//                           shape: BoxShape.circle,
-//                           color: Color(colorValue),
-//                         ),
-//                         width: 7.0,
-//                         height: 7.0,
-//                       );
-//                     },
-//                   );
-//                 }
-//                 return const SizedBox();
-//               },
-//             ),
-//           );
-//         } else {
-//           return const Center(child: Text('Dersler yüklenemedi.'));
-//         }
-//       },
-//     );
-//   }
-// }
-
-// class LessonDetailView extends StatelessWidget {
-//   const LessonDetailView({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocBuilder<LessonBloc, LessonState>(
-//       builder: (context, state) {
-//         if (state is LessonSelected) {
-//           final lesson = state.selectedLesson;
-//           return Padding(
-//             padding: const EdgeInsets.all(16.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.start,
-//               children: [
-//                 Text('Ders: ${lesson.title}',
-//                     style: const TextStyle(fontSize: 20)),
-//                 const SizedBox(height: 8),
-//                 Text('Eğitmen: ${lesson.instructor}'),
-//                 const SizedBox(height: 8),
-//                 Text('Saat: ${lesson.startTime} - ${lesson.endTime}'),
-//                 const SizedBox(height: 8),
-//                 Text('Tarih: ${lesson.date.toLocal()}'),
-//               ],
-//             ),
-//           );
-//         }
-//         return const Center(child: Text('Bir ders seçin'));
-//       },
-//     );
-//   }
-// }
+class CalendarView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Takvim'),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.filter_alt),
+            onPressed: () {
+              // Filtre işlemleri
+            },
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          BlocBuilder<CalendarBloc, CalendarState>(
+            builder: (context, state) {
+              if (state is CalendarLoading) {
+                return Center(child: CircularProgressIndicator());
+              } else if (state is CalendarLoaded) {
+                return Column(
+                  children: [
+                    TableCalendar(
+                      firstDay: DateTime.utc(2020, 10, 16),
+                      lastDay: DateTime.utc(2030, 3, 14),
+                      focusedDay: state.selectedDate,
+                      selectedDayPredicate: (day) => isSameDay(state.selectedDate, day),
+                      onDaySelected: (selectedDay, focusedDay) {
+                        context.read<CalendarBloc>().add(SelectDate(selectedDay));
+                      },
+                      calendarBuilders: CalendarBuilders(
+                        markerBuilder: (context, date, events) {
+                          List<Lesson> lessons = state.lessons.where((lesson) => isSameDay(lesson.date, date)).toList();
+                          if (lessons.isNotEmpty) {
+                            return Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: lessons
+                                  .map((lesson) => Container(
+                                        margin: EdgeInsets.symmetric(horizontal: 1.5),
+                                        width: 5.0,
+                                        height: 5.0,
+                                        decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          shape: BoxShape.circle,
+                                        ),
+                                      ))
+                                  .toList(),
+                            );
+                          }
+                          return null;
+                        },
+                      ),
+                    ),
+                    Expanded(
+                      child: ListView.builder(
+                        itemCount: state.lessons.length,
+                        itemBuilder: (context, index) {
+                          Lesson lesson = state.lessons[index];
+                          return Card(
+                            color: Colors.red,
+                            child: ListTile(
+                              title: Text(lesson.time),
+                              subtitle: Text(lesson.instructor),
+                              leading: Text(lesson.title),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                );
+              } else {
+                return Center(child: Text('Veri yüklenemedi.'));
+              }
+            },
+          ),
+        ],
+      ),
+    );
+  }
+}

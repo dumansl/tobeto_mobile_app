@@ -1,21 +1,19 @@
 import 'package:equatable/equatable.dart';
-import 'package:tobeto_mobile_app/model/calendar_model.dart';
 
-
-abstract class LessonEvent extends Equatable {
-  const LessonEvent();
+abstract class CalendarEvent extends Equatable {
+  const CalendarEvent();
 
   @override
   List<Object> get props => [];
 }
 
-class LessonsLoadRequested extends LessonEvent {}
+class FetchLessons extends CalendarEvent {}
 
-class LessonSelectedEvent extends LessonEvent {
-  final Lesson selectedLesson;
+class SelectDate extends CalendarEvent {
+  final DateTime date;
 
-  const LessonSelectedEvent(this.selectedLesson);
+  const SelectDate(this.date);
 
   @override
-  List<Object> get props => [selectedLesson];
+  List<Object> get props => [date];
 }

@@ -1,14 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tobeto_mobile_app/model/calendar_model.dart';
 
-class LessonRepository {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+class CalendarRepository {
+  final CalendarService service;
 
-  Stream<List<Lesson>> getLessons() {
-    return _firestore.collection('lessons').snapshots().map((snapshot) {
-      return snapshot.docs.map((doc) {
-        return Lesson.fromMap(doc.data(), doc.id);
-      }).toList();
-    });
+  CalendarRepository(this.service);
+
+  Future<List<Lesson>> fetchLessons() {
+    return service.fetchLessons();
+  }
+}
+
+class CalendarService {
+  Future<List<Lesson>> fetchLessons() async {
+    FirebaseFirestore firestore = FirebaseFirestore.instance;
+    QuerySnapshot snapshot = await firestore.collection('lessons').get();
+    return snapshot.docs.map((doc) => Lesson.fromJson(doc.data() as Map<String, dynamic>)).toList();
   }
 }

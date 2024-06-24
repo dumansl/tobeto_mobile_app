@@ -1,34 +1,30 @@
 import 'package:equatable/equatable.dart';
 import 'package:tobeto_mobile_app/model/calendar_model.dart';
 
-
-abstract class LessonState extends Equatable {
-  const LessonState();
+abstract class CalendarState extends Equatable {
+  const CalendarState();
 
   @override
   List<Object> get props => [];
 }
 
-class LessonInitial extends LessonState {}
+class CalendarLoading extends CalendarState {}
 
-class LessonLoadInProgress extends LessonState {}
-
-class LessonLoadSuccess extends LessonState {
+class CalendarLoaded extends CalendarState {
   final List<Lesson> lessons;
+  final DateTime selectedDate;
 
-  const LessonLoadSuccess([this.lessons = const []]);
+  const CalendarLoaded({required this.lessons, required this.selectedDate});
 
-  @override
-  List<Object> get props => [lessons];
-}
-
-class LessonLoadFailure extends LessonState {}
-
-class LessonSelected extends LessonState {
-  final Lesson selectedLesson;
-
-  const LessonSelected(this.selectedLesson);
+  CalendarLoaded copyWith({List<Lesson>? lessons, DateTime? selectedDate}) {
+    return CalendarLoaded(
+      lessons: lessons ?? this.lessons,
+      selectedDate: selectedDate ?? this.selectedDate,
+    );
+  }
 
   @override
-  List<Object> get props => [selectedLesson];
+  List<Object> get props => [lessons, selectedDate];
 }
+
+class CalendarError extends CalendarState {}
