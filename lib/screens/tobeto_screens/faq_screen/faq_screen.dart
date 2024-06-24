@@ -3,10 +3,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_event.dart';
 import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_state.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/sitemap_and_resources/sitemap_and_resources_widget/custom_dropdown_input.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/sitemap_and_resources/sitemap_and_resources_widget/description_title_content.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_dropdown_input.dart';
 import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
+
+import '../widgets/description_title_content.dart';
 
 class FAQScreen extends StatefulWidget {
   const FAQScreen({super.key});
