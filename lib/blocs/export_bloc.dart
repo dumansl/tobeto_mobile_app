@@ -1,3 +1,4 @@
+// Bloc 'lar buradan çağırılıyor.
 export "announcement_bloc/announcement_bloc.dart";
 export 'application_bloc/application_bloc.dart';
 export 'auth_bloc/auth_bloc.dart';

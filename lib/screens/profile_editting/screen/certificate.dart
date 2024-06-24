@@ -1,4 +1,3 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_bloc.dart';
@@ -21,8 +20,10 @@ class CertificateScreen extends StatefulWidget {
 }
 
 class _CertificateScreenState extends State<CertificateScreen> {
-  final TextEditingController certificatesNameController = TextEditingController();
-  final TextEditingController certificateDateController = TextEditingController();
+  final TextEditingController certificatesNameController =
+      TextEditingController();
+  final TextEditingController certificateDateController =
+      TextEditingController();
 
   void _clearControllers() {
     certificatesNameController.clear();
@@ -30,7 +31,8 @@ class _CertificateScreenState extends State<CertificateScreen> {
   }
 
   bool _areControllersValid() {
-    return certificatesNameController.text.isNotEmpty && certificateDateController.text.isNotEmpty;
+    return certificatesNameController.text.isNotEmpty &&
+        certificateDateController.text.isNotEmpty;
   }
 
   void _addClubCominities() {
@@ -42,8 +44,10 @@ class _CertificateScreenState extends State<CertificateScreen> {
     _clearControllers();
   }
 
+  @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CertificateBloc, CertificateState>(builder: (context, state) {
+    return BlocBuilder<CertificateBloc, CertificateState>(
+        builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -60,7 +64,8 @@ class _CertificateScreenState extends State<CertificateScreen> {
           ),
           InputText(
             child: CustomDateInput(
-                controller: certificateDateController, labelText: TobetoText.profileEditCertificatesDate),
+                controller: certificateDateController,
+                labelText: TobetoText.profileEditCertificatesDate),
           ),
           CustomElevatedButton(
             onPressed: () {
@@ -78,7 +83,9 @@ class _CertificateScreenState extends State<CertificateScreen> {
               return InputText(
                   child: CustomMiniCard(
                 onpressed: () {
-                  context.read<CertificateBloc>().add(RemoveCertificate(certificate));
+                  context
+                      .read<CertificateBloc>()
+                      .add(RemoveCertificate(certificate));
                 },
                 title: certificate['certificatesName'],
                 content: certificate['certificateDate'],

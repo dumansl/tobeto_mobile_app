@@ -6,11 +6,12 @@ import 'package:tobeto_mobile_app/blocs/survey_bloc/survey_bloc.dart';
 import 'package:tobeto_mobile_app/model/survey_model.dart';
 import '../survey_screen/survey_widgets/survey_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/services/survey_service.dart';
 
 class SurveyScreen extends StatefulWidget {
+  const SurveyScreen({super.key});
+
   @override
-  _SurveyScreenState createState() => _SurveyScreenState();
+  State<SurveyScreen> createState() => _SurveyScreenState();
 }
 
 class _SurveyScreenState extends State<SurveyScreen> {
@@ -27,8 +28,10 @@ class _SurveyScreenState extends State<SurveyScreen> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       userId = user.uid;
-      DocumentSnapshot surveyDoc =
-          await FirebaseFirestore.instance.collection('surveys').doc('uVhMmvdqeWXX3AW5oGTI').get();
+      DocumentSnapshot surveyDoc = await FirebaseFirestore.instance
+          .collection('surveys')
+          .doc('uVhMmvdqeWXX3AW5oGTI')
+          .get();
 
       surveyId = surveyDoc.id;
 
@@ -42,7 +45,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
   @override
   Widget build(BuildContext context) {
     if (userId == null || surveyId == null) {
-      return Scaffold(
+      return const Scaffold(
         body: Center(child: CircularProgressIndicator()),
       );
     }
@@ -122,7 +125,8 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SurveyBloc>(context).add(LoadSurveyDetails(surveyId: widget.surveyId));
+    BlocProvider.of<SurveyBloc>(context)
+        .add(LoadSurveyDetails(surveyId: widget.surveyId));
   }
 
   @override
@@ -131,7 +135,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
       appBar: AppBar(
         title: Text(widget.surveyTitle),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -140,7 +144,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
       body: BlocBuilder<SurveyBloc, SurveyState>(
         builder: (context, state) {
           if (state is SurveyLoading) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (state is SurveyDetailsLoaded) {
             surveyQuestions = state.questions;
             return Column(
@@ -211,14 +215,15 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: TobetoColor.purple,
-                      textStyle: TextStyle(
+                      textStyle: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,
                       ),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 20.0, vertical: 15.0),
                     ),
                     child: const Text('Kaydet'),
                   ),

@@ -87,22 +87,30 @@ class CatalogCourseCardsmall extends StatelessWidget {
                     padding: EdgeInsets.symmetric(
                         horizontal: ScreenPadding.padding8px),
                     child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        SizedBox(
-                          width: ScreenUtil.getWidth(context) * 0.05,
-                          child: Image.asset(ImagePath.personalInformation),
+                        Row(
+                          children: [
+                            SizedBox(
+                              width: ScreenUtil.getWidth(context) * 0.05,
+                              child: Image.asset(ImagePath.personalInformation),
+                            ),
+                            Text(
+                              courseTeacher,
+                              style: TobetoTextStyle.poppins(context)
+                                  .captionBlackBold12,
+                            ),
+                          ],
                         ),
-                        SizedBox(width: ScreenUtil.getWidth(context) * 0.00),
-                        Text(
-                          courseTeacher,
-                          style: TobetoTextStyle.poppins(context)
-                              .captionBlackBold12,
+                        Row(
+                          children: [
+                            const Icon(Icons.star,
+                                color: Colors.black, size: 16),
+                            Text(rank,
+                                style: TobetoTextStyle.poppins(context)
+                                    .captionBlackBold12),
+                          ],
                         ),
-                        SizedBox(width: ScreenUtil.getWidth(context) * 0.045),
-                        const Icon(Icons.star, color: Colors.black, size: 16),
-                        Text(rank,
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackBold12),
                       ],
                     ),
                   ),

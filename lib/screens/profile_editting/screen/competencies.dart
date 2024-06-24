@@ -9,7 +9,6 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_c
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/services/user_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class Competencies extends StatefulWidget {
@@ -44,7 +43,9 @@ class _CompetenciesState extends State<Competencies> {
             CustomElevatedButton(
               onPressed: () {
                 if (skillController.text.isNotEmpty) {
-                  context.read<CompetenciesBloc>().add(AddSkill(skillController.text));
+                  context
+                      .read<CompetenciesBloc>()
+                      .add(AddSkill(skillController.text));
                   skillController.clear();
                 }
               },

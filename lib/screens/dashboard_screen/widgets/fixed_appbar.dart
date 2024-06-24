@@ -13,10 +13,12 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
     this.bottom,
     this.height = 75,
     required this.title,
+    this.isDashboard = false,
   });
   final TabBar? bottom;
   final double height;
   final String title;
+  final bool isDashboard;
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -26,18 +28,21 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
         style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
       ),
       centerTitle: true,
-      leading: IconButton(
-        icon: Icon(
-          Icons.arrow_back_rounded,
-          color: TobetoColor.purple,
-          size: IconSize.size35px,
-        ),
-        onPressed: () {
-          Navigator.pop(context);
-        },
-      ),
+      leading: isDashboard
+          ? null
+          : IconButton(
+              icon: Icon(
+                Icons.arrow_back_rounded,
+                color: TobetoColor.purple,
+                size: IconSize.size35px,
+              ),
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
       actions: [
-        BlocBuilder<ProfilePhotoBloc, ProfilePhotoState>(builder: (context, state) {
+        BlocBuilder<ProfilePhotoBloc, ProfilePhotoState>(
+            builder: (context, state) {
           if (state is ProfilePhotoLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ProfilePhotoLoaded) {

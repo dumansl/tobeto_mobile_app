@@ -28,7 +28,8 @@ class _CatalogScreenState extends State<CatalogScreen> {
           CatalogBloc(courseRepository: CourseRepository())..add(Fetch()),
       child: Scaffold(
         appBar: const FixedAppbar(
-          title: 'Catalog',
+          title: 'Katalog',
+          isDashboard: true,
         ),
         body: BlocBuilder<CatalogBloc, CatalogState>(
           builder: (context, state) {

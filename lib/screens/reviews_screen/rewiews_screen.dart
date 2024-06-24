@@ -110,6 +110,7 @@ class RewiewsScreen extends StatelessWidget {
                     lineerColor2: TobetoColor.card.darkBlue,
                   ),
                 ),
+                SizedBox(height: ScreenPadding.padding58px * 1.5),
               ],
             ),
           ),
