@@ -3,7 +3,7 @@ import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_appbar.d
 
 class WhatDoWeOfferScreen extends StatelessWidget {
   const WhatDoWeOfferScreen({super.key});
-  // TODO : Zehra Karaca
+  // TO DO : Zehra Karaca
   @override
   Widget build(BuildContext context) {
     return const Scaffold(

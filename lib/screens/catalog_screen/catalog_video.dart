@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:tobeto_mobile_app/model/catalog_model.dart';
@@ -10,7 +9,6 @@ import 'package:tobeto_mobile_app/blocs/video_bloc/video_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_event.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_state.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CatalogVideo extends StatefulWidget {

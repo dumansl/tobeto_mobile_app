@@ -8,9 +8,7 @@ import 'package:tobeto_mobile_app/model/catalog_model.dart';
 import 'package:tobeto_mobile_app/screens/catalog_screen/catalog_video.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/services/catalog_service.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CatalogDetails extends StatelessWidget {

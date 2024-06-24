@@ -109,14 +109,14 @@ class SurveyDetailScreen extends StatefulWidget {
   final String surveyTitle;
 
   const SurveyDetailScreen({
-    Key? key,
+    super.key,
     required this.userId,
     required this.surveyId,
     required this.surveyTitle,
-  }) : super(key: key);
+  });
 
   @override
-  _SurveyDetailScreenState createState() => _SurveyDetailScreenState();
+  State<SurveyDetailScreen> createState() => _SurveyDetailScreenState();
 }
 
 class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
@@ -193,7 +193,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                                     });
                                   },
                                 );
-                              }).toList(),
+                              }),
                             ],
                           ),
                         ),
