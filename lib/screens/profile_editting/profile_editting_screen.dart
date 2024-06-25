@@ -58,7 +58,10 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             )),
           ],
         ),
-        title: TobetoText.profileEditAppBar,
+        title: Text(
+          TobetoText.profileEditAppBar,
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding12px),

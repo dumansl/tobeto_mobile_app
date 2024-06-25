@@ -8,6 +8,8 @@ import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/spider_
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
+import 'reviews_widgets/description_title_content.dart';
+
 class SuccessModelResultScreen extends StatefulWidget {
   const SuccessModelResultScreen({super.key});
 
@@ -17,8 +19,6 @@ class SuccessModelResultScreen extends StatefulWidget {
 }
 
 class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
-  bool _isExpanded = false;
-
   @override
   void initState() {
     context.read<ReviewBloc>().add(FetchReviews());
@@ -332,29 +332,18 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
           title: title,
           score: score,
         ),
-        Padding(
-          padding: EdgeInsets.only(
-              top: ScreenPadding.padding16px, bottom: ScreenPadding.padding8px),
-          child: _successModelDescriptionTitleContent(
-            title: TobetoText.successExamResultDescription,
-            description: description,
-          ),
+        SizedBox(height: ScreenPadding.padding16px),
+        DescriptionTitleContent(
+          title: TobetoText.successExamResultDescription,
+          description: description,
         ),
-        Padding(
-          padding: EdgeInsets.only(
-              bottom: ScreenPadding.padding16px, top: ScreenPadding.padding8px),
-          child: _successModelDescriptionTitleContent(
-            title: TobetoText.successExamResultDescription2,
-            description: description2,
-          ),
+        DescriptionTitleContent(
+          title: TobetoText.successExamResultDescription2,
+          description: description2,
         ),
-        Padding(
-          padding: EdgeInsets.only(
-              bottom: ScreenPadding.padding16px, top: ScreenPadding.padding8px),
-          child: _successModelDescriptionTitleContent(
-            title: TobetoText.successExamResultDescription3,
-            description: description3,
-          ),
+        DescriptionTitleContent(
+          title: TobetoText.successExamResultDescription3,
+          description: description3,
         ),
       ],
     );
@@ -365,10 +354,13 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(
-          title,
-          style: TobetoTextStyle.poppins(context).captionPurpleBold12,
+        Expanded(
+          child: Text(
+            title,
+            style: TobetoTextStyle.poppins(context).captionPurpleBold12,
+          ),
         ),
+        const SizedBox(height: 4),
         Container(
           padding: EdgeInsets.symmetric(
             vertical: ScreenPadding.padding12px,
@@ -385,74 +377,6 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
             style: TobetoTextStyle.poppins(context).captionWhiteBold12,
           ),
         ),
-      ],
-    );
-  }
-
-  Widget _successModelDescriptionTitleContent({
-    required String title,
-    required String description,
-  }) {
-    return Column(
-      children: [
-        GestureDetector(
-          onTap: () {
-            setState(() {
-              _isExpanded = !_isExpanded;
-            });
-          },
-          child: Container(
-            padding: EdgeInsets.all(ScreenPadding.padding8px),
-            width: double.infinity,
-            decoration: BoxDecoration(
-              color: TobetoColor.card.lightPurple,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(SizeRadius.radius16px),
-                topRight: Radius.circular(SizeRadius.radius16px),
-                bottomLeft: _isExpanded
-                    ? const Radius.circular(0)
-                    : Radius.circular(SizeRadius.radius16px),
-                bottomRight: _isExpanded
-                    ? const Radius.circular(0)
-                    : Radius.circular(SizeRadius.radius16px),
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  title,
-                  style: TobetoTextStyle.poppins(context).captionPurpleBold12,
-                ),
-                Icon(
-                  _isExpanded
-                      ? Icons.arrow_drop_down_rounded
-                      : Icons.arrow_right_rounded,
-                  size: IconSize.size35px,
-                  color: TobetoColor.purple,
-                ),
-              ],
-            ),
-          ),
-        ),
-        _isExpanded
-            ? Container(
-                padding: EdgeInsets.all(ScreenPadding.padding16px),
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: TobetoColor.card.cream,
-                  borderRadius: BorderRadius.only(
-                    bottomRight: Radius.circular(SizeRadius.radius16px),
-                    bottomLeft: Radius.circular(SizeRadius.radius16px),
-                  ),
-                ),
-                child: Text(
-                  description,
-                  style: TobetoTextStyle.poppins(context).captionGrayBold12,
-                  textAlign: TextAlign.justify,
-                ),
-              )
-            : const SizedBox(),
       ],
     );
   }
