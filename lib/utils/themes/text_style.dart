@@ -688,7 +688,7 @@ class Typography {
     captionLightGrayNormal12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      color: Theme.of(context).colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.onTertiary,
     );
     captionPurpleThin18 = baseStyle.copyWith(
       fontSize: 18,

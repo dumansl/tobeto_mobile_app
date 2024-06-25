@@ -13,12 +13,13 @@ ColorScheme lightColorScheme = ColorScheme(
   surface: TobetoColor.card.white, //  card rengi
   secondary: TobetoColor.formField.white, // Text Form Field Rengi
   onPrimary: TobetoColor.text.white, // Çerceve Rengi
-  onSecondary: TobetoColor.icon.darkGrey, // Icon Rengi
+  onSecondary: TobetoColor.icon.grey, // Icon Rengi
   onSurface: TobetoColor.text.black, // Text Rengi//dashboardtext rengi
   inversePrimary: const Color(0xffb1d18a),
   error: TobetoColor.state.error,
   onError: const Color(0xffffffff),
-  onTertiary: TobetoColor.text.black,
+  onTertiary: TobetoColor.text.lightGrey,
+  onSecondaryContainer: TobetoColor.icon.grey,
 );
 
 ColorScheme darkColorScheme = ColorScheme(
@@ -27,10 +28,11 @@ ColorScheme darkColorScheme = ColorScheme(
   surface: TobetoColor.card.carddarkmode, //card rengi
   secondary: TobetoColor.card.carddarkmode, // Text Form Field Rengi
   onPrimary: TobetoColor.card.black,
-  onSecondary: TobetoColor.icon.darkGrey, // Icon Rengi
+  onSecondary: TobetoColor.icon.black, // Icon Rengi
   onSurface: TobetoColor.text.white, // Text Rengi//dashboardtext rengi
   error: TobetoColor.state.error,
   onError: const Color(0xff690005),
   inversePrimary: const Color(0xff4c662b),
-  onTertiary: TobetoColor.text.black,
+  onTertiary: TobetoColor.text.lightGrey,
+  onSecondaryContainer: TobetoColor.card.carddarkmode,
 );

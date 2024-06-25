@@ -13,7 +13,8 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<DashboardScreen> {
-  final PersistentTabController _controller = PersistentTabController(initialIndex: 2);
+  final PersistentTabController _controller =
+      PersistentTabController(initialIndex: 2);
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +55,7 @@ class _HomeState extends State<DashboardScreen> {
                 inactiveIcon: Image.asset(ImagePath.catalog),
               )),
           PersistentTabConfig(
-              screen: CalendarView(),
+              screen: CalendarScreen(),
               item: ItemConfig(
                 icon: Image.asset(ImagePath.calendarActive),
                 title: TobetoText.bottomIconCalendar,

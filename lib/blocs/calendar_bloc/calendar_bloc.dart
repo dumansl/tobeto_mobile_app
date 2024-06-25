@@ -1,17 +1,19 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_event.dart';
+import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_state.dart';
 import 'package:tobeto_mobile_app/services/calendar_service.dart';
-import 'calendar_event.dart';
-import 'calendar_state.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
-  final CalendarRepository repository;
+  final CalendarService repository;
 
   CalendarBloc(this.repository) : super(CalendarLoading()) {
     on<FetchLessons>((event, emit) async {
       try {
         final lessons = await repository.fetchLessons();
+        print('Fetched lessons in BLoC: ${lessons.length}');
         emit(CalendarLoaded(lessons: lessons, selectedDate: DateTime.now()));
-      } catch (_) {
+      } catch (error) {
+        print('Error fetching lessons in BLoC: $error');
         emit(CalendarError());
       }
     });
