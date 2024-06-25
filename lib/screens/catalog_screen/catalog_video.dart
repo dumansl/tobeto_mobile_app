@@ -56,7 +56,12 @@ class _CatalogDetailState extends State<CatalogVideo> {
       create: (context) => VideoBloc(VideoRepository(FirebaseStorage.instance))
         ..add(FetchVideo(widget.catalogCourse.videoUrl)),
       child: Scaffold(
-        appBar: const FixedAppbar(title: 'Catalog'),
+        appBar: FixedAppbar(
+          title: Text(
+            "Katalog",
+            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+          ),
+        ),
         body: BlocConsumer<VideoBloc, VideoState>(
           listener: (context, state) {
             if (state is VideoLoaded) {

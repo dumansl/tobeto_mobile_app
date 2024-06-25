@@ -23,7 +23,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const FixedAppbar(title: 'Profil', isDashboard: true),
+      appBar: FixedAppbar(
+        isLeading: false,
+        title: Text(
+          "Profil",
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
+      ),
       body: ListView(
         children: const [
           ProfilePhotoView(),

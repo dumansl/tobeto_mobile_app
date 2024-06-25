@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_appbar.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
@@ -59,7 +59,9 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TobetoAppBar(),
+      appBar: const FixedAppbar(
+        isTobetoScreen: true,
+      ),
       backgroundColor: TobetoColor.card.cream,
       body: SingleChildScrollView(
         child: Padding(

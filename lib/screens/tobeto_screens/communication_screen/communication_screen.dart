@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/communication_text_field.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/side_title_and_comment.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_appbar.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -12,7 +12,10 @@ class CommunicationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TobetoAppBar(),
+      appBar: const FixedAppbar(
+        isLeading: false,
+        isTobetoScreen: true,
+      ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
