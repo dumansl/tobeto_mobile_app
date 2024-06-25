@@ -26,7 +26,7 @@ class _ProfileEditPageState extends State<ProfileEditPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FixedAppbar(
-        height: 130,
+        height: ScreenUtil.getHeight(context) * 0.15,
         bottom: TabBar(
           tabAlignment: TabAlignment.start,
           indicatorColor: TobetoColor.purple,
@@ -37,7 +37,7 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             Tab(icon: Image.asset(ImagePath.personalInformation)),
             Tab(
                 icon: Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding10px),
               child: Image.asset(ImagePath.experiences),
             )),
             Tab(icon: Image.asset(ImagePath.education)),
@@ -45,7 +45,7 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             Tab(icon: Image.asset(ImagePath.certificates)),
             Tab(
                 icon: Padding(
-              padding: const EdgeInsets.only(bottom: 2),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding2px),
               child: Image.asset(ImagePath.communities),
             )),
             Tab(icon: Image.asset(ImagePath.projectsAndAwards)),
@@ -53,18 +53,15 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             Tab(icon: Image.asset(ImagePath.foreignLanguages)),
             Tab(
                 icon: Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding4px),
               child: Image.asset(ImagePath.settings),
             )),
           ],
         ),
-        title: Text(
-          TobetoText.profileAppBar,
-          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
-        ),
+        title: TobetoText.profileEditAppBar,
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding12px),
         child: TabBarView(
           controller: _tabController,
           children: const [

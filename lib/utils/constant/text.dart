@@ -83,6 +83,7 @@ abstract class TobetoText {
   static String profileMilitaryStuation = "Askerlik Durumu";
   static String profileDisableStuation = "Engellilik Durumu";
   static String profileAboutMe = "Hakkımda";
+  static String emptyAboutMe = 'Henüz eklediğiniz bir hakkımda bilginiz bulunmamaktadır.';
   static String profileMySkills = "Yetkinliklerim";
   static String profileLanguages = "Yabancı Dillerim";
   static String profileMyCertificate = "Sertifikalarım";
@@ -95,6 +96,7 @@ abstract class TobetoText {
   static String profileTobetoWorkSuccessStartButton = "Başla";
   static String profileTobetoTests = "Tobeto Seviye Testlerim";
   static String profileTobetoEducations = "Tobeto'dan Aldığı Eğitimler";
+  static String emptyEducations = "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.";
   // profile edit page/profile
   static String workLifeTitle = "Deneyimlerim";
   static String personalInformationTitle = "Kişisel Bilgilerim";
@@ -158,8 +160,8 @@ abstract class TobetoText {
   static String profileEditFinishJobDateBox = "gg.aa.yyyy";
   static String profileEditExperienceContinueBox = "Çalışmaya Devam Ediyorum";
   static String profileEditJobDescription = "İş Açıklaması*";
-  static String profileEditJobDescriptionBox =
-      "Lütfen iş açıklaması giriniz...";
+  static String profileEditJobDescriptionBox = "Lütfen iş açıklaması giriniz...";
+  static String emptyJob = "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.";
   // profile edit page/education
   static String profileEditEducationStatu = "Eğitim Durumu*";
   static List<String> educationStatu = [
@@ -282,6 +284,13 @@ abstract class TobetoText {
       "Lütfen yeni şifrenizi tekrar giriniz...";
   static String profileEditSettingsChangeButton = "Şifre Değiştir";
   static String profileEditSettingsFinalButton = "Üyeliği Sonlandır";
+  static String passwordPlease = 'Lütfen bir şifre girin';
+  static String passwordCharachter = 'Şifreniz en az 6 karakter olmalıdır';
+  static String passwordAgain = 'Lütfen şifrenizi tekrar girin';
+  static String passwordWrong = 'Parolalar uyuşmuyor';
+  static String accountWrong = 'Hesap silinirken hata oluştu:';
+  static String accountEnd = 'Üyeliği sonlandırmak istediğinize emin misiniz?';
+
   // evaluation page
   static String evaluationAppBar = "Değerlendirmeler";
   static String evaluationHeadline1part1 = "Yetkinlik";
@@ -601,4 +610,6 @@ abstract class TobetoText {
   static String hambugerMenuResources = "Kaynaklar";
   static String hambugerMenuAboutUsCommunication = "İletişim";
   static String hambugerMenuIstanbulIsCodding = "İstanbul Kodluyor";
+  static String cancel = "İptal";
+  static String yes = "Evet";
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class InputText extends StatelessWidget {
   const InputText({
@@ -10,14 +11,15 @@ class InputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 2, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding2px, vertical: ScreenPadding.padding10px),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(12),
-            color: Theme.of(context).colorScheme.surface,
+            borderRadius: BorderRadius.circular(SizeRadius.radius12px),
+            color: TobetoColor.card.white,
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.shadow,
+                color: TobetoColor.card.shadowColor,
+
                 blurRadius: 4,
                 offset: const Offset(
                   0,
