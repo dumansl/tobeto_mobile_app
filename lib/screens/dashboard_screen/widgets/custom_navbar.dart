@@ -40,7 +40,9 @@ class CustomNavBar extends StatelessWidget {
         ],
       );
 
-  Widget _buildMiddleItem(ItemConfig item, bool isSelected) => Column(
+  Widget _buildMiddleItem(
+          BuildContext context, ItemConfig item, bool isSelected) =>
+      Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -49,10 +51,10 @@ class CustomNavBar extends StatelessWidget {
             height: IconSize.size65px,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: TobetoColor.button.white,
+              color: Theme.of(context).colorScheme.primaryContainer,
               boxShadow: [
                 BoxShadow(
-                  color: TobetoColor.card.shadowColor,
+                  color: Theme.of(context).colorScheme.shadow,
                   blurRadius: SizeRadius.radius10px,
                 ),
               ],
@@ -85,10 +87,12 @@ class CustomNavBar extends StatelessWidget {
             SizedBox(height: IconSize.size25px),
             DecoratedNavBar(
               decoration: NavBarDecoration(
-                  color: Theme.of(context).colorScheme.onSurface, //dasbord renk
+                  color: Theme.of(context)
+                      .colorScheme
+                      .primaryContainer, //dasbord renk
                   boxShadow: [
                     BoxShadow(
-                      color: TobetoColor.card.shadowColor,
+                      color: Theme.of(context).colorScheme.shadow,
                       blurRadius: SizeRadius.radius10px,
                     ),
                   ],
@@ -128,6 +132,7 @@ class CustomNavBar extends StatelessWidget {
                 navBarConfig.onItemSelected(midIndex);
               },
               child: _buildMiddleItem(
+                context,
                 navBarConfig.items[midIndex],
                 navBarConfig.selectedIndex == midIndex,
               ),

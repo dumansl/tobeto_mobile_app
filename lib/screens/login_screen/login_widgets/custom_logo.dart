@@ -14,12 +14,15 @@ class CustomLogo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final assetImagePath =
+        isDarkMode ? ImagePath.whiteTobeto : ImagePath.greyTobeto;
     return Container(
       height: height,
       width: width,
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(ImagePath.greyTobeto),
+          image: AssetImage(assetImagePath),
         ),
       ),
     );

@@ -11,8 +11,6 @@ class UserService {
   final String userId;
   FirebaseFirestore db = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
-  // final String userId = 'YOUR_USER_ID'; // Bu userId'yi kullanıcıya göre dinamik olarak alın.
-
   UserService() : userId = FirebaseAuth.instance.currentUser!.uid;
 
   Future<List<dynamic>?> _getCollectionData(String collectionName) async {

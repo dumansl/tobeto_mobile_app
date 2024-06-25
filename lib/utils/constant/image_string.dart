@@ -16,6 +16,7 @@ abstract class ImagePath {
   //login
   static const String splashScreenGif = "assets/gifs/splash_screen.gif";
   static const String mainScreenGif = "assets/gifs/skills.gif";
+  static const String maindarkScreenGif = "assets/gifs/skilldark.gif";
   static const String intro1 = "assets/images/intro_1.png";
   static const String intro2 = "assets/images/intro_2.png";
   static const String intro3 = "assets/images/intro_3.png";
@@ -171,9 +172,9 @@ abstract class ImagePath {
   static const String ikWhiteUp = "assets/icons/ik-white-up.png";
 
   static const String calendarChoose = "assets/icons/calendar-choose.png";
-  static const String calendarClock = "assets/icons/calendar-clock.png";
-  static const String calendarEducation = "assets/icons/calendar-education.png";
-  static const String calendarProfile = "assets/icons/calendar-profile.png";
+  static const String calendarClock = "assets/icons/clock.svg";
+  static const String calendarEducation = "assets/icons/lesson.svg";
+  static const String calendarProfile = "assets/icons/teacher.svg";
   static const String close = "assets/icons/close.png";
   static const String company = "assets/icons/company.png";
   static const String graduationCap = "assets/icons/graduation-cap.png";

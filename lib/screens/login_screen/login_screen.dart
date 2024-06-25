@@ -101,9 +101,12 @@ class _LoginScreenState extends State<LoginScreen> {
                       child: _buildUserRoleToggleButtons(),
                     ),
                   ),
-                  const Expanded(
+                  Expanded(
                     flex: 15,
-                    child: CustomLogo(),
+                    child: CustomLogo(
+                      width: ScreenUtil.getWidth(context) * 0.65,
+                      height: ScreenUtil.getHeight(context) * 0.09,
+                    ),
                   ),
                   Expanded(
                     flex: 43,

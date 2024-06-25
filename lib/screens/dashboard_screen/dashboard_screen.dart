@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
+import 'package:tobeto_mobile_app/screens/calendar_screen/calendar_screen.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/custom_navbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -54,7 +55,7 @@ class _HomeState extends State<DashboardScreen> {
                 inactiveIcon: Image.asset(ImagePath.catalog),
               )),
           PersistentTabConfig(
-              screen: const LoginScreen(),
+              screen: CalendarScreen(),
               item: ItemConfig(
                 icon: Image.asset(ImagePath.calendarActive),
                 title: TobetoText.bottomIconCalendar,

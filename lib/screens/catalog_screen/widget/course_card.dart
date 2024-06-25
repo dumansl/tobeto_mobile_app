@@ -38,13 +38,12 @@ class CatalogCourseCardsmall extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: TobetoColor.card.shadowColor.withOpacity(0.4),
-                spreadRadius: 2,
+                color: Theme.of(context).colorScheme.shadow,
+                spreadRadius: 0.2,
                 blurRadius: 5,
                 offset: const Offset(2, 4), // changes position of shadow
               ),
             ],
-            color: TobetoColor.card.cream,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -67,7 +66,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
                 children: [
                   Container(
                     width: ScreenUtil.getWidth(context) * 0.47,
-                    color: TobetoColor.background.lightGrey,
+                    color: Theme.of(context).colorScheme.onSecondaryContainer,
                     // Set background color to white
                     padding: EdgeInsets.all(ScreenPadding.padding8px),
                     child: Text(
@@ -78,7 +77,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: TobetoColor.background.lightGrey,
+                      color: Theme.of(context).colorScheme.onSecondaryContainer,
                       borderRadius: const BorderRadius.vertical(
                         bottom: Radius.circular(12),
                       ), // Rounded bottom border
@@ -104,8 +103,9 @@ class CatalogCourseCardsmall extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            const Icon(Icons.star,
-                                color: Colors.black, size: 16),
+                            Icon(Icons.star,
+                                color: Theme.of(context).colorScheme.onSurface,
+                                size: 16),
                             Text(rank,
                                 style: TobetoTextStyle.poppins(context)
                                     .captionBlackBold12),
