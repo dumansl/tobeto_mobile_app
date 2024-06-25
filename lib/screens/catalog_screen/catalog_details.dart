@@ -170,7 +170,8 @@ class CatalogDetails extends StatelessWidget {
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(30),
-                                  color: TobetoColor.card.white,
+                                  color:
+                                      Theme.of(context).colorScheme.onPrimary,
                                 ),
                                 padding: const EdgeInsets.symmetric(
                                     horizontal: 32, vertical: 16),
@@ -219,18 +220,20 @@ class InfoCard extends StatelessWidget {
       height: ScreenUtil.getHeight(context) * 0.075,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: TobetoColor.card.grey.withOpacity(0.16),
+        color: Theme.of(context).colorScheme.onSecondary,
       ),
       child: Column(
         children: [
           Padding(
             padding: EdgeInsets.only(top: ScreenUtil.getHeight(context) * 0.01),
-            child: Icon(icon, size: 32, color: Colors.black54),
+            child: Icon(icon,
+                size: 32, color: Theme.of(context).colorScheme.onSurface),
           ),
           const SizedBox(height: 1),
           Text(
             label,
-            style: const TextStyle(fontSize: 16, color: Colors.black54),
+            style: TextStyle(
+                fontSize: 16, color: Theme.of(context).colorScheme.onSurface),
           ),
         ],
       ),

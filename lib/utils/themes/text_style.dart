@@ -653,7 +653,7 @@ class Typography {
     captionBlackBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
-      color: Theme.of(context).colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.onPrimaryFixed,
     );
     captionBlackNormal12 = baseStyle.copyWith(
       fontSize: 12,
@@ -668,7 +668,7 @@ class Typography {
     captionGrayBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
-      color: Theme.of(context).colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.surface,
     );
     captionGrayNormal12 = baseStyle.copyWith(
       fontSize: 12,

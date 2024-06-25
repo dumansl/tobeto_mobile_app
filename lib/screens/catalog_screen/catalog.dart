@@ -54,7 +54,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   rank: course.rank.toString(),
                   width: ScreenUtil.getWidth(context) * 0.44,
                   imagePath: course.imagePath,
-                  height: ScreenUtil.getHeight(context) * 0.2,
+                  height: ScreenUtil.getHeight(context) * 0.1,
                 );
               }).toList();
 
