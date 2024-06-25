@@ -7,9 +7,9 @@ part 'job_event.dart';
 part 'job_state.dart';
 
 class JobBloc extends Bloc<JobEvent, JobState> {
-  final JobService jobService;
+  final JobService jobService = JobService();
 
-  JobBloc(this.jobService) : super(JobInitial()) {
+  JobBloc() : super(JobInitial()) {
     on<LoadJobs>((event, emit) async {
       emit(JobLoading());
       try {

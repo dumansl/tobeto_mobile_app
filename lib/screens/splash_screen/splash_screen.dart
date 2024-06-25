@@ -80,12 +80,16 @@ class _SplashScreenState extends State<SplashScreen> {
   }
 
   _animatedGif(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final assetImagePath = isDarkMode
+        ? 'assets/gifs/splashDarkScreen.gif'
+        : 'assets/gifs/splashLightScreen.gif';
     return Container(
       padding: EdgeInsets.symmetric(horizontal: ScreenPadding.screenpadding),
       width: ScreenUtil.getWidth(context),
       height: ScreenUtil.getHeight(context),
       child: Image.asset(
-        ImagePath.splashScreenGif,
+        assetImagePath,
         fit: BoxFit.contain,
       ),
     );

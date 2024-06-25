@@ -63,12 +63,16 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
 
   Widget _buildApplicationContent(
       BuildContext context, Application application) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final assetImagePath = isDarkMode
+        ? 'assets/images/ik-logo-light.png'
+        : 'assets/images/ik-logo-dark.png';
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           decoration: BoxDecoration(
-            color: TobetoColor.card.cream,
+            color: Theme.of(context).colorScheme.onPrimary,
             borderRadius: BorderRadius.circular(16),
             border: Border(
               left: BorderSide(
@@ -84,7 +88,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                 child: Row(
                   children: [
                     Image.asset(
-                      ImagePath.ikLogoDart,
+                      assetImagePath,
                       width: 100,
                       height: 100,
                     ),
@@ -102,7 +106,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                           Text(
                             application.description,
                             style: TobetoTextStyle.poppins(context)
-                                .bodyBlackLight16,
+                                .captionMediumBlack16,
                           ),
                         ],
                       ),

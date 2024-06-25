@@ -4,15 +4,16 @@ import 'competencies_event.dart';
 import 'competencies_state.dart';
 
 class CompetenciesBloc extends Bloc<CompetenciesEvent, CompetenciesState> {
-  final UserService userService;
+  final UserService userService = UserService();
 
-  CompetenciesBloc({required this.userService}) : super(CompetenciesState()) {
+  CompetenciesBloc() : super(CompetenciesState()) {
     on<LoadSkills>(_onLoadSkills);
     on<AddSkill>(_onAddSkill);
     on<RemoveSkill>(_onRemoveSkill);
   }
 
-  Future<void> _onLoadSkills(LoadSkills event, Emitter<CompetenciesState> emit) async {
+  Future<void> _onLoadSkills(
+      LoadSkills event, Emitter<CompetenciesState> emit) async {
     emit(state.copyWith(isLoading: true));
     try {
       final skills = await userService.loadSkills();
@@ -22,7 +23,8 @@ class CompetenciesBloc extends Bloc<CompetenciesEvent, CompetenciesState> {
     }
   }
 
-  Future<void> _onAddSkill(AddSkill event, Emitter<CompetenciesState> emit) async {
+  Future<void> _onAddSkill(
+      AddSkill event, Emitter<CompetenciesState> emit) async {
     try {
       await userService.addSkill(event.skill);
       final updatedSkills = List<String>.from(state.skills)..add(event.skill);
@@ -32,10 +34,12 @@ class CompetenciesBloc extends Bloc<CompetenciesEvent, CompetenciesState> {
     }
   }
 
-  Future<void> _onRemoveSkill(RemoveSkill event, Emitter<CompetenciesState> emit) async {
+  Future<void> _onRemoveSkill(
+      RemoveSkill event, Emitter<CompetenciesState> emit) async {
     try {
       await userService.removeSkill(event.skill);
-      final updatedSkills = List<String>.from(state.skills)..remove(event.skill);
+      final updatedSkills = List<String>.from(state.skills)
+        ..remove(event.skill);
       emit(state.copyWith(skills: updatedSkills));
     } catch (e) {
       emit(state.copyWith(error: e.toString()));

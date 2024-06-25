@@ -156,7 +156,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                     itemBuilder: (context, index) {
                       final question = surveyQuestions[index];
                       return Card(
-                        color: TobetoColor.card.cream,
+                        color: Theme.of(context).colorScheme.onPrimary,
                         elevation: 2.0,
                         margin: const EdgeInsets.symmetric(vertical: 10.0),
                         child: Padding(
@@ -176,7 +176,8 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                               ...question.options.map((option) {
                                 return ListTile(
                                   title: Text(option),
-                                  textColor: Colors.black,
+                                  textColor:
+                                      Theme.of(context).colorScheme.onSurface,
                                   leading: Radio<String>(
                                     value: option,
                                     groupValue: question.selected,

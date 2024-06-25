@@ -27,7 +27,7 @@ class Boxlong extends StatelessWidget {
       decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: TobetoColor.card.shadowColor.withOpacity(0.8),
+            color: Theme.of(context).colorScheme.shadow,
             spreadRadius: 1,
             blurRadius: 9,
             offset: const Offset(2, 4), // Shadow'ın konumu

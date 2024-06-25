@@ -16,7 +16,8 @@ class CustomNavBar extends StatelessWidget {
   final NavBarConfig navBarConfig;
   final NavBarDecoration navBarDecoration;
 
-  Widget _buildItem(BuildContext context, ItemConfig item, bool isSelected) => Column(
+  Widget _buildItem(BuildContext context, ItemConfig item, bool isSelected) =>
+      Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
@@ -39,7 +40,9 @@ class CustomNavBar extends StatelessWidget {
         ],
       );
 
-  Widget _buildMiddleItem(ItemConfig item, bool isSelected) => Column(
+  Widget _buildMiddleItem(
+          BuildContext context, ItemConfig item, bool isSelected) =>
+      Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
@@ -48,10 +51,10 @@ class CustomNavBar extends StatelessWidget {
             height: IconSize.size65px,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: TobetoColor.button.white,
+              color: Theme.of(context).colorScheme.primaryContainer,
               boxShadow: [
                 BoxShadow(
-                  color: TobetoColor.card.shadowColor,
+                  color: Theme.of(context).colorScheme.shadow,
                   blurRadius: SizeRadius.radius10px,
                 ),
               ],
@@ -83,12 +86,18 @@ class CustomNavBar extends StatelessWidget {
           children: [
             SizedBox(height: IconSize.size25px),
             DecoratedNavBar(
-              decoration: NavBarDecoration(boxShadow: [
-                BoxShadow(
-                  color: TobetoColor.card.shadowColor,
-                  blurRadius: SizeRadius.radius10px,
-                ),
-              ], borderRadius: BorderRadius.vertical(top: Radius.circular(SizeRadius.radius20px))),
+              decoration: NavBarDecoration(
+                  color: Theme.of(context)
+                      .colorScheme
+                      .primaryContainer, //dasbord renk
+                  boxShadow: [
+                    BoxShadow(
+                      color: Theme.of(context).colorScheme.shadow,
+                      blurRadius: SizeRadius.radius10px,
+                    ),
+                  ],
+                  borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(SizeRadius.radius20px))),
               // ignore: deprecated_member_use
               filter: navBarConfig.selectedItem.filter,
               height: IconSize.size60px,
@@ -123,6 +132,7 @@ class CustomNavBar extends StatelessWidget {
                 navBarConfig.onItemSelected(midIndex);
               },
               child: _buildMiddleItem(
+                context,
                 navBarConfig.items[midIndex],
                 navBarConfig.selectedIndex == midIndex,
               ),

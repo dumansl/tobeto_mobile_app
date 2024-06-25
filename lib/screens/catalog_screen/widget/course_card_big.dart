@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
 import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -38,13 +36,13 @@ class CatalogCourseCardBig extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: TobetoColor.card.shadowColor.withOpacity(0.4),
+                color: Theme.of(context).colorScheme.shadow,
                 spreadRadius: 2,
                 blurRadius: 5,
                 offset: const Offset(2, 4), // changes position of shadow
               ),
             ],
-            color: TobetoColor.card.cream,
+            color: Theme.of(context).colorScheme.onSecondaryContainer,
             borderRadius: BorderRadius.circular(16),
           ),
           child: Column(
@@ -67,7 +65,7 @@ class CatalogCourseCardBig extends StatelessWidget {
                 children: [
                   Container(
                     width: ScreenUtil.getWidth(context) * 1,
-                    color: TobetoColor.background.lightGrey,
+                    color: Theme.of(context).colorScheme.onSecondaryContainer,
                     // Set background color to white
                     margin: EdgeInsets.only(left: ScreenPadding.padding16px),
                     child: Text(
@@ -77,7 +75,7 @@ class CatalogCourseCardBig extends StatelessWidget {
                   ),
                   Container(
                     decoration: BoxDecoration(
-                      color: TobetoColor.background.lightGrey,
+                      color: Theme.of(context).colorScheme.onSecondaryContainer,
                       borderRadius: const BorderRadius.vertical(
                         bottom: Radius.circular(12),
                       ), // Rounded bottom border
@@ -104,7 +102,7 @@ class CatalogCourseCardBig extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.star,
-                              color: TobetoColor.purple,
+                              color: Theme.of(context).colorScheme.onSurface,
                               size: ScreenUtil.getWidth(context) * 0.08,
                             ),
                             SizedBox(

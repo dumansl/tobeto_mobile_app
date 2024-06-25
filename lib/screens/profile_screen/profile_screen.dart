@@ -2,11 +2,8 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_state.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_event.dart';
 import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_state.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_state.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
@@ -27,7 +24,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: FixedAppbar(title: TobetoText.bottomIconProfile, isDashboard: true),
+      appBar: FixedAppbar(
+        isLeading: false,
+        title: Text(
+          "Profil",
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
+      ),
       body: ListView(
         children: const [
           ProfilePhotoView(),
@@ -54,6 +57,7 @@ class ProfilePhotoView extends StatefulWidget {
 
 class _ProfilePhotoViewState extends State<ProfilePhotoView> {
   File? _selectedImage;
+
   void _pickImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
@@ -87,7 +91,8 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
                         ? FileImage(_selectedImage!)
                         : hasImageUrl
                             ? NetworkImage(imageUrl)
-                            : const AssetImage(ImagePath.defaultProfilePhoto) as ImageProvider,
+                            : const AssetImage(ImagePath.profilePhoto)
+                                as ImageProvider,
                   ),
                   CircleAvatar(
                     backgroundColor: TobetoColor.card.white,
@@ -105,7 +110,9 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
               if (_selectedImage != null)
                 ElevatedButton(
                   onPressed: () {
-                    context.read<ProfilePhotoBloc>().add(UpdateProfilePhoto(_selectedImage!));
+                    context
+                        .read<ProfilePhotoBloc>()
+                        .add(UpdateProfilePhoto(_selectedImage!));
                   },
                   style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
                   child: Text(TobetoText.profileEditSaveButton),
@@ -137,7 +144,10 @@ class PersonalInfo extends StatelessWidget {
               alignment: Alignment.topRight,
               child: IconButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const ProfileEditPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const ProfileEditPage()));
                 },
                 icon: Image.asset(ImagePath.organizer),
               ),
@@ -147,7 +157,8 @@ class PersonalInfo extends StatelessWidget {
                 IconAndText(
                   icon: ImagePath.user,
                   text: TobetoText.profileName,
-                  value: '${firstNameController.text} ${lastNameController.text}',
+                  value:
+                      '${firstNameController.text} ${lastNameController.text}',
                 ),
                 IconAndText(
                   icon: ImagePath.birthdate,
@@ -369,7 +380,7 @@ class Club extends StatelessWidget {
 
         return Column(
           children: [
-            CustomTitle(title: TobetoText.profileCommunity),
+            CustomTitle(title: TobetoText.profileWorkExperiences),
             if (state.club.isEmpty)
               TwoLineCard(line2: TobetoText.emptyCommunity)
             else
@@ -426,7 +437,8 @@ class MainTitleCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) => ConstrainedBox(
+        builder: (BuildContext context, BoxConstraints constraints) =>
+            ConstrainedBox(
               constraints: const BoxConstraints(
                 maxHeight: double.infinity,
               ),
@@ -519,3 +531,4 @@ class TwoLineCard extends StatelessWidget {
     );
   }
 }
+

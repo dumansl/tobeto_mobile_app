@@ -36,7 +36,7 @@ class CustomTextField extends StatelessWidget {
       readOnly: readOnly!,
       controller: controller,
       maxLines: maxLines,
-      cursorColor: TobetoColor.card.grey,
+      cursorColor: Theme.of(context).colorScheme.onSurface,
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
       maxLength: maxLength,
@@ -51,6 +51,7 @@ class CustomTextField extends StatelessWidget {
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
         floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
         border: OutlineInputBorder(
+
             borderRadius: BorderRadius.all(
           Radius.circular(SizeRadius.radius12px),
         )),

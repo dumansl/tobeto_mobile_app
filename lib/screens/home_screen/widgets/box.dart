@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -27,7 +26,7 @@ class Box extends StatelessWidget {
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(
-                color: TobetoColor.card.shadowColor.withOpacity(0.8),
+                color: Theme.of(context).colorScheme.shadow,
                 spreadRadius: 1,
                 blurRadius: 9,
                 offset: const Offset(2, 4), // changes position of shadow

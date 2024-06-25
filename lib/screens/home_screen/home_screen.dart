@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/theme_bloc/theme_bloc.dart';
-import 'package:tobeto_mobile_app/screens/catalog_screen/catalog.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/nested_scroll.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';
@@ -196,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const CatalogScreen(),
+                                builder: (context) => const DashboardScreen(),
                               ),
                             );
                           },
@@ -243,16 +242,23 @@ class _ExamplesCard extends StatelessWidget {
               children: [
                 Text(
                   "Herkes için Kodlama",
-                  style: TobetoTextStyle.poppins(context).captionGrayBold12,
+                  style: TobetoTextStyle.poppins(context).captionBlackBold12,
                 ),
               ],
             ),
             Row(
               children: [
-                const Icon(Icons.watch_later_outlined),
+                Icon(
+                  Icons.watch_later_outlined,
+                  color: Theme.of(context).colorScheme.onPrimaryFixed,
+                ),
                 Padding(
                   padding: EdgeInsets.only(left: ScreenPadding.padding8px),
-                  child: const Text("Herkes için Kodlama"),
+                  child: Text(
+                    "Herkes için Kodlama",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onPrimaryFixed),
+                  ),
                 ),
               ],
             ),

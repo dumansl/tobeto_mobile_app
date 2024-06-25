@@ -19,6 +19,7 @@ class InputText extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: TobetoColor.card.shadowColor,
+
                 blurRadius: 4,
                 offset: const Offset(
                   0,

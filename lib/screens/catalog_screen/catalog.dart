@@ -27,9 +27,12 @@ class _CatalogScreenState extends State<CatalogScreen> {
       create: (context) =>
           CatalogBloc(courseRepository: CourseRepository())..add(Fetch()),
       child: Scaffold(
-        appBar: const FixedAppbar(
-          title: 'Katalog',
-          isDashboard: true,
+        appBar: FixedAppbar(
+          isLeading: false,
+          title: Text(
+            "Katalog",
+            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+          ),
         ),
         body: BlocBuilder<CatalogBloc, CatalogState>(
           builder: (context, state) {
@@ -54,7 +57,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   rank: course.rank.toString(),
                   width: ScreenUtil.getWidth(context) * 0.44,
                   imagePath: course.imagePath,
-                  height: ScreenUtil.getHeight(context) * 0.2,
+                  height: ScreenUtil.getHeight(context) * 0.1,
                 );
               }).toList();
 
