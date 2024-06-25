@@ -11,9 +11,13 @@ class BlogScreen extends StatelessWidget {
   // TO DO : Zehra Karaca
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      appBar: FixedAppbar(
+    return Scaffold(
+      appBar: const FixedAppbar(
         isTobetoScreen: true,
+      ),
+      body: BlocProvider(
+        create: (context) => BlogBloc()..add(LoadBlogsEvent()),
+        child: BlogList(),
       ),
     );
   }
