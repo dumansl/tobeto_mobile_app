@@ -6,9 +6,7 @@ import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_logo.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/tobeto_screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
-import 'package:tobeto_mobile_app/utils/themes/theme.dart';
 
 class TobetoHomeScreen extends StatelessWidget {
   const TobetoHomeScreen({super.key});
@@ -461,7 +459,6 @@ class TobetoHomeScreen extends StatelessWidget {
                       children: [
                         BlocBuilder<ThemeBloc, ThemeMode>(
                           builder: (context, state) {
-                            bool isDarkMode = state == ThemeMode.dark;
                             return Container(
                               decoration: BoxDecoration(
                                 boxShadow: [
@@ -479,12 +476,10 @@ class TobetoHomeScreen extends StatelessWidget {
                               width: double.infinity,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
-                                child: Image.asset(
-                                  ThemeMode == ThemeMode.dark
-                                      ? ImagePath.mainScreenGif
-                                      : ImagePath.maindarkScreenGif,
-                                  // Burada anahtar ekleyerek rebuild sağlıyoruz
-                                ),
+                                child: Image.asset(ImagePath.mainScreenGif
+
+                                    // Burada anahtar ekleyerek rebuild sağlıyoruz
+                                    ),
                               ),
                             );
                           },

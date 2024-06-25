@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/blog_model.dart';
 import 'package:equatable/equatable.dart';
 import 'package:tobeto_mobile_app/services/blog_service.dart';
@@ -19,7 +20,7 @@ class BlogBloc extends Bloc<BlogEvent, BlogState> {
       List<Blog> blogs = await _blogService.fetchBlogs();
       emit(BlogLoadedState(blogs: blogs));
     } catch (e) {
-      print('Error in Bloc: $e');
+      debugPrint('Error in Bloc: $e');
       emit(BlogErrorState());
     }
   }

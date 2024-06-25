@@ -110,28 +110,26 @@ class CatalogContent extends StatelessWidget {
       child: Column(
         children: [
           Center(
-            child: Container(
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Container(
-                        width: ScreenUtil.getWidth(context) * 1,
-                        height: ScreenUtil.getHeight(context) * 0.30,
-                        decoration: const BoxDecoration(),
-                        child: _customVideoPlayerController != null
-                            ? CustomVideoPlayer(
-                                customVideoPlayerController:
-                                    _customVideoPlayerController!,
-                              )
-                            : const Center(
-                                child: CircularProgressIndicator(),
-                              ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            child: Column(
+              children: [
+                Row(
+                  children: [
+                    Container(
+                      width: ScreenUtil.getWidth(context) * 1,
+                      height: ScreenUtil.getHeight(context) * 0.30,
+                      decoration: const BoxDecoration(),
+                      child: _customVideoPlayerController != null
+                          ? CustomVideoPlayer(
+                              customVideoPlayerController:
+                                  _customVideoPlayerController!,
+                            )
+                          : const Center(
+                              child: CircularProgressIndicator(),
+                            ),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           Padding(
@@ -299,9 +297,9 @@ class DescriptionTab extends StatelessWidget {
   final CatalogCourse catalogCourse;
 
   const DescriptionTab({
-    Key? key,
+    super.key,
     required this.catalogCourse,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -317,7 +315,7 @@ class DescriptionTab extends StatelessWidget {
           Text(
             'Burada ${catalogCourse.courseName} için açıklama içeriği gösterilebilir.',
             textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 16),
+            style: const TextStyle(fontSize: 16),
           ),
         ],
       ),
