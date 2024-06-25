@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_appbar.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
-
 import '../../../utils/constant/constants.dart';
 import '../widgets/description_title_content.dart';
 import 'blog_screen/blog_screen.dart';
@@ -14,7 +13,9 @@ class WhatsHappeningIntobetoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const TobetoAppBar(),
+      appBar: const FixedAppbar(
+        isTobetoScreen: true,
+      ),
       body: Padding(
         padding: EdgeInsets.only(
           top: ScreenPadding.padding24px,

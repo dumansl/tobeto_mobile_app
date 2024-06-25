@@ -23,7 +23,12 @@ class CatalogDetails extends StatelessWidget {
       create: (context) =>
           CatalogBloc(courseRepository: CourseRepository())..add(Fetch()),
       child: Scaffold(
-        appBar: const FixedAppbar(title: 'Catalog'),
+        appBar: FixedAppbar(
+          title: Text(
+            "Katalog",
+            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+          ),
+        ),
         body: BlocBuilder<CatalogBloc, CatalogState>(
           builder: (context, state) {
             if (state is CatalogNotLoaded) {

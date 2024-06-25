@@ -17,7 +17,10 @@ class RewiewsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: TobetoColor.background.lightGrey,
       appBar: FixedAppbar(
-        title: TobetoText.evaluationAppBar,
+        title: Text(
+          TobetoText.evaluationAppBar,
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(

@@ -13,9 +13,7 @@ class TobetoSuccesScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Dispatch FetchReviews event to load reviews when the screen is built
     context.read<ReviewBloc>().add(FetchReviews());
-
     return Scaffold(
       backgroundColor: TobetoColor.background.lightGrey,
       body: SafeArea(
@@ -149,7 +147,9 @@ class TobetoSuccesScreen extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  TobetoText.evaluationCard5,
+                  state.reviews.isCompleted
+                      ? TobetoText.tmainCard2RaporButton
+                      : TobetoText.evaluationCard5,
                   style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
                 ),
               ),
@@ -158,7 +158,7 @@ class TobetoSuccesScreen extends StatelessWidget {
         } else if (state is ReviewError) {
           return Center(child: Text('Error: ${state.message}'));
         } else {
-          return Container(); // Default case to handle other states if necessary
+          return Container();
         }
       },
     );

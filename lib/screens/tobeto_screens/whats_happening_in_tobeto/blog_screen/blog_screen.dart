@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-
-import '../../widgets/custom_appbar.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 
 class BlogScreen extends StatelessWidget {
   const BlogScreen({super.key});
@@ -8,7 +7,9 @@ class BlogScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: TobetoAppBar(),
+      appBar: FixedAppbar(
+        isTobetoScreen: true,
+      ),
     );
   }
 }
