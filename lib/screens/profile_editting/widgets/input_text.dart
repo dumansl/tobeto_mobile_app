@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
-import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class InputText extends StatelessWidget {
   const InputText({

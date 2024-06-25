@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/blog_model.dart';
 
 class BlogService {
@@ -8,12 +9,12 @@ class BlogService {
     try {
       QuerySnapshot snapshot = await _firestore.collection('blog').get();
       List<Blog> blogs = snapshot.docs.map((doc) {
-        print("Fetched blog data: ${doc.data()}");
+        debugPrint("Fetched blog data: ${doc.data()}");
         return Blog.fromFirestore(doc);
       }).toList();
       return blogs;
     } catch (e) {
-      print('Error fetching blogs: $e');
+      debugPrint('Error fetching blogs: $e');
       throw Exception('Error fetching blogs: $e');
     }
   }
@@ -22,7 +23,7 @@ class BlogService {
     try {
       await _firestore.collection('blog').add(blog.toFirestore());
     } catch (e) {
-      print('Error adding blog: $e');
+      debugPrint('Error adding blog: $e');
       throw Exception('Error adding blog: $e');
     }
   }

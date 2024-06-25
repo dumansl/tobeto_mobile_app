@@ -104,8 +104,98 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                           padding: EdgeInsets.symmetric(
                             vertical: ScreenPadding.padding16px,
                           ),
-                          child: _successModelDescription(
-                              score: (state.reviews.score! * 10).round() / 10),
+                          child: Column(
+                            children: [
+                              _successModelDescription(
+                                title: TobetoText
+                                    .evaluationspiderChartDescription1,
+                                score: (state.reviews.score! * 10).round() / 10,
+                                description: TobetoText
+                                    .successExamResultDescriptionContent,
+                                description2: TobetoText
+                                    .successExamResultDescription2Content,
+                                description3: TobetoText
+                                    .successExamResultDescription3Content,
+                              ),
+                              _successModelDescription(
+                                title: TobetoText
+                                    .evaluationspiderChartDescription2,
+                                score: (state.reviews.score! * 10).round() / 10,
+                                description: TobetoText
+                                    .successExamResultDescriptionContent,
+                                description2: TobetoText
+                                    .successExamResultDescription2Content,
+                                description3: TobetoText
+                                    .successExamResultDescription3Content,
+                              ),
+                              _successModelDescription(
+                                title: TobetoText
+                                    .evaluationspiderChartDescription3,
+                                score: (state.reviews.score! * 10).round() / 10,
+                                description: TobetoText
+                                    .successExamResultDescriptionContent,
+                                description2: TobetoText
+                                    .successExamResultDescription2Content,
+                                description3: TobetoText
+                                    .successExamResultDescription3Content,
+                              ),
+                              _successModelDescription(
+                                title: TobetoText
+                                    .evaluationspiderChartDescription4,
+                                score: (state.reviews.score! * 10).round() / 10,
+                                description: TobetoText
+                                    .successExamResultDescriptionContent,
+                                description2: TobetoText
+                                    .successExamResultDescription2Content,
+                                description3: TobetoText
+                                    .successExamResultDescription3Content,
+                              ),
+                              _successModelDescription(
+                                title: TobetoText
+                                    .evaluationspiderChartDescription5,
+                                score: (state.reviews.score! * 10).round() / 10,
+                                description: TobetoText
+                                    .successExamResultDescriptionContent,
+                                description2: TobetoText
+                                    .successExamResultDescription2Content,
+                                description3: TobetoText
+                                    .successExamResultDescription3Content,
+                              ),
+                              _successModelDescription(
+                                title: TobetoText
+                                    .evaluationspiderChartDescription6,
+                                score: (state.reviews.score! * 10).round() / 10,
+                                description: TobetoText
+                                    .successExamResultDescriptionContent,
+                                description2: TobetoText
+                                    .successExamResultDescription2Content,
+                                description3: TobetoText
+                                    .successExamResultDescription3Content,
+                              ),
+                              _successModelDescription(
+                                title: TobetoText
+                                    .evaluationspiderChartDescription7,
+                                score: (state.reviews.score! * 10).round() / 10,
+                                description: TobetoText
+                                    .successExamResultDescriptionContent,
+                                description2: TobetoText
+                                    .successExamResultDescription2Content,
+                                description3: TobetoText
+                                    .successExamResultDescription3Content,
+                              ),
+                              _successModelDescription(
+                                title: TobetoText
+                                    .evaluationspiderChartDescription8,
+                                score: (state.reviews.score! * 10).round() / 10,
+                                description: TobetoText
+                                    .successExamResultDescriptionContent,
+                                description2: TobetoText
+                                    .successExamResultDescription2Content,
+                                description3: TobetoText
+                                    .successExamResultDescription3Content,
+                              ),
+                            ],
+                          ),
                         ),
                       ],
                     ),
@@ -229,28 +319,42 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
     );
   }
 
-  Widget _successModelDescription({required double score}) {
+  Widget _successModelDescription({
+    required String title,
+    required double score,
+    required String description,
+    required String description2,
+    required String description3,
+  }) {
     return Column(
       children: [
         _successModelDescriptionTitle(
-          title: TobetoText.evaluationspiderChartDescription1,
+          title: title,
           score: score,
         ),
         Padding(
           padding: EdgeInsets.only(
               top: ScreenPadding.padding16px, bottom: ScreenPadding.padding8px),
           child: _successModelDescriptionTitleContent(
-              title: "Bu yetkinlik nedir ve neden önemli?",
-              description:
-                  "Tobeto ‘İşte Başarı Modeli’nin son yetkinliği yeni dünya ile ilgilidir. Bu yetkinlik, diğer yedi yetkinlikten farklı olarak, yeni dünya ile ilgili farkındalık yaratmak ve herkesin kendisini olabildiğince buna hazırlaması konusunda yönlendirici olması için modele eklenmiştir. Zira içinde bulunduğumuz zamanlar önemli bir geçiş sürecine işaret etmektedir. Dijital teknolojilerle birlikte yaşanan dönüşümler hayatın her alanını yeninden şekillendirmektedir. İş dünyası ve şirketler de bu dönüşümün hem lokomotifi hem de etkilenenidir. Teknolojinin bu kadar yaygınlaşması ve karmaşık hale gelmesi, onu kullanabilecek nitelikte donanımlı insanlar gerektirmektedir. Birçok araştırma göstermektedir ki, hızlı teknolojik gelişmeler karşısında gereken yetenek altyapısı oluşturulamamıştır. Bu yüzden birçok şirket, özellikle teknoloji yoğun pozisyonlarda yetenek açığı çekmektedir. Bu açığı kapatmak için kendi içinde gelişim programları düzenleyen pek çok şirket var. İşin daha dramatik boyutu, bazı meslekler artık kendini tamamen teknolojiye bırakmış durumda ve artık bu meslek alanlarında çalışanların kendilerini başka alanlarda çalışacak şekilde geliştirmesi bir zorunluluk.Tüm bu dönüşüm süreci içinde; yeni dünyayı anlamış, bu dünyada başarılı olabilecek dijital ve teknoloji yetkinliklerine sahip adayların istihdamı kuşkusuz daha kolay. Bu konudaki gelişim ihtiyacı sadece istihdamla ilgili de değil çünkü bu beceriler gündelik yaşamda da çok önemli hale gelmiş durumda. İnterneti iyi kullanan, aradığı tüm bilgilere ulaşabilen, ihtiyacına göre dijital uygulamaları arayıp bulan, siber dünyada güvenliğini koruyabilen tüm bireyler birçok alanda öne çıkıyor. Ayrıca bu dünya fırsatlar dünyasıdır. Yeni mecralar, yeni işler, yeni para kazanma biçimleri ortaya çıkarken bu fırsatları ancak yeterli donanıma sahip bireyler yakalayabilecek. Tüm bu açılardan bakıldığında bu yetkinlik, diğer tüm yetkinliklerin gücünü artırması açısından önemli. "),
+            title: TobetoText.successExamResultDescription,
+            description: description,
+          ),
         ),
         Padding(
           padding: EdgeInsets.only(
               bottom: ScreenPadding.padding16px, top: ScreenPadding.padding8px),
           child: _successModelDescriptionTitleContent(
-              title: "Bu yetkinlik nedir ve neden önemli?",
-              description:
-                  "Tobeto ‘İşte Başarı Modeli’nin son yetkinliği yeni dünya ile ilgilidir. Bu yetkinlik, diğer yedi yetkinlikten farklı olarak, yeni dünya ile ilgili farkındalık yaratmak ve herkesin kendisini olabildiğince buna hazırlaması konusunda yönlendirici olması için modele eklenmiştir. Zira içinde bulunduğumuz zamanlar önemli bir geçiş sürecine işaret etmektedir. Dijital teknolojilerle birlikte yaşanan dönüşümler hayatın her alanını yeninden şekillendirmektedir. İş dünyası ve şirketler de bu dönüşümün hem lokomotifi hem de etkilenenidir. Teknolojinin bu kadar yaygınlaşması ve karmaşık hale gelmesi, onu kullanabilecek nitelikte donanımlı insanlar gerektirmektedir. Birçok araştırma göstermektedir ki, hızlı teknolojik gelişmeler karşısında gereken yetenek altyapısı oluşturulamamıştır. Bu yüzden birçok şirket, özellikle teknoloji yoğun pozisyonlarda yetenek açığı çekmektedir. Bu açığı kapatmak için kendi içinde gelişim programları düzenleyen pek çok şirket var. İşin daha dramatik boyutu, bazı meslekler artık kendini tamamen teknolojiye bırakmış durumda ve artık bu meslek alanlarında çalışanların kendilerini başka alanlarda çalışacak şekilde geliştirmesi bir zorunluluk.Tüm bu dönüşüm süreci içinde; yeni dünyayı anlamış, bu dünyada başarılı olabilecek dijital ve teknoloji yetkinliklerine sahip adayların istihdamı kuşkusuz daha kolay. Bu konudaki gelişim ihtiyacı sadece istihdamla ilgili de değil çünkü bu beceriler gündelik yaşamda da çok önemli hale gelmiş durumda. İnterneti iyi kullanan, aradığı tüm bilgilere ulaşabilen, ihtiyacına göre dijital uygulamaları arayıp bulan, siber dünyada güvenliğini koruyabilen tüm bireyler birçok alanda öne çıkıyor. Ayrıca bu dünya fırsatlar dünyasıdır. Yeni mecralar, yeni işler, yeni para kazanma biçimleri ortaya çıkarken bu fırsatları ancak yeterli donanıma sahip bireyler yakalayabilecek. Tüm bu açılardan bakıldığında bu yetkinlik, diğer tüm yetkinliklerin gücünü artırması açısından önemli. "),
+            title: TobetoText.successExamResultDescription2,
+            description: description2,
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.only(
+              bottom: ScreenPadding.padding16px, top: ScreenPadding.padding8px),
+          child: _successModelDescriptionTitleContent(
+            title: TobetoText.successExamResultDescription3,
+            description: description3,
+          ),
         ),
       ],
     );

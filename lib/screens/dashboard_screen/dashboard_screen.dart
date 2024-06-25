@@ -55,7 +55,7 @@ class _HomeState extends State<DashboardScreen> {
                 inactiveIcon: Image.asset(ImagePath.catalog),
               )),
           PersistentTabConfig(
-              screen: CalendarScreen(),
+              screen: const CalendarScreen(),
               item: ItemConfig(
                 icon: Image.asset(ImagePath.calendarActive),
                 title: TobetoText.bottomIconCalendar,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
