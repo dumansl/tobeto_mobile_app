@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
-ThemeData lightTheme =
-    ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
+ThemeData lightTheme = ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
 
-ThemeData darkTheme =
-    ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
+ThemeData darkTheme = ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
 
 ColorScheme lightColorScheme = ColorScheme(
   brightness: Brightness.light,
@@ -19,6 +17,9 @@ ColorScheme lightColorScheme = ColorScheme(
   error: TobetoColor.state.error,
   onError: const Color(0xffffffff),
   onTertiary: TobetoColor.text.black,
+  tertiaryContainer: TobetoColor.card.lightPurple, //sss textfield
+  tertiaryFixed: TobetoColor.purple, //sss icon
+  tertiaryFixedDim: TobetoColor.card.cream.withOpacity(0.35), //sss popup
 );
 
 ColorScheme darkColorScheme = ColorScheme(
@@ -33,4 +34,7 @@ ColorScheme darkColorScheme = ColorScheme(
   onError: const Color(0xff690005),
   inversePrimary: const Color(0xff4c662b),
   onTertiary: TobetoColor.text.black,
+  tertiaryContainer: TobetoColor.purple, //sss textfield
+  tertiaryFixed: TobetoColor.icon.white, //sss icon
+  tertiaryFixedDim: TobetoColor.card.black,
 );
