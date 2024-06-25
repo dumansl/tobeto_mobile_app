@@ -13,8 +13,11 @@ class PressDetailsScreen extends StatelessWidget {
     debugPrint(ScreenUtil.getHeight(context).toString());
     debugPrint(ScreenUtil.getWidth(context).toString());
     return Scaffold(
-      appBar: const FixedAppbar(
-        title: 'Basında Biz',
+      appBar: FixedAppbar(
+        title: Text(
+          "Basında Biz",
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
       ),
       body: Padding(
         padding: EdgeInsets.all(ScreenPadding.padding24px),

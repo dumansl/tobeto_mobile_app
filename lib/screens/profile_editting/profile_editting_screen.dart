@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.
 import 'package:tobeto_mobile_app/screens/screens.dart';
 
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class ProfileEditPage extends StatefulWidget {
   const ProfileEditPage({super.key});
@@ -57,7 +58,10 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             )),
           ],
         ),
-        title: TobetoText.profileAppBar,
+        title: Text(
+          TobetoText.profileAppBar,
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 12),

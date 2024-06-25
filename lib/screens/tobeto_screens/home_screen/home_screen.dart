@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_appbar.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_logo.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/tobeto_screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -17,7 +17,10 @@ class TobetoHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: _drawer(context),
-      appBar: const TobetoAppBar(isLeading: false),
+      appBar: const FixedAppbar(
+        isLeading: false,
+        isTobetoScreen: true,
+      ),
       body: _body(context),
     );
   }
