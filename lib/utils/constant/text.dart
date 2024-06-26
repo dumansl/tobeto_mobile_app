@@ -77,7 +77,8 @@ abstract class TobetoText {
   static String profileMilitaryStuation = "Askerlik Durumu";
   static String profileDisableStuation = "Engellilik Durumu";
   static String profileAboutMe = "Hakkımda";
-  static String emptyAboutMe = 'Henüz eklediğiniz bir hakkımda bilginiz bulunmamaktadır.';
+  static String emptyAboutMe =
+      'Henüz eklediğiniz bir hakkımda bilginiz bulunmamaktadır.';
   static String profileMySkills = "Yetkinliklerim";
   static String profileLanguages = "Yabancı Dillerim";
   static String profileMyCertificate = "Sertifikalarım";
@@ -90,7 +91,8 @@ abstract class TobetoText {
   static String profileTobetoWorkSuccessStartButton = "Başla";
   static String profileTobetoTests = "Tobeto Seviye Testlerim";
   static String profileTobetoEducations = "Tobeto'dan Aldığı Eğitimler";
-  static String emptyEducations = "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.";
+  static String emptyEducations =
+      "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.";
   // profile edit page/profile
   static String workLifeTitle = "Deneyimlerim";
   static String personalInformationTitle = "Kişisel Bilgilerim";
@@ -147,8 +149,10 @@ abstract class TobetoText {
   static String profileEditFinishJobDateBox = "gg.aa.yyyy";
   static String profileEditExperienceContinueBox = "Çalışmaya Devam Ediyorum";
   static String profileEditJobDescription = "İş Açıklaması*";
-  static String profileEditJobDescriptionBox = "Lütfen iş açıklaması giriniz...";
-  static String emptyJob = "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.";
+  static String profileEditJobDescriptionBox =
+      "Lütfen iş açıklaması giriniz...";
+  static String emptyJob =
+      "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.";
   // profile edit page/education
   static String profileEditEducationStatu = "Eğitim Durumu*";
   static List<String> educationStatu = ['Lise', 'Ön Lisans', 'Lisans', 'Yüksek Lisans', 'Doktora', 'Lisansüstü'];
@@ -547,4 +551,7 @@ abstract class TobetoText {
   static String hambugerMenuIstanbulIsCodding = "İstanbul Kodluyor";
   static String cancel = "İptal";
   static String yes = "Evet";
+  //educator
+  static String educatorHomeMain1 =
+      "Tobeto; yetenekleri keşfeder, geliştirir ve yeni işine hazırlar.";
 }
