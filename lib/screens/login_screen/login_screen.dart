@@ -64,11 +64,20 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (context) => const TobetoHomeScreen()),
               );
             } else {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => const DashboardScreen()),
-              );
+              if (!_educatorSwitch) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const DashboardScreen()),
+                );
+              } else {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          const DashboardScreen()), // Eğitmen için burası değişecek.
+                );
+              }
             }
           } else if (state is LoginError) {
             if (state.errorMessage != null) {
