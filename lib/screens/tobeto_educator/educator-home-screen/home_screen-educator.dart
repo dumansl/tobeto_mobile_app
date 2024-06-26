@@ -40,65 +40,6 @@ class _HomeScreenState extends State<HomeScreenEducator> {
 
   @override
   Widget build(BuildContext context) {
-    // Box widget'larını liste olarak tanımlıyoruz.
-    final List<Widget> boxWidgets = [
-      Box(
-        text: TobetoText.mainCard1,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const ApplicationScreen(),
-            ),
-          );
-        },
-      ),
-      Box(
-        text: TobetoText.mainCard2,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const RewiewsScreen(),
-            ),
-          );
-        },
-      ),
-      Box(
-        text: TobetoText.mainCard3,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const AnnouncementScreen(),
-            ),
-          );
-        },
-      ),
-      Box(
-        text: TobetoText.mainCard4,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const SurveyScreen(),
-            ),
-          );
-        },
-      ),
-      Box(
-        text: TobetoText.mainCard5,
-        onTap: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const JobScreen(),
-            ),
-          );
-        },
-      ),
-    ];
-
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding12px),
@@ -113,13 +54,7 @@ class _HomeScreenState extends State<HomeScreenEducator> {
                 textAlign: TextAlign.center,
               ),
               SizedBox(height: ScreenPadding.padding12px),
-              const Rainbow(),
               SizedBox(height: ScreenPadding.padding12px),
-              Text(
-                TobetoText.mainHeadline2,
-                style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
-                textAlign: TextAlign.center,
-              ),
               Switch(
                 value: context.read<ThemeBloc>().state == ThemeMode.dark,
                 onChanged: (value) {
@@ -127,48 +62,10 @@ class _HomeScreenState extends State<HomeScreenEducator> {
                 },
               ),
               SizedBox(height: ScreenPadding.padding12px),
-              Text(
-                TobetoText.mainHeadline3,
-                style: TobetoTextStyle.poppins(context).subtitleBlackSemiBold20,
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: ScreenPadding.padding12px),
-              SizedBox(
-                height: ScreenUtil.getHeight(context) * 0.12,
-
-                // ListView.builder için yükseklik belirleyin
-                child: ListView.builder(
-                  itemCount: boxWidgets.length,
-                  scrollDirection: Axis.horizontal,
-                  itemBuilder: (BuildContext context, int index) {
-                    return boxWidgets[
-                        index]; // Belirlenen Box widget'larını kullan
-                  },
-                ),
-              ),
-              SizedBox(height: ScreenPadding.padding12px),
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   SizedBox(height: ScreenPadding.padding12px),
-                  Padding(
-                    padding: EdgeInsets.only(left: ScreenPadding.padding8px),
-                    child: Text(
-                      "Sınavlarım",
-                      style: TobetoTextStyle.poppins(context).bodyBlackBold16,
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Expanded(
-                        child: SizedBox(
-                          height: ScreenUtil.getHeight(context) * 0.15,
-                          width: ScreenUtil.getWidth(context) * 0.9,
-                          child: const _ExamplesCard(),
-                        ),
-                      ),
-                    ],
-                  ),
                   SizedBox(height: ScreenPadding.padding12px),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
