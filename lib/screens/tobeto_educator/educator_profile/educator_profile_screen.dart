@@ -2,14 +2,17 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:tobeto_mobile_app/blocs/certificate_bloc/certificate_state.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_state.dart';
 import 'package:tobeto_mobile_app/blocs/user_bloc/user_state.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/profile_editting_screen.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_date_input.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdown_input.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/phone_textfield.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -84,8 +87,7 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
                         ? FileImage(_selectedImage!)
                         : hasImageUrl
                             ? NetworkImage(imageUrl)
-                            : const AssetImage(ImagePath.defaultProfilePhoto)
-                                as ImageProvider,
+                            : const AssetImage(ImagePath.defaultProfilePhoto) as ImageProvider,
                   ),
                   CircleAvatar(
                     backgroundColor: TobetoColor.card.white,
@@ -103,12 +105,9 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
               if (_selectedImage != null)
                 ElevatedButton(
                   onPressed: () {
-                    context
-                        .read<ProfilePhotoBloc>()
-                        .add(UpdateProfilePhoto(_selectedImage!));
+                    context.read<ProfilePhotoBloc>().add(UpdateProfilePhoto(_selectedImage!));
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: TobetoColor.purple),
+                  style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
                   child: Text(TobetoText.profileEditSaveButton),
                 ),
             ],
@@ -132,49 +131,91 @@ class PersonalInfo extends StatelessWidget {
       if (state is UserLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state is UserLoaded) {
-        return Column(
-          children: [
-            MainTitleCard(
-              iconAndTexts: [
-                IconAndText(
-                  icon: ImagePath.user,
-                  text: TobetoText.profileName,
-                  value:
-                      '${firstNameController.text} ${lastNameController.text}',
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 12),
+          child: Column(
+            children: [
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditName,
+                controller: firstNameController,
+              )),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditSurname,
+                controller: lastNameController,
+              )),
+              InputText(
+                  child: CustomDateInput(controller: birthDateController, labelText: TobetoText.profileEditBirthday)),
+              InputText(
+                  child: CustomTextField(
+                title: TobetoText.profileEditEmail,
+                keyboardType: TextInputType.emailAddress,
+                controller: emailController,
+                readOnly: true, // E-posta alanını yalnızca okunabilir yapıyoruz.
+              )),
+              InputText(
+                  child: PhoneTextField(
+                controller: phoneNumberController,
+              )),
+              InputText(
+                child: CustomDropDownInput(
+                  onChanged: (newValue) {
+                    genderController.text = newValue ?? genderController.text;
+                  },
+                  items: TobetoText.genderStatu
+                      .map((label) => DropdownMenuItem(
+                            value: label,
+                            child: Text(label),
+                          ))
+                      .toList(),
+                  title: genderController.text.isNotEmpty ? genderController.text : TobetoText.profileEditGender,
+                  controller: genderController,
+                  labelText: TobetoText.profileEditGender,
                 ),
-                IconAndText(
-                  icon: ImagePath.birthdate,
-                  text: TobetoText.profileBirthday,
-                  value: birthDateController.text,
-                ),
-                IconAndText(
-                  icon: ImagePath.mail,
-                  text: TobetoText.profileEmail,
-                  value: emailController.text,
-                ),
-                IconAndText(
-                  icon: ImagePath.phone,
-                  text: TobetoText.profilePhoneNumber,
-                  value: phoneNumberController.text,
-                ),
-                IconAndText(
-                  icon: ImagePath.gender,
-                  text: TobetoText.profileGender,
-                  value: genderController.text,
-                ),
-                IconAndText(
-                  icon: ImagePath.soldier,
-                  text: TobetoText.profileMilitaryStuation,
-                  value: militaryStatuController.text,
-                ),
-                IconAndText(
-                  icon: ImagePath.disabled,
-                  text: TobetoText.profileDisableStuation,
-                  value: disabledStatuController.text,
-                ),
-              ],
-            ),
-          ],
+              ),
+              InputText(
+                  child: CustomDropDownInput(
+                onChanged: (newValue) {
+                  militaryStatuController.text = newValue ?? militaryStatuController.text;
+                },
+                items: TobetoText.militaryStatu
+                    .map((label) => DropdownMenuItem(
+                          value: label,
+                          child: Text(label),
+                        ))
+                    .toList(),
+                title: militaryStatuController.text.isNotEmpty
+                    ? militaryStatuController.text
+                    : TobetoText.profileEditMilitaryStuation,
+                controller: militaryStatuController,
+                labelText: TobetoText.profileEditMilitaryStuation,
+              )),
+              InputText(
+                  child: CustomDropDownInput(
+                onChanged: (newValue) {
+                  disabledStatuController.text = newValue ?? disabledStatuController.text;
+                },
+                items: TobetoText.disableStatu
+                    .map((label) => DropdownMenuItem(
+                          value: label,
+                          child: Text(label),
+                        ))
+                    .toList(),
+                title: disabledStatuController.text.isNotEmpty
+                    ? disabledStatuController.text
+                    : TobetoText.profileEditDisableStuation,
+                controller: disabledStatuController,
+                labelText: TobetoText.profileEditDisableStuation,
+              )),
+              CustomElevatedButton(
+                text: TobetoText.profileEditSaveButton,
+                onPressed: () {
+                  context.read<UserBloc>().add(UpdateUserData());
+                },
+              ),
+            ],
+          ),
         );
       } else if (state is UserError) {
         return Center(child: Text('Error: ${state.message}'));
@@ -182,113 +223,5 @@ class PersonalInfo extends StatelessWidget {
         return const Center(child: Text('Bir hata oluştu.'));
       }
     });
-  }
-}
-
-class MainTitleCard extends StatelessWidget {
-  final List<IconAndText> iconAndTexts;
-
-  const MainTitleCard({super.key, required this.iconAndTexts});
-
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-        builder: (BuildContext context, BoxConstraints constraints) =>
-            ConstrainedBox(
-              constraints: const BoxConstraints(
-                maxHeight: double.infinity,
-              ),
-              child: Column(children: [
-                SizedBox(
-                  width: double.infinity,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius:
-                            BorderRadius.circular(SizeRadius.radius20px)),
-                    color: Theme.of(context).colorScheme.onPrimary,
-                    child: Padding(
-                      padding: EdgeInsets.all(ScreenPadding.padding16px),
-                      child: Column(
-                        children: iconAndTexts,
-                      ),
-                    ),
-                  ),
-                )
-              ]),
-            ));
-  }
-}
-
-class IconAndText extends StatelessWidget {
-  final String icon;
-  final String? text;
-  final String? value;
-
-  const IconAndText({
-    super.key,
-    required this.icon,
-    this.text,
-    this.value,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        SizedBox(
-            width: ScreenUtil.getWidth(context) * 0.09,
-            height: ScreenUtil.getHeight(context) * 0.07,
-            child: Image.asset(
-              icon,
-              color: Theme.of(context).colorScheme.onSurface,
-            )),
-        SizedBox(width: ScreenPadding.padding16px),
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(text!,
-                style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
-            Text(value!,
-                style: TobetoTextStyle.poppins(context).captionBlackBold18),
-          ],
-        ),
-      ],
-    );
-  }
-}
-
-class TwoLineCard extends StatelessWidget {
-  final String? line1;
-  final String line2;
-
-  const TwoLineCard({super.key, this.line1, required this.line2});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(SizeRadius.radius20px)),
-        color: Theme.of(context).colorScheme.onPrimary,
-        child: Padding(
-          padding: EdgeInsets.all(ScreenPadding.padding12px),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              if (line1 != null && line1!.isNotEmpty)
-                Text(
-                  line1!,
-                  style: TobetoTextStyle.poppins(context).captionGrayNormal12,
-                ),
-              Text(
-                line2,
-                style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
   }
 }
