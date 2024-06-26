@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/center
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -18,47 +19,47 @@ class ProjectPhotosCard extends StatelessWidget {
           style: TobetoTextStyle.poppins(context).captionBlackBold24,
         ),
         const VerticalPadding(),
-        const Row(
+        Row(
           children: [
             CustomImageContainer(
               imagePath: ImagePath.ik1,
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.all(1.5),
+              padding: EdgeInsets.all(ScreenPadding.padding2px),
               widthFactor: 0.65,
             ),
           ],
         ),
         const VerticalPadding(),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CustomImageContainer(
               imagePath: ImagePath.ik2,
               alignment: Alignment.centerRight,
-              padding: EdgeInsets.all(1.5),
+              padding: EdgeInsets.all(ScreenPadding.padding2px),
               widthFactor: 0.65,
             ),
           ],
         ),
         const VerticalPadding(),
-        const Row(
+        Row(
           children: [
             CustomImageContainer(
               imagePath: ImagePath.ik3,
               alignment: Alignment.centerLeft,
-              padding: EdgeInsets.all(1.5),
+              padding: EdgeInsets.all(ScreenPadding.padding2px),
               widthFactor: 0.65,
             ),
           ],
         ),
         const VerticalPadding(),
-        const Row(
+        Row(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             CustomImageContainer(
               imagePath: ImagePath.ik4,
               alignment: Alignment.centerRight,
-              padding: EdgeInsets.all(1.5),
+              padding: EdgeInsets.all(ScreenPadding.padding2px),
               widthFactor: 0.65,
             ),
           ],

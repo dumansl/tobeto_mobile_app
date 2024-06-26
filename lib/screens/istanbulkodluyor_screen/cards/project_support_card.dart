@@ -4,6 +4,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -37,7 +38,7 @@ class ProjectSupportCard extends StatelessWidget {
             PaddedText(
               text: TobetoText.istanbulCard5Body,
               style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
-              padding: const EdgeInsets.only(left: 30, right: 30),
+              padding: EdgeInsets.only(left: ScreenPadding.padding30px, right: ScreenPadding.padding30px),
             ),
             const Center(
               child: Column(

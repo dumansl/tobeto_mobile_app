@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/center
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom_container.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -31,14 +32,14 @@ class EmploymentPathCard extends StatelessWidget {
             Row(
               children: [
                 Padding(
-                  padding: const EdgeInsets.all(3),
+                  padding: EdgeInsets.all(ScreenPadding.padding3px),
                   child: CircleAvatar(
                     radius: 17.5,
                     backgroundColor: TobetoColor.card.shineGreen,
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 60),
+                  padding: const EdgeInsets.only(left: 60), //buraya bakılacak
                   child: CenteredText(
                     text: TobetoText.istanbulHeadline4,
                     style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
@@ -53,17 +54,18 @@ class EmploymentPathCard extends StatelessWidget {
             PaddedText(
               text: TobetoText.istanbulCard3Title1,
               style: TobetoTextStyle.poppins(context).captionWhiteBold18,
-              padding: const EdgeInsets.only(top: 30, bottom: 20, left: 10),
+              padding: EdgeInsets.only(
+                  top: ScreenPadding.padding30px, bottom: ScreenPadding.padding20px, left: ScreenPadding.padding10px),
             ),
             PaddedText(
               text: TobetoText.istanbulCard3Title2,
               style: TobetoTextStyle.poppins(context).captionWhiteBold18,
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding10px),
             ),
             PaddedText(
               text: TobetoText.istanbulCard3Body1,
               style: TobetoTextStyle.poppins(context).bodyWhiteNormal16,
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding10px),
             ),
             Icon(
               Icons.add,
@@ -73,12 +75,12 @@ class EmploymentPathCard extends StatelessWidget {
             PaddedText(
               text: TobetoText.istanbulCard3Title3,
               style: TobetoTextStyle.poppins(context).captionWhiteBold18,
-              padding: const EdgeInsets.only(bottom: 10, top: 20),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding10px, top: ScreenPadding.padding20px),
             ),
             PaddedText(
               text: TobetoText.istanbulCard3Body2,
               style: TobetoTextStyle.poppins(context).bodyWhiteNormal16,
-              padding: const EdgeInsets.only(bottom: 20),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding20px),
             ),
           ],
         ),

@@ -32,7 +32,7 @@ class ApplyNowCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 90),
+                  padding: const EdgeInsets.only(left: 90), //buraya bakılacak
                   child: CenteredText(
                     text: TobetoText.istanbulHeadline6,
                     style: TobetoTextStyle.poppins(context).captionWhiteBold18,
@@ -92,7 +92,7 @@ class CustomNumberedText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 2, bottom: 20),
+      padding: EdgeInsets.only(left: ScreenPadding.padding2px, bottom: ScreenPadding.padding20px),
       child: RichText(
         text: TextSpan(
           children: [
