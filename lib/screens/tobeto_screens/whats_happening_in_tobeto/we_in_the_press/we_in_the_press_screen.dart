@@ -15,8 +15,11 @@ class WeInThePressScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const FixedAppbar(
-        title: 'Basında Biz',
+      appBar: FixedAppbar(
+        title: Text(
+          "Basında Biz",
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
       ),
       backgroundColor: TobetoColor.background.lightGrey,
       body: Padding(

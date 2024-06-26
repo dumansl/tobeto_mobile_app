@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_appbar.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_logo.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/tobeto_screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -13,7 +15,10 @@ class TobetoHomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: _drawer(context),
-      appBar: const TobetoAppBar(isLeading: false),
+      appBar: const FixedAppbar(
+        isLeading: false,
+        isTobetoScreen: true,
+      ),
       body: _body(context),
     );
   }
@@ -130,6 +135,12 @@ class TobetoHomeScreen extends StatelessWidget {
                       );
                     },
                   ),
+                  Switch(
+                    value: context.read<ThemeBloc>().state == ThemeMode.dark,
+                    onChanged: (value) {
+                      context.read<ThemeBloc>().add(ThemeChanged(value));
+                    },
+                  ),
                 ],
               ),
             ),
@@ -166,7 +177,7 @@ class TobetoHomeScreen extends StatelessWidget {
                   padding: const EdgeInsets.only(left: 70),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: TobetoColor.card.lightGrey,
+                      color: Theme.of(context).colorScheme.onSecondary,
                       borderRadius: const BorderRadius.all(
                         Radius.circular(50),
                       ),
@@ -267,7 +278,7 @@ class TobetoHomeScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(30)),
-                        color: TobetoColor.icon.grey,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                       height: 120,
                       width: 120,
@@ -322,7 +333,7 @@ class TobetoHomeScreen extends StatelessWidget {
                       decoration: BoxDecoration(
                         borderRadius:
                             const BorderRadius.all(Radius.circular(30)),
-                        color: TobetoColor.icon.grey,
+                        color: Theme.of(context).colorScheme.onSecondary,
                       ),
                       height: 120,
                       width: 120,
@@ -380,7 +391,7 @@ class TobetoHomeScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      color: TobetoColor.icon.grey,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
                     height: 120,
                     width: 120,
@@ -441,24 +452,46 @@ class TobetoHomeScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      color: TobetoColor.card.white,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
                     width: double.infinity,
                     child: Column(
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 4),
-                          child: Padding(
-                            padding: const EdgeInsets.all(8.0),
-                            child: SizedBox(
-                                width: double.infinity,
-                                child: Image.asset(ImagePath.mainScreenGif)),
-                          ),
+                        BlocBuilder<ThemeBloc, ThemeMode>(
+                          builder: (context, state) {
+                            return Container(
+                              decoration: BoxDecoration(
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: TobetoColor.card.shadowColor
+                                        .withOpacity(0.4),
+                                    spreadRadius: 2,
+                                    blurRadius: 5,
+                                    offset: const Offset(
+                                        2, 4), // changes position of shadow
+                                  ),
+                                ],
+                                borderRadius: BorderRadius.circular(50),
+                              ),
+                              width: double.infinity,
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: Image.asset(ImagePath.mainScreenGif
+
+                                    // Burada anahtar ekleyerek rebuild sağlıyoruz
+                                    ),
+                              ),
+                            );
+                          },
                         ),
-                        Text('Tobeto "İşte Başarı Modeli"mizi Keşfet!',
-                            style: TobetoTextStyle.poppins(context)
-                                .titleBlackBold24,
-                            textAlign: TextAlign.center),
+                        Padding(
+                          padding:
+                              EdgeInsets.only(top: ScreenPadding.padding8px),
+                          child: Text('Tobeto "İşte Başarı Modeli"mizi Keşfet!',
+                              style: TobetoTextStyle.poppins(context)
+                                  .titleBlackBold24,
+                              textAlign: TextAlign.center),
+                        ),
                         Padding(
                           padding: const EdgeInsets.only(
                               top: 30, left: 10, right: 10, bottom: 20),
@@ -520,7 +553,6 @@ class TobetoHomeScreen extends StatelessWidget {
                       TobetoColor.purple,
                       TobetoColor.purple,
                       TobetoColor.purple,
-                      TobetoColor.purple,
                       TobetoColor.card.white,
                       TobetoColor.card.white,
                     ],
@@ -533,7 +565,7 @@ class TobetoHomeScreen extends StatelessWidget {
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      color: TobetoColor.card.white,
+                      color: Theme.of(context).colorScheme.onSecondary,
                     ),
                     width: double.infinity,
                     child: Padding(

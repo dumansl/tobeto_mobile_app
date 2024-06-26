@@ -59,7 +59,9 @@ class TobetoMobileApp extends StatelessWidget {
             create: (context) => CertificateBloc()..add(LoadCertificate())),
         BlocProvider<ProfilePhotoBloc>(
             create: (context) => ProfilePhotoBloc()..add(LoadProfilePhoto())),
-        BlocProvider<PressBloc>(create: (context) => PressBloc()),
+        BlocProvider<PressBloc>(
+            create: (context) => PressBloc()..add(FetchPress())),
+        BlocProvider<BlogBloc>(create: (context) => BlogBloc()),
       ],
       child: BlocBuilder<ThemeBloc, ThemeMode>(
         builder: (context, state) {

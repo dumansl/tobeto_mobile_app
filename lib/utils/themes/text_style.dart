@@ -28,6 +28,7 @@ class Typography {
   late TextStyle subtitleBlackLight20;
 
   late TextStyle bodyBlackBold16;
+  late TextStyle themebodyBlackBold16;
   late TextStyle bodyBlackSemiBold16;
   late TextStyle bodyBlackNormal16;
   late TextStyle bodyBlackLight16;
@@ -213,6 +214,7 @@ class Typography {
   late TextStyle captionGrayThin12;
   late TextStyle captionGrayBold12;
   late TextStyle captionGrayNormal12;
+  late TextStyle lightcaptionGrayNormal12;
 
   late TextStyle captionLightGrayThin12;
   late TextStyle captionLightGrayBold12;
@@ -668,13 +670,19 @@ class Typography {
     captionGrayBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
-      color: Theme.of(context).colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.surface,
     );
     captionGrayNormal12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.normal,
       color: Theme.of(context).colorScheme.onSurface,
     );
+    lightcaptionGrayNormal12 = baseStyle.copyWith(
+      fontSize: 12,
+      fontWeight: FontWeight.normal,
+      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.5),
+    );
+
     captionLightGrayThin12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w300,
@@ -688,7 +696,7 @@ class Typography {
     captionLightGrayNormal12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.normal,
-      color: Theme.of(context).colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.onTertiary,
     );
     captionPurpleThin18 = baseStyle.copyWith(
       fontSize: 18,
@@ -1116,6 +1124,11 @@ class Typography {
       color: Theme.of(context).colorScheme.onSurface,
     );
     bodyBlackBold16 = baseStyle.copyWith(
+      fontSize: 16,
+      fontWeight: FontWeight.bold,
+      color: Theme.of(context).colorScheme.onSurface,
+    );
+    themebodyBlackBold16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.bold,
       color: Theme.of(context).colorScheme.onSurface,
@@ -1622,7 +1635,7 @@ class Typography {
     bodyGrayLightNormal16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      color: Theme.of(context).colorScheme.onSurface,
+      color: TobetoColor.text.darkGrey,
     );
     bodyGrayLightLight16 = baseStyle.copyWith(
       fontSize: 16,

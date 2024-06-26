@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomDropDownInput extends StatelessWidget {
@@ -19,11 +20,11 @@ class CustomDropDownInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      icon: const Padding(
-        padding: EdgeInsets.only(right: 10),
+      icon: Padding(
+        padding: EdgeInsets.only(right: ScreenPadding.padding10px),
         child: Icon(
           Icons.keyboard_arrow_down_rounded,
-          size: 25,
+          size: IconSize.size25px,
         ),
       ),
       items: items,
@@ -45,14 +46,14 @@ class CustomDropDownInput extends StatelessWidget {
             : TobetoTextStyle.poppins(context).captionPurpleNormal18,
         floatingLabelStyle: controller.text.isNotEmpty
             ? TobetoTextStyle.poppins(context).captionPurpleNormal18
-            : const TextStyle(color: Colors.transparent),
-        border: const OutlineInputBorder(
+            : TextStyle(color: TobetoColor.background.transparent),
+        border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
-          Radius.circular(12),
+          Radius.circular(SizeRadius.radius12px),
         )),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.transparent, width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: TobetoColor.background.transparent, width: 1.0),
+          borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
         ),
       ),
     );

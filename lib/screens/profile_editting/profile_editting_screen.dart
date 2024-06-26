@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.
 import 'package:tobeto_mobile_app/screens/screens.dart';
 
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class ProfileEditPage extends StatefulWidget {
   const ProfileEditPage({super.key});
@@ -25,7 +26,7 @@ class _ProfileEditPageState extends State<ProfileEditPage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FixedAppbar(
-        height: 130,
+        height: ScreenUtil.getHeight(context) * 0.15,
         bottom: TabBar(
           tabAlignment: TabAlignment.start,
           indicatorColor: TobetoColor.purple,
@@ -36,7 +37,7 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             Tab(icon: Image.asset(ImagePath.personalInformation)),
             Tab(
                 icon: Padding(
-              padding: const EdgeInsets.only(bottom: 10),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding10px),
               child: Image.asset(ImagePath.experiences),
             )),
             Tab(icon: Image.asset(ImagePath.education)),
@@ -44,7 +45,7 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             Tab(icon: Image.asset(ImagePath.certificates)),
             Tab(
                 icon: Padding(
-              padding: const EdgeInsets.only(bottom: 2),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding2px),
               child: Image.asset(ImagePath.communities),
             )),
             Tab(icon: Image.asset(ImagePath.projectsAndAwards)),
@@ -52,15 +53,18 @@ class _ProfileEditPageState extends State<ProfileEditPage>
             Tab(icon: Image.asset(ImagePath.foreignLanguages)),
             Tab(
                 icon: Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: EdgeInsets.only(bottom: ScreenPadding.padding4px),
               child: Image.asset(ImagePath.settings),
             )),
           ],
         ),
-        title: TobetoText.profileAppBar,
+        title: Text(
+          TobetoText.profileEditAppBar,
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
       ),
       body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12),
+        padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding12px),
         child: TabBarView(
           controller: _tabController,
           children: const [

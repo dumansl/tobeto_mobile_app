@@ -34,7 +34,7 @@ class NestedScroll extends StatelessWidget {
             headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
               return [
                 SliverAppBar(
-                  backgroundColor: TobetoColor.background.white,
+                  backgroundColor: Theme.of(context).colorScheme.surface,
                   expandedHeight: MediaQuery.of(context).size.height * 0.28,
                   toolbarHeight: MediaQuery.of(context).size.height * 0.090,
                   floating: false,
@@ -55,8 +55,9 @@ class NestedScroll extends StatelessWidget {
                                 alignment: isTopRight ? Alignment.centerRight : Alignment.bottomCenter,
                                 child: Container(
                                   padding: const EdgeInsets.all(2.0),
-                                  width: isTopRight ? IconSize.size30px * 2 : IconSize.size60px * 2,
-                                  height: isTopRight ? IconSize.size30px * 2 : IconSize.size60px * 2,
+                                  width: isTopRight
+                                      ? ScreenUtil.getWidth(context) * 0.15
+                                      : ScreenUtil.getWidth(context) * 0.3,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
                                     gradient: LinearGradient(

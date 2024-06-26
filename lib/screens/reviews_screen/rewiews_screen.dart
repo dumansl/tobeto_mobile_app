@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_event.dart';
 import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_state.dart';
+import 'package:tobeto_mobile_app/model/exam_model.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -17,7 +18,10 @@ class RewiewsScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: TobetoColor.background.lightGrey,
       appBar: FixedAppbar(
-        title: TobetoText.evaluationAppBar,
+        title: Text(
+          TobetoText.evaluationAppBar,
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
       ),
       body: SingleChildScrollView(
         child: Center(
@@ -54,34 +58,34 @@ class RewiewsScreen extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                   child: BlocBuilder<ExamBloc, ExamState>(
-                      builder: (context, state) {
-                    if (state is InitialState) {
-                      context.read<ExamBloc>().add(FetchExams());
-                    }
-                    if (state is ExamLoading) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (state is ExamLoaded) {
-                      return ListView.builder(
-                        shrinkWrap: true,
-                        physics: const NeverScrollableScrollPhysics(),
-                        itemCount: state.exams.length,
-                        itemBuilder: (context, index) {
-                          var exam = state.exams[index];
-                          return _examCard(context, title: exam.exam);
-                        },
-                      );
-                    } else if (state is ExamError) {
-                      return Center(child: Text('Hata: ${state.message}'));
-                    } else {
-                      return const Center(
-                          child: Text('Bilinmeyen bir hata oluştu.'));
-                    }
-                  }),
+                    builder: (context, state) {
+                      if (state is InitialState) {
+                        context.read<ExamBloc>().add(FetchExams());
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is ExamLoading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (state is ExamLoaded) {
+                        return ListView.builder(
+                          shrinkWrap: true,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: state.exams.length,
+                          itemBuilder: (context, index) {
+                            var exam = state.exams[index];
+                            return _examCard(context, exam: exam);
+                          },
+                        );
+                      } else if (state is ExamError) {
+                        debugPrint(state.message);
+                        return Center(child: Text('Hata: ${state.message}'));
+                      } else {
+                        return const Center(
+                          child: Text('Bilinmeyen bir hata oluştu.'),
+                        );
+                      }
+                    },
+                  ),
                 ),
-                Padding(
-                  padding: EdgeInsets.only(top: ScreenPadding.padding16px),
-                  child: _rainbowDivider(context),
-                ),
+                _rainbowDivider(context),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding8px),
                   child: _reviewsHeadline2(context),
@@ -240,7 +244,7 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  Widget _examCard(BuildContext context, {required String title}) {
+  Widget _examCard(BuildContext context, {required Exam exam}) {
     return Container(
       margin: EdgeInsets.only(top: ScreenPadding.padding8px),
       width: double.infinity,
@@ -269,7 +273,7 @@ class RewiewsScreen extends StatelessWidget {
           SizedBox(width: ScreenPadding.padding8px),
           Expanded(
             child: Text(
-              title,
+              exam.exam,
               style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
               overflow: TextOverflow.ellipsis,
             ),
@@ -277,7 +281,7 @@ class RewiewsScreen extends StatelessWidget {
           const Spacer(),
           CustomReviewButton(
             onPressed: () {
-              _showCustomDialog(context);
+              _showCustomDialog(context, exam);
             },
             backgroundColor: TobetoColor.card.white,
             buttonText: TobetoText.evaluationCardButton,
@@ -324,7 +328,7 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  void _showCustomDialog(BuildContext context) {
+  void _showCustomDialog(BuildContext context, Exam exam) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -333,7 +337,7 @@ class RewiewsScreen extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: 'Front End\n',
+                  text: '${exam.exam}\n',
                   style:
                       TobetoTextStyle.poppins(context).subtitleBlackSemiBold20,
                 ),
@@ -344,7 +348,7 @@ class RewiewsScreen extends StatelessWidget {
                 ),
                 TextSpan(
                   text:
-                      'Sınav Süresi : 30 Dakika Soru\nSayısı : 25\nSoru Tipi : Çoktan Seçmeli',
+                      'Sınav Süresi : ${exam.examDuration} Dakika Soru\nSayısı : ${exam.numberOfQuestions}\nSoru Tipi : ${exam.questionType}',
                   style:
                       TobetoTextStyle.poppins(context).captionBlackSemiBold15,
                 ),

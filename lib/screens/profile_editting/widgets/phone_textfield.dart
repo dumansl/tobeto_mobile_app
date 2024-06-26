@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
-import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class PhoneTextField extends StatelessWidget {
@@ -22,20 +21,19 @@ class PhoneTextField extends StatelessWidget {
       decoration: InputDecoration(
         border: InputBorder.none,
         counterText: "",
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.transparent, width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: TobetoColor.background.transparent, width: 1.0),
+          borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
         ),
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
+          borderSide: const BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
         labelText: TobetoText.profileEditPhoneNumber,
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
         floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
       ),
-
-      initialCountryCode: 'TR', //Bütün sorumluluk Şule'dedir.
+      initialCountryCode: 'TR',
       onChanged: (phone) {
         debugPrint(phone.completeNumber);
       },

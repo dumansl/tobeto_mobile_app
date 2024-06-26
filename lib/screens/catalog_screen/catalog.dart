@@ -24,12 +24,14 @@ class _CatalogScreenState extends State<CatalogScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          CatalogBloc(courseRepository: CourseRepository())..add(Fetch()),
+      create: (context) => CatalogBloc(courseRepository: CourseRepository())..add(Fetch()),
       child: Scaffold(
-        appBar: const FixedAppbar(
-          title: 'Katalog',
-          isDashboard: true,
+        appBar: FixedAppbar(
+          isLeading: false,
+          title: Text(
+            "Katalog",
+            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+          ),
         ),
         body: BlocBuilder<CatalogBloc, CatalogState>(
           builder: (context, state) {
@@ -45,8 +47,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              CatalogDetails(catalogCourse: course),
+                          builder: (context) => CatalogDetails(catalogCourse: course),
                         ));
                   },
                   courseName: course.courseName,
@@ -54,7 +55,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                   rank: course.rank.toString(),
                   width: ScreenUtil.getWidth(context) * 0.44,
                   imagePath: course.imagePath,
-                  height: ScreenUtil.getHeight(context) * 0.2,
+                  height: ScreenUtil.getHeight(context) * 0.1,
                 );
               }).toList();
 
@@ -67,8 +68,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                         padding: const EdgeInsets.only(top: 5),
                         child: Text(
                           TobetoText.catalogHeadline1,
-                          style: TobetoTextStyle.poppins(context)
-                              .headlineBlackNormal32,
+                          style: TobetoTextStyle.poppins(context).headlineBlackNormal32,
                         ),
                       ),
                       Padding(
@@ -86,8 +86,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                       ),
                       Text(
                         TobetoText.catalogCategory,
-                        style: TobetoTextStyle.poppins(context)
-                            .headlineBlackNormal32,
+                        style: TobetoTextStyle.poppins(context).headlineBlackNormal32,
                       ),
 
                       // Assuming you also want to display big cards from the fetched data
@@ -98,8 +97,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        CatalogDetails(catalogCourse: course),
+                                    builder: (context) => CatalogDetails(catalogCourse: course),
                                   ));
                             },
                             courseName: course.courseName,
@@ -115,8 +113,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                    builder: (context) =>
-                                        CatalogDetails(catalogCourse: course),
+                                    builder: (context) => CatalogDetails(catalogCourse: course),
                                   ));
                             },
                             courseName: course.courseName,

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomTextField extends StatelessWidget {
@@ -15,6 +15,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.focusNode,
     this.onSaved,
+    this.readOnly = false,
   });
 
   final TextInputType keyboardType;
@@ -27,33 +28,40 @@ class CustomTextField extends StatelessWidget {
   final FormFieldValidator<String>? validator;
   final FocusNode? focusNode;
   final void Function(String?)? onSaved;
+  final bool? readOnly;
 
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      readOnly: readOnly!,
       controller: controller,
       maxLines: maxLines,
-      cursorColor: TobetoColor.card.grey,
+      cursorColor: Theme.of(context).colorScheme.onSurface, //imleç rengi
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
       maxLength: maxLength,
       style: TobetoTextStyle.poppins(context).bodyBlackBold16,
       decoration: InputDecoration(
         counterText: "",
-        focusedBorder: const OutlineInputBorder(
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
+        focusedBorder: OutlineInputBorder(
+          borderRadius:
+              BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
+          borderSide: BorderSide(
+              color: TobetoColor.purple, width: ScreenPadding.padding2px),
         ),
         labelText: title,
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
-        floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
-        border: const OutlineInputBorder(
+        floatingLabelStyle:
+            TobetoTextStyle.poppins(context).captionPurpleNormal18,
+        border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
-          Radius.circular(12),
+          Radius.circular(SizeRadius.radius12px),
         )),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.transparent, width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        enabledBorder: OutlineInputBorder(
+          borderSide:
+              BorderSide(color: TobetoColor.background.transparent, width: 1.0),
+          borderRadius:
+              BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
         ),
       ),
     );

@@ -7,9 +7,9 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_date_i
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_dropdown_input.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/phone_textfield.dart';
-import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class PersonalInformationForm extends StatefulWidget {
@@ -74,6 +74,7 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                 title: TobetoText.profileEditEmail,
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
+                readOnly: true, // E-posta alanını yalnızca okunabilir yapıyoruz.
               )),
               InputText(
                 child: CustomDropDownInput(

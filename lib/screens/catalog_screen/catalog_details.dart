@@ -20,10 +20,14 @@ class CatalogDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) =>
-          CatalogBloc(courseRepository: CourseRepository())..add(Fetch()),
+      create: (context) => CatalogBloc(courseRepository: CourseRepository())..add(Fetch()),
       child: Scaffold(
-        appBar: const FixedAppbar(title: 'Catalog'),
+        appBar: FixedAppbar(
+          title: Text(
+            "Katalog",
+            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+          ),
+        ),
         body: BlocBuilder<CatalogBloc, CatalogState>(
           builder: (context, state) {
             if (state is CatalogNotLoaded) {
@@ -62,15 +66,11 @@ class CatalogDetails extends StatelessWidget {
                                     Align(
                                       alignment: Alignment.center,
                                       child: Container(
-                                        width:
-                                            ScreenUtil.getWidth(context) * 0.9,
-                                        height: ScreenUtil.getHeight(context) *
-                                            0.22,
+                                        width: ScreenUtil.getWidth(context) * 0.9,
+                                        height: ScreenUtil.getHeight(context) * 0.22,
                                         decoration: BoxDecoration(
                                           image: DecorationImage(
-                                              image: NetworkImage(
-                                                  catalogCourse.imagePath),
-                                              fit: BoxFit.cover),
+                                              image: NetworkImage(catalogCourse.imagePath), fit: BoxFit.cover),
                                         ),
                                       ),
                                     ),
@@ -81,10 +81,8 @@ class CatalogDetails extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 16),
-                        Text(catalogCourse.courseName,
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackBold24),
-                        SizedBox(height: ScreenUtil.getHeight(context) * 0.03),
+                        Text(catalogCourse.courseName, style: TobetoTextStyle.poppins(context).captionBlackBold24),
+                        SizedBox(height: ScreenUtil.getHeight(context) * 0.01),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -106,19 +104,16 @@ class CatalogDetails extends StatelessWidget {
                           ],
                         ),
                         SizedBox(
-                          height: ScreenUtil.getHeight(context) * 0.03,
+                          height: ScreenUtil.getHeight(context) * 0.02,
                         ),
-                        Text('Eğitim İçeriği',
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackBold18),
+                        Text('Eğitim İçeriği', style: TobetoTextStyle.poppins(context).captionBlackBold18),
                         const Divider(),
                         const SizedBox(height: 8),
                         Stack(
                           children: [
                             Text(
                               'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not...',
-                              style: TobetoTextStyle.poppins(context)
-                                  .captionBlackThin18,
+                              style: TobetoTextStyle.poppins(context).captionBlackThin18,
                             ),
                           ],
                         ),
@@ -126,7 +121,7 @@ class CatalogDetails extends StatelessWidget {
                     ),
                   ),
                   Positioned(
-                    bottom: ScreenUtil.getHeight(context) * 0.08,
+                    bottom: ScreenUtil.getHeight(context) * 0.085,
                     right: 20,
                     child: Stack(
                       children: [
@@ -150,8 +145,7 @@ class CatalogDetails extends StatelessWidget {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => CatalogVideo(
-                                      catalogCourse: catalogCourse),
+                                  builder: (context) => CatalogVideo(catalogCourse: catalogCourse),
                                 ),
                               ); // Eğitime git butonuna basıldığında yapılacak işlemler
                             },
@@ -162,23 +156,20 @@ class CatalogDetails extends StatelessWidget {
                                 decoration: BoxDecoration(
                                   boxShadow: [
                                     BoxShadow(
-                                      color: TobetoColor.card.yellow
-                                          .withOpacity(0.8),
+                                      color: TobetoColor.card.yellow.withOpacity(0.8),
                                       spreadRadius: 1,
                                       blurRadius: 5,
                                       offset: const Offset(1, 1),
                                     ),
                                   ],
                                   borderRadius: BorderRadius.circular(30),
-                                  color: TobetoColor.card.white,
+                                  color: Theme.of(context).colorScheme.onPrimary,
                                 ),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 32, vertical: 16),
+                                padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                                 child: Center(
                                   child: Text(
                                     TobetoText.mainGoEducation,
-                                    style: TobetoTextStyle.poppins(context)
-                                        .bodyBlackBold16,
+                                    style: TobetoTextStyle.poppins(context).bodyBlackBold16,
                                   ),
                                 ),
                               ),
@@ -216,21 +207,21 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: widht,
-      height: ScreenUtil.getHeight(context) * 0.075,
+      height: ScreenUtil.getHeight(context) * 0.085,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(12),
-        color: TobetoColor.card.grey.withOpacity(0.16),
+        color: Theme.of(context).colorScheme.onSecondary,
       ),
       child: Column(
         children: [
           Padding(
             padding: EdgeInsets.only(top: ScreenUtil.getHeight(context) * 0.01),
-            child: Icon(icon, size: 32, color: Colors.black54),
+            child: Icon(icon, size: 32, color: Theme.of(context).colorScheme.onSurface),
           ),
-          const SizedBox(height: 1),
+          const SizedBox(height: 2),
           Text(
             label,
-            style: const TextStyle(fontSize: 16, color: Colors.black54),
+            style: TextStyle(fontSize: 16, color: Theme.of(context).colorScheme.onSurface),
           ),
         ],
       ),

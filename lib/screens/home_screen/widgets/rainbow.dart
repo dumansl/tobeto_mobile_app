@@ -8,6 +8,10 @@ class Rainbow extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+    final assetImagePath = isDarkMode
+        ? 'assets/images/ik-logo-light.png'
+        : 'assets/images/ik-logo-dark.png';
     return Center(
       child: Stack(
         children: [
@@ -43,12 +47,10 @@ class Rainbow extends StatelessWidget {
                     width: ScreenUtil.getWidth(context) * 0.9,
                     height: ScreenUtil.getHeight(context) * 0.155,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: Theme.of(context).colorScheme.onPrimary,
                       borderRadius: BorderRadius.circular(24.0),
                     ),
-                    child: Image.asset(
-                      'assets/images/ik-logo-dark.png',
-                    ),
+                    child: Image.asset(assetImagePath),
                   ),
                 ),
               ],

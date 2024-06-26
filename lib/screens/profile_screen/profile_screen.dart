@@ -9,6 +9,7 @@ import 'package:tobeto_mobile_app/blocs/user_bloc/user_state.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/profile_editting_screen.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
+import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -23,7 +24,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const FixedAppbar(title: 'Profil', isDashboard: true),
+      appBar: FixedAppbar(
+        isLeading: false,
+        title: Text(
+          "Profil",
+          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        ),
+      ),
       body: ListView(
         children: const [
           ProfilePhotoView(),
@@ -73,7 +80,6 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
         } else if (state is ProfilePhotoLoaded) {
           String imageUrl = state.imageUrl;
           bool hasImageUrl = imageUrl.isNotEmpty;
-
           return Column(
             children: [
               Stack(
@@ -89,7 +95,7 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
                                 as ImageProvider,
                   ),
                   CircleAvatar(
-                    backgroundColor: Colors.white,
+                    backgroundColor: TobetoColor.card.white,
                     radius: 20,
                     child: IconButton(
                       onPressed: _pickImage,
@@ -108,9 +114,8 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
                         .read<ProfilePhotoBloc>()
                         .add(UpdateProfilePhoto(_selectedImage!));
                   },
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: TobetoColor.purple),
-                  child: const Text('Kaydet'),
+                  style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
+                  child: Text(TobetoText.profileEditSaveButton),
                 ),
             ],
           );
@@ -189,10 +194,7 @@ class PersonalInfo extends StatelessWidget {
             ),
             CustomTitle(title: TobetoText.profileAboutMe),
             TwoLineCard(
-              line1: '',
-              line2: aboutMeController.text.isNotEmpty
-                  ? aboutMeController.text
-                  : 'Henüz eklediğiniz bir hakkımda bilginiz bulunmamaktadır.',
+              line2: aboutMeController.text.isNotEmpty ? aboutMeController.text : TobetoText.emptyAboutMe,
             ),
           ],
         );
@@ -223,8 +225,7 @@ class CompetenciesView extends StatelessWidget {
               title: TobetoText.profileMySkills,
             ),
             if (state.skills.isEmpty)
-              const TwoLineCard(
-                  line2: "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.")
+              TwoLineCard(line2: TobetoText.emptySkill)
             else
               ...state.skills.map((skill) {
                 return TwoLineCard(
@@ -254,8 +255,7 @@ class MyLanguages extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileLanguages),
             if (state.languages.isEmpty)
-              const TwoLineCard(
-                  line2: "Henüz eklediğiniz bir diliniz bulunmamaktadır.")
+              TwoLineCard(line2: TobetoText.emptyLanguage)
             else
               ...state.languages.map((languages) {
                 return TwoLineCard(
@@ -286,8 +286,7 @@ class MyCertificate extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileMyCertificate),
             if (state.certificate.isEmpty)
-              const TwoLineCard(
-                  line2: "Henüz eklediğiniz bir sertifikanız bulunmamaktadır.")
+              TwoLineCard(line2: TobetoText.emptyCertificate)
             else
               ...state.certificate.map((certificate) {
                 return TwoLineCard(
@@ -319,9 +318,7 @@ class Projects extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileProjectAwards),
             if (state.projects.isEmpty)
-              const TwoLineCard(
-                  line2:
-                      "Henüz eklediğiniz bir proje veya ödülünüz bulunmamaktadır.")
+              TwoLineCard(line2: TobetoText.profileEditProjectAwardSubtitle)
             else
               ...state.projects.map((projects) {
                 return TwoLineCard(
@@ -353,9 +350,7 @@ class WorkExperience extends StatelessWidget {
           children: [
             const CustomTitle(title: 'İş Deneyimleri'),
             if (state.works.isEmpty)
-              const TwoLineCard(
-                  line2:
-                      "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.")
+              TwoLineCard(line2: TobetoText.emptyJob)
             else
               ...state.works.map((work) {
                 return TwoLineCard(
@@ -387,9 +382,7 @@ class Club extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileWorkExperiences),
             if (state.club.isEmpty)
-              const TwoLineCard(
-                  line2:
-                      "Henüz eklediğiniz bir kulüp veya topluluğunuz bulunmamaktadır.")
+              TwoLineCard(line2: TobetoText.emptyCommunity)
             else
               ...state.club.map((club) {
                 return TwoLineCard(
@@ -421,9 +414,7 @@ class Education extends StatelessWidget {
           children: [
             CustomTitle(title: TobetoText.profileEducations),
             if (state.education.isEmpty)
-              const TwoLineCard(
-                  line2:
-                      "Henüz eklediğiniz bir eğitim bilginiz bulunmamaktadır.")
+              TwoLineCard(line2: TobetoText.emptyEducations)
             else
               ...state.education.map((education) {
                 return TwoLineCard(
@@ -449,15 +440,14 @@ class MainTitleCard extends StatelessWidget {
         builder: (BuildContext context, BoxConstraints constraints) =>
             ConstrainedBox(
               constraints: const BoxConstraints(
-                minHeight: 0,
                 maxHeight: double.infinity,
               ),
               child: Column(children: [
                 SizedBox(
                   width: double.infinity,
                   child: Card(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SizeRadius.radius20px)),
                     color: Theme.of(context).colorScheme.onPrimary,
-                    margin: const EdgeInsets.only(bottom: 5),
                     child: Padding(
                       padding: EdgeInsets.all(ScreenPadding.padding16px),
                       child: Column(
@@ -488,74 +478,21 @@ class IconAndText extends StatelessWidget {
     return Row(
       children: [
         SizedBox(
-            width: 40,
-            height: 40,
+            width: ScreenUtil.getWidth(context) * 0.09,
+            height: ScreenUtil.getHeight(context) * 0.07,
             child: Image.asset(
               icon,
               color: Theme.of(context).colorScheme.onSurface,
             )),
-        const SizedBox(width: 15),
+        SizedBox(width: ScreenPadding.padding16px),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(text!,
-                style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
-            Text(value!,
-                style: TobetoTextStyle.poppins(context).captionGrayBold18),
+            Text(text!, style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
+            Text(value!, style: TobetoTextStyle.poppins(context).captionBlackBold18),
           ],
         ),
       ],
-    );
-  }
-}
-
-class TitleCard extends StatelessWidget {
-  final String title;
-  final Widget content;
-  final Function()? onTap;
-  final String? icon;
-
-  const TitleCard({
-    super.key,
-    required this.title,
-    required this.content,
-    this.onTap,
-    this.icon,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        color: Theme.of(context).colorScheme.surface,
-        margin: const EdgeInsets.only(bottom: 5),
-        child: Padding(
-          padding: EdgeInsets.all(ScreenPadding.padding16px),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(title,
-                      style: TobetoTextStyle.poppins(context).bodyBlackBold16),
-                  if (icon != null)
-                    InkWell(
-                      onTap: onTap,
-                      child: Image.asset(icon!),
-                    ),
-                ],
-              ),
-              const Divider(
-                thickness: 0.7,
-                color: TobetoColor.purple,
-              ),
-              content,
-            ],
-          ),
-        ),
-      ),
     );
   }
 }
@@ -571,9 +508,8 @@ class TwoLineCard extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SizeRadius.radius20px)),
         color: Theme.of(context).colorScheme.onPrimary,
-        margin: const EdgeInsets.only(bottom: 5),
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding12px),
           child: Column(
@@ -596,72 +532,3 @@ class TwoLineCard extends StatelessWidget {
   }
 }
 
-class PopUpDialog extends StatelessWidget {
-  const PopUpDialog({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      backgroundColor: TobetoColor.card.cream,
-      title: Text(TobetoText.profileMySkills),
-      content: const Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          DialogCard(skill: 'Takım Yönetimi'),
-          DialogCard(skill: 'Mobil Geliştiricilik'),
-          DialogCard(skill: 'Çok Görevli Çalışma'),
-          DialogCard(skill: 'Aktif Dinleme'),
-          DialogCard(skill: 'İletişim'),
-        ],
-      ),
-    );
-  }
-}
-
-class DialogCard extends StatelessWidget {
-  final String skill;
-
-  const DialogCard({super.key, required this.skill});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      width: double.infinity,
-      child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(50)),
-        color: TobetoColor.card.white,
-        margin: const EdgeInsets.only(bottom: 5),
-        child: Padding(
-          padding: EdgeInsets.all(ScreenPadding.padding16px),
-          child: Text(skill,
-              style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomTitle extends StatelessWidget {
-  final String title;
-  const CustomTitle({
-    super.key,
-    required this.title,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(15, 10, 15, 0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(title, style: TobetoTextStyle.poppins(context).bodyBlackBold16),
-          const Divider(
-            thickness: 0.7,
-            color: TobetoColor.purple,
-          ),
-        ],
-      ),
-    );
-  }
-}

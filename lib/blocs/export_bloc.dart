@@ -50,3 +50,4 @@ export 'press_bloc.dart/press_bloc.dart';
 export 'press_bloc.dart/press_event.dart';
 export 'profile_photo_bloc/profile_photo_bloc.dart';
 export 'profile_photo_bloc/profile_photo_event.dart';
+export 'package:tobeto_mobile_app/blocs/blog_bloc/blog_bloc.dart';

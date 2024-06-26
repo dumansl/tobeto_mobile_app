@@ -16,8 +16,7 @@ class CustomNavBar extends StatelessWidget {
   final NavBarConfig navBarConfig;
   final NavBarDecoration navBarDecoration;
 
-  Widget _buildItem(BuildContext context, ItemConfig item, bool isSelected) =>
-      Column(
+  Widget _buildItem(BuildContext context, ItemConfig item, bool isSelected) => Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Expanded(
@@ -34,25 +33,25 @@ class CustomNavBar extends StatelessWidget {
                 item.title!,
                 style: isSelected
                     ? TobetoTextStyle.poppins(context).captionPurpleBold12
-                    : TobetoTextStyle.poppins(context).captionGrayNormal12,
+                    : TobetoTextStyle.poppins(context).lightcaptionGrayNormal12,
               ),
             ),
         ],
       );
 
-  Widget _buildMiddleItem(ItemConfig item, bool isSelected) => Column(
+  Widget _buildMiddleItem(BuildContext context, ItemConfig item, bool isSelected) => Column(
         mainAxisSize: MainAxisSize.min,
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           Container(
-            width: IconSize.size65px,
-            height: IconSize.size65px,
+            width: ScreenUtil.getWidth(context) * 0.16,
+            height: ScreenUtil.getWidth(context) * 0.16,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              color: TobetoColor.button.white,
+              color: Theme.of(context).colorScheme.primaryContainer,
               boxShadow: [
                 BoxShadow(
-                  color: TobetoColor.card.shadowColor,
+                  color: Theme.of(context).colorScheme.shadow,
                   blurRadius: SizeRadius.radius10px,
                 ),
               ],
@@ -60,8 +59,8 @@ class CustomNavBar extends StatelessWidget {
             child: Center(
               child: IconTheme(
                 data: IconThemeData(
-                  size: IconSize.size35px,
-                ),
+                    // size: IconSize.size35px,
+                    ),
                 child: isSelected ? item.icon : item.inactiveIcon,
               ),
             ),
@@ -82,21 +81,20 @@ class CustomNavBar extends StatelessWidget {
         Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(height: IconSize.size25px),
+            SizedBox(height: ScreenUtil.getHeight(context) * 0.03),
             DecoratedNavBar(
               decoration: NavBarDecoration(
-                  color: Theme.of(context).colorScheme.onSurface, //dasbord renk
+                  color: Theme.of(context).colorScheme.primaryContainer, //dashbord renk
                   boxShadow: [
                     BoxShadow(
-                      color: TobetoColor.card.shadowColor,
+                      color: Theme.of(context).colorScheme.shadow,
                       blurRadius: SizeRadius.radius10px,
                     ),
                   ],
-                  borderRadius: BorderRadius.vertical(
-                      top: Radius.circular(SizeRadius.radius20px))),
+                  borderRadius: BorderRadius.vertical(top: Radius.circular(SizeRadius.radius20px))),
               // ignore: deprecated_member_use
               filter: navBarConfig.selectedItem.filter,
-              height: IconSize.size60px,
+              height: ScreenUtil.getHeight(context) * 0.075,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: navBarConfig.items.map((item) {
@@ -128,6 +126,7 @@ class CustomNavBar extends StatelessWidget {
                 navBarConfig.onItemSelected(midIndex);
               },
               child: _buildMiddleItem(
+                context,
                 navBarConfig.items[midIndex],
                 navBarConfig.selectedIndex == midIndex,
               ),

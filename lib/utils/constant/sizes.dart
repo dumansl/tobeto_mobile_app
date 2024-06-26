@@ -6,6 +6,7 @@ abstract class SizeRadius {
   static double radius5px = 5;
   static double radius8px = 8;
   static double radius10px = 10;
+  static double radius12px = 12;
   static double radius16px = 16;
   static double radius30px = 30;
   static double radius20px = 20;
@@ -30,11 +31,15 @@ abstract class ScreenUtil {
 
 abstract class ScreenPadding {
   ScreenPadding._();
+  static double padding2px = 2;
+  static double padding4px = 4;
   static double padding6px = 6;
   static double padding8px = 8;
+  static double padding10px = 10;
   static double padding12px = 12;
   static double padding16px = 16;
   static double padding18px = 18;
+  static double padding20px = 20;
   static double padding24px = 24;
   static double padding32px = 32;
   static double padding52px = 52;

@@ -223,7 +223,7 @@ class _ExamplesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: TobetoColor.card.cream,
+      color: Theme.of(context).colorScheme.onPrimary,
       elevation: 12,
       child: Padding(
         padding: EdgeInsets.only(left: ScreenPadding.padding8px),
@@ -242,16 +242,23 @@ class _ExamplesCard extends StatelessWidget {
               children: [
                 Text(
                   "Herkes için Kodlama",
-                  style: TobetoTextStyle.poppins(context).captionGrayBold12,
+                  style: TobetoTextStyle.poppins(context).captionBlackBold12,
                 ),
               ],
             ),
             Row(
               children: [
-                const Icon(Icons.watch_later_outlined),
+                Icon(
+                  Icons.watch_later_outlined,
+                  color: Theme.of(context).colorScheme.onSurface,
+                ),
                 Padding(
                   padding: EdgeInsets.only(left: ScreenPadding.padding8px),
-                  child: const Text("Herkes için Kodlama"),
+                  child: Text(
+                    "Herkes için Kodlama",
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface),
+                  ),
                 ),
               ],
             ),
