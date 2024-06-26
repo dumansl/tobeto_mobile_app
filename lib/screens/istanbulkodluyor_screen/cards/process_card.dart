@@ -4,6 +4,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/center
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom_container.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -20,7 +21,7 @@ class ProcessCard extends StatelessWidget {
           text: TobetoText.istanbulProcess,
           style: TextStyle(
             color: TobetoColor.card.shineGreen,
-            fontSize: 20,
+            fontSize: ScreenPadding.padding20px,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -61,7 +62,7 @@ class CustomStepRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 5),
+      padding: EdgeInsets.only(bottom: ScreenPadding.padding5px),
       child: Row(
         children: [
           const SizedBox(width: 30),
@@ -72,7 +73,7 @@ class CustomStepRow extends StatelessWidget {
                 number,
                 style: GoogleFonts.poppins(
                   color: TobetoColor.card.shineGreen,
-                  fontSize: 16,
+                  fontSize: ScreenPadding.padding16px,
                   fontWeight: FontWeight.bold,
                 ),
               ),

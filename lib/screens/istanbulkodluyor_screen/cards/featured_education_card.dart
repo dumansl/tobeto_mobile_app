@@ -15,7 +15,7 @@ class FeaturedEducationCard extends StatelessWidget {
           text: TobetoText.istanbulHeadline5,
           style: TextStyle(
             color: TobetoColor.card.shineGreen,
-            fontSize: 20,
+            fontSize: ScreenPadding.padding20px,
             fontWeight: FontWeight.bold,
           ),
         ),

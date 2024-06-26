@@ -4,6 +4,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -28,7 +29,7 @@ class DescriptionCard extends StatelessWidget {
           ],
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 30),
+              padding: EdgeInsets.only(top: ScreenPadding.padding30px),
               child: CenteredText(
                 text: TobetoText.istanbulCard1Title,
                 style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
@@ -85,7 +86,7 @@ class FAQButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30),
+      padding: EdgeInsets.only(left: ScreenPadding.padding30px, right: ScreenPadding.padding30px),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: TobetoColor.purple, elevation: 6, shadowColor: TobetoColor.card.lightGrey),
@@ -111,7 +112,7 @@ class TobetoButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 30, right: 30),
+      padding: EdgeInsets.only(left: ScreenPadding.padding30px, right: ScreenPadding.padding30px),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: TobetoColor.purple, elevation: 6, shadowColor: TobetoColor.card.lightGrey),

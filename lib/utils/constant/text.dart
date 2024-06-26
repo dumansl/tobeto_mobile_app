@@ -495,7 +495,7 @@ abstract class TobetoText {
   static String tpressAppBar = "Basında Biz";
   // communucation
   static String tcommunucationTitleButton = "İletişime Geçin";
-  static String tcommunucationTitle1 = "İletişime Bilgileri";
+  static String tcommunucationTitle1 = "İletişim Bilgileri";
   static String tcommunucationSideTitle1 = "Firma Adı:";
   static String tcommunucationSideTitle2 = "Firma Unvan:";
   static String tcommunucationSideTitle3 = "Vergi Dairesi:";
