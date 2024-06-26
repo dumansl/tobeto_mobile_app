@@ -6,7 +6,6 @@ import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_leading.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/horizontal_page_route.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
