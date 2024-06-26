@@ -3,6 +3,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/center
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom_container.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -62,7 +63,7 @@ class _FAQCardState extends State<FAQCard> {
             borderRadius: const BorderRadius.all(Radius.circular(30)),
             children: [
               Padding(
-                padding: const EdgeInsets.all(16.0),
+                padding: EdgeInsets.all(ScreenPadding.padding16px),
                 child: Text(
                   TobetoText.istanbulCard6Body,
                   style: TextStyle(

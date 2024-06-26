@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom_container.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -19,7 +20,7 @@ class AboutIstanbulKodluyorCard extends StatelessWidget {
         PaddedText(
           text: TobetoText.istanbulCard2Body,
           style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
-          padding: const EdgeInsets.all(30),
+          padding: EdgeInsets.all(ScreenPadding.padding30px),
         ),
       ],
     );
@@ -38,7 +39,7 @@ class ProjectAboutHeader extends StatelessWidget {
         Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: 15),
+              padding: EdgeInsets.only(left: ScreenPadding.padding15px),
               child: Text(
                 TobetoText.istanbulHeadline3,
                 style: TobetoTextStyle.poppins(context).captionWhiteBold18,
@@ -46,7 +47,7 @@ class ProjectAboutHeader extends StatelessWidget {
             ),
             const SizedBox(width: 20),
             Padding(
-              padding: const EdgeInsets.all(2.0),
+              padding: EdgeInsets.all(ScreenPadding.padding2px),
               child: CircleAvatar(
                 backgroundColor: TobetoColor.card.shineGreen,
                 radius: 17.5,

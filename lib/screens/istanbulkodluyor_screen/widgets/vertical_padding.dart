@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 
 class VerticalPadding extends StatelessWidget {
   const VerticalPadding({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(padding: EdgeInsets.only(top: 30));
+    return Padding(padding: EdgeInsets.only(top: ScreenPadding.padding30px));
   }
 }
 

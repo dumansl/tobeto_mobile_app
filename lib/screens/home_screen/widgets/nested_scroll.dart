@@ -35,7 +35,7 @@ class NestedScroll extends StatelessWidget {
               return [
                 SliverAppBar(
                   backgroundColor: Theme.of(context).colorScheme.surface,
-                  expandedHeight: MediaQuery.of(context).size.height * 0.28,
+                  expandedHeight: MediaQuery.of(context).size.height * 0.35,
                   toolbarHeight: MediaQuery.of(context).size.height * 0.090,
                   floating: false,
                   pinned: true,
@@ -51,7 +51,7 @@ class NestedScroll extends StatelessWidget {
                               return Container(
                                 padding: isTopRight
                                     ? EdgeInsets.only(top: ScreenPadding.padding32px, right: ScreenPadding.padding12px)
-                                    : EdgeInsets.symmetric(vertical: ScreenPadding.padding32px),
+                                    : EdgeInsets.symmetric(vertical: ScreenPadding.padding52px),
                                 alignment: isTopRight ? Alignment.centerRight : Alignment.bottomCenter,
                                 child: Container(
                                   padding: const EdgeInsets.all(2.0),
@@ -73,7 +73,7 @@ class NestedScroll extends StatelessWidget {
                                     ),
                                   ),
                                   child: CircleAvatar(
-                                    radius: isTopRight ? IconSize.size30px : IconSize.size60px,
+                                    radius: ScreenUtil.getWidth(context) * 0.15,
                                     foregroundImage: state.imageUrl.isNotEmpty
                                         ? NetworkImage(state.imageUrl)
                                         : const AssetImage(ImagePath.defaultProfilePhoto),
@@ -90,6 +90,7 @@ class NestedScroll extends StatelessWidget {
                             padding: EdgeInsets.only(top: ScreenPadding.padding32px),
                             alignment: isTopRight ? Alignment.centerLeft : Alignment.bottomCenter,
                             child: RichText(
+                              textAlign: isTopRight ? TextAlign.start : TextAlign.center,
                               text: TextSpan(
                                 style: TobetoTextStyle.poppins(context).captionBlackBold18,
                                 children: <TextSpan>[
@@ -98,7 +99,7 @@ class NestedScroll extends StatelessWidget {
                                     style: TobetoTextStyle.poppins(context).captionPurpleBold18,
                                   ),
                                   TextSpan(
-                                    text: "'ya hoş geldin ${firstNameController.text}",
+                                    text: "'ya hoş geldin\n ${firstNameController.text}",
                                   ),
                                 ],
                               ),
