@@ -340,8 +340,6 @@ class Typography {
   late TextStyle captionMediumGreen32;
 
   Typography({required this.context, required this.baseStyle}) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-
     captionPurpleThin12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.w300,
@@ -931,7 +929,7 @@ class Typography {
     headlineGrayMediumBold32 = baseStyle.copyWith(
       fontSize: 32,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     headlineGrayMediumSemiBold32 = baseStyle.copyWith(
       fontSize: 32,
@@ -1001,7 +999,7 @@ class Typography {
     captionGrayMediumNormal15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     captionGrayMediumLight15 = baseStyle.copyWith(
       fontSize: 15,
@@ -1525,17 +1523,17 @@ class Typography {
     captionGrayDarkBold15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     captionGrayDarkSemiBold15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     captionGrayDarkNormal15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     captionGrayDarkLight15 = baseStyle.copyWith(
       fontSize: 15,
@@ -1655,7 +1653,7 @@ class Typography {
     captionGrayLightNormal15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.normal,
-      color: colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     captionGrayLightLight15 = baseStyle.copyWith(
       fontSize: 15,
@@ -1671,7 +1669,9 @@ class Typography {
 }
 
 class TobetoTextStyle {
-  static Typography poppins(BuildContext context) => Typography(context: context, baseStyle: GoogleFonts.poppins());
+  static Typography poppins(BuildContext context) =>
+      Typography(context: context, baseStyle: GoogleFonts.poppins());
 
-  static Typography inter(BuildContext context) => Typography(context: context, baseStyle: GoogleFonts.inter());
+  static Typography inter(BuildContext context) =>
+      Typography(context: context, baseStyle: GoogleFonts.inter());
 }

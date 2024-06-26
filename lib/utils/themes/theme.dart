@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
-ThemeData lightTheme = ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
+ThemeData lightTheme =
+    ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
 
-ThemeData darkTheme = ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
+ThemeData darkTheme =
+    ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
 
 ColorScheme lightColorScheme = ColorScheme(
   brightness: Brightness.light,
-  primary: TobetoColor.card.cream, //Arka Plan Rengi
+  primary: TobetoColor.background.lightGrey, //Arka Plan Rengi
   surface: TobetoColor.card.cream, //  card rengi //sayfa renkleri
   secondary: TobetoColor.formField.white, // Text Form Field Rengi
   onPrimary: TobetoColor.text.white, // Çerceve Rengi
@@ -25,11 +27,14 @@ ColorScheme lightColorScheme = ColorScheme(
   tertiaryFixed: TobetoColor.purple, //sss icon
   tertiaryFixedDim: TobetoColor.card.cream.withOpacity(0.35), //sss popup
   tertiary: TobetoColor.card.white,
+  surfaceBright: TobetoColor.text.darkGrey,
+  outline: TobetoColor.background.white,
+  surfaceContainer: TobetoColor.icon.darkGrey,
 );
 
 ColorScheme darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
-  primary: TobetoColor.card.carddarkmode, //arka plan rengi
+  primary: TobetoColor.background.darkbackground, //arka plan rengi
   surface: TobetoColor.card.carddarkmode, //card rengi
   secondary: TobetoColor.card.carddarkmode, // Text Form Field Rengi
   onPrimary: TobetoColor.card.black,
@@ -47,4 +52,7 @@ ColorScheme darkColorScheme = ColorScheme(
   tertiaryFixed: TobetoColor.icon.white, //sss icon
   tertiaryFixedDim: TobetoColor.card.black,
   tertiary: TobetoColor.card.black,
+  surfaceBright: TobetoColor.text.white,
+  outline: TobetoColor.background.darkbackground,
+  surfaceContainer: TobetoColor.icon.white,
 );

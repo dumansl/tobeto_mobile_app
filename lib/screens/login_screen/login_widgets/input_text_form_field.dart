@@ -42,8 +42,7 @@ class InputTextFormField extends StatelessWidget {
         hintStyle: TobetoTextStyle.inter(context).captionGrayLightNormal15,
         contentPadding: EdgeInsets.symmetric(
           horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding
-              .padding16px, // Yüksekliği artırmak için burayı değiştirin
+          vertical: ScreenPadding.padding16px,
         ),
         filled: true,
         fillColor: Theme.of(context).colorScheme.onPrimary,

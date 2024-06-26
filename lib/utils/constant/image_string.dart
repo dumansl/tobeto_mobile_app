@@ -14,24 +14,29 @@ abstract class ImagePath {
   static const String calendarActive = "assets/icons/takvim_aktif.png";
 
   //login
-  static const String splashScreenGif = "assets/gifs/splash_screen.gif";
+  static const String splashDarkScreenGif = "assets/gifs/splashDarkScreen.gif";
+  static const String splashLightScreenGif =
+      "assets/gifs/splashLightScreen.gif";
   static const String mainScreenGif = "assets/gifs/skills.gif";
   static const String maindarkScreenGif = "assets/gifs/skilldark.gif";
   static const String intro1 = "assets/images/intro_1.png";
   static const String intro2 = "assets/images/intro_2.png";
   static const String intro3 = "assets/images/intro_3.png";
   static const String loginBackground = "assets/images/login_background.png";
-  static const String loginBackgroundEducator = "assets/images/login_background_educator.png";
+  static const String loginBackgroundEducator =
+      "assets/images/login_background_educator.png";
   static const String facebookIcon = "assets/icons/facebook_icon.png";
   static const String googleIcon = "assets/icons/google_icon.png";
   static const String visitorIcon = "assets/icons/misafir_giris.png";
   static const String passwordIcon = "assets/icons/sifre.png";
-  static const String defaultProfilePhoto = "assets/icons/default_profil_photo.png";
+  static const String defaultProfilePhoto =
+      "assets/icons/default_profil_photo.png";
   static const String ikLogoDart = "assets/images/ik-logo-dark.png";
   static const String ikLogoLight = "assets/images/ik-logo-light.png";
 
   static const String ecmelAyral = "assets/images/ecmel_ayral.jpg";
-  static const String howToTraining = "assets/images/eğitimlere_nasil_katilirim.jpg";
+  static const String howToTraining =
+      "assets/images/eğitimlere_nasil_katilirim.jpg";
   static const String notFound = "assets/images/notFound.png";
   static const String heart = "assets/icons/heart.png";
   static const String timer = "assets/icons/timer.png";
@@ -48,19 +53,23 @@ abstract class ImagePath {
   static const String genderWhite = "assets/icons/gender_white.png";
   static const String soldier = "assets/icons/soldier.png";
   static const String soldierWhite = "assets/icons/soldier_white.png";
-  static const String personalInformation = "assets/icons/user_profile_edit.png";
+  static const String personalInformation =
+      "assets/icons/user_profile_edit.png";
   static const String experiences = "assets/icons/suitcase_profile_edit.png";
   static const String education = "assets/icons/profil_edit_read.png";
   static const String competencies = "assets/icons/profile_edit_prize.png";
   static const String certificates = "assets/icons/profile_edit_quality.png";
   static const String communities = "assets/icons/profile_edit_documents.png";
-  static const String projectsAndAwards = "assets/icons/profile_edit_trophy.png";
+  static const String projectsAndAwards =
+      "assets/icons/profile_edit_trophy.png";
   static const String socialMedia = "assets/icons/profile_edit_longitude.png";
-  static const String foreignLanguages = "assets/icons/profile_edit_language.png";
+  static const String foreignLanguages =
+      "assets/icons/profile_edit_language.png";
   static const String flagTurkey = "assets/icons/turkey.png";
   static const String trash = "assets/icons/profile_edit_trash.png";
   static const String profileEdit = "assets/icons/profile_edit_create.png";
-  static const String profileEditWhite = "assets/icons/profile_edit_create_white.png";
+  static const String profileEditWhite =
+      "assets/icons/profile_edit_create_white.png";
   static const String profileEditNote = "assets/images/profile_edit_note.png";
   static const String linkedin = "assets/icons/linkedin.png";
   static const String platformIcon = "assets/icons/platform-icon.png";
@@ -181,9 +190,12 @@ abstract class ImagePath {
   static const String menu = "assets/icons/menu.png";
   static const String news = "assets/icons/news.png";
   static const String share = "assets/icons/share.png";
-  static const String monthLeftArrowFill = "assets/icons/month-leftarrow-fill.png";
-  static const String monthRightArrowEmpty = "assets/icons/month-rightarrow-empty.png";
-  static const String monthWhiteLeftArrowFill = "assets/icons/month-white-leftarrow-fill.png";
+  static const String monthLeftArrowFill =
+      "assets/icons/month-leftarrow-fill.png";
+  static const String monthRightArrowEmpty =
+      "assets/icons/month-rightarrow-empty.png";
+  static const String monthWhiteLeftArrowFill =
+      "assets/icons/month-white-leftarrow-fill.png";
   static const String unread = "assets/icons/unread.png";
 
   static const String facebook = "assets/icons/facebook.png";
