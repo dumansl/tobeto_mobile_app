@@ -62,7 +62,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
       appBar: const FixedAppbar(
         isTobetoScreen: true,
       ),
-      backgroundColor: TobetoColor.card.cream,
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(30.0),
@@ -73,19 +73,15 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
               // _buildImageSection(ImagePath.biz2),
               //const SizedBox(height: 30),
               _buildRichTextSection(
-                text1:
-                    'Yeni nesil mesleklerdeki yetenek açığının mevcut yüksek deneyim ve beceri beklentisinden uzaklaşıp yeteneği keşfederek ve onları en iyi versiyonlarına ulaştırarak çözülebileceğine inanıyoruz. Tobeto; yetenekleri potansiyellerine göre değerlendirir, onları en uygun alanlarda geliştirir ve değer yaratacak projelerle eşleştirir. ',
-                boldText: 'YES (Yetiş-Eşleş-Sürdür) ',
-                text2:
-                    'ilkesini benimseyen herkese Tobeto Ailesi\'ne katılmaya davet ediyor.',
+                text1: TobetoText.twawRich1,
+                boldText: TobetoText.twawRich2,
+                text2: TobetoText.twawRich3,
               ),
               const SizedBox(height: 30),
               _buildRichTextSection(
-                text1:
-                    'Günümüzde meslek hayatında yer almak ve kariyerinde yükselmek için en önemli unsurların başında ',
-                boldText: 'dijital beceri sahibi olmak ',
-                text2:
-                    'geliyor. Bu ihtiyaçların tamamını karşılamak için içeriklerimizi Tobeto Platform’da birleştirdik.',
+                text1: TobetoText.twawRich4,
+                boldText: TobetoText.twawRich5,
+                text2: TobetoText.twawRich6,
               ),
               //const SizedBox(height: 30),
               //_buildImageSection(ImagePath.biz3),
@@ -93,17 +89,16 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
               _buildImageSection(ImagePath.biz4),
               const SizedBox(height: 30),
               _buildRichTextSection(
-                text1: 'Öğrencilerin teoriyi anlamalarını önemsemekle beraber ',
-                boldText: 'uygulamayı \nmerkeze alan ',
-                text2:
-                    'bir öğrenme yolculuğu sunuyoruz. Öğrenciyi sürekli gelişim, geri bildirim döngüsünde tutarak yetenek ve beceri kazanımını hızlandırıyoruz.',
+                text1: TobetoText.twawRich7,
+                boldText: TobetoText.twawRich8,
+                text2: TobetoText.twawRich9,
               ),
               const SizedBox(
                 height: 30,
               ),
-              _buildInfoCard('TOBETO FARKI', 'NEDİR?', [
-                _buildTextSection('Online ve canlı derslerle hibrit yaklaşım'),
-                _buildTextSection('Alanında uzman eğitmenlerle canlı dersler'),
+              _buildInfoCard(TobetoText.twawTobeto, TobetoText.twawTobetoWho, [
+                _buildTextSection(TobetoText.twawTobetoOnline),
+                _buildTextSection(TobetoText.twawTobetoArea),
               ]),
               Padding(
                 padding: const EdgeInsets.only(top: 20),
@@ -115,20 +110,15 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
                 ),
               ),
               const SizedBox(height: 30),
-              _buildTeamMemberCard('Elif KILIÇ',
-                  TobetoText.twawTeamsCard1Subtitle, ImagePath.elifKilic),
+              _buildTeamMemberCard('Elif KILIÇ', TobetoText.twawTeamsCard1Subtitle, ImagePath.elifKilic),
               const SizedBox(height: 30),
-              _buildTeamMemberCard('Kader YAVUZ',
-                  TobetoText.twawTeamsCard2Subtitle, ImagePath.kaderYavuz),
+              _buildTeamMemberCard('Kader YAVUZ', TobetoText.twawTeamsCard2Subtitle, ImagePath.kaderYavuz),
               const SizedBox(height: 30),
-              _buildTeamMemberCard('Gürkan İLİŞEN',
-                  TobetoText.twawTeamsCard4Subtitle, ImagePath.gurkanIlisen),
+              _buildTeamMemberCard('Gürkan İLİŞEN', TobetoText.twawTeamsCard4Subtitle, ImagePath.gurkanIlisen),
               const SizedBox(height: 30),
-              _buildTeamMemberCard('Pelin BATIR',
-                  TobetoText.twawTeamsCard3Subtitle, ImagePath.pelinBatir),
+              _buildTeamMemberCard('Pelin BATIR', TobetoText.twawTeamsCard3Subtitle, ImagePath.pelinBatir),
               const SizedBox(height: 30),
-              _buildTeamMemberCard('Ali SEYHAN',
-                  TobetoText.twawTeamsCard5Subtitle, ImagePath.aliSeyhan),
+              _buildTeamMemberCard('Ali SEYHAN', TobetoText.twawTeamsCard5Subtitle, ImagePath.aliSeyhan),
               const SizedBox(height: 30),
               _buildOfficeInfoCard(),
             ],
@@ -159,7 +149,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
         padding: const EdgeInsets.all(4.0),
         child: Container(
           decoration: BoxDecoration(
-            color: TobetoColor.card.white,
+            color: Theme.of(context).colorScheme.tertiary,
             borderRadius: const BorderRadius.all(
               Radius.circular(30),
             ),
@@ -174,10 +164,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
                   children: [
                     Padding(
                       padding: const EdgeInsets.only(left: 30),
-                      child: SizedBox(
-                          height: 150,
-                          width: 150,
-                          child: Image.asset(ImagePath.tTobeto)),
+                      child: SizedBox(height: 150, width: 150, child: Image.asset(ImagePath.tTobeto)),
                     ),
                     Padding(
                       padding: const EdgeInsets.only(top: 10),
@@ -185,22 +172,12 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
                         textAlign: TextAlign.center,
                         text: TextSpan(
                           children: [
-                            TextSpan(
-                                text: 'Yeni Nesil\n',
-                                style: TobetoTextStyle.poppins(context)
-                                    .subtitleBlackBold20),
-                            TextSpan(
-                                text: 'Mesleklere\n',
-                                style: TobetoTextStyle.poppins(context)
-                                    .subtitleBlackBold20),
-                            TextSpan(
-                                text: 'Yeni Nesil\n',
-                                style: TobetoTextStyle.poppins(context)
-                                    .subtitleBlackBold20),
+                            TextSpan(text: 'Yeni Nesil\n', style: TobetoTextStyle.poppins(context).subtitleBlackBold20),
+                            TextSpan(text: 'Mesleklere\n', style: TobetoTextStyle.poppins(context).subtitleBlackBold20),
+                            TextSpan(text: 'Yeni Nesil\n', style: TobetoTextStyle.poppins(context).subtitleBlackBold20),
                             TextSpan(
                               text: TobetoText.twawCard1Body2,
-                              style: TobetoTextStyle.poppins(context)
-                                  .subtitlePurpleBold20,
+                              style: TobetoTextStyle.poppins(context).subtitlePurpleBold20,
                             ),
                           ],
                         ),
@@ -232,9 +209,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
                                       color: Colors.black.withOpacity(0.6),
                                     ),
                                     child: Icon(
-                                      _controller.value.isPlaying
-                                          ? Icons.pause
-                                          : Icons.play_arrow,
+                                      _controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
                                       color: TobetoColor.icon.white,
                                       size: 20,
                                     ),
@@ -275,9 +250,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
                                 color: Colors.black.withOpacity(0.6),
                               ),
                               child: Icon(
-                                _isFullScreen
-                                    ? Icons.fullscreen_exit
-                                    : Icons.fullscreen,
+                                _isFullScreen ? Icons.fullscreen_exit : Icons.fullscreen,
                                 color: TobetoColor.icon.white,
                                 size: 20,
                               ),
@@ -306,26 +279,17 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
     );
   }
 
-  Widget _buildRichTextSection(
-      {required String text1,
-      required String boldText,
-      required String text2}) {
+  Widget _buildRichTextSection({required String text1, required String boldText, required String text2}) {
     return RichText(
       text: TextSpan(
         style: TextStyle(
           fontSize: 16.0,
-          color: TobetoColor.text.black,
+          color: Theme.of(context).colorScheme.onSurface,
         ),
         children: <TextSpan>[
-          TextSpan(
-              text: text1,
-              style: TobetoTextStyle.poppins(context).captionBlackNormal15),
-          TextSpan(
-              text: boldText,
-              style: TobetoTextStyle.poppins(context).captionBlackBold15),
-          TextSpan(
-              text: text2,
-              style: TobetoTextStyle.poppins(context).captionBlackNormal15),
+          TextSpan(text: text1, style: TobetoTextStyle.poppins(context).captionBlackNormal15),
+          TextSpan(text: boldText, style: TobetoTextStyle.poppins(context).captionBlackBold15),
+          TextSpan(text: text2, style: TobetoTextStyle.poppins(context).captionBlackNormal15),
         ],
       ),
     );
@@ -353,7 +317,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(30)),
-            color: TobetoColor.card.white,
+            color: Theme.of(context).colorScheme.tertiary,
           ),
           width: double.infinity,
           child: Column(
@@ -391,6 +355,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
       child: Text(
         text,
         style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
+        textAlign: TextAlign.center,
       ),
     );
   }
@@ -416,9 +381,8 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
       child: Padding(
         padding: const EdgeInsets.all(4.0),
         child: Container(
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(30),
-              color: TobetoColor.card.white),
+          decoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(30), color: Theme.of(context).colorScheme.tertiary),
           child: Column(
             children: [
               Padding(
@@ -443,8 +407,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
                 child: Center(
                   child: Text(
                     role,
-                    style:
-                        TobetoTextStyle.poppins(context).captionGrayLightBold15,
+                    style: TobetoTextStyle.poppins(context).captionGrayLightBold15,
                   ),
                 ),
               ),
@@ -477,7 +440,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
         child: Container(
           decoration: BoxDecoration(
             borderRadius: const BorderRadius.all(Radius.circular(30)),
-            color: TobetoColor.card.white,
+            color: Theme.of(context).colorScheme.tertiary,
           ),
           width: double.infinity,
           child: Column(
@@ -492,12 +455,10 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.only(
-                    top: 40, bottom: 80, right: 30, left: 30),
+                padding: const EdgeInsets.only(top: 40, bottom: 80, right: 30, left: 30),
                 child: Text(
                   TobetoText.twawTeamsCard6OfficeBody,
-                  style:
-                      TobetoTextStyle.poppins(context).bodyGrayMediumNormal16,
+                  style: TobetoTextStyle.poppins(context).bodyGrayMediumNormal16,
                 ),
               ),
             ],

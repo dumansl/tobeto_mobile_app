@@ -34,11 +34,9 @@ class _FAQScreenState extends State<FAQScreen> {
             children: [
               Padding(
                 padding: EdgeInsets.only(bottom: ScreenPadding.padding16px),
-                child: Center(
-                  child: Text(
-                    "Sıkça Sorulan Sorular",
-                    style: TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
-                  ),
+                child: Text(
+                  "S.S.S",
+                  style: TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
                 ),
               ),
               Padding(
