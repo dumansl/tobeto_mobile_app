@@ -19,6 +19,7 @@ class UserModel {
   final String? aboutMe;
   final String? skill;
   final String? avatarUrl;
+  final String? token;
 
   UserModel({
     this.id,
@@ -39,6 +40,7 @@ class UserModel {
     this.street,
     this.aboutMe,
     this.skill,
+    this.token,
   });
 
   factory UserModel.fromFirestore(DocumentSnapshot doc) {
@@ -60,6 +62,7 @@ class UserModel {
       aboutMe: doc['aboutMe'] ?? '',
       skill: doc['skill'] ?? '',
       avatarUrl: doc['avatarUrl'] ?? '',
+      token: doc['token'] ?? '',
     );
   }
 
@@ -83,6 +86,7 @@ class UserModel {
       aboutMe: data['aboutMe'] ?? '',
       skill: data['skill'] ?? '',
       avatarUrl: data['avatarUrl'] ?? '',
+      token: data['token'] ?? '',
     );
   }
 }

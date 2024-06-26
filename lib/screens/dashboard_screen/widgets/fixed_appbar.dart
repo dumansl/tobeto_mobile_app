@@ -75,7 +75,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                 IconButton(
                   onPressed: () {},
                   icon: CircleAvatar(
-                    radius: IconSize.size30px,
+                    radius: ScreenUtil.getWidth(context) * 0.075,
                     foregroundImage: state.imageUrl.isNotEmpty
                         ? NetworkImage(state.imageUrl)
                         : const AssetImage(ImagePath.defaultProfilePhoto),

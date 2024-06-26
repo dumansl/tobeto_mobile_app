@@ -3,6 +3,7 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tobeto_mobile_app/screens/calendar_screen/calendar_screen.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/custom_navbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
+import 'package:tobeto_mobile_app/services/user_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class DashboardScreen extends StatefulWidget {
@@ -14,6 +15,12 @@ class DashboardScreen extends StatefulWidget {
 
 class _HomeState extends State<DashboardScreen> {
   final PersistentTabController _controller = PersistentTabController(initialIndex: 2);
+
+  @override
+  void initState() {
+    super.initState();
+    UserService().requestNotificationPermissions();
+  }
 
   @override
   Widget build(BuildContext context) {

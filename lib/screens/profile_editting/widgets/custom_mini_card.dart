@@ -24,7 +24,10 @@ class CustomMiniCard extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           SizedBox(
-            child: SizedBox(height: ScreenUtil.getHeight(context) * 0.06, child: imagepath),
+            child: SizedBox(
+                width: ScreenUtil.getWidth(context) * 0.07,
+                height: ScreenUtil.getHeight(context) * 0.07,
+                child: imagepath),
           ),
           RichText(
               textAlign: TextAlign.center,

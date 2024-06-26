@@ -19,7 +19,7 @@ class CustomDateInput extends StatelessWidget {
       addCalendar: false,
       controller: controller,
       decoration: InputDecoration(
-        hintText: 'aa/gg/yyyy',
+        hintText: 'gg/aa/yyyy',
         hintStyle: TextStyle(color: TobetoColor.text.grey),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/user_model.dart';
@@ -12,6 +13,7 @@ class UserService {
   FirebaseFirestore db = FirebaseFirestore.instance;
   final FirebaseStorage storage = FirebaseStorage.instance;
   UserService() : userId = FirebaseAuth.instance.currentUser!.uid;
+  FirebaseMessaging fcm = FirebaseMessaging.instance;
 
   Future<List<dynamic>?> _getCollectionData(String collectionName) async {
     final DocumentSnapshot snapshot = await db.collection('users').doc(userId).get();
@@ -237,5 +239,16 @@ class UserService {
       disabledStatuController.text = data['disabledStatu'] ?? '';
     }
     return null;
+  }
+
+  Future<void> requestNotificationPermissions() async {
+    final permission = await fcm.requestPermission();
+    if (permission.authorizationStatus == AuthorizationStatus.authorized) {
+      final userId = FirebaseAuth.instance.currentUser!.uid;
+      final token = await fcm.getToken();
+      // await fcm.subscribeToTopic('mobil1A');
+      fcm.onTokenRefresh.listen((token) {});
+      await db.collection('users').doc(userId).update({'token': token});
+    }
   }
 }
