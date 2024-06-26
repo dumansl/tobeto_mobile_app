@@ -1,7 +1,7 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/educator_announcement_bloc/educator_announcement_event.dart';
 import 'package:tobeto_mobile_app/blocs/educator_announcement_bloc/educator_announcement_state.dart';
-import 'package:tobeto_mobile_app/services/educator-announcement.dart';
+import 'package:tobeto_mobile_app/services/educator_announcement.dart';
 
 class EducatorAnnouncementBloc
     extends Bloc<EducatorAnnouncementEvent, EducatorAnnouncementState> {

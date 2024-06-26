@@ -58,7 +58,7 @@ class CustomNavBar extends StatelessWidget {
             ),
             child: Center(
               child: IconTheme(
-                data: IconThemeData(
+                data: const IconThemeData(
                     // size: IconSize.size35px,
                     ),
                 child: isSelected ? item.icon : item.inactiveIcon,

@@ -63,7 +63,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
               Column(
                 children: [
                   Container(
-                    width: ScreenUtil.getWidth(context) * 0.47,
+                    width: ScreenUtil.getWidth(context) * 0.5,
                     color: Theme.of(context).colorScheme.onSecondaryContainer,
                     // Set background color to white
                     padding: EdgeInsets.all(ScreenPadding.padding8px),
@@ -80,7 +80,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
                         bottom: Radius.circular(12),
                       ), // Rounded bottom border
                     ),
-                    width: ScreenUtil.getWidth(context) * 0.47,
+                    width: ScreenUtil.getWidth(context) * 0.5,
                     padding: EdgeInsets.symmetric(
                         horizontal: ScreenPadding.padding8px),
                     child: Row(
