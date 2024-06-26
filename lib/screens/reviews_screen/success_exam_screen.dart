@@ -49,89 +49,94 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
           final totalQuestions = review.questions.length;
           final currentQuestion = review.questions[_currentQuestionIndex];
 
-          return Container(
-            height: double.infinity,
-            margin: EdgeInsets.only(top: ScreenPadding.padding24px),
-            padding: EdgeInsets.all(ScreenPadding.padding24px),
-            decoration: BoxDecoration(
-              color: TobetoColor.background.white,
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(SizeRadius.radius20px),
-                topRight: Radius.circular(SizeRadius.radius20px),
+          return Padding(
+            padding: EdgeInsets.only(bottom: ScreenPadding.padding24px),
+            child: Container(
+              height: double.infinity,
+              margin: EdgeInsets.only(top: ScreenPadding.padding24px),
+              padding: EdgeInsets.all(ScreenPadding.padding24px),
+              decoration: BoxDecoration(
+                color: TobetoColor.background.white,
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(SizeRadius.radius20px),
+                  topRight: Radius.circular(SizeRadius.radius20px),
+                ),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    spreadRadius: 5,
+                    blurRadius: 7,
+                    offset: const Offset(0, 3),
+                  ),
+                ],
               ),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: const Offset(0, 3),
-                ),
-              ],
-            ),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Icon(
-                      Icons.question_answer,
-                      size: IconSize.size25px,
-                      color: TobetoColor.icon.darkGrey,
-                    ),
-                    SizedBox(width: ScreenPadding.padding8px),
-                    Text(
-                      "${_currentQuestionIndex + 1} / $totalQuestions",
-                      style:
-                          TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
-                    ),
-                  ],
-                ),
-                Divider(color: TobetoColor.frame.grey),
-                SizedBox(height: ScreenPadding.padding8px),
-                Expanded(
-                    child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.end,
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    _questionText(currentQuestion),
-                    for (String answerKey in review.answers.keys)
-                      _answerButton(
-                        answerText: answerKey,
-                        isSelected: _selectedAnswers[_currentQuestionIndex] ==
-                            answerKey,
-                        onTap: () {
-                          setState(() {
-                            _selectedAnswers[_currentQuestionIndex] = answerKey;
-                          });
-                        },
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(
+                        Icons.question_answer,
+                        size: IconSize.size25px,
+                        color: TobetoColor.icon.darkGrey,
                       ),
-                    CustomReviewButton(
-                      buttonText: _currentQuestionIndex + 1 == totalQuestions
-                          ? TobetoText.successExamButtonEnd
-                          : TobetoText.successExamButtonNext,
-                      backgroundColor: TobetoColor.purple,
-                      style:
-                          TobetoTextStyle.poppins(context).bodyWhiteSemiBold16,
-                      onPressed: _selectedAnswers
-                              .containsKey(_currentQuestionIndex)
-                          ? () async {
-                              if (_currentQuestionIndex + 1 == totalQuestions) {
-                                await _showResult(context);
-                              } else {
-                                setState(() {
-                                  _currentQuestionIndex++;
-                                });
-                              }
-                            }
-                          : () {
-                              snackBar(context,
-                                  "Lütfen uygun bulduğunuz cevabı işaretleyin.",
-                                  bgColor: TobetoColor.state.error);
-                            },
-                    ),
-                  ],
-                )),
-              ],
+                      SizedBox(width: ScreenPadding.padding8px),
+                      Text(
+                        "${_currentQuestionIndex + 1} / $totalQuestions",
+                        style: TobetoTextStyle.poppins(context)
+                            .bodyGrayDarkNormal16,
+                      ),
+                    ],
+                  ),
+                  Divider(color: TobetoColor.frame.grey),
+                  SizedBox(height: ScreenPadding.padding8px),
+                  Expanded(
+                      child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.end,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _questionText(currentQuestion),
+                      for (String answerKey in review.answers.keys)
+                        _answerButton(
+                          answerText: answerKey,
+                          isSelected: _selectedAnswers[_currentQuestionIndex] ==
+                              answerKey,
+                          onTap: () {
+                            setState(() {
+                              _selectedAnswers[_currentQuestionIndex] =
+                                  answerKey;
+                            });
+                          },
+                        ),
+                      CustomReviewButton(
+                        buttonText: _currentQuestionIndex + 1 == totalQuestions
+                            ? TobetoText.successExamButtonEnd
+                            : TobetoText.successExamButtonNext,
+                        backgroundColor: TobetoColor.purple,
+                        style: TobetoTextStyle.poppins(context)
+                            .bodyWhiteSemiBold16,
+                        onPressed:
+                            _selectedAnswers.containsKey(_currentQuestionIndex)
+                                ? () async {
+                                    if (_currentQuestionIndex + 1 ==
+                                        totalQuestions) {
+                                      await _showResult(context);
+                                    } else {
+                                      setState(() {
+                                        _currentQuestionIndex++;
+                                      });
+                                    }
+                                  }
+                                : () {
+                                    snackBar(context,
+                                        "Lütfen uygun bulduğunuz cevabı işaretleyin.",
+                                        bgColor: TobetoColor.state.error);
+                                  },
+                      ),
+                    ],
+                  )),
+                ],
+              ),
             ),
           );
         } else if (state is ReviewError) {

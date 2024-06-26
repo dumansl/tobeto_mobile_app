@@ -20,7 +20,7 @@ class RewiewsScreen extends StatelessWidget {
       appBar: FixedAppbar(
         title: Text(
           TobetoText.evaluationAppBar,
-          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+          style: TobetoTextStyle.poppins(context).titlePurpleBold24,
         ),
       ),
       body: SingleChildScrollView(
@@ -59,7 +59,7 @@ class RewiewsScreen extends StatelessWidget {
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                   child: BlocBuilder<ExamBloc, ExamState>(
                     builder: (context, state) {
-                      if (state is InitialState) {
+                      if (state is ExamInitialState) {
                         context.read<ExamBloc>().add(FetchExams());
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is ExamLoading) {
@@ -85,7 +85,10 @@ class RewiewsScreen extends StatelessWidget {
                     },
                   ),
                 ),
-                _rainbowDivider(context),
+                Padding(
+                  padding: EdgeInsets.only(top: ScreenPadding.padding16px),
+                  child: _rainbowDivider(context),
+                ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding8px),
                   child: _reviewsHeadline2(context),
@@ -244,7 +247,7 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  Widget _examCard(BuildContext context, {required Exam exam}) {
+  Widget _examCard(BuildContext context, {required UserExam exam}) {
     return Container(
       margin: EdgeInsets.only(top: ScreenPadding.padding8px),
       width: double.infinity,
@@ -273,7 +276,7 @@ class RewiewsScreen extends StatelessWidget {
           SizedBox(width: ScreenPadding.padding8px),
           Expanded(
             child: Text(
-              exam.exam,
+              exam.exam.exam,
               style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
               overflow: TextOverflow.ellipsis,
             ),
@@ -328,7 +331,7 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  void _showCustomDialog(BuildContext context, Exam exam) {
+  void _showCustomDialog(BuildContext context, UserExam exam) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -337,7 +340,7 @@ class RewiewsScreen extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: '${exam.exam}\n',
+                  text: '${exam.exam.exam}\n',
                   style:
                       TobetoTextStyle.poppins(context).subtitleBlackSemiBold20,
                 ),
@@ -348,7 +351,7 @@ class RewiewsScreen extends StatelessWidget {
                 ),
                 TextSpan(
                   text:
-                      'Sınav Süresi : ${exam.examDuration} Dakika Soru\nSayısı : ${exam.numberOfQuestions}\nSoru Tipi : ${exam.questionType}',
+                      'Sınav Süresi : ${exam.exam.duration} Dakika Soru\nSayısı : ${exam.exam.duration}\nSoru Tipi : ${exam.exam.numberOfQuestion}',
                   style:
                       TobetoTextStyle.poppins(context).captionBlackSemiBold15,
                 ),
@@ -357,17 +360,18 @@ class RewiewsScreen extends StatelessWidget {
           ),
           actions: <Widget>[
             CustomReviewButton(
-                buttonText: TobetoText.evaluationCardButton,
-                backgroundColor: TobetoColor.purple,
-                style: TobetoTextStyle.poppins(context).captionWhiteBold12,
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const ExamResultScreen(),
-                    ),
-                  );
-                })
+              buttonText: TobetoText.evaluationCardButton,
+              backgroundColor: TobetoColor.purple,
+              style: TobetoTextStyle.poppins(context).captionWhiteBold12,
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const AreaExamScreen(),
+                  ),
+                );
+              },
+            ),
           ],
         );
       },
