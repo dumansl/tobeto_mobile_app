@@ -195,7 +195,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (context) => const DashboardScreen(),
+                                builder: (context) => const CatalogScreen(),
                               ),
                             );
                           },
@@ -223,7 +223,7 @@ class _ExamplesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: TobetoColor.card.cream,
+      color: Theme.of(context).colorScheme.onPrimary,
       elevation: 12,
       child: Padding(
         padding: EdgeInsets.only(left: ScreenPadding.padding8px),
@@ -250,14 +250,14 @@ class _ExamplesCard extends StatelessWidget {
               children: [
                 Icon(
                   Icons.watch_later_outlined,
-                  color: Theme.of(context).colorScheme.onPrimaryFixed,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 Padding(
                   padding: EdgeInsets.only(left: ScreenPadding.padding8px),
                   child: Text(
                     "Herkes için Kodlama",
                     style: TextStyle(
-                        color: Theme.of(context).colorScheme.onPrimaryFixed),
+                        color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ),
               ],

@@ -1126,7 +1126,7 @@ class Typography {
     bodyBlackBold16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.black,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     themebodyBlackBold16 = baseStyle.copyWith(
       fontSize: 16,
@@ -1671,7 +1671,9 @@ class Typography {
 }
 
 class TobetoTextStyle {
-  static Typography poppins(BuildContext context) => Typography(context: context, baseStyle: GoogleFonts.poppins());
+  static Typography poppins(BuildContext context) =>
+      Typography(context: context, baseStyle: GoogleFonts.poppins());
 
-  static Typography inter(BuildContext context) => Typography(context: context, baseStyle: GoogleFonts.inter());
+  static Typography inter(BuildContext context) =>
+      Typography(context: context, baseStyle: GoogleFonts.inter());
 }

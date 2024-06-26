@@ -11,15 +11,16 @@ class InputText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding2px, vertical: ScreenPadding.padding10px),
+      padding: EdgeInsets.symmetric(
+          horizontal: ScreenPadding.padding2px,
+          vertical: ScreenPadding.padding10px),
       child: Container(
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(SizeRadius.radius12px),
-            color: TobetoColor.card.white,
+            borderRadius: BorderRadius.circular(12),
+            color: Theme.of(context).colorScheme.surface,
             boxShadow: [
               BoxShadow(
-                color: TobetoColor.card.shadowColor,
-
+                color: Theme.of(context).colorScheme.shadow,
                 blurRadius: 4,
                 offset: const Offset(
                   0,
