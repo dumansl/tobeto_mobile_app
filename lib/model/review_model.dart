@@ -17,7 +17,7 @@ class Review {
   factory Review.fromFirestore(DocumentSnapshot doc) {
     return Review(
       isCompleted: doc['isCompleted'],
-      score: doc['isCompleted'],
+      score: doc['score'] ?? 0,
       answers: Map<String, dynamic>.from(doc['answers']),
       questions: List<dynamic>.from(doc['question']),
     );

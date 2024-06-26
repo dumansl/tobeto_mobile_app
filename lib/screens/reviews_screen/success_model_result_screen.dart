@@ -19,6 +19,8 @@ class SuccessModelResultScreen extends StatefulWidget {
 }
 
 class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
+  double score = 0.0;
+
   @override
   void initState() {
     context.read<ReviewBloc>().add(FetchReviews());
@@ -78,6 +80,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
           BlocBuilder<ReviewBloc, ReviewState>(
             builder: (context, state) {
               if (state is ReviewLoaded) {
+                score = (state.reviews.score!) / 5;
                 return Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -86,9 +89,9 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                           padding: EdgeInsets.symmetric(
                             vertical: ScreenPadding.padding24px,
                           ),
-                          child: const SpiderChart(
+                          child: SpiderChart(
                             values: [
-                              0.86,
+                              score,
                               0.95,
                               0.90,
                               0.95,

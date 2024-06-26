@@ -23,6 +23,7 @@ export 'reviews_screen/tobeto_success_screen.dart';
 export 'reviews_screen/exam_result_screen.dart';
 export 'reviews_screen/success_model_result_screen.dart';
 export 'reviews_screen/success_exam_screen.dart';
+export 'reviews_screen/area_exam_screen.dart';
 export 'announcement_screen/announcement_screen.dart';
 export 'application_screen/application_screen.dart';
 export 'survey_screen/survey_screen.dart';

@@ -27,9 +27,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _authService.signInWithEmailAndPassword(
           event.email, event.password);
       await _sharedPreferencesService.setLoggedIn(true);
-      if (event.email == 'educator@tobeto.com') {
-        event.isEducator = true;
-      }
       LoginSuccess();
     } catch (e) {
       emit(LoginError(errorMessage: e.toString()));
