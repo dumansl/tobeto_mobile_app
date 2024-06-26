@@ -9,15 +9,10 @@ class DescriptionTitleContent extends StatefulWidget {
   final bool isButton;
   final Widget? navigatorScreen;
   const DescriptionTitleContent(
-      {super.key,
-      required this.title,
-      this.description,
-      this.isButton = false,
-      this.navigatorScreen});
+      {super.key, required this.title, this.description, this.isButton = false, this.navigatorScreen});
 
   @override
-  State<DescriptionTitleContent> createState() =>
-      _DescriptionTitleContentState();
+  State<DescriptionTitleContent> createState() => _DescriptionTitleContentState();
 }
 
 class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
@@ -46,16 +41,12 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
             ),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: TobetoColor.card.lightPurple,
+              color: Theme.of(context).colorScheme.tertiaryContainer,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(SizeRadius.radius16px),
                 topRight: Radius.circular(SizeRadius.radius16px),
-                bottomLeft: _isExpanded
-                    ? const Radius.circular(0)
-                    : Radius.circular(SizeRadius.radius16px),
-                bottomRight: _isExpanded
-                    ? const Radius.circular(0)
-                    : Radius.circular(SizeRadius.radius16px),
+                bottomLeft: _isExpanded ? const Radius.circular(0) : Radius.circular(SizeRadius.radius16px),
+                bottomRight: _isExpanded ? const Radius.circular(0) : Radius.circular(SizeRadius.radius16px),
               ),
             ),
             child: Row(
@@ -64,15 +55,13 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
                 Expanded(
                   child: Text(
                     widget.title,
-                    style: TobetoTextStyle.poppins(context).captionPurpleBold12,
+                    style: TobetoTextStyle.poppins(context).captionBlackBold12,
                   ),
                 ),
                 Icon(
-                  _isExpanded
-                      ? Icons.arrow_drop_down_rounded
-                      : Icons.arrow_right_rounded,
+                  _isExpanded ? Icons.arrow_drop_down_rounded : Icons.arrow_right_rounded,
                   size: IconSize.size35px,
-                  color: TobetoColor.purple,
+                  color: Theme.of(context).colorScheme.tertiaryFixed,
                 ),
               ],
             ),
@@ -83,7 +72,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
                 padding: EdgeInsets.all(ScreenPadding.padding16px),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: TobetoColor.card.cream.withOpacity(0.35),
+                  color: Theme.of(context).colorScheme.tertiaryFixedDim,
                   borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(SizeRadius.radius16px),
                     bottomLeft: Radius.circular(SizeRadius.radius16px),

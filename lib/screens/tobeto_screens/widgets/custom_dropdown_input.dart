@@ -36,14 +36,13 @@ class CustomDropDownInput extends StatelessWidget {
           borderSide: BorderSide(color: TobetoColor.purple, width: 2.0),
         ),
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
-        floatingLabelStyle:
-            TobetoTextStyle.poppins(context).captionPurpleNormal18,
+        floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
         border: const OutlineInputBorder(
             borderRadius: BorderRadius.all(
           Radius.circular(12),
         )),
         enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.transparent, width: 1.0),
+          borderSide: BorderSide(color: Colors.black, width: 1.0),
           borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),

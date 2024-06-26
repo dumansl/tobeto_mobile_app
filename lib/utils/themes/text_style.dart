@@ -711,7 +711,7 @@ class Typography {
     captionPurpleNormal18 = baseStyle.copyWith(
       fontSize: 18,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.purple,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     captionWhiteThin18 = baseStyle.copyWith(
       fontSize: 18,
@@ -1485,7 +1485,7 @@ class Typography {
     subtitleGrayDarkBold20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     subtitleGrayDarkSemiBold20 = baseStyle.copyWith(
       fontSize: 20,
@@ -1671,9 +1671,7 @@ class Typography {
 }
 
 class TobetoTextStyle {
-  static Typography poppins(BuildContext context) =>
-      Typography(context: context, baseStyle: GoogleFonts.poppins());
+  static Typography poppins(BuildContext context) => Typography(context: context, baseStyle: GoogleFonts.poppins());
 
-  static Typography inter(BuildContext context) =>
-      Typography(context: context, baseStyle: GoogleFonts.inter());
+  static Typography inter(BuildContext context) => Typography(context: context, baseStyle: GoogleFonts.inter());
 }

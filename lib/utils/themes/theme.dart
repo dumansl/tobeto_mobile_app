@@ -6,6 +6,7 @@ ThemeData lightTheme = ThemeData(useMaterial3: true, colorScheme: lightColorSche
 ThemeData darkTheme = ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
 
 ColorScheme lightColorScheme = ColorScheme(
+
     brightness: Brightness.light,
     primary: TobetoColor.card.cream, //Arka Plan Rengi
     surface: TobetoColor.card.cream, //  card rengi //sayfa renkleri
@@ -20,7 +21,12 @@ ColorScheme lightColorScheme = ColorScheme(
     onSecondaryContainer: TobetoColor.icon.grey, //
     shadow: TobetoColor.card.shadowColor,
     primaryContainer: TobetoColor.card.white,
-    onPrimaryFixed: TobetoColor.card.black);
+    onPrimaryFixed: TobetoColor.card.black,
+    tertiaryContainer: TobetoColor.card.lightPurple, //sss textfield
+    tertiaryFixed: TobetoColor.purple, //sss icon
+    tertiaryFixedDim: TobetoColor.card.cream.withOpacity(0.35), //sss popup
+
+);
 
 ColorScheme darkColorScheme = ColorScheme(
     brightness: Brightness.dark,
@@ -37,4 +43,10 @@ ColorScheme darkColorScheme = ColorScheme(
     onSecondaryContainer: TobetoColor.card.carddarkmode,
     shadow: TobetoColor.card.black,
     primaryContainer: TobetoColor.card.carddarkmode,
-    onPrimaryFixed: TobetoColor.card.black);
+    onPrimaryFixed: TobetoColor.card.black,
+    tertiaryContainer: TobetoColor.purple, //sss textfield
+    tertiaryFixed: TobetoColor.icon.white, //sss icon
+    tertiaryFixedDim: TobetoColor.card.black,
+
+);
+
