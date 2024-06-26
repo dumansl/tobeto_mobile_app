@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/model/educator_annocement-model.dart';
+import 'package:tobeto_mobile_app/model/educator_annocement_model.dart';
 
 class EducatorAnnouncementRepository {
   final FirebaseFirestore _firestore;

@@ -5,9 +5,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/educator_announcement_bloc/educator_announcement_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/educator_announcement_bloc/educator_announcement_event.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
-import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_educator/dasboard-educator/dashboard_screen-educator.dart';
-import 'package:tobeto_mobile_app/services/educator-announcement.dart';
+
+import 'package:tobeto_mobile_app/screens/tobeto_educator/dasboard-educator/dashboard_screen_educator.dart';
+import 'package:tobeto_mobile_app/services/educator_announcement.dart';
 import 'package:tobeto_mobile_app/services/video_repository.dart';
 import 'package:tobeto_mobile_app/utils/themes/theme.dart';
 import 'firebase_options.dart';

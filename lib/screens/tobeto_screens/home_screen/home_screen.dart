@@ -166,6 +166,9 @@ class TobetoHomeScreen extends StatelessWidget {
   }
 
   Widget _body(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.light;
+    final assetImagePath =
+        isDarkMode ? 'assets/gifs/skills.gif' : 'assets/gifs/skilldark.gif';
     return Padding(
       padding: EdgeInsets.all(ScreenPadding.padding16px),
       child: SingleChildScrollView(
@@ -476,7 +479,7 @@ class TobetoHomeScreen extends StatelessWidget {
                               width: double.infinity,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
-                                child: Image.asset(ImagePath.mainScreenGif
+                                child: Image.asset(assetImagePath
 
                                     // Burada anahtar ekleyerek rebuild sağlıyoruz
                                     ),

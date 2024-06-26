@@ -5,10 +5,10 @@ class ExamResultScreen extends StatelessWidget {
   final int correctAnswers;
 
   const ExamResultScreen({
-    Key? key,
+    super.key,
     required this.totalQuestions,
     required this.correctAnswers,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,25 +16,25 @@ class ExamResultScreen extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Quiz Result'),
+        title: const Text('Quiz Result'),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
+            const Text(
               'Quiz Finished!',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Text(
               'Correct Answers: $correctAnswers / $totalQuestions',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Text(
               'Score: ${scorePercentage.toStringAsFixed(2)}%',
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
           ],
         ),

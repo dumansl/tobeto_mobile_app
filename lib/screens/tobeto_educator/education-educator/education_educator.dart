@@ -47,12 +47,12 @@ class _SimpleEducationScreenState extends State<SimpleEducationScreen> {
                           padding: const EdgeInsets.all(16.0),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(12.0),
-                            color: Colors.white,
+                            color: Theme.of(context).colorScheme.onPrimary,
                             boxShadow: [
                               BoxShadow(
-                                color: Colors.grey.withOpacity(0.5),
-                                spreadRadius: 5,
-                                blurRadius: 7,
+                                color: Theme.of(context).colorScheme.shadow,
+                                spreadRadius: 1,
+                                blurRadius: 2,
                                 offset: const Offset(0, 3),
                               ),
                             ],
