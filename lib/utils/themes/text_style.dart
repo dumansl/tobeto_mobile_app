@@ -1021,7 +1021,7 @@ class Typography {
     bodyGrayMediumNormal16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.onSurface,
     );
     bodyGrayMediumLight16 = baseStyle.copyWith(
       fontSize: 16,
