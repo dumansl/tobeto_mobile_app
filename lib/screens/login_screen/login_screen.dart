@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
-import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
+import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
+
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_logo.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/tobeto_screens.dart';
@@ -32,8 +31,8 @@ class _LoginScreenState extends State<LoginScreen> {
 
   final formKey = GlobalKey<FormState>();
   List<Widget> userRole = <Widget>[
-    const Text('Öğrenci'),
-    const Text('Eğitmen'),
+    Text(TobetoText.loginStudent),
+    Text(TobetoText.loginEducator),
   ];
 
   String _email = "";
@@ -53,6 +52,7 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.outline,
       resizeToAvoidBottomInset: false,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
@@ -64,20 +64,11 @@ class _LoginScreenState extends State<LoginScreen> {
                     builder: (context) => const TobetoHomeScreen()),
               );
             } else {
-              if (!_educatorSwitch) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const DashboardScreen()),
-                );
-              } else {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          const DashboardScreen()), // Eğitmen için burası değişecek.
-                );
-              }
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const DashboardScreen()),
+              );
             }
           } else if (state is LoginError) {
             if (state.errorMessage != null) {
@@ -88,7 +79,7 @@ class _LoginScreenState extends State<LoginScreen> {
             } else {
               snackBar(
                 context,
-                "Giriş yaparken bir hata oluştu! Lütfen tekrar deneyin.",
+                TobetoText.loginLoginError,
               );
             }
           }
@@ -114,7 +105,6 @@ class _LoginScreenState extends State<LoginScreen> {
                     flex: 15,
                     child: CustomLogo(
                       width: ScreenUtil.getWidth(context) * 0.65,
-                      height: ScreenUtil.getHeight(context) * 0.09,
                     ),
                   ),
                   Expanded(
@@ -145,7 +135,6 @@ class _LoginScreenState extends State<LoginScreen> {
           if (index == 0) {
             _educatorSwitch = false;
           } else {
-            // "Eğitmen" seçildiyse "_anotherLogin()" gizlensin
             _educatorSwitch = true;
           }
         });
@@ -154,7 +143,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Radius.circular(SizeRadius.radius16px),
       ),
       selectedBorderColor: TobetoColor.purple,
-      selectedColor: Theme.of(context).colorScheme.primary,
+      selectedColor: TobetoColor.text.white,
       fillColor: TobetoColor.purple,
       color: TobetoColor.purple,
       constraints: BoxConstraints(
@@ -186,7 +175,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'E-posta adresinizi giriniz';
+                return TobetoText.loginValidatorEmail;
               }
 
               return null;
@@ -200,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
             suffixIcon: IconButton(
               icon: Icon(
                 _showPassword ? Icons.visibility : Icons.visibility_off,
-                color: Theme.of(context).colorScheme.onSecondary,
+                color: Theme.of(context).colorScheme.surfaceContainer,
               ),
               onPressed: () {
                 setState(() {
@@ -213,7 +202,7 @@ class _LoginScreenState extends State<LoginScreen> {
             },
             validator: (value) {
               if (value == null || value.isEmpty) {
-                return 'Şifrenizi giriniz';
+                return TobetoText.loginValidatorPassword;
               }
               return null;
             },
@@ -237,7 +226,6 @@ class _LoginScreenState extends State<LoginScreen> {
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-
                 context
                     .read<AuthBloc>()
                     .add(LoginEvent(email: _email, password: _password));
@@ -254,8 +242,11 @@ class _LoginScreenState extends State<LoginScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
-        _loginTitleDivider(
-          text: TobetoText.loginAlternative,
+        Padding(
+          padding: const EdgeInsets.only(bottom: 8),
+          child: _loginTitleDivider(
+            text: TobetoText.loginAlternative,
+          ),
         ),
         Padding(
           padding:
@@ -357,7 +348,7 @@ class _LoginScreenState extends State<LoginScreen> {
           vertical: ScreenPadding.padding8px,
         ),
         decoration: ShapeDecoration(
-          color: Theme.of(context).colorScheme.primary,
+          color: Theme.of(context).colorScheme.primaryContainer,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(SizeRadius.radius8px),
           ),

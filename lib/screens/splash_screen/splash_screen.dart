@@ -66,6 +66,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: BlocListener<NetConnectBloc, NetConnectState>(
         listener: (context, state) {
           if (state is ConnectedState) {
@@ -82,8 +83,8 @@ class _SplashScreenState extends State<SplashScreen> {
   _animatedGif(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final assetImagePath = isDarkMode
-        ? 'assets/gifs/splashDarkScreen.gif'
-        : 'assets/gifs/splashLightScreen.gif';
+        ? ImagePath.splashDarkScreenGif
+        : ImagePath.splashLightScreenGif;
     return Container(
       padding: EdgeInsets.symmetric(horizontal: ScreenPadding.screenpadding),
       width: ScreenUtil.getWidth(context),

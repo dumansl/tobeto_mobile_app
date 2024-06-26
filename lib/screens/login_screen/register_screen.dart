@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
+import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_leading.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/horizontal_page_route.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
@@ -50,6 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.outline,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
@@ -62,13 +65,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
           } else if (state is LoginError) {
             snackBar(
               context,
-              "Kayıt olurken yaparken bir hata oluştu! Lütfen tekrar deneyin.",
+              TobetoText.registerError,
             );
           }
         },
         child: Stack(
           children: [
             const CustomBackground(),
+            const CustomLeading(),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: ScreenPadding.screenpadding * 2,
@@ -80,8 +84,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   physics: const NeverScrollableScrollPhysics(),
                   children: [
                     CustomLogo(
-                      width: ScreenUtil.getWidth(context) * 0.37,
-                      height: ScreenUtil.getHeight(context) * 0.09,
+                      width: ScreenUtil.getWidth(context) * 0.65,
+                      height: ScreenUtil.getHeight(context) * 0.07,
                     ),
                     const SizedBox(height: 20),
                     _registerContent(),
@@ -116,7 +120,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen adınızı girin';
+                  return TobetoText.registerValidatorName;
                 }
                 return null;
               },
@@ -136,7 +140,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen soyadınızı girin';
+                  return TobetoText.registerValidatorSurname;
                 }
                 return null;
               },
@@ -157,9 +161,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen e-posta adresinizi girin';
+                  return TobetoText.registerValidatorEmail;
                 } else if (!value.contains('@')) {
-                  return 'Geçerli bir e-posta adresi girin';
+                  return TobetoText.registerValidatorEmailV2;
                 }
                 return null;
               },
@@ -177,7 +181,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               suffixIcon: IconButton(
                 icon: Icon(
                   _showPassword ? Icons.visibility : Icons.visibility_off,
-                  color: Theme.of(context).colorScheme.onSecondary,
+                  color: Theme.of(context).colorScheme.surfaceContainer,
                 ),
                 onPressed: () {
                   setState(() {
@@ -187,9 +191,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
               ),
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen bir şifre girin';
+                  return TobetoText.registerValidatorPassword;
                 } else if (value.length < 6) {
-                  return 'Şifreniz en az 6 karakter olmalıdır';
+                  return TobetoText.registerValidatorPasswordV2;
                 }
                 return null;
               },
@@ -211,7 +215,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   _showConfirmPassword
                       ? Icons.visibility
                       : Icons.visibility_off,
-                  color: Theme.of(context).colorScheme.onSecondary,
+                  color: Theme.of(context).colorScheme.surfaceContainer,
                 ),
                 onPressed: () {
                   setState(() {
@@ -224,7 +228,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               },
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Lütfen şifrenizi tekrar girin';
+                  return TobetoText.registerValidatorConfirmPassword;
                 }
                 return null;
               },
@@ -235,7 +239,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 if (_password != _confirmPassword) {
-                  snackBar(context, 'Parolalar uyuşmuyor');
+                  snackBar(context, TobetoText.registerConfirmPasswordError);
                   return;
                 }
                 context.read<AuthBloc>().add(

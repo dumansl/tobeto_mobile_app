@@ -24,7 +24,7 @@ class CustomTextButton extends StatelessWidget {
             ),
             TextSpan(
               text: textbold,
-              style: TobetoTextStyle.inter(context).captionGrayDarkNormal15,
+              style: TobetoTextStyle.inter(context).captionGrayDarkBold15,
             ),
           ],
         ),

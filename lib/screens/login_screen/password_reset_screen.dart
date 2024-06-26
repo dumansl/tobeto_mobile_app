@@ -9,6 +9,7 @@ import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 import 'login_widgets/custom_background.dart';
 import 'login_widgets/custom_button.dart';
+import 'login_widgets/custom_leading.dart';
 import 'login_widgets/custom_logo.dart';
 import 'login_widgets/input_text_form_field.dart';
 
@@ -25,35 +26,39 @@ class _PasswordResetScreenState extends State<PasswordResetScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.outline,
       resizeToAvoidBottomInset: false,
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is ResetPasswordSuccess) {
             snackBar(
               context,
-              "Şifre sıfırlama e-postası gönderildi. Lütfen emailinizi kontrol edin.",
+              TobetoText.loginForgotPasswordSuccess,
+              bgColor: TobetoColor.state.success,
             );
           } else if (state is ResetPasswordError) {
             snackBar(
               context,
-              "Kayıt olurken yaparken bir hata oluştu! Lütfen tekrar deneyin.",
+              TobetoText.loginForgotPasswordError,
             );
           }
         },
         child: Stack(
           children: [
             const CustomBackground(),
+            const CustomLeading(),
             Padding(
               padding: EdgeInsets.symmetric(
                 horizontal: ScreenPadding.screenpadding * 2,
                 vertical: ScreenPadding.screenpadding * 2,
               ),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Expanded(
+                  Expanded(
                     flex: 25,
-                    child: CustomLogo(),
+                    child: CustomLogo(
+                      width: ScreenUtil.getWidth(context) * 0.65,
+                    ),
                   ),
                   Expanded(
                     flex: 35,

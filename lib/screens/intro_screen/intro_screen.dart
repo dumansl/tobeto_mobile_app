@@ -52,6 +52,7 @@ class _IntroScreenState extends State<IntroScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).colorScheme.primary,
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
@@ -138,7 +139,7 @@ class _IntroScreenState extends State<IntroScreen> {
           height: ScreenUtil.getHeight(context) * 0.35,
           width: ScreenUtil.getWidth(context) * 0.55,
           image,
-          fit: BoxFit.fitHeight,
+          fit: BoxFit.fitWidth,
         ),
         const Spacer(flex: 10),
         Text(
