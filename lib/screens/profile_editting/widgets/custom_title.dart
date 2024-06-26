@@ -16,7 +16,7 @@ class CustomTitle extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: TobetoTextStyle.poppins(context).bodyBlackBold16),
+          Text(title, style: TobetoTextStyle.poppins(context).themebodyBlackBold16),
           const Divider(
             thickness: 0.7,
             color: TobetoColor.purple,

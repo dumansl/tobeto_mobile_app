@@ -16,8 +16,11 @@ class CustomDateInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DateFormatField(
+      addCalendar: false,
       controller: controller,
       decoration: InputDecoration(
+        hintText: 'aa/gg/yyyy',
+        hintStyle: TextStyle(color: TobetoColor.text.grey),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
           borderSide: const BorderSide(color: TobetoColor.purple, width: 2.0),

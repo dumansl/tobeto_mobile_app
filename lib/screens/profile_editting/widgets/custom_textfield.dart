@@ -45,13 +45,12 @@ class CustomTextField extends StatelessWidget {
         counterText: "",
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
-          borderSide: const BorderSide(color: TobetoColor.purple, width: 2.0),
+          borderSide: BorderSide(color: TobetoColor.purple, width: ScreenPadding.padding2px),
         ),
         labelText: title,
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
         floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
         border: OutlineInputBorder(
-
             borderRadius: BorderRadius.all(
           Radius.circular(SizeRadius.radius12px),
         )),
