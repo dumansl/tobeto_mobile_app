@@ -47,8 +47,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
             )
           : null,
       actions: [
-        BlocBuilder<ProfilePhotoBloc, ProfilePhotoState>(
-            builder: (context, state) {
+        BlocBuilder<ProfilePhotoBloc, ProfilePhotoState>(builder: (context, state) {
           if (state is ProfilePhotoLoading) {
             return const Center(child: CircularProgressIndicator());
           } else if (state is ProfilePhotoLoaded) {
@@ -56,8 +55,8 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
               padding: EdgeInsets.only(right: ScreenPadding.padding12px),
               child: Stack(alignment: Alignment.center, children: [
                 Container(
-                  width: ScreenUtil.getWidth(context) * 0.16,
-                  height: ScreenUtil.getHeight(context) * 0.16,
+                  width: ScreenUtil.getWidth(context) * 0.155,
+                  height: ScreenUtil.getHeight(context) * 0.155,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     gradient: LinearGradient(

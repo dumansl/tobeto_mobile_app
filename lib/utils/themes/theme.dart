@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
-ThemeData lightTheme =
-    ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
+ThemeData lightTheme = ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
 
-ThemeData darkTheme =
-    ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
+ThemeData darkTheme = ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
 
 ColorScheme lightColorScheme = ColorScheme(
     brightness: Brightness.light,
@@ -31,7 +29,7 @@ ColorScheme darkColorScheme = ColorScheme(
     secondary: TobetoColor.card.carddarkmode, // Text Form Field Rengi
     onPrimary: TobetoColor.card.black,
     onSecondary: TobetoColor.icon.black, // Icon Rengi
-    onSurface: TobetoColor.card.white, // Text Rengi//dashboardtext rengi
+    onSurface: TobetoColor.text.white, // Text Rengi//dashboardtext rengi
     error: TobetoColor.state.error,
     onError: const Color(0xff690005),
     inversePrimary: const Color(0xff4c662b),

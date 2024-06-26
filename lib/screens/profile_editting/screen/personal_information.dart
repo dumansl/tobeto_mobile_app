@@ -74,6 +74,7 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                 title: TobetoText.profileEditEmail,
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
+                readOnly: true, // E-posta alanını yalnızca okunabilir yapıyoruz.
               )),
               InputText(
                 child: CustomDropDownInput(
