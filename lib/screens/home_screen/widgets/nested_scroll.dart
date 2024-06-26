@@ -36,7 +36,7 @@ class NestedScroll extends StatelessWidget {
                 SliverAppBar(
                   backgroundColor: Theme.of(context).colorScheme.surface,
                   expandedHeight: MediaQuery.of(context).size.height * 0.35,
-                  toolbarHeight: MediaQuery.of(context).size.height * 0.090,
+                  toolbarHeight: MediaQuery.of(context).size.height * 0.09,
                   floating: false,
                   pinned: true,
                   flexibleSpace: FlexibleSpaceBar(
