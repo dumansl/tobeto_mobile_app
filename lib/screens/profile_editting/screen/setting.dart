@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
+import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/input_text_form_field.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_elevated_button.dart';
-import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
@@ -39,7 +40,7 @@ class _SettingState extends State<Setting> {
         children: [
           CustomTitle(title: TobetoText.profileEditSettings),
           InputText(
-            child: CustomTextField(
+            child: InputTextFormField(
               focusNode: _oldPasswordFocusNode,
               onFieldSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_passwordFocusNode);
@@ -55,7 +56,6 @@ class _SettingState extends State<Setting> {
               onSaved: (newValue) {
                 _oldPassword = newValue!;
               },
-              title: TobetoText.profileEditSettingsOldPassword,
               suffixIcon: IconButton(
                 icon: Icon(
                   _showPassword ? Icons.visibility : Icons.visibility_off,
@@ -68,11 +68,11 @@ class _SettingState extends State<Setting> {
                 },
               ),
               obscureText: !_showPassword,
-              maxLines: 1,
+              hintText: TobetoText.profileEditSettingsOldPassword,
             ),
           ),
           InputText(
-            child: CustomTextField(
+            child: InputTextFormField(
               focusNode: _passwordFocusNode,
               onFieldSubmitted: (_) {
                 FocusScope.of(context).requestFocus(_confirmPasswordFocusNode);
@@ -88,7 +88,6 @@ class _SettingState extends State<Setting> {
               onSaved: (newValue) {
                 _password = newValue!;
               },
-              title: TobetoText.profileEditSettingsNewPassword,
               suffixIcon: IconButton(
                 icon: Icon(
                   _showPassword2 ? Icons.visibility : Icons.visibility_off,
@@ -101,11 +100,11 @@ class _SettingState extends State<Setting> {
                 },
               ),
               obscureText: !_showPassword2,
-              maxLines: 1,
+              hintText: TobetoText.profileEditSettingsNewPassword,
             ),
           ),
           InputText(
-            child: CustomTextField(
+            child: InputTextFormField(
               focusNode: _confirmPasswordFocusNode,
               onSaved: (newValue) {
                 _confirmPassword = newValue!;
@@ -116,7 +115,6 @@ class _SettingState extends State<Setting> {
                 }
                 return null;
               },
-              title: TobetoText.profileEditSettingsOldPasswordAgain,
               suffixIcon: IconButton(
                 icon: Icon(
                   _showPassword3 ? Icons.visibility : Icons.visibility_off,
@@ -129,26 +127,35 @@ class _SettingState extends State<Setting> {
                 },
               ),
               obscureText: !_showPassword3,
-              maxLines: 1,
+              hintText: TobetoText.profileEditSettingsOldPasswordAgain,
             ),
           ),
-          CustomElevatedButton(
-            text: TobetoText.profileEditSaveButton,
-            onPressed: () {
-              if (_formKey.currentState!.validate()) {
-                _formKey.currentState!.save();
-                if (_password != _confirmPassword) {
-                  snackBar(context, TobetoText.passwordWrong);
-                  return;
-                }
-                context.read<AuthBloc>().add(
-                      ChangePasswordEvent(
-                        currentPassword: _oldPassword,
-                        newPassword: _password,
-                      ),
-                    );
+          BlocListener<AuthBloc, AuthState>(
+            listener: (context, state) {
+              if (state is ChangePasswordSuccess) {
+                snackBar(context, 'Şifre değiştirme başarılı!', bgColor: TobetoColor.state.success);
+              } else if (state is ChangePasswordError) {
+                snackBar(context, 'Şifre değiştirme işlemi başarısız!', bgColor: TobetoColor.state.error);
               }
             },
+            child: CustomElevatedButton(
+              text: TobetoText.profileEditSaveButton,
+              onPressed: () {
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  if (_password != _confirmPassword) {
+                    snackBar(context, TobetoText.passwordWrong);
+                    return;
+                  }
+                  context.read<AuthBloc>().add(
+                        ChangePasswordEvent(
+                          currentPassword: _oldPassword,
+                          newPassword: _password,
+                        ),
+                      );
+                }
+              },
+            ),
           ),
           BlocConsumer<AuthBloc, AuthState>(
             listener: (context, state) {
@@ -209,7 +216,7 @@ class _SettingState extends State<Setting> {
             TextButton(
               onPressed: () {
                 context.read<AuthBloc>().add(const DeleteAccountEvent());
-                Navigator.of(context).pop();
+                pushWithoutNavBar(context, MaterialPageRoute(builder: (context) => LoginScreen()));
               },
               child: Text(
                 TobetoText.yes,
