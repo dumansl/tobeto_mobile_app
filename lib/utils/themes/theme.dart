@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
-ThemeData lightTheme = ThemeData(
-  useMaterial3: true,
-  colorScheme: lightColorScheme,
-);
+ThemeData lightTheme = ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
 
-ThemeData darkTheme =
-    ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
+ThemeData darkTheme = ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
 
 ColorScheme lightColorScheme = ColorScheme(
   brightness: Brightness.light,
@@ -32,6 +28,7 @@ ColorScheme lightColorScheme = ColorScheme(
   surfaceBright: TobetoColor.text.darkGrey,
   outline: TobetoColor.background.white,
   surfaceContainer: TobetoColor.icon.darkGrey,
+  onTertiaryContainer: TobetoColor.card.lightGrey, // istanbulkodluyor page
   inverseSurface: TobetoColor.card.lightGrey,
 );
 
@@ -58,5 +55,6 @@ ColorScheme darkColorScheme = ColorScheme(
   surfaceBright: TobetoColor.text.white,
   outline: TobetoColor.background.darkbackground,
   surfaceContainer: TobetoColor.icon.white,
+  onTertiaryContainer: TobetoColor.button.darkGrey,
   inverseSurface: TobetoColor.card.isreaddarkmode,
 );

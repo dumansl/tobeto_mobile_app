@@ -19,13 +19,11 @@ class IntroductionCard extends StatelessWidget {
       width: double.infinity,
       child: Column(
         children: [
-          const VerticalPadding(),
-          const CustomImage(
+          CustomImage(
             imagePath: ImagePath.ikLogoLight,
-            width: 290,
-            height: 120,
+            width: ScreenUtil.getWidth(context) * 0.6,
+            height: ScreenUtil.getHeight(context) * 0.14,
           ),
-          const VerticalPadding(),
           CenteredText(
             text: TobetoText.istanbulHeadline1,
             style: TobetoTextStyle.poppins(context).subtitleWhiteLight20,
@@ -57,7 +55,7 @@ class CustomRichText extends StatelessWidget {
         children: [
           TextSpan(
             text: textParts[0],
-            style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
           ),
           TextSpan(
             text: '“',
@@ -65,7 +63,7 @@ class CustomRichText extends StatelessWidget {
           ),
           TextSpan(
             text: textParts[2],
-            style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
           ),
           TextSpan(
             text: '”',
@@ -73,7 +71,7 @@ class CustomRichText extends StatelessWidget {
           ),
           TextSpan(
             text: textParts[4],
-            style: TobetoTextStyle.poppins(context).subtitleWhiteBold20,
+            style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
           ),
         ],
       ),

@@ -21,7 +21,7 @@ class ProcessCard extends StatelessWidget {
           text: TobetoText.istanbulProcess,
           style: TextStyle(
             color: TobetoColor.card.shineGreen,
-            fontSize: ScreenPadding.padding20px,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -65,7 +65,7 @@ class CustomStepRow extends StatelessWidget {
       padding: EdgeInsets.only(bottom: ScreenPadding.padding5px),
       child: Row(
         children: [
-          const SizedBox(width: 30),
+          SizedBox(width: ScreenUtil.getWidth(context) * 0.07),
           CircleAvatar(
             backgroundColor: TobetoColor.card.white,
             child: Center(
@@ -79,10 +79,10 @@ class CustomStepRow extends StatelessWidget {
               ),
             ),
           ),
-          const SizedBox(width: 20),
+          SizedBox(width: ScreenUtil.getHeight(context) * 0.013),
           Text(
             text,
-            style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
+            style: TobetoTextStyle.poppins(context).bodyWhiteSemiBold16,
           ),
         ],
       ),

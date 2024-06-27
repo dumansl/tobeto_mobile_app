@@ -21,9 +21,9 @@ class DescriptionCard extends StatelessWidget {
           borderRadius: const BorderRadius.only(bottomRight: Radius.circular(30), bottomLeft: Radius.circular(30)),
           boxShadow: [
             BoxShadow(
-              color: TobetoColor.card.grey.withOpacity(0.3),
+              color: TobetoColor.card.darkGrey.withOpacity(0.2),
               spreadRadius: 7,
-              blurRadius: 15,
+              blurRadius: 5,
               offset: const Offset(3, 5),
             ),
           ],
@@ -38,7 +38,7 @@ class DescriptionCard extends StatelessWidget {
             PaddedText(
               text: TobetoText.istanbulCard1Body,
               style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
-              padding: const EdgeInsets.all(30),
+              padding: EdgeInsets.all(ScreenPadding.padding30px),
             ),
           ],
         ),
@@ -89,7 +89,7 @@ class FAQButton extends StatelessWidget {
       padding: EdgeInsets.only(left: ScreenPadding.padding30px, right: ScreenPadding.padding30px),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: TobetoColor.purple, elevation: 6, shadowColor: TobetoColor.card.lightGrey),
+            backgroundColor: TobetoColor.purple, elevation: 9, shadowColor: TobetoColor.card.darkGrey.withOpacity(0.2)),
         onPressed: faqButton,
         child: Text(
           text,
@@ -115,12 +115,12 @@ class TobetoButton extends StatelessWidget {
       padding: EdgeInsets.only(left: ScreenPadding.padding30px, right: ScreenPadding.padding30px),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
-            backgroundColor: TobetoColor.purple, elevation: 6, shadowColor: TobetoColor.card.lightGrey),
+            backgroundColor: TobetoColor.purple, elevation: 9, shadowColor: TobetoColor.card.darkGrey.withOpacity(0.2)),
         onPressed: () {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => const DashboardScreen(),
+              builder: (context) => const SplashScreen(),
             ),
           );
         },
