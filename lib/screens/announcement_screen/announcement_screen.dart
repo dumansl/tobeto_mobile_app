@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/announcement_bloc/announcement_bloc.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '../announcement_screen/announcement_widgets/announcement_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 
@@ -12,13 +14,10 @@ class AnnouncementScreen extends StatelessWidget {
     return BlocProvider(
       create: (context) => AnnouncementBloc()..add(LoadAnnouncements()),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text("Duyuru ve Haberlerim"),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
+        appBar: FixedAppbar(
+          title: Text(
+            'Duyuru ve Haberlerim',
+            style: TobetoTextStyle.poppins(context).subtitlePurpleSemiBold20,
           ),
         ),
         body: const AnnouncementView(),
@@ -139,6 +138,7 @@ class _AnnouncementViewState extends State<AnnouncementView> {
             },
           ),
         ),
+
         /*Expanded(
           child: BlocBuilder<AnnouncementBloc, AnnouncementState>(
             builder: (context, state) {

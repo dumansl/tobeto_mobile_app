@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
-ThemeData lightTheme =
-    ThemeData(useMaterial3: true, colorScheme: lightColorScheme);
+ThemeData lightTheme = ThemeData(
+  useMaterial3: true,
+  colorScheme: lightColorScheme,
+);
 
 ThemeData darkTheme =
     ThemeData(useMaterial3: true, colorScheme: darkColorScheme);
@@ -30,11 +32,12 @@ ColorScheme lightColorScheme = ColorScheme(
   surfaceBright: TobetoColor.text.darkGrey,
   outline: TobetoColor.background.white,
   surfaceContainer: TobetoColor.icon.darkGrey,
+  inverseSurface: TobetoColor.card.lightGrey,
 );
 
 ColorScheme darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
-  primary: TobetoColor.background.darkbackground, //arka plan rengi
+  primary: TobetoColor.card.carddarkmode, //arka plan rengi
   surface: TobetoColor.card.carddarkmode, //card rengi
   secondary: TobetoColor.card.carddarkmode, // Text Form Field Rengi
   onPrimary: TobetoColor.card.black,
@@ -55,4 +58,5 @@ ColorScheme darkColorScheme = ColorScheme(
   surfaceBright: TobetoColor.text.white,
   outline: TobetoColor.background.darkbackground,
   surfaceContainer: TobetoColor.icon.white,
+  inverseSurface: TobetoColor.card.isreaddarkmode,
 );

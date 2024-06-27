@@ -4,6 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tobeto_mobile_app/blocs/survey_bloc/survey_bloc.dart';
 import 'package:tobeto_mobile_app/model/survey_model.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '../survey_screen/survey_widgets/survey_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
@@ -53,11 +55,12 @@ class _SurveyScreenState extends State<SurveyScreen> {
     return BlocProvider(
       create: (_) => SurveyBloc()..add(LoadSurveys()),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Anketler'),
+        appBar: FixedAppbar(
+          title: Text(TobetoText.survey,
+              style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(ScreenPadding.padding8px),
           child: BlocBuilder<SurveyBloc, SurveyState>(
             builder: (context, state) {
               if (state is SurveyLoading) {
@@ -68,7 +71,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
                   itemBuilder: (context, index) {
                     final survey = state.surveys[index];
                     return Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
+                      padding: EdgeInsets.symmetric(
+                          vertical: ScreenPadding.padding8px),
                       child: GestureDetector(
                         onTap: () => Navigator.push(
                           context,
@@ -132,14 +136,9 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.surveyTitle),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
+      appBar: FixedAppbar(
+        title: Text('Anket',
+            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
       ),
       body: BlocBuilder<SurveyBloc, SurveyState>(
         builder: (context, state) {
@@ -164,14 +163,9 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                question.question,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 18.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
+                              Text(question.question,
+                                  style: TobetoTextStyle.poppins(context)
+                                      .captionBlackBold18),
                               const SizedBox(height: 10.0),
                               ...question.options.map((option) {
                                 return ListTile(
@@ -229,6 +223,9 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                     child: const Text('Kaydet'),
                   ),
                 ),
+                SizedBox(
+                  height: ScreenUtil.getHeight(context) * 0.1,
+                )
               ],
             );
           } else if (state is SurveyError) {
