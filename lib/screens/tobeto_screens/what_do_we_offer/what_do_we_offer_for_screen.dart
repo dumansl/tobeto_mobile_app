@@ -70,7 +70,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFF6104BE),
+                  color: const Color(0xFF6104BE),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 padding: const EdgeInsets.all(16),
@@ -80,7 +80,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
                     Center(
                       child: Text(
                         TobetoText.tcompaniesCard2Title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -92,7 +92,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       TobetoText.tcompaniesCard2Body,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 14,
                         color: Colors.white,
@@ -116,7 +116,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFF1D4499),
+                  color: const Color(0xFF1D4499),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 padding: const EdgeInsets.all(16),
@@ -126,7 +126,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
                     Center(
                       child: Text(
                         TobetoText.tcompaniesCard6Title,
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontFamily: 'Poppins',
                           fontSize: 16,
                           fontWeight: FontWeight.bold,
@@ -138,7 +138,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
                     const SizedBox(height: 8),
                     Text(
                       TobetoText.tcompaniesCard6Body,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 14,
                         color: Colors.white,
@@ -162,7 +162,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFFE9E8FF),
+                  color: const Color(0xFFE9E8FF),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 padding: const EdgeInsets.all(16),
@@ -170,7 +170,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
                   children: [
                     Text(
                       TobetoText.tcompaniesCard10Body,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 14,
                         color: Colors.black,

@@ -27,7 +27,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       appBar: FixedAppbar(
         isLeading: false,
         title: Text(
-          "Profil",
+          TobetoText.profileAppBar,
           style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
         ),
       ),
@@ -91,7 +91,7 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
                         ? FileImage(_selectedImage!)
                         : hasImageUrl
                             ? NetworkImage(imageUrl)
-                            : const AssetImage(ImagePath.profilePhoto)
+                            : const AssetImage(ImagePath.defaultProfilePhoto)
                                 as ImageProvider,
                   ),
                   CircleAvatar(
