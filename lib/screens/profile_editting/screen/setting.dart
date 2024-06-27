@@ -24,6 +24,9 @@ class _SettingState extends State<Setting> {
   String _oldPassword = "";
   String _password = "";
   String _confirmPassword = "";
+  bool _showPassword = false;
+  bool _showPassword2 = false;
+  bool _showPassword3 = false;
 
   final FocusNode _oldPasswordFocusNode = FocusNode();
   final FocusNode _passwordFocusNode = FocusNode();
@@ -53,6 +56,19 @@ class _SettingState extends State<Setting> {
                 _oldPassword = newValue!;
               },
               title: TobetoText.profileEditSettingsOldPassword,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _showPassword ? Icons.visibility : Icons.visibility_off,
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _showPassword = !_showPassword;
+                  });
+                },
+              ),
+              obscureText: !_showPassword,
+              maxLines: 1,
             ),
           ),
           InputText(
@@ -73,6 +89,19 @@ class _SettingState extends State<Setting> {
                 _password = newValue!;
               },
               title: TobetoText.profileEditSettingsNewPassword,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _showPassword2 ? Icons.visibility : Icons.visibility_off,
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _showPassword2 = !_showPassword2;
+                  });
+                },
+              ),
+              obscureText: !_showPassword2,
+              maxLines: 1,
             ),
           ),
           InputText(
@@ -88,6 +117,19 @@ class _SettingState extends State<Setting> {
                 return null;
               },
               title: TobetoText.profileEditSettingsOldPasswordAgain,
+              suffixIcon: IconButton(
+                icon: Icon(
+                  _showPassword3 ? Icons.visibility : Icons.visibility_off,
+                  color: Theme.of(context).colorScheme.surfaceContainer,
+                ),
+                onPressed: () {
+                  setState(() {
+                    _showPassword3 = !_showPassword3;
+                  });
+                },
+              ),
+              obscureText: !_showPassword3,
+              maxLines: 1,
             ),
           ),
           CustomElevatedButton(

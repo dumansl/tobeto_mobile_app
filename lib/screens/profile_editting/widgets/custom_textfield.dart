@@ -16,6 +16,8 @@ class CustomTextField extends StatelessWidget {
     this.focusNode,
     this.onSaved,
     this.readOnly = false,
+    this.suffixIcon,
+    this.obscureText = false,
   });
 
   final TextInputType keyboardType;
@@ -29,6 +31,8 @@ class CustomTextField extends StatelessWidget {
   final FocusNode? focusNode;
   final void Function(String?)? onSaved;
   final bool? readOnly;
+  final Widget? suffixIcon;
+  final bool obscureText;
 
   @override
   Widget build(BuildContext context) {
@@ -36,12 +40,14 @@ class CustomTextField extends StatelessWidget {
       readOnly: readOnly!,
       controller: controller,
       maxLines: maxLines,
+      obscureText: obscureText,
       cursorColor: Theme.of(context).colorScheme.onSurface, //imleç rengi
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
       maxLength: maxLength,
       style: TobetoTextStyle.poppins(context).bodyBlackBold16,
       decoration: InputDecoration(
+        suffixIcon: suffixIcon,
         counterText: "",
         focusedBorder: OutlineInputBorder(
           borderRadius:
