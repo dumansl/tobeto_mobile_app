@@ -100,6 +100,7 @@ class _EducationScreenState extends State<EducationScreen>
                           Expanded(
                             flex: 9,
                             child: TextField(
+                              cursorColor: TobetoColor.purple,
                               controller: _searchController,
                               focusNode: _focusNode,
                               decoration: InputDecoration(

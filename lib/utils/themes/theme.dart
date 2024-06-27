@@ -29,11 +29,12 @@ ColorScheme lightColorScheme = ColorScheme(
   outline: TobetoColor.background.white,
   surfaceContainer: TobetoColor.icon.darkGrey,
   onTertiaryContainer: TobetoColor.card.lightGrey, // istanbulkodluyor page
+  inverseSurface: TobetoColor.card.lightGrey,
 );
 
 ColorScheme darkColorScheme = ColorScheme(
   brightness: Brightness.dark,
-  primary: TobetoColor.background.darkbackground, //arka plan rengi
+  primary: TobetoColor.card.carddarkmode, //arka plan rengi
   surface: TobetoColor.card.carddarkmode, //card rengi
   secondary: TobetoColor.card.carddarkmode, // Text Form Field Rengi
   onPrimary: TobetoColor.card.black,
@@ -55,4 +56,5 @@ ColorScheme darkColorScheme = ColorScheme(
   outline: TobetoColor.background.darkbackground,
   surfaceContainer: TobetoColor.icon.white,
   onTertiaryContainer: TobetoColor.button.darkGrey,
+  inverseSurface: TobetoColor.card.isreaddarkmode,
 );
