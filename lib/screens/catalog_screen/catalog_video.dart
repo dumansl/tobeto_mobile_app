@@ -179,14 +179,14 @@ class PlaylistItem extends StatefulWidget {
   final Function(String) onVideoSelected;
 
   const PlaylistItem({
-    Key? key,
+    super.key,
     required this.index,
     required this.catalogCourse,
     required this.onVideoSelected,
-  }) : super(key: key);
+  });
 
   @override
-  _PlaylistItemState createState() => _PlaylistItemState();
+  State<PlaylistItem> createState() => _PlaylistItemState();
 }
 
 class _PlaylistItemState extends State<PlaylistItem> {
