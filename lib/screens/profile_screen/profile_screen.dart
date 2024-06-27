@@ -114,7 +114,8 @@ class _ProfilePhotoViewState extends State<ProfilePhotoView> {
                         .read<ProfilePhotoBloc>()
                         .add(UpdateProfilePhoto(_selectedImage!));
                   },
-                  style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: TobetoColor.purple),
                   child: Text(TobetoText.profileEditSaveButton),
                 ),
             ],
@@ -194,7 +195,9 @@ class PersonalInfo extends StatelessWidget {
             ),
             CustomTitle(title: TobetoText.profileAboutMe),
             TwoLineCard(
-              line2: aboutMeController.text.isNotEmpty ? aboutMeController.text : TobetoText.emptyAboutMe,
+              line2: aboutMeController.text.isNotEmpty
+                  ? aboutMeController.text
+                  : TobetoText.emptyAboutMe,
             ),
           ],
         );
@@ -446,7 +449,9 @@ class MainTitleCard extends StatelessWidget {
                 SizedBox(
                   width: double.infinity,
                   child: Card(
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SizeRadius.radius20px)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius:
+                            BorderRadius.circular(SizeRadius.radius20px)),
                     color: Theme.of(context).colorScheme.onPrimary,
                     child: Padding(
                       padding: EdgeInsets.all(ScreenPadding.padding16px),
@@ -488,8 +493,10 @@ class IconAndText extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(text!, style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
-            Text(value!, style: TobetoTextStyle.poppins(context).captionBlackBold18),
+            Text(text!,
+                style: TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16),
+            Text(value!,
+                style: TobetoTextStyle.poppins(context).captionBlackBold18),
           ],
         ),
       ],
@@ -508,7 +515,8 @@ class TwoLineCard extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       child: Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(SizeRadius.radius20px)),
+        shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(SizeRadius.radius20px)),
         color: Theme.of(context).colorScheme.onPrimary,
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding12px),
@@ -531,4 +539,3 @@ class TwoLineCard extends StatelessWidget {
     );
   }
 }
-
