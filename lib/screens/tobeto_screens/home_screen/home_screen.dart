@@ -5,11 +5,25 @@ import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_logo.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/tobeto_screens.dart';
+import 'package:tobeto_mobile_app/services/shared_preferences_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
-class TobetoHomeScreen extends StatelessWidget {
+class TobetoHomeScreen extends StatefulWidget {
   const TobetoHomeScreen({super.key});
+
+  @override
+  State<TobetoHomeScreen> createState() => _TobetoHomeScreenState();
+}
+
+class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
+  late SharedPreferencesService _sharedPreferencesService;
+
+  @override
+  void initState() {
+    super.initState();
+    _sharedPreferencesService = SharedPreferencesService();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -24,9 +38,14 @@ class TobetoHomeScreen extends StatelessWidget {
   }
 
   Drawer _drawer(BuildContext context) {
+    bool value = context.read<ThemeBloc>().state == ThemeMode.dark;
     return Drawer(
       child: Padding(
-        padding: EdgeInsets.all(ScreenPadding.padding32px),
+        padding: EdgeInsets.only(
+          top: ScreenPadding.padding32px,
+          left: ScreenPadding.padding32px,
+          right: ScreenPadding.padding32px,
+        ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -135,9 +154,35 @@ class TobetoHomeScreen extends StatelessWidget {
                       );
                     },
                   ),
-                  Switch(
-                    value: context.read<ThemeBloc>().state == ThemeMode.dark,
-                    onChanged: (value) {
+                  _drawerTextButton(
+                    context,
+                    text: TobetoText.hambugerMenuIstanbulIsCodding,
+                    onPressed: () {
+                      if (_sharedPreferencesService.isLoggedIn()) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const DashboardScreen(),
+                          ),
+                        );
+                      } else if (!_sharedPreferencesService.isLoggedIn()) {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const LoginScreen(),
+                          ),
+                        );
+                      }
+                    },
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      value ? Icons.nights_stay : Icons.wb_sunny,
+                      color: value ? Colors.white : Colors.yellow,
+                      size: IconSize.size35px,
+                    ),
+                    onPressed: () {
+                      value = !value;
                       context.read<ThemeBloc>().add(ThemeChanged(value));
                     },
                   ),

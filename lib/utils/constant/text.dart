@@ -657,4 +657,6 @@ abstract class TobetoText {
   //educator
   static String educatorHomeMain1 =
       "Tobeto; yetenekleri keşfeder, geliştirir ve yeni işine hazırlar.";
+
+  static String exit = "Çıkış Yap";
 }

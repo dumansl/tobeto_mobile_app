@@ -6,6 +6,7 @@ import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/rainbow.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/home_screen/home_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Box widget'larını liste olarak tanımlıyoruz.
+    bool value = context.read<ThemeBloc>().state == ThemeMode.dark;
     final List<Widget> boxWidgets = [
       Box(
         text: TobetoText.mainCard1,
@@ -98,7 +99,6 @@ class _HomeScreenState extends State<HomeScreen> {
         },
       ),
     ];
-
     return Scaffold(
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding12px),
@@ -106,7 +106,43 @@ class _HomeScreenState extends State<HomeScreen> {
           currentScreen: ListView(
             scrollDirection: Axis.vertical,
             children: [
-              SizedBox(height: ScreenPadding.padding12px),
+              Padding(
+                padding: EdgeInsets.all(ScreenPadding.padding16px),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const TobetoHomeScreen(),
+                          ),
+                        );
+                      },
+                      child: Container(
+                        height: IconSize.size35px,
+                        width: IconSize.size35px,
+                        decoration: const BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage(ImagePath.tTobeto)),
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      icon: Icon(
+                        value ? Icons.nights_stay : Icons.wb_sunny,
+                        color: value ? Colors.white : Colors.yellow,
+                        size: IconSize.size35px,
+                      ),
+                      onPressed: () {
+                        value = !value;
+                        context.read<ThemeBloc>().add(ThemeChanged(value));
+                      },
+                    ),
+                  ],
+                ),
+              ),
               Text(
                 TobetoText.mainHeadline1,
                 style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
@@ -119,12 +155,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 TobetoText.mainHeadline2,
                 style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
                 textAlign: TextAlign.center,
-              ),
-              Switch(
-                value: context.read<ThemeBloc>().state == ThemeMode.dark,
-                onChanged: (value) {
-                  context.read<ThemeBloc>().add(ThemeChanged(value));
-                },
               ),
               SizedBox(height: ScreenPadding.padding12px),
               Text(
