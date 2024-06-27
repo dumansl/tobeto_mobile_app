@@ -54,7 +54,7 @@ class CardColor {
   final Color iknavyblue = const Color(0xff1E0F41);
   final Color ikgreen = const Color(0xff00D29B);
   final Color carddarkmode = const Color(0xFF14171A);
-  final Color isreaddarkmode = Color.fromARGB(255, 45, 48, 50);
+  final Color isreaddarkmode = const Color.fromARGB(255, 45, 48, 50);
 }
 
 class ButtonColor {
