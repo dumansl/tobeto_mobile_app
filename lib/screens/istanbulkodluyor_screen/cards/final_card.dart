@@ -4,6 +4,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 
 class FinalCard extends StatelessWidget {
   const FinalCard({super.key});
@@ -12,14 +13,14 @@ class FinalCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomContainer(
       backgroundColor: TobetoColor.card.navyBlue,
-      children: const [
-        VerticalPadding(),
+      children: [
+        const VerticalPadding(),
         CustomImage(
           imagePath: ImagePath.ikLogoLight,
-          width: 290,
-          height: 120,
+          width: ScreenUtil.getWidth(context) * 0.55,
+          height: ScreenUtil.getHeight(context) * 0.13,
         ),
-        VerticalPadding(),
+        const VerticalPadding(),
       ],
     );
   }

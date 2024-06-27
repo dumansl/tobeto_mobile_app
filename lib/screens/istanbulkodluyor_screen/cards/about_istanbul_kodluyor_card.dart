@@ -37,15 +37,13 @@ class ProjectAboutHeader extends StatelessWidget {
       borderRadius: const BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
       children: [
         Row(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: [
-            Padding(
-              padding: EdgeInsets.only(left: ScreenPadding.padding15px),
-              child: Text(
-                TobetoText.istanbulHeadline3,
-                style: TobetoTextStyle.poppins(context).captionWhiteBold18,
-              ),
+            Text(
+              TobetoText.istanbulHeadline3,
+              style: TobetoTextStyle.poppins(context).captionWhiteBold18,
             ),
-            const SizedBox(width: 20),
+            SizedBox(width: ScreenUtil.getWidth(context) * 0.068),
             Padding(
               padding: EdgeInsets.all(ScreenPadding.padding2px),
               child: CircleAvatar(

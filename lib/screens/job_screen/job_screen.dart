@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_mobile_app/blocs/job_bloc/job_bloc.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import 'job_widgets/job_card.dart';
 
@@ -24,12 +26,9 @@ class JobScreen extends StatelessWidget {
         }
       },
       child: Scaffold(
-        appBar: AppBar(
+        appBar: FixedAppbar(
           title: Text('İş Süreçlerim',
-              style: TobetoTextStyle.poppins(context).headlineBlackBold32),
-          centerTitle: true,
-          backgroundColor: Colors.white,
-          elevation: 0,
+              style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
         ),
         body: BlocBuilder<JobBloc, JobState>(
           builder: (context, state) {
@@ -39,7 +38,7 @@ class JobScreen extends StatelessWidget {
               return Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(ScreenPadding.padding8px),
                     child: Container(
                       decoration: BoxDecoration(
                         color: Colors.purple.shade50,

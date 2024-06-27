@@ -26,4 +26,12 @@ class SharedPreferencesService {
   Future<void> setLoggedIn(bool value) async {
     await _prefs.setBool('isLoggedIn', value);
   }
+
+  bool shouldHideNavigationBar() {
+    return _prefs.getBool('hideNavigationBar') ?? false;
+  }
+
+  Future<void> setHideNavigationBar(bool value) async {
+    await _prefs.setBool('hideNavigationBar', value);
+  }
 }

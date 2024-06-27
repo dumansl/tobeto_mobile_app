@@ -39,13 +39,14 @@ class _FAQCardState extends State<FAQCard> {
             borderRadius: const BorderRadius.all(Radius.circular(30)),
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Expanded(
-                    child: CenteredText(
-                      text: TobetoText.istanbulApplicationButton,
-                      style: TobetoTextStyle.poppins(context).captionWhiteBold15,
-                    ),
+                  CenteredText(
+                    text: TobetoText.istanbulApplicationButton,
+                    style: TobetoTextStyle.poppins(context).captionWhiteBold15,
+                  ),
+                  SizedBox(
+                    width: ScreenUtil.getWidth(context) * 0.127,
                   ),
                   Icon(
                     _isExpanded ? Icons.keyboard_arrow_up : Icons.keyboard_arrow_down,
@@ -59,7 +60,7 @@ class _FAQCardState extends State<FAQCard> {
         ),
         if (_isExpanded)
           CustomContainer(
-            backgroundColor: TobetoColor.card.white,
+            backgroundColor: Theme.of(context).colorScheme.onPrimary,
             borderRadius: const BorderRadius.all(Radius.circular(30)),
             children: [
               Padding(
@@ -67,7 +68,7 @@ class _FAQCardState extends State<FAQCard> {
                 child: Text(
                   TobetoText.istanbulCard6Body,
                   style: TextStyle(
-                    color: TobetoColor.text.black,
+                    color: Theme.of(context).colorScheme.onSurface,
                     fontSize: 16,
                   ),
                 ),

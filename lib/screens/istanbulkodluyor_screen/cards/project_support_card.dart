@@ -18,20 +18,20 @@ class ProjectSupportCard extends StatelessWidget {
         const VerticalPadding(),
         const VerticalPadding(),
         CustomContainer(
-          backgroundColor: TobetoColor.card.lightGrey,
+          backgroundColor: Theme.of(context).colorScheme.onTertiaryContainer,
           borderRadius: const BorderRadius.all(Radius.circular(30)),
           boxShadow: [
             BoxShadow(
-                color: TobetoColor.card.grey.withOpacity(0.65),
+                color: TobetoColor.card.darkGrey.withOpacity(0.2),
                 spreadRadius: 5,
-                blurRadius: 12,
+                blurRadius: 4,
                 offset: const Offset(6, 8)),
           ],
           children: [
             const VerticalPadding(),
             PaddedText(
               text: TobetoText.istanbulReport5Title,
-              style: TobetoTextStyle.poppins(context).captionBlackBold18,
+              style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
               padding: EdgeInsets.zero,
             ),
             const VerticalPadding(),
@@ -40,45 +40,41 @@ class ProjectSupportCard extends StatelessWidget {
               style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
               padding: EdgeInsets.only(left: ScreenPadding.padding30px, right: ScreenPadding.padding30px),
             ),
-            const Center(
+            Center(
               child: Column(
                 children: [
                   CustomImage(
                     imagePath: ImagePath.stb,
-                    width: 350,
-                    height: 100,
+                    width: ScreenUtil.getWidth(context) * 0.7,
+                    height: ScreenUtil.getHeight(context) * 0.1,
                   ),
-                  VerticalPadding(),
+                  const VerticalPadding(),
                   CustomImage(
                     imagePath: ImagePath.istka,
-                    width: 100,
-                    height: 50,
+                    width: ScreenUtil.getWidth(context) * 0.20,
+                    height: ScreenUtil.getHeight(context) * 0.065,
                   ),
-                  VerticalPadding(),
+                  const VerticalPadding(),
                   CustomImage(
                     imagePath: ImagePath.bop,
-                    width: 250,
-                    height: 100,
+                    width: ScreenUtil.getWidth(context) * 0.5,
+                    height: ScreenUtil.getHeight(context) * 0.1,
                   ),
-                  VerticalPadding(),
                   CustomImage(
                     imagePath: ImagePath.etkiYap,
-                    width: 100,
-                    height: 50,
+                    width: ScreenUtil.getHeight(context) * 0.2,
+                    height: ScreenUtil.getHeight(context) * 0.1,
                   ),
-                  VerticalPadding(),
                   CustomImage(
                     imagePath: ImagePath.enocta,
-                    width: 150,
-                    height: 100,
+                    width: ScreenUtil.getWidth(context) * 0.25,
+                    height: ScreenUtil.getHeight(context) * 0.1,
                   ),
-                  VerticalPadding(),
                   CustomImage(
                     imagePath: ImagePath.greyTobeto,
-                    width: 250,
-                    height: 100,
+                    width: ScreenUtil.getWidth(context) * 0.6,
+                    height: ScreenUtil.getHeight(context) * 0.1,
                   ),
-                  VerticalPadding(),
                 ],
               ),
             ),

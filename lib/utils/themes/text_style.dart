@@ -1229,7 +1229,7 @@ class Typography {
     subtitleWhiteBold20 = baseStyle.copyWith(
       fontSize: 20,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.white,
+      color: Theme.of(context).colorScheme.onPrimary,
     );
     subtitleWhiteSemiBold20 = baseStyle.copyWith(
       fontSize: 20,
@@ -1249,7 +1249,7 @@ class Typography {
     bodyWhiteBold16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.bold,
-      color: TobetoColor.text.white,
+      color: Theme.of(context).colorScheme.onPrimary,
     );
     bodyWhiteSemiBold16 = baseStyle.copyWith(
       fontSize: 16,
@@ -1259,7 +1259,7 @@ class Typography {
     bodyWhiteNormal16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.white,
+      color: Theme.of(context).colorScheme.onPrimary,
     );
     bodyWhiteLight16 = baseStyle.copyWith(
       fontSize: 16,
@@ -1669,9 +1669,7 @@ class Typography {
 }
 
 class TobetoTextStyle {
-  static Typography poppins(BuildContext context) =>
-      Typography(context: context, baseStyle: GoogleFonts.poppins());
+  static Typography poppins(BuildContext context) => Typography(context: context, baseStyle: GoogleFonts.poppins());
 
-  static Typography inter(BuildContext context) =>
-      Typography(context: context, baseStyle: GoogleFonts.inter());
+  static Typography inter(BuildContext context) => Typography(context: context, baseStyle: GoogleFonts.inter());
 }
