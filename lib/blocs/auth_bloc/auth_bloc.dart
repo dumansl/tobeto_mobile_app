@@ -18,14 +18,12 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
   }
 
   final AuthService _authService = AuthService();
-  final SharedPreferencesService _sharedPreferencesService =
-      SharedPreferencesService();
+  final SharedPreferencesService _sharedPreferencesService = SharedPreferencesService();
 
   Future<void> _onLogin(LoginEvent event, Emitter<AuthState> emit) async {
     try {
       emit(LoginProgress());
-      await _authService.signInWithEmailAndPassword(
-          event.email, event.password);
+      await _authService.signInWithEmailAndPassword(event.email, event.password);
       await _sharedPreferencesService.setLoggedIn(true);
       emit(LoginSuccess());
     } catch (e) {
@@ -33,8 +31,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onGoogleLogin(
-      GoogleLoginEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onGoogleLogin(GoogleLoginEvent event, Emitter<AuthState> emit) async {
     try {
       emit(LoginProgress());
       await _authService.signInWithGoogle();
@@ -46,8 +43,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onGuestLogin(
-      GuestLoginEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onGuestLogin(GuestLoginEvent event, Emitter<AuthState> emit) async {
     try {
       emit(LoginProgress());
       await _authService.signInAnonymously();
@@ -67,10 +63,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     try {
       emit(LoginProgress());
       await _authService.createUserWithEmailAndPassword(
-          email: event.email,
-          password: event.password,
-          name: event.name,
-          lastName: event.lastName);
+          email: event.email, password: event.password, name: event.name, lastName: event.lastName);
       await _sharedPreferencesService.setLoggedIn(true);
       emit(LoginSuccess());
     } catch (e) {
@@ -78,8 +71,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onResetPassword(
-      ResetPasswordEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onResetPassword(ResetPasswordEvent event, Emitter<AuthState> emit) async {
     try {
       emit(ResetPasswordProgress());
       await _authService.resetPassword(event.email);
@@ -89,11 +81,11 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onDeleteAccount(
-      DeleteAccountEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onDeleteAccount(DeleteAccountEvent event, Emitter<AuthState> emit) async {
     try {
       emit(DeleteAccountProgress());
       await _authService.deleteAccount();
+      await _sharedPreferencesService.setLoggedIn(false);
       emit(DeleteAccountSuccess());
       emit(NotAuthenticated());
     } catch (e) {
@@ -101,8 +93,7 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
-  Future<void> _onChangePassword(
-      ChangePasswordEvent event, Emitter<AuthState> emit) async {
+  Future<void> _onChangePassword(ChangePasswordEvent event, Emitter<AuthState> emit) async {
     try {
       emit(ChangePasswordProgress());
       await _authService.changePassword(
