@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/announcement_bloc/announcement_bloc.dart';
-import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import 'package:tobeto_mobile_app/model/announcement_model.dart';

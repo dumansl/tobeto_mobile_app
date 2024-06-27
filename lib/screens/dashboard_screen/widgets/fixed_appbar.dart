@@ -38,6 +38,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
         }
       },
       child: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.surface,
         iconTheme: const IconThemeData(
           color: TobetoColor.purple,
         ),
