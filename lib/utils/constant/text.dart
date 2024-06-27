@@ -78,6 +78,8 @@ abstract class TobetoText {
       "Ücretsiz eğitimlerle, \n geleceğin mesleklerinde sen de yerini al.";
   static String mainHeadline3 = "Aradığın “İş” Burada!";
   static String mainCard1 = "Başvurularım";
+  static String applicationEmpty = "Henüz bir başvurunuz bulunmamaktadır.";
+  static String applicationError = "Bilinmeyen bir hata oluştu";
   static String mainCard2 = "Değerlendir";
   static String mainCard3 = "Duyuru ve \n Haberlerim";
   static String mainCard4 = "Anketlerim";

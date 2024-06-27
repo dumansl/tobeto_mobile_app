@@ -17,7 +17,7 @@ class WeInThePressScreen extends StatelessWidget {
     return Scaffold(
       appBar: FixedAppbar(
         title: Text(
-          "Basında Biz",
+          TobetoText.tpressAppBar,
           style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
         ),
       ),

@@ -3,8 +3,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_event.dart';
 import 'package:tobeto_mobile_app/blocs/faq_bloc/faq_state.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_dropdown_input.dart';
-import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '../widgets/description_title_content.dart';
 
@@ -17,13 +18,17 @@ class FAQScreen extends StatefulWidget {
 
 class _FAQScreenState extends State<FAQScreen> {
   String selectedCategory = 'tobeto';
-  final Map<String, String> categoryTitles = {'tobeto': 'Tobeto', 'education': 'Eğitim', 'support': 'Destek'};
+  final Map<String, String> categoryTitles = {
+    'tobeto': 'Tobeto',
+    'education': 'Eğitim',
+    'support': 'Destek'
+  };
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Center(child: Text("Sıkça Sorulan Sorular")),
+      appBar: const FixedAppbar(
+        isTobetoScreen: true,
       ),
       body: BlocProvider(
         create: (context) => FAQBloc()..add(FetchFAQs()),
@@ -35,8 +40,9 @@ class _FAQScreenState extends State<FAQScreen> {
               Padding(
                 padding: EdgeInsets.only(bottom: ScreenPadding.padding16px),
                 child: Text(
-                  "S.S.S",
-                  style: TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
+                  TobetoText.tmapFAQBox,
+                  style:
+                      TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
                 ),
               ),
               Padding(
@@ -75,7 +81,7 @@ class _FAQScreenState extends State<FAQScreen> {
                     } else if (state is FAQError) {
                       return Center(child: Text('Error: ${state.message}'));
                     } else {
-                      return const Center(child: Text('Blinmedik durum'));
+                      return const Center(child: Text('Bilinmedik durum'));
                     }
                   },
                 ),

@@ -50,8 +50,7 @@ class WhatsHappeningIntobetoScreen extends StatelessWidget {
         DescriptionTitleContent(
           title: TobetoText.calendarAppBar,
           isButton: true,
-          navigatorScreen:
-              const WeInThePressScreen(), // Takvim bitince sayfa eklenecek.
+          navigatorScreen: const CalendarScreen(),
         ),
         DescriptionTitleContent(
           title: TobetoText.hambugerMenuIstanbulIsCodding,

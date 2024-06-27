@@ -15,7 +15,7 @@ class PressDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: FixedAppbar(
         title: Text(
-          "Basında Biz",
+          TobetoText.tpressAppBar,
           style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
         ),
       ),
@@ -70,7 +70,7 @@ class PressDetailsScreen extends StatelessWidget {
           height: ScreenUtil.getHeight(context) * 0.25,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(20.0),
-            color: Colors.black.withOpacity(0.3),
+            color: TobetoColor.card.black.withOpacity(0.3),
           ),
           child: Align(
             alignment: Alignment.bottomLeft,
@@ -103,11 +103,11 @@ class PressDetailsScreen extends StatelessWidget {
                     image: NetworkImage(imageUrls[index]),
                     fit: BoxFit.cover,
                   ),
-                  boxShadow: const [
+                  boxShadow: [
                     BoxShadow(
-                      color: Colors.black26,
+                      color: TobetoColor.card.grey,
                       blurRadius: 10.0,
-                      offset: Offset(0, 5),
+                      offset: const Offset(0, 5),
                     ),
                   ],
                 ),

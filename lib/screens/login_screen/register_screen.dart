@@ -249,15 +249,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         lastName: _lastName,
                       ),
                     );
-                showDialog(
-                  context: context,
-                  barrierDismissible: false,
-                  builder: (BuildContext context) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  },
-                );
               }
             },
             text: TobetoText.loginRegisterButton,

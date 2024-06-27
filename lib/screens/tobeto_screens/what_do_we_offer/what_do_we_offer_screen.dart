@@ -86,7 +86,7 @@ class WhatDoWeOffer extends StatelessWidget {
                 imagePath: ImagePath.ekip2,
                 isLast: true,
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               Container(
                 padding: const EdgeInsets.all(16),
                 decoration: const BoxDecoration(
@@ -94,7 +94,8 @@ class WhatDoWeOffer extends StatelessWidget {
                     image: AssetImage(ImagePath.kapak),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius: BorderRadius.vertical(bottom: Radius.circular(8)),
+                  borderRadius:
+                      BorderRadius.vertical(bottom: Radius.circular(8)),
                 ),
                 child: const Column(
                   children: [
@@ -113,12 +114,20 @@ class WhatDoWeOffer extends StatelessWidget {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ActionButton(label: 'AI PROMPTING', route: CatalogScreen()),
-                          ActionButton(label: 'PROJE YÖNETİMİ', route: CatalogScreen()),
-                          ActionButton(label: 'FULL STACK DEVELOPER', route: CatalogScreen()),
-                          ActionButton(label: 'İŞ ANALİSTİ', route: CatalogScreen()),
-                          ActionButton(label: 'DİJİTAL PAZARLAMA', route: CatalogScreen()),
-                          ActionButton(label: 'YAZILIM KALİTE', route: CatalogScreen()),
+                          ActionButton(
+                              label: 'AI PROMPTING', route: CatalogScreen()),
+                          ActionButton(
+                              label: 'PROJE YÖNETİMİ', route: CatalogScreen()),
+                          ActionButton(
+                              label: 'FULL STACK DEVELOPER',
+                              route: CatalogScreen()),
+                          ActionButton(
+                              label: 'İŞ ANALİSTİ', route: CatalogScreen()),
+                          ActionButton(
+                              label: 'DİJİTAL PAZARLAMA',
+                              route: CatalogScreen()),
+                          ActionButton(
+                              label: 'YAZILIM KALİTE', route: CatalogScreen()),
                         ],
                       ),
                     ),
@@ -143,6 +152,7 @@ class OfferCard extends StatelessWidget {
   final bool isLast;
 
   const OfferCard({
+    super.key,
     required this.title,
     required this.description,
     required this.color,
@@ -226,7 +236,7 @@ class ActionButton extends StatelessWidget {
   final String label;
   final Widget route;
 
-  const ActionButton({required this.label, required this.route});
+  const ActionButton({super.key, required this.label, required this.route});
 
   @override
   Widget build(BuildContext context) {

@@ -34,3 +34,4 @@ export 'tobeto_screens/whats_happening_in_tobeto/blog_screen/blog_screen.dart';
 export 'tobeto_screens/whats_happening_in_tobeto/blog_screen/blog_details.dart';
 export 'tobeto_screens/what_do_we_offer/what_do_we_offer_screen.dart';
 export 'tobeto_screens/what_do_we_offer/what_do_we_offer_for_screen.dart';
+export 'calendar_screen/calendar_screen.dart';

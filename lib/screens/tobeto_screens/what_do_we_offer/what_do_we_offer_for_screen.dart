@@ -28,7 +28,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFFE9E8FF),
+                  color: const Color(0xFFE9E8FF),
                   borderRadius: BorderRadius.circular(10),
                 ),
                 padding: const EdgeInsets.all(16),
@@ -49,7 +49,8 @@ class WhatDoWeOfferFor extends StatelessWidget {
                               text: 'keşfeder,',
                               style: TextStyle(color: Colors.purple[900]),
                             ),
-                            const TextSpan(text: ' geliştirir\nve yeni işine hazırlar.'),
+                            const TextSpan(
+                                text: ' geliştirir\nve yeni işine hazırlar.'),
                           ],
                         ),
                       ),
