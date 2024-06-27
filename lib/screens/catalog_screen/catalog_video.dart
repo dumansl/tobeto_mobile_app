@@ -7,7 +7,6 @@ import 'package:tobeto_mobile_app/blocs/video_bloc/video_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_event.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_state.dart';
 import 'package:tobeto_mobile_app/model/catalog_model.dart';
-import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/services/video_repository.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -17,10 +16,10 @@ class CatalogVideo extends StatefulWidget {
   final CatalogCourse catalogCourse;
 
   @override
-  State<CatalogVideo> createState() => _CatalogDetailState();
+  State<CatalogVideo> createState() => _CatalogVideoState();
 }
 
-class _CatalogDetailState extends State<CatalogVideo> {
+class _CatalogVideoState extends State<CatalogVideo> {
   CustomVideoPlayerController? _customVideoPlayerController;
   CachedVideoPlayerController? _cachedVideoPlayerController;
   bool _isDisposing = false;
@@ -35,6 +34,7 @@ class _CatalogDetailState extends State<CatalogVideo> {
 
   Future<void> initializeVideoPlayer(String videoUrl) async {
     if (_isDisposing) return;
+
     _cachedVideoPlayerController?.dispose();
     _customVideoPlayerController?.dispose();
 
@@ -57,11 +57,12 @@ class _CatalogDetailState extends State<CatalogVideo> {
       create: (context) => VideoBloc(VideoRepository(FirebaseStorage.instance))
         ..add(FetchVideo(widget.catalogCourse.videoUrl)),
       child: Scaffold(
-        appBar: FixedAppbar(
-          title: Text(
-            "Katalog",
-            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+        appBar: AppBar(
+          iconTheme: IconThemeData(
+            color: TobetoColor.icon.white,
+            size: IconSize.size25px,
           ),
+          backgroundColor: TobetoColor.card.black,
         ),
         body: BlocConsumer<VideoBloc, VideoState>(
           listener: (context, state) {
@@ -109,89 +110,36 @@ class CatalogContent extends StatelessWidget {
     return Center(
       child: Column(
         children: [
-          Center(
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    Container(
-                      width: ScreenUtil.getWidth(context) * 1,
-                      height: ScreenUtil.getHeight(context) * 0.30,
-                      decoration: const BoxDecoration(),
-                      child: _customVideoPlayerController != null
-                          ? CustomVideoPlayer(
-                              customVideoPlayerController:
-                                  _customVideoPlayerController!,
-                            )
-                          : const Center(
-                              child: CircularProgressIndicator(),
-                            ),
-                    ),
-                  ],
-                ),
-              ],
+          Container(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height * 0.40,
+            decoration: const BoxDecoration(
+              color: Colors.black,
             ),
-          ),
-          Padding(
-            padding:
-                EdgeInsets.symmetric(horizontal: ScreenPadding.padding24px),
-            child: Row(
-              children: [
-                SizedBox(
-                  width: ScreenUtil.getWidth(context) * 0.8,
-                  child: Text(
-                    catalogCourse.courseName,
-                    style: TobetoTextStyle.poppins(context).headlineBlackBold32,
+            child: _customVideoPlayerController != null
+                ? CustomVideoPlayer(
+                    customVideoPlayerController: _customVideoPlayerController!,
+                  )
+                : const Center(
+                    child: CircularProgressIndicator(),
                   ),
-                )
-              ],
-            ),
           ),
           Container(
-            height: 60,
-            decoration: BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: TobetoColor.card.shadowColor.withOpacity(0.5),
-                  spreadRadius: 3,
-                  blurRadius: 5,
-                  offset: const Offset(0, 6), // changes position of shadow
-                ),
-              ],
-              color: TobetoColor.purple,
+            width: double.infinity,
+            padding: const EdgeInsets.symmetric(
+              horizontal: 16.0,
+              vertical: 8.0,
             ),
-            child: Row(
-              children: [
-                Padding(
-                  padding: EdgeInsets.only(left: ScreenPadding.padding24px),
-                  child: Text(
-                    'playlist',
-                    style: TobetoTextStyle.poppins(context).captionWhiteBold30,
-                  ),
-                )
-              ],
+            color: TobetoColor.purple,
+            child: Text(
+              catalogCourse.courseName,
+              style: TobetoTextStyle.poppins(context).captionWhiteBold30,
             ),
           ),
           Expanded(
-            child: DefaultTabController(
-              length: 2,
-              child: Column(
-                children: [
-                  Expanded(
-                    child: TabBarView(
-                      children: [
-                        Playlist(
-                          catalogCourse: catalogCourse,
-                          onVideoSelected: onVideoSelected,
-                        ),
-                        DescriptionTab(
-                          catalogCourse: catalogCourse,
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            child: Playlist(
+              catalogCourse: catalogCourse,
+              onVideoSelected: onVideoSelected,
             ),
           ),
         ],
@@ -212,112 +160,114 @@ class Playlist extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => VideoBloc(VideoRepository(FirebaseStorage.instance)),
-      child: PlaylistContent(
-          catalogCourse: catalogCourse, onVideoSelected: onVideoSelected),
-    );
-  }
-}
-
-class PlaylistContent extends StatefulWidget {
-  final CatalogCourse catalogCourse;
-  final Function(String) onVideoSelected;
-
-  const PlaylistContent({
-    super.key,
-    required this.catalogCourse,
-    required this.onVideoSelected,
-  });
-
-  @override
-  State<PlaylistContent> createState() => _PlaylistContentState();
-}
-
-class _PlaylistContentState extends State<PlaylistContent> {
-  int _selectedVideoIndex = -1;
-  late ScrollController playlistController;
-
-  @override
-  void initState() {
-    super.initState();
-    playlistController = ScrollController();
-    playlistController.addListener(_scrollListener);
-  }
-
-  void _scrollListener() {
-    if (playlistController.position.atEdge) {
-      if (playlistController.position.pixels != 0) {
-        // Firebase'den yeni veri çekme işlemini başlatabilirsin
-      }
-    }
-  }
-
-  @override
-  void dispose() {
-    playlistController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
     return ListView.builder(
-      controller: playlistController,
-      itemCount: widget.catalogCourse.playlist.length,
+      itemCount: catalogCourse.playlist.length,
       itemBuilder: (context, index) {
-        return ListTile(
-          leading: Icon(
-            _selectedVideoIndex == index
-                ? Icons.play_circle_filled
-                : Icons.play_circle_filled,
-            color: _selectedVideoIndex == index ? Colors.purple : Colors.grey,
-            size: 50,
-          ),
-          title: Text('${widget.catalogCourse.courseName} ',
-              style: _selectedVideoIndex == index
-                  ? TobetoTextStyle.poppins(context).captionMediumBlack20
-                  : TobetoTextStyle.poppins(context).subtitleGrayDarkLight20),
-          subtitle: Text('${widget.catalogCourse.courseTeacher} ',
-              style: _selectedVideoIndex == index
-                  ? TobetoTextStyle.poppins(context).bodyBlackLight16
-                  : TobetoTextStyle.poppins(context).bodyGrayDarkLight16),
-          onTap: () {
-            setState(() {
-              _selectedVideoIndex = index;
-            });
-            widget.onVideoSelected(widget.catalogCourse.playlist[index]);
-          },
+        return PlaylistItem(
+          index: index,
+          catalogCourse: catalogCourse,
+          onVideoSelected: onVideoSelected,
         );
       },
     );
   }
 }
 
-class DescriptionTab extends StatelessWidget {
+class PlaylistItem extends StatefulWidget {
+  final int index;
   final CatalogCourse catalogCourse;
+  final Function(String) onVideoSelected;
 
-  const DescriptionTab({
-    super.key,
+  const PlaylistItem({
+    Key? key,
+    required this.index,
     required this.catalogCourse,
-  });
+    required this.onVideoSelected,
+  }) : super(key: key);
+
+  @override
+  _PlaylistItemState createState() => _PlaylistItemState();
+}
+
+class _PlaylistItemState extends State<PlaylistItem> {
+  CustomVideoPlayerController? _customVideoPlayerController;
+  CachedVideoPlayerController? _cachedVideoPlayerController;
+
+  @override
+  void initState() {
+    super.initState();
+    _initializeVideoPlayer();
+  }
+
+  @override
+  void dispose() {
+    _cachedVideoPlayerController?.dispose();
+    super.dispose();
+  }
+
+  void _initializeVideoPlayer() {
+    _cachedVideoPlayerController ??= CachedVideoPlayerController.network(
+      widget.catalogCourse.playlist[widget.index],
+    );
+    _cachedVideoPlayerController!.initialize().then((_) {
+      if (!mounted) return; // Check if widget is still mounted
+      setState(() {
+        _customVideoPlayerController = CustomVideoPlayerController(
+          context: context,
+          videoPlayerController: _cachedVideoPlayerController!,
+        );
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Text(
-            'Açıklama Sayfası',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'Burada ${catalogCourse.courseName} için açıklama içeriği gösterilebilir.',
-            textAlign: TextAlign.center,
-            style: const TextStyle(fontSize: 16),
-          ),
-        ],
+    return InkWell(
+      onTap: () {
+        widget.onVideoSelected(widget.catalogCourse.playlist[widget.index]);
+      },
+      child: Container(
+        padding: const EdgeInsets.all(16.0),
+        margin: const EdgeInsets.symmetric(horizontal: 4.0, vertical: 8.0),
+        decoration: BoxDecoration(
+          color: Theme.of(context).colorScheme.primaryContainer,
+          borderRadius: const BorderRadius.all(Radius.circular(16.0)),
+          boxShadow: [
+            BoxShadow(
+              color: TobetoColor.purple.withOpacity(0.8),
+              spreadRadius: 1,
+              blurRadius: 5,
+              offset: const Offset(1, 1),
+            ),
+          ],
+        ),
+        child: Row(
+          children: [
+            const Icon(
+              Icons.play_circle_filled,
+              color: TobetoColor.purple,
+              size: 50,
+            ),
+            const SizedBox(width: 8.0),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    '${widget.catalogCourse.courseName} ',
+                    style: TobetoTextStyle.poppins(context)
+                        .subtitleGrayDarkLight20,
+                  ),
+                  Text(
+                    '${widget.catalogCourse.courseTeacher} ',
+                    style: TobetoTextStyle.poppins(context).bodyGrayDarkLight16,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
