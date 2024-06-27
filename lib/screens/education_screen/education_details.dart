@@ -1,67 +1,117 @@
-// ignore_for_file: library_private_types_in_public_api
-
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/model/course_model.dart';
+import 'package:tobeto_mobile_app/services/education_service.dart';
+import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class EducationDetails extends StatefulWidget {
-  final String imageUrl;
-  final String videoName;
-  final int videoDuration;
-  final int videoPoints;
-  final String videoLanguage;
-  final String educationContent;
+  final Course course;
+  final String educationId;
+  final String asyncEducationId;
+  final String videoId;
 
   const EducationDetails({
-    super.key,
-    required this.imageUrl,
-    required this.videoName,
-    required this.videoDuration,
-    required this.videoPoints,
-    required this.videoLanguage,
-    required this.educationContent,
-  });
+    Key? key,
+    required this.course,
+    required this.educationId,
+    required this.asyncEducationId,
+    required this.videoId,
+  }) : super(key: key);
 
   @override
   _EducationDetailsState createState() => _EducationDetailsState();
 }
 
 class _EducationDetailsState extends State<EducationDetails> {
+  CustomVideoPlayerController? _customVideoPlayerController;
+  CachedVideoPlayerController? _cachedVideoPlayerController;
+  bool _videoInitialized = false;
   int _selectedIndex = 0;
-  int _selectedVideoIndex = -1;
   bool _isLiked = false;
   bool _isBookmarked = false;
+  Course? _courseDetails;
+
+  @override
+  void initState() {
+    super.initState();
+    fetchVideoDetails();
+  }
+
+  Future<void> fetchVideoDetails() async {
+    Course courseDetails = await EducationService().fetchCourseVideo(
+      widget.educationId,
+      widget.asyncEducationId,
+      widget.videoId,
+    );
+    setState(() {
+      _courseDetails = courseDetails;
+    });
+    initializeVideoPlayer(courseDetails.videoUrl);
+  }
+
+  Future<void> initializeVideoPlayer(String? videoUrl) async {
+    if (videoUrl != null && videoUrl.isNotEmpty) {
+      _cachedVideoPlayerController = CachedVideoPlayerController.network(videoUrl);
+      await _cachedVideoPlayerController!.initialize();
+      _customVideoPlayerController = CustomVideoPlayerController(
+        context: context,
+        videoPlayerController: _cachedVideoPlayerController!,
+      );
+      _cachedVideoPlayerController!.pause();
+      setState(() {
+        _videoInitialized = true;
+      });
+    } else {
+      setState(() {
+        _videoInitialized = true;
+      });
+    }
+  }
+
+  @override
+  void dispose() {
+    _customVideoPlayerController?.dispose();
+    _cachedVideoPlayerController?.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
+    if (_courseDetails == null) {
+      return Scaffold(
+        appBar: AppBar(
+          title: const Text("Eğitim Detayları"),
+        ),
+        body: Center(
+          child: CircularProgressIndicator(),
+        ),
+      );
+    }
+
     return Scaffold(
       appBar: AppBar(
-        title: Text(TobetoText.bottomIconEducation,
-            style: TobetoTextStyle.poppins(context).subHeadlineBlackBold28),
+        title: Text(
+          "Eğitim Detayları",
+          style: TextStyle(fontSize: 22),
+        ),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          ClipRRect(
-            borderRadius: BorderRadius.circular(20.0),
-            child: Image.asset(
-              widget.imageUrl,
-              height: 180,
-              width: double.infinity,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return const Text('Resim yüklenemedi.');
-              },
+          if (_videoInitialized && _customVideoPlayerController != null)
+            AspectRatio(
+              aspectRatio: _cachedVideoPlayerController!.value.aspectRatio,
+              child: CustomVideoPlayer(
+                customVideoPlayerController: _customVideoPlayerController!,
+              ),
             ),
-          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Expanded(
-                  child: Text(widget.videoName,
-                      style:
-                          TobetoTextStyle.poppins(context).subtitleBlackBold20),
+                  child: Text(_courseDetails!.title, style: TobetoTextStyle.poppins(context).subtitleBlackBold20),
                 ),
                 Row(
                   children: [
@@ -107,26 +157,20 @@ class _EducationDetailsState extends State<EducationDetails> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: _selectedIndex == 0
-                              ? TobetoColor.purple
-                              : Colors.grey[200],
+                          color: _selectedIndex == 0 ? Colors.purple : Colors.grey[200],
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(30.0),
                             bottomLeft: Radius.circular(30.0),
                           ),
                         ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                         child: Center(
                           child: Text(
                             'Liste',
                             style: TextStyle(
-                              fontFamily: 'Poppins',
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
-                              color: _selectedIndex == 0
-                                  ? Colors.white
-                                  : TobetoColor.purple,
+                              color: _selectedIndex == 0 ? Colors.white : Colors.purple,
                             ),
                           ),
                         ),
@@ -142,26 +186,20 @@ class _EducationDetailsState extends State<EducationDetails> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: _selectedIndex == 1
-                              ? TobetoColor.purple
-                              : Colors.grey[200],
+                          color: _selectedIndex == 1 ? Colors.purple : Colors.grey[200],
                           borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(30.0),
                             bottomRight: Radius.circular(30.0),
                           ),
                         ),
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 16.0, vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
                         child: Center(
                           child: Text(
                             'Detay',
                             style: TextStyle(
-                              fontFamily: 'Poppins',
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
-                              color: _selectedIndex == 1
-                                  ? Colors.white
-                                  : TobetoColor.purple,
+                              color: _selectedIndex == 1 ? Colors.white : Colors.purple,
                             ),
                           ),
                         ),
@@ -182,22 +220,16 @@ class _EducationDetailsState extends State<EducationDetails> {
 
   Widget _buildVideoList() {
     return ListView.builder(
-      itemCount: 7,
+      itemCount: _courseDetails!.playlist.length,
       itemBuilder: (context, index) {
         return ListTile(
-          leading: Icon(
+          leading: const Icon(
             Icons.play_circle_fill,
-            color:
-                _selectedVideoIndex == index ? TobetoColor.purple : Colors.grey,
+            color: Colors.purple,
           ),
-          title: Text('Video $index',
-              style: TobetoTextStyle.poppins(context).captionBlackNormal18),
-          subtitle: Text('Açıklama açıklama açıklama açıklama',
-              style: TobetoTextStyle.poppins(context).captionGrayLightLight15),
+          title: Text('Video ${index + 1}', style: TobetoTextStyle.poppins(context).captionBlackBold18),
           onTap: () {
-            setState(() {
-              _selectedVideoIndex = index;
-            });
+            initializeVideoPlayer(_courseDetails!.playlist[index]);
           },
         );
       },
@@ -213,25 +245,24 @@ class _EducationDetailsState extends State<EducationDetails> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              _buildDetailItem(
-                  Icons.access_time, '${widget.videoDuration} dakika'),
-              _buildDetailItem(
-                  Icons.subscriptions_outlined, '${widget.videoPoints} puan'),
-              _buildDetailItem(Icons.language, widget.videoLanguage),
+              _buildDetailItem(Icons.access_time, '${_courseDetails!.videoDuration} dakika'),
+              _buildDetailItem(Icons.subscriptions_outlined, '${_courseDetails!.videoPoints} puan'),
+              _buildDetailItem(Icons.language, _courseDetails!.language),
             ],
           ),
           const SizedBox(height: 16.0),
-          Text('Eğitim İçeriği',
-              style: TobetoTextStyle.poppins(context).captionBlackBold18),
+          Text('Eğitim İçeriği', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const Divider(
             color: Colors.black,
             thickness: 2,
           ),
           const SizedBox(height: 8.0),
           Text(
-            widget.educationContent,
-            style: TobetoTextStyle.poppins(context).captionGrayThin18,
+            _courseDetails!.content,
+            style: TextStyle(fontSize: 16),
           ),
+          const SizedBox(height: 16.0),
+          _buildInfoRow('Kategori:', _courseDetails!.videoCategory),
         ],
       ),
     );
@@ -254,11 +285,29 @@ class _EducationDetailsState extends State<EducationDetails> {
           Flexible(
             child: Text(
               text,
-              style: const TextStyle(fontFamily: 'Poppins', fontSize: 12),
+              style: TextStyle(fontSize: 12),
               textAlign: TextAlign.center,
             ),
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildInfoRow(String label, String value) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      child: RichText(
+        text: TextSpan(
+          text: '$label ',
+          style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0, color: Colors.black),
+          children: <TextSpan>[
+            TextSpan(
+              text: value,
+              style: const TextStyle(fontWeight: FontWeight.normal),
+            ),
+          ],
+        ),
       ),
     );
   }
