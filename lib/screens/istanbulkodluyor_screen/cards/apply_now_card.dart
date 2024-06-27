@@ -16,7 +16,7 @@ class ApplyNowCard extends StatelessWidget {
       borderRadius: const BorderRadius.all(Radius.circular(30)),
       boxShadow: [
         BoxShadow(
-          color: TobetoColor.card.grey.withOpacity(0.5),
+          color: TobetoColor.card.darkGrey.withOpacity(0.2),
           spreadRadius: 5,
           blurRadius: 6,
           offset: const Offset(2, 6),
@@ -29,18 +29,15 @@ class ApplyNowCard extends StatelessWidget {
           borderRadius: const BorderRadius.only(topRight: Radius.circular(30), bottomRight: Radius.circular(30)),
           children: [
             Row(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               children: [
-                Padding(
-                  padding: const EdgeInsets.only(left: 90), //buraya bakılacak
-                  child: CenteredText(
-                    text: TobetoText.istanbulHeadline6,
-                    style: TobetoTextStyle.poppins(context).captionWhiteBold18,
-                  ),
+                CenteredText(
+                  text: TobetoText.istanbulHeadline6,
+                  style: TobetoTextStyle.poppins(context).captionWhiteBold18,
                 ),
-                const SizedBox(width: 55),
+                SizedBox(width: ScreenUtil.getWidth(context) * 0.2),
                 Padding(
-                  padding: const EdgeInsets.all(3),
+                  padding: EdgeInsets.all(ScreenPadding.padding2px),
                   child: CircleAvatar(
                     backgroundColor: TobetoColor.card.shineGreen,
                     radius: 17.5,

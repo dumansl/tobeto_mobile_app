@@ -34,6 +34,11 @@ abstract class TobetoText {
   static String loginGoogleButton = "Google ile Devam Et";
   static String loginSubtitle = "Henüz üye değil misin?";
   static String loginRegisterButton = "Kayıt Ol";
+  static String announcement = "Duyuru";
+  static String announcementik = "İstanbul kodluyor";
+  static String announcementread = "Devamını Oku";
+
+  static String survey = "Anketlerim";
 
   static String loginLoginError =
       "Giriş yaparken bir hata oluştu! Lütfen tekrar deneyin.";
