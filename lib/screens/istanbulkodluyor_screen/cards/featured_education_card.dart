@@ -15,11 +15,10 @@ class FeaturedEducationCard extends StatelessWidget {
           text: TobetoText.istanbulHeadline5,
           style: TextStyle(
             color: TobetoColor.card.shineGreen,
-            fontSize: ScreenPadding.padding20px,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
-        const VerticalPadding(),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -75,7 +74,6 @@ class FeaturedEducationCard extends StatelessWidget {
             ),
           ],
         ),
-        const VerticalPadding(),
       ],
     );
   }
@@ -96,8 +94,8 @@ class CustomIconButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 130,
-      width: 130,
+      height: ScreenUtil.getHeight(context) * 0.14,
+      width: ScreenUtil.getWidth(context) * 0.3,
       child: IconButton(
         onPressed: () {
           showDialog(
@@ -106,15 +104,15 @@ class CustomIconButton extends StatelessWidget {
               return AlertDialog(
                 title: Text(
                   title,
-                  style: const TextStyle(color: TobetoColor.purple),
+                  style: TextStyle(color: TobetoColor.card.shineGreen),
                 ),
                 content: Text(
                   description,
-                  style: TextStyle(color: TobetoColor.text.black),
+                  style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                 ),
                 actions: [
                   TextButton(
-                    style: ButtonStyle(backgroundColor: WidgetStateProperty.all<Color>(TobetoColor.purple)),
+                    style: ButtonStyle(backgroundColor: WidgetStateProperty.all<Color>(TobetoColor.card.shineGreen)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -128,7 +126,10 @@ class CustomIconButton extends StatelessWidget {
             },
           );
         },
-        icon: Image.asset(imagePath),
+        icon: Image.asset(
+          imagePath,
+          color: TobetoColor.card.shineGreen,
+        ),
       ),
     );
   }
