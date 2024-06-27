@@ -202,13 +202,13 @@ class _PlaylistItemState extends State<PlaylistItem> {
   @override
   void dispose() {
     _cachedVideoPlayerController?.dispose();
+    _customVideoPlayerController?.dispose();
     super.dispose();
   }
 
   void _initializeVideoPlayer() {
-    _cachedVideoPlayerController ??= CachedVideoPlayerController.network(
-      widget.catalogCourse.playlist[widget.index],
-    );
+    _cachedVideoPlayerController = CachedVideoPlayerController.network(
+        widget.catalogCourse.playlist[widget.index]);
     _cachedVideoPlayerController!.initialize().then((_) {
       if (!mounted) return; // Check if widget is still mounted
       setState(() {
