@@ -84,7 +84,7 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
         _userEligible = await EducationService().checkUserStatus(_userId!);
       }
     } catch (e) {
-      print('Error checking user status: $e');
+      debugPrint('Error checking user status: $e');
     } finally {
       setState(() {
         _loading = false;

@@ -35,7 +35,8 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<UserBloc>(
             create: (context) => UserBloc()..add(LoadUserData())),
         BlocProvider<ExamBloc>(create: (context) => ExamBloc()),
-        BlocProvider<ReviewBloc>(create: (context) => ReviewBloc()),
+        BlocProvider<BusinessSuccessBloc>(
+            create: (context) => BusinessSuccessBloc()),
         BlocProvider<AnnouncementBloc>(create: (context) => AnnouncementBloc()),
         BlocProvider<VideoBloc>(
             create: (context) =>

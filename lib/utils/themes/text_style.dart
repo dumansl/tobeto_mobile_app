@@ -653,7 +653,7 @@ class Typography {
     captionBlackBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
-      color: Theme.of(context).colorScheme.onPrimary,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     captionBlackNormal12 = baseStyle.copyWith(
       fontSize: 12,
@@ -1473,7 +1473,7 @@ class Typography {
     titleGrayDarkNormal24 = baseStyle.copyWith(
       fontSize: 24,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     titleGrayDarkLight24 = baseStyle.copyWith(
       fontSize: 24,
@@ -1513,7 +1513,7 @@ class Typography {
     bodyGrayDarkNormal16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.normal,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     bodyGrayDarkLight16 = baseStyle.copyWith(
       fontSize: 16,
@@ -1538,7 +1538,7 @@ class Typography {
     captionGrayDarkLight15 = baseStyle.copyWith(
       fontSize: 15,
       fontWeight: FontWeight.w300,
-      color: TobetoColor.text.darkGrey,
+      color: Theme.of(context).colorScheme.surfaceBright,
     );
     headlineGrayLightBold32 = baseStyle.copyWith(
       fontSize: 32,

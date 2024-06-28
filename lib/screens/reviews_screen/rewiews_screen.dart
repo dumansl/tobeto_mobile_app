@@ -16,7 +16,6 @@ class RewiewsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: TobetoColor.background.lightGrey,
       appBar: FixedAppbar(
         title: Text(
           TobetoText.evaluationAppBar,

@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/review_bloc/review_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/review_bloc/review_event.dart';
-import 'package:tobeto_mobile_app/blocs/review_bloc/review_state.dart';
+import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
+
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/custom_headline_text.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/spider_chart.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
@@ -23,14 +22,14 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
 
   @override
   void initState() {
-    context.read<ReviewBloc>().add(FetchReviews());
     super.initState();
+    context.read<BusinessSuccessBloc>().add(FetchBusinessSuccess());
+    context.read<BusinessSuccessBloc>().add(FetchQuizResult());
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: TobetoColor.background.lightGrey,
       body: SafeArea(
         child: Column(
           children: [
@@ -68,7 +67,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
           vertical: ScreenPadding.padding32px,
           horizontal: ScreenPadding.padding32px),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.horizontal(
           left: Radius.circular(SizeRadius.radius30px),
           right: Radius.circular(SizeRadius.radius30px),
@@ -77,10 +76,16 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
       child: Column(
         children: [
           _purpleDivider(context),
-          BlocBuilder<ReviewBloc, ReviewState>(
+          BlocBuilder<BusinessSuccessBloc, BusinessSuccessState>(
             builder: (context, state) {
-              if (state is ReviewLoaded) {
-                score = (state.reviews.score!) / 5;
+              if (state is QuizResultLoaded) {
+                if (state.quizResults.isEmpty) {
+                  return Center(child: Text('No quiz results available.'));
+                }
+
+                score = (state.quizResults[0].score ?? 0);
+                double resultScore = score == 0 ? 0 : score / 5;
+
                 return Expanded(
                   child: SingleChildScrollView(
                     child: Column(
@@ -91,7 +96,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                           ),
                           child: SpiderChart(
                             values: [
-                              score,
+                              resultScore,
                               0.95,
                               0.90,
                               0.95,
@@ -102,7 +107,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                             ],
                           ),
                         ),
-                        _spiderDescription(state.reviews.score!),
+                        _spiderDescription(score),
                         Padding(
                           padding: EdgeInsets.symmetric(
                             vertical: ScreenPadding.padding16px,
@@ -112,7 +117,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                               _successModelDescription(
                                 title: TobetoText
                                     .evaluationspiderChartDescription1,
-                                score: (state.reviews.score! * 10).round() / 10,
+                                score: (score * 10).round() / 10,
                                 description: TobetoText
                                     .successExamResultDescriptionContent,
                                 description2: TobetoText
@@ -123,7 +128,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                               _successModelDescription(
                                 title: TobetoText
                                     .evaluationspiderChartDescription2,
-                                score: (state.reviews.score! * 10).round() / 10,
+                                score: (score * 10).round() / 10,
                                 description: TobetoText
                                     .successExamResultDescriptionContent,
                                 description2: TobetoText
@@ -134,7 +139,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                               _successModelDescription(
                                 title: TobetoText
                                     .evaluationspiderChartDescription3,
-                                score: (state.reviews.score! * 10).round() / 10,
+                                score: (score * 10).round() / 10,
                                 description: TobetoText
                                     .successExamResultDescriptionContent,
                                 description2: TobetoText
@@ -145,7 +150,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                               _successModelDescription(
                                 title: TobetoText
                                     .evaluationspiderChartDescription4,
-                                score: (state.reviews.score! * 10).round() / 10,
+                                score: (score * 10).round() / 10,
                                 description: TobetoText
                                     .successExamResultDescriptionContent,
                                 description2: TobetoText
@@ -156,7 +161,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                               _successModelDescription(
                                 title: TobetoText
                                     .evaluationspiderChartDescription5,
-                                score: (state.reviews.score! * 10).round() / 10,
+                                score: (score * 10).round() / 10,
                                 description: TobetoText
                                     .successExamResultDescriptionContent,
                                 description2: TobetoText
@@ -167,7 +172,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                               _successModelDescription(
                                 title: TobetoText
                                     .evaluationspiderChartDescription6,
-                                score: (state.reviews.score! * 10).round() / 10,
+                                score: (score * 10).round() / 10,
                                 description: TobetoText
                                     .successExamResultDescriptionContent,
                                 description2: TobetoText
@@ -178,7 +183,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                               _successModelDescription(
                                 title: TobetoText
                                     .evaluationspiderChartDescription7,
-                                score: (state.reviews.score! * 10).round() / 10,
+                                score: (score * 10).round() / 10,
                                 description: TobetoText
                                     .successExamResultDescriptionContent,
                                 description2: TobetoText
@@ -189,7 +194,7 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                               _successModelDescription(
                                 title: TobetoText
                                     .evaluationspiderChartDescription8,
-                                score: (state.reviews.score! * 10).round() / 10,
+                                score: (score * 10).round() / 10,
                                 description: TobetoText
                                     .successExamResultDescriptionContent,
                                 description2: TobetoText
@@ -204,9 +209,9 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                     ),
                   ),
                 );
-              } else if (state is ReviewLoading) {
+              } else if (state is QuizResultLoading) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is ReviewError) {
+              } else if (state is QuizResultError) {
                 return Center(child: Text('Error: ${state.message}'));
               } else {
                 return Container();

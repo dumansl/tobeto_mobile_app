@@ -46,7 +46,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
             ),
             width: double.infinity,
             decoration: BoxDecoration(
-              color: TobetoColor.card.lightPurple,
+              color: Theme.of(context).colorScheme.tertiaryContainer,
               borderRadius: BorderRadius.only(
                 topLeft: Radius.circular(SizeRadius.radius16px),
                 topRight: Radius.circular(SizeRadius.radius16px),
@@ -64,7 +64,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
                 Expanded(
                   child: Text(
                     widget.title,
-                    style: TobetoTextStyle.poppins(context).captionPurpleBold12,
+                    style: TobetoTextStyle.poppins(context).captionBlackBold12,
                   ),
                 ),
                 Icon(
@@ -72,7 +72,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
                       ? Icons.arrow_drop_down_rounded
                       : Icons.arrow_right_rounded,
                   size: IconSize.size35px,
-                  color: TobetoColor.purple,
+                  color: Theme.of(context).colorScheme.tertiaryFixed,
                 ),
               ],
             ),
@@ -83,7 +83,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
                 padding: EdgeInsets.all(ScreenPadding.padding16px),
                 width: double.infinity,
                 decoration: BoxDecoration(
-                  color: TobetoColor.card.cream.withOpacity(0.35),
+                  color: Theme.of(context).colorScheme.tertiaryFixedDim,
                   borderRadius: BorderRadius.only(
                     bottomRight: Radius.circular(SizeRadius.radius16px),
                     bottomLeft: Radius.circular(SizeRadius.radius16px),
@@ -91,7 +91,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
                 ),
                 child: Text(
                   widget.description!,
-                  style: TobetoTextStyle.poppins(context).captionGrayBold12,
+                  style: TobetoTextStyle.poppins(context).captionBlackBold12,
                   textAlign: TextAlign.justify,
                 ),
               )

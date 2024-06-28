@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/review_bloc/review_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/review_bloc/review_event.dart';
-import 'package:tobeto_mobile_app/blocs/review_bloc/review_state.dart';
+import 'package:tobeto_mobile_app/blocs/tobeto_success_bloc/tobeto_success_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/tobeto_success_bloc/tobeto_success_event.dart';
+import 'package:tobeto_mobile_app/blocs/tobeto_success_bloc/tobeto_success_state.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/custom_review_button.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/reviews_appbar.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
-
 import '../screens.dart';
 
 class SuccessExamScreen extends StatefulWidget {
@@ -25,27 +24,32 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: TobetoColor.background.lightGrey,
       appBar: const ReviewsAppbar(
         title: "Tobeto İşte Başarı Modeli",
       ),
       body: BlocProvider(
-        create: (context) => ReviewBloc()..add(FetchReviews()),
+        create: (context) => BusinessSuccessBloc()..add(FetchBusinessSuccess()),
         child: _examContent(context),
       ),
     );
   }
 
   Widget _examContent(BuildContext context) {
-    return BlocBuilder<ReviewBloc, ReviewState>(
+    return BlocBuilder<BusinessSuccessBloc, BusinessSuccessState>(
       builder: (context, state) {
-        if (state is ReviewLoading) {
+        if (state is BusinessSuccessLoading) {
           return const Center(
               child: CircularProgressIndicator(
             color: TobetoColor.purple,
           ));
-        } else if (state is ReviewLoaded) {
-          final review = state.reviews;
+        } else if (state is BusinessSuccessLoaded) {
+          final review = state.businessSuccess;
+          if (review.questions.isEmpty) {
+            return const Center(
+              child: Text('No questions available.'),
+            );
+          }
+
           final totalQuestions = review.questions.length;
           final currentQuestion = review.questions[_currentQuestionIndex];
 
@@ -56,7 +60,7 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
               margin: EdgeInsets.only(top: ScreenPadding.padding24px),
               padding: EdgeInsets.all(ScreenPadding.padding24px),
               decoration: BoxDecoration(
-                color: TobetoColor.background.white,
+                color: Theme.of(context).colorScheme.primaryContainer,
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(SizeRadius.radius20px),
                   topRight: Radius.circular(SizeRadius.radius20px),
@@ -96,17 +100,23 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _questionText(currentQuestion),
-                      for (String answerKey in review.answers.keys)
-                        _answerButton(
-                          answerText: answerKey,
-                          isSelected: _selectedAnswers[_currentQuestionIndex] ==
-                              answerKey,
-                          onTap: () {
-                            setState(() {
-                              _selectedAnswers[_currentQuestionIndex] =
-                                  answerKey;
-                            });
-                          },
+                      if (review.answers.isNotEmpty)
+                        for (String answerKey in review.answers.keys)
+                          _answerButton(
+                            answerText: answerKey,
+                            isSelected:
+                                _selectedAnswers[_currentQuestionIndex] ==
+                                    answerKey,
+                            onTap: () {
+                              setState(() {
+                                _selectedAnswers[_currentQuestionIndex] =
+                                    answerKey;
+                              });
+                            },
+                          )
+                      else
+                        const Center(
+                          child: Text('No answers available.'),
                         ),
                       CustomReviewButton(
                         buttonText: _currentQuestionIndex + 1 == totalQuestions
@@ -139,7 +149,7 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
               ),
             ),
           );
-        } else if (state is ReviewError) {
+        } else if (state is BusinessSuccessError) {
           return Center(child: Text('Error: ${state.message}'));
         } else {
           return const Center(child: Text('Bilinmeyen Durum'));
@@ -176,8 +186,10 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
 
     double averageScore = totalScore / _selectedAnswers.length;
 
-    BlocProvider.of<ReviewBloc>(context).add(UpdateReviewStatus(averageScore));
+    // Bloc kullanarak sonucu kaydet
+    context.read<BusinessSuccessBloc>().add(SaveQuizResult(averageScore, true));
 
+    // BlocListener kullanarak sonuç kaydedildikten sonra yönlendirme yapabilirsiniz
     Navigator.push(
       context,
       MaterialPageRoute(
