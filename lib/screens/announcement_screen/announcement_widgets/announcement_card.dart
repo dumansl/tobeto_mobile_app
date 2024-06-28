@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/announcement_bloc/announcement_bloc.dart';
-
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import 'package:tobeto_mobile_app/model/announcement_model.dart';
@@ -10,17 +9,14 @@ class AnnouncementCard extends StatelessWidget {
   final Announcement announcement;
   final FocusNode focusNode;
 
-  const AnnouncementCard(
-      {super.key, required this.announcement, required this.focusNode});
+  const AnnouncementCard({super.key, required this.announcement, required this.focusNode});
 
   String _formatDate(DateTime date) {
     return "${date.day.toString().padLeft(2, '0')}/${date.month.toString().padLeft(2, '0')}/${date.year}";
   }
 
   void _showDetails(BuildContext context) {
-    context
-        .read<AnnouncementBloc>()
-        .add(MarkAsRead(announcement.copyWith(isRead: true)));
+    context.read<AnnouncementBloc>().add(MarkAsRead(announcement.copyWith(isRead: true)));
     focusNode.unfocus();
     showModalBottomSheet(
       context: context,
@@ -44,11 +40,9 @@ class AnnouncementCard extends StatelessWidget {
                   children: [
                     Text(
                       announcement.title,
-                      style: const TextStyle(
-                          fontSize: 24, fontWeight: FontWeight.bold),
+                      style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(height: 16),
-                    //Text(announcement.description),
                     Text(
                       announcement.description.replaceAll('\\n', '\n'),
                       style: const TextStyle(fontSize: 16),
@@ -59,12 +53,11 @@ class AnnouncementCard extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            const Icon(Icons.calendar_today,
-                                size: 16, color: Colors.grey),
+                            const Icon(Icons.calendar_today, size: 16, color: TobetoColor.purple),
                             const SizedBox(width: 4),
                             Text(
                               'Tarih: ${_formatDate(announcement.date)}',
-                              style: const TextStyle(color: Colors.grey),
+                              style: const TextStyle(color: TobetoColor.purple),
                             ),
                           ],
                         ),
@@ -94,8 +87,7 @@ class AnnouncementCard extends StatelessWidget {
               ? Theme.of(context).colorScheme.inverseSurface
               : Theme.of(context).colorScheme.onPrimary,
           borderRadius: BorderRadius.circular(16.0),
-          border: Border(
-              left: BorderSide(color: TobetoColor.card.lightGreen, width: 7)),
+          border: Border(left: BorderSide(color: TobetoColor.card.lightGreen, width: 7)),
         ),
         child: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding16px),
@@ -128,12 +120,11 @@ class AnnouncementCard extends StatelessWidget {
                 children: [
                   Row(
                     children: [
-                      const Icon(Icons.calendar_month,
-                          size: 16, color: Colors.grey),
+                      Icon(Icons.calendar_month, size: 16, color: TobetoColor.frame.grey),
                       const SizedBox(width: 4),
                       Text(
                         'Tarih: ${_formatDate(announcement.date)}',
-                        style: const TextStyle(color: Colors.grey),
+                        style: TextStyle(color: TobetoColor.frame.grey),
                       ),
                     ],
                   ),

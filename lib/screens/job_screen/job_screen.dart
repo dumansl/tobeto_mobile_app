@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:tobeto_mobile_app/blocs/job_bloc/job_bloc.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import 'job_widgets/job_card.dart';
@@ -13,6 +12,8 @@ class JobScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.dark;
+
     return BlocProvider(
       create: (context) {
         final user = FirebaseAuth.instance.currentUser;
@@ -27,8 +28,10 @@ class JobScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: FixedAppbar(
-          title: Text('İş Süreçlerim',
-              style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
+          title: Text(
+            'İş Süreçlerim',
+            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+          ),
         ),
         body: BlocBuilder<JobBloc, JobState>(
           builder: (context, state) {
@@ -41,7 +44,7 @@ class JobScreen extends StatelessWidget {
                     padding: EdgeInsets.all(ScreenPadding.padding8px),
                     child: Container(
                       decoration: BoxDecoration(
-                        color: Colors.purple.shade50,
+                        color: isDarkMode ? Colors.purple.shade900 : Colors.purple.shade50,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: ToggleButtons(
@@ -51,23 +54,18 @@ class JobScreen extends StatelessWidget {
                         selectedBorderColor: Colors.transparent,
                         selectedColor: Colors.white,
                         borderRadius: BorderRadius.circular(20),
-                        isSelected: [
-                          state.selectedIndex == 0,
-                          state.selectedIndex == 1
-                        ],
+                        isSelected: [state.selectedIndex == 0, state.selectedIndex == 1],
                         onPressed: (index) {
                           context.read<JobBloc>().add(ToggleTab(index));
                         },
                         children: const [
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Text('Başvurularım',
-                                style: TextStyle(fontFamily: 'Poppins')),
+                            child: Text('Başvurularım', style: TextStyle(fontFamily: 'Poppins')),
                           ),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 16.0),
-                            child: Text('Mülakatlarım',
-                                style: TextStyle(fontFamily: 'Poppins')),
+                            child: Text('Mülakatlarım', style: TextStyle(fontFamily: 'Poppins')),
                           ),
                         ],
                       ),

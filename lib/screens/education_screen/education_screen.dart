@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/screens/education_screen/education_about.dart';
 import 'package:tobeto_mobile_app/services/education_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -166,6 +165,7 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
         length: 3,
         child: Scaffold(
           appBar: FixedAppbar(
+            isLeading: false,
             title: Text(
               "Eğitimlerim",
               style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
@@ -232,6 +232,8 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                       ],
                     ),
                     TabBar(
+                      dividerHeight: 0,
+                      tabAlignment: TabAlignment.start,
                       controller: _tabController,
                       isScrollable: true,
                       indicatorColor: TobetoColor.purple,

@@ -6,6 +6,7 @@ class Blog {
   final DateTime date;
   final String image;
   final String content;
+  final String subImage;
 
   Blog({
     required this.id,
@@ -13,6 +14,7 @@ class Blog {
     required this.date,
     required this.image,
     required this.content,
+    required this.subImage,
   });
 
   factory Blog.fromFirestore(DocumentSnapshot doc) {
@@ -23,6 +25,7 @@ class Blog {
       date: (data['date'] as Timestamp).toDate(), // Timestamp'i DateTime'e dönüştür
       image: data['image'],
       content: data['content'],
+      subImage: data['subImage'],
     );
   }
 

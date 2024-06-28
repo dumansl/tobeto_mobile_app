@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:tobeto_mobile_app/model/blog_model.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class BlogDetails extends StatefulWidget {
   final Blog blog;
@@ -13,121 +16,119 @@ class BlogDetails extends StatefulWidget {
 }
 
 class _BlogDetailsState extends State<BlogDetails> {
-  void _shareContent() {
-    String shareText =
-        "${widget.blog.title}\n\n${widget.blog.content}\n\nRead more at: ${widget.blog.image}";
+  late PageController _pageController;
+  late int _currentIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    _currentIndex = widget.allBlogs.indexOf(widget.blog);
+    _pageController = PageController(initialPage: _currentIndex);
+  }
+
+  void _shareContent(Blog blog) {
+    String shareText = "${blog.title}\n\n${blog.content}\n\nRead more at: ${blog.image}";
     Share.share(shareText, subject: 'Check out this blog!');
   }
 
   @override
   Widget build(BuildContext context) {
-    final int currentIndex = widget.allBlogs.indexOf(widget.blog);
-    final bool hasPrevious = currentIndex > 0;
-    final bool hasNext = currentIndex < widget.allBlogs.length - 1;
-
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Blog Detayları',
-            style: TextStyle(fontFamily: 'Poppins')),
+      appBar: const FixedAppbar(
+        isTobetoScreen: true,
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(16.0),
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(widget.blog.image),
-                    radius: 20,
-                  ),
-                  const SizedBox(width: 8.0),
-                  Expanded(
-                    child: Text(
-                      widget.blog.title,
-                      style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-              const SizedBox(height: 8.0),
-              const Divider(),
-              const SizedBox(height: 8.0),
-              Image.network(widget.blog.image),
-              const SizedBox(height: 16.0),
-              Text(
-                widget.blog.content,
-                style: const TextStyle(fontFamily: 'Poppins'),
-              ),
-              const SizedBox(height: 16.0),
-            ],
-          ),
-          const SizedBox(height: 100), // FAB için boşluk bıraktık
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              ElevatedButton.icon(
-                onPressed: hasPrevious
-                    ? () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlogDetails(
-                              blog: widget.allBlogs[currentIndex - 1],
-                              allBlogs: widget.allBlogs,
-                            ),
-                          ),
-                        );
-                      }
-                    : null,
-                icon: const Icon(Icons.arrow_back),
-                label: const Text('Önceki',
-                    style: TextStyle(fontFamily: 'Poppins')),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                ),
-              ),
-              FloatingActionButton(
-                onPressed: _shareContent,
-                backgroundColor: Colors.white,
-                child: const Icon(Icons.share, color: Colors.purple),
-              ),
-              ElevatedButton(
-                onPressed: hasNext
-                    ? () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => BlogDetails(
-                              blog: widget.allBlogs[currentIndex + 1],
-                              allBlogs: widget.allBlogs,
-                            ),
-                          ),
-                        );
-                      }
-                    : null,
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple,
-                ),
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
+      body: PageView.builder(
+        controller: _pageController,
+        itemCount: widget.allBlogs.length,
+        itemBuilder: (context, index) {
+          final blog = widget.allBlogs[index];
+          return Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: ListView(
+              children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text('Sonraki', style: TextStyle(fontFamily: 'Poppins')),
-                    Icon(Icons.arrow_forward),
+                    Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(blog.image),
+                          radius: 20,
+                        ),
+                        const SizedBox(width: 8.0),
+                        Expanded(
+                          child: Text(
+                            blog.title,
+                            style: TobetoTextStyle.poppins(context).captionBlackBold18,
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 8.0),
+                    const Divider(),
+                    const SizedBox(height: 8.0),
+                    Image.network(blog.subImage),
+                    const SizedBox(height: 16.0),
+                    Text(
+                      blog.content,
+                      style: TobetoTextStyle.poppins(context).bodyBlackLight16,
+                    ),
+                    const SizedBox(height: 16.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        ElevatedButton.icon(
+                          onPressed: index > 0
+                              ? () {
+                                  _pageController.previousPage(
+                                    duration: Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              : null,
+                          icon: const Icon(Icons.arrow_back),
+                          label: const Text('Önceki', style: TextStyle(fontFamily: 'Poppins')),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                          ),
+                        ),
+                        FloatingActionButton(
+                          onPressed: () => _shareContent(blog),
+                          backgroundColor: isDarkMode ? TobetoColor.formField.darkGrey : TobetoColor.card.cream,
+                          child: const Icon(Icons.share, color: Colors.purple),
+                        ),
+                        ElevatedButton(
+                          onPressed: index < widget.allBlogs.length - 1
+                              ? () {
+                                  _pageController.nextPage(
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeInOut,
+                                  );
+                                }
+                              : null,
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                          ),
+                          child: const Row(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text('Sonraki', style: TextStyle(fontFamily: 'Poppins')),
+                              Icon(Icons.arrow_forward),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    const SizedBox(height: 16.0),
                   ],
                 ),
-              ),
-            ],
-          ),
-          const SizedBox(height: 16.0),
-        ],
+              ],
+            ),
+          );
+        },
       ),
     );
   }

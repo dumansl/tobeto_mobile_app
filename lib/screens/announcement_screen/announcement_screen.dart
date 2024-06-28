@@ -96,13 +96,9 @@ class _AnnouncementViewState extends State<AnnouncementView> {
               Expanded(
                 flex: 1,
                 child: IconButton(
-                  icon: Icon(_showOnlyUnread
-                      ? Icons.visibility_off
-                      : Icons.visibility),
+                  icon: Icon(_showOnlyUnread ? Icons.visibility_off : Icons.visibility),
                   onPressed: _toggleShowUnread,
-                  tooltip: _showOnlyUnread
-                      ? 'Hepsini Göster'
-                      : 'Okunmuş Olanları Gizle',
+                  tooltip: _showOnlyUnread ? 'Hepsini Göster' : 'Okunmuş Olanları Gizle',
                 ),
               ),
             ],
@@ -113,21 +109,16 @@ class _AnnouncementViewState extends State<AnnouncementView> {
             builder: (context, state) {
               if (state is AnnouncementsLoading) {
                 return const Center(child: CircularProgressIndicator());
-              } else if (state is AnnouncementsLoaded ||
-                  state is AnnouncementsFiltered) {
-                final announcements = state is AnnouncementsLoaded
-                    ? state.announcements
-                    : (state as AnnouncementsFiltered).announcements;
+              } else if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
+                final announcements =
+                    state is AnnouncementsLoaded ? state.announcements : (state as AnnouncementsFiltered).announcements;
                 if (announcements.isEmpty) {
-                  return const Center(
-                      child: Text('No announcements available.'));
+                  return const Center(child: Text('No announcements available.'));
                 }
                 return ListView.builder(
                   itemCount: announcements.length,
                   itemBuilder: (context, index) {
-                    return AnnouncementCard(
-                        announcement: announcements[index],
-                        focusNode: _focusNode);
+                    return AnnouncementCard(announcement: announcements[index], focusNode: _focusNode);
                   },
                 );
               } else if (state is AnnouncementsError) {
@@ -138,25 +129,6 @@ class _AnnouncementViewState extends State<AnnouncementView> {
             },
           ),
         ),
-
-        /*Expanded(
-          child: BlocBuilder<AnnouncementBloc, AnnouncementState>(
-            builder: (context, state) {
-              if (state is AnnouncementsLoaded || state is AnnouncementsFiltered) {
-                final announcements =
-                    state is AnnouncementsLoaded ? state.announcements : (state as AnnouncementsFiltered).announcements;
-                return ListView.builder(
-                  itemCount: announcements.length,
-                  itemBuilder: (context, index) {
-                    return AnnouncementCard(announcement: announcements[index], focusNode: _focusNode);
-                  },
-                );
-              } else {
-                return const Center(child: CircularProgressIndicator());
-              }
-            },
-          ),
-        ), */
       ],
     );
   }
