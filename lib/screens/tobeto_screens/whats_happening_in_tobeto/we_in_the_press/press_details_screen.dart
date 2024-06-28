@@ -33,8 +33,7 @@ class PressDetailsScreen extends StatelessWidget {
                 textAlign: TextAlign.justify,
               ),
               SizedBox(height: ScreenPadding.padding16px),
-              if (press.imageUrls.isNotEmpty)
-                _imageSlider(context, press.imageUrls),
+              if (press.imageUrls.isNotEmpty) _imageSlider(context, press.imageUrls),
             ],
           ),
         ),
@@ -94,7 +93,7 @@ class PressDetailsScreen extends StatelessWidget {
         itemCount: imageUrls.length,
         itemBuilder: (context, index) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 8.0),
+            padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding8px),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(20.0),
               child: Container(

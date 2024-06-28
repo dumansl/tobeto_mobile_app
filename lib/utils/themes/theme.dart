@@ -30,6 +30,7 @@ ColorScheme lightColorScheme = ColorScheme(
   surfaceContainer: TobetoColor.icon.darkGrey,
   onTertiaryContainer: TobetoColor.card.lightGrey, // istanbulkodluyor page
   inverseSurface: TobetoColor.card.lightGrey,
+  surfaceDim: const Color(0xFFE9E8FF),
 );
 
 ColorScheme darkColorScheme = ColorScheme(
@@ -57,4 +58,5 @@ ColorScheme darkColorScheme = ColorScheme(
   surfaceContainer: TobetoColor.icon.white,
   onTertiaryContainer: TobetoColor.button.darkGrey,
   inverseSurface: TobetoColor.card.isreaddarkmode,
+  surfaceDim: TobetoColor.card.black,
 );

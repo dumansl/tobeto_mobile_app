@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
-
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_logo.dart';
@@ -50,11 +49,10 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Expanded(
+            Expanded(
               flex: 15,
               child: CustomLogo(
-                height: 75,
-                width: 200,
+                width: ScreenUtil.getWidth(context) * 0.5,
               ),
             ),
             Expanded(
@@ -110,8 +108,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const WhatsHappeningIntobetoScreen(),
+                          builder: (context) => const WhatsHappeningIntobetoScreen(),
                         ),
                       );
                     },
@@ -200,8 +197,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
     );
   }
 
-  Widget _drawerTextButton(BuildContext context,
-      {required String text, required VoidCallback onPressed}) {
+  Widget _drawerTextButton(BuildContext context, {required String text, required VoidCallback onPressed}) {
     return TextButton(
       onPressed: onPressed,
       child: Text(
@@ -213,8 +209,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
 
   Widget _body(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.light;
-    final assetImagePath =
-        isDarkMode ? 'assets/gifs/skills.gif' : 'assets/gifs/skilldark.gif';
+    final assetImagePath = isDarkMode ? 'assets/gifs/skills.gif' : 'assets/gifs/skilldark.gif';
     return Padding(
       padding: EdgeInsets.all(ScreenPadding.padding16px),
       child: SingleChildScrollView(
@@ -223,7 +218,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
             Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 70),
+                  padding: EdgeInsets.only(left: ScreenPadding.padding70px),
                   child: Container(
                     decoration: BoxDecoration(
                       color: Theme.of(context).colorScheme.onSecondary,
@@ -231,17 +226,17 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                         Radius.circular(50),
                       ),
                     ),
-                    height: 200,
+                    height: ScreenUtil.getHeight(context) * 0.204,
                     width: double.infinity,
                   ),
                 ),
                 Row(
                   children: [
                     Padding(
-                      padding: const EdgeInsets.only(top: 25),
+                      padding: EdgeInsets.only(top: ScreenPadding.padding24px),
                       child: Container(
-                        height: 150,
-                        width: 200,
+                        height: ScreenUtil.getHeight(context) * 0.155,
+                        width: ScreenUtil.getWidth(context) * 0.42,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           image: const DecorationImage(
@@ -255,24 +250,22 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(left: 5),
+                            padding: EdgeInsets.only(left: ScreenPadding.padding6px),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 16),
+                                  padding: EdgeInsets.only(top: ScreenPadding.padding24px),
                                   child: Text(
                                     TobetoText.tmainCard1Title,
-                                    style: TobetoTextStyle.poppins(context)
-                                        .captionBlackBold12,
+                                    style: TobetoTextStyle.poppins(context).captionBlackBold12,
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.only(top: 16),
+                                  padding: EdgeInsets.only(top: ScreenPadding.padding12px),
                                   child: Text(
                                     TobetoText.tmainCard1Body,
-                                    style: TobetoTextStyle.poppins(context)
-                                        .captionBlackNormal12,
+                                    style: TobetoTextStyle.poppins(context).captionBlackNormal12,
                                   ),
                                 ),
                               ],
@@ -286,18 +279,16 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 16),
+              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
               child: RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
-                        text: 'Birlikte',
-                        style: TobetoTextStyle.poppins(context)
-                            .subtitlePurpleLight20),
+                        text: TobetoText.tmainHeadline1Rich1,
+                        style: TobetoTextStyle.poppins(context).subtitlePurpleLight20),
                     TextSpan(
-                        text: ' Büyüyoruz!',
-                        style:
-                            TobetoTextStyle.poppins(context).titlePurpleBold24),
+                        text: TobetoText.tmainHeadline1Rich2,
+                        style: TobetoTextStyle.poppins(context).titlePurpleBold24),
                   ],
                 ),
               ),
@@ -322,37 +313,33 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: EdgeInsets.all(ScreenPadding.padding4px),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(30)),
+                        borderRadius: const BorderRadius.all(Radius.circular(30)),
                         color: Theme.of(context).colorScheme.onSecondary,
                       ),
-                      height: 120,
-                      width: 120,
+                      height: ScreenUtil.getHeight(context) * 0.125,
+                      width: ScreenUtil.getWidth(context) * 0.275,
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 4),
+                            padding: EdgeInsets.only(top: ScreenPadding.padding4px),
                             child: Container(
-                                width: 40,
-                                height: 40,
+                                height: ScreenUtil.getHeight(context) * 0.045,
+                                width: ScreenUtil.getWidth(context) * 0.1,
                                 decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 196, 133, 255),
-                                    borderRadius: BorderRadius.circular(20)),
+                                    color: const Color.fromARGB(255, 196, 133, 255),
+                                    borderRadius: BorderRadius.circular(30)),
                                 child: Image.asset(ImagePath.news)),
                           ),
                           Text(
-                            '8.000',
-                            style: TobetoTextStyle.poppins(context)
-                                .titlePurpleBold24,
+                            TobetoText.infoEducationNumber,
+                            style: TobetoTextStyle.poppins(context).titlePurpleBold24,
                           ),
                           Text(
-                            'Asenkron Eğitim İçeriği',
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackThin12,
+                            TobetoText.infoEducationTitle,
+                            style: TobetoTextStyle.poppins(context).captionBlackThin12,
                             textAlign: TextAlign.center,
                           )
                         ],
@@ -377,37 +364,33 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                     ),
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(4.0),
+                    padding: EdgeInsets.all(ScreenPadding.padding4px),
                     child: Container(
                       decoration: BoxDecoration(
-                        borderRadius:
-                            const BorderRadius.all(Radius.circular(30)),
+                        borderRadius: const BorderRadius.all(Radius.circular(30)),
                         color: Theme.of(context).colorScheme.onSecondary,
                       ),
-                      height: 120,
-                      width: 120,
+                      height: ScreenUtil.getHeight(context) * 0.125,
+                      width: ScreenUtil.getWidth(context) * 0.275,
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 4),
+                            padding: EdgeInsets.only(top: ScreenPadding.padding4px),
                             child: Container(
-                                width: 40,
-                                height: 40,
+                                height: ScreenUtil.getHeight(context) * 0.045,
+                                width: ScreenUtil.getWidth(context) * 0.1,
                                 decoration: BoxDecoration(
-                                    color: const Color.fromARGB(
-                                        255, 196, 133, 255),
-                                    borderRadius: BorderRadius.circular(20)),
+                                    color: const Color.fromARGB(255, 196, 133, 255),
+                                    borderRadius: BorderRadius.circular(30)),
                                 child: Image.asset(ImagePath.company)),
                           ),
                           Text(
-                            '1.000',
-                            style: TobetoTextStyle.poppins(context)
-                                .titlePurpleBold24,
+                            TobetoText.infoOnlineNumber,
+                            style: TobetoTextStyle.poppins(context).titlePurpleBold24,
                           ),
                           Text(
-                            'Saat Canlı Ders',
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackThin12,
+                            TobetoText.infoOnlineTitle,
+                            style: TobetoTextStyle.poppins(context).captionBlackThin12,
                             textAlign: TextAlign.center,
                           )
                         ],
@@ -418,7 +401,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16),
+              padding: EdgeInsets.only(top: ScreenPadding.padding16px),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(33.0),
@@ -436,37 +419,32 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: EdgeInsets.all(ScreenPadding.padding4px),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
                       color: Theme.of(context).colorScheme.onSecondary,
                     ),
-                    height: 120,
-                    width: 120,
+                    height: ScreenUtil.getHeight(context) * 0.125,
+                    width: ScreenUtil.getWidth(context) * 0.275,
                     child: Column(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 4),
+                          padding: EdgeInsets.only(top: ScreenPadding.padding4px),
                           child: Container(
-                              width: 40,
-                              height: 40,
-                              decoration: BoxDecoration(
-                                  color: Colors.blueAccent,
-                                  borderRadius: BorderRadius.circular(20)),
+                              height: ScreenUtil.getHeight(context) * 0.045,
+                              width: ScreenUtil.getWidth(context) * 0.1,
+                              decoration:
+                                  BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.circular(30)),
                               child: Image.asset(ImagePath.graduationCap)),
                         ),
-                        const Text(
-                          '17.600',
-                          style: TextStyle(
-                              color: Colors.indigo,
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold),
+                        Text(
+                          TobetoText.infoStudentNumber,
+                          style: const TextStyle(color: Colors.indigo, fontSize: 24, fontWeight: FontWeight.bold),
                         ),
                         Text(
-                          'Öğrenci',
-                          style: TobetoTextStyle.poppins(context)
-                              .captionBlackThin12,
+                          TobetoText.infoStudentTitle,
+                          style: TobetoTextStyle.poppins(context).captionBlackThin12,
                           textAlign: TextAlign.center,
                         )
                       ],
@@ -476,7 +454,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 16),
+              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(33.0),
@@ -497,7 +475,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: EdgeInsets.all(ScreenPadding.padding4px),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
@@ -512,12 +490,10 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: TobetoColor.card.shadowColor
-                                        .withOpacity(0.4),
+                                    color: TobetoColor.card.shadowColor.withOpacity(0.4),
                                     spreadRadius: 2,
                                     blurRadius: 5,
-                                    offset: const Offset(
-                                        2, 4), // changes position of shadow
+                                    offset: const Offset(2, 4), // changes position of shadow
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(50),
@@ -525,52 +501,45 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                               width: double.infinity,
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
-                                child: Image.asset(assetImagePath
-
-                                    // Burada anahtar ekleyerek rebuild sağlıyoruz
-                                    ),
+                                child: Image.asset(assetImagePath),
                               ),
                             );
                           },
                         ),
                         Padding(
-                          padding:
-                              EdgeInsets.only(top: ScreenPadding.padding8px),
-                          child: Text('Tobeto "İşte Başarı Modeli"mizi Keşfet!',
-                              style: TobetoTextStyle.poppins(context)
-                                  .titleBlackBold24,
-                              textAlign: TextAlign.center),
+                          padding: EdgeInsets.only(top: ScreenPadding.padding8px),
+                          child: Text(TobetoText.tmainTobetoTitle,
+                              style: TobetoTextStyle.poppins(context).titleBlackBold24, textAlign: TextAlign.center),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(
-                              top: 30, left: 10, right: 10, bottom: 20),
+                          padding: EdgeInsets.only(
+                              top: ScreenPadding.padding30px,
+                              left: ScreenPadding.padding10px,
+                              right: ScreenPadding.padding10px,
+                              bottom: ScreenPadding.padding20px),
                           child: Text(
-                            'Üyelerimize ücretsiz sunduğumuz, iş bulma ve işte başarılı olma sürecinde gerekli 80 tane davranış ifadesinden oluşan Tobeto "İşte Başarı Modeli" ile, profesyonellik yetkinliklerini ölç, raporunu gör',
-                            style: TobetoTextStyle.poppins(context)
-                                .subtitleBlackNormal20,
+                            TobetoText.tmainTobetoBody,
+                            style: TobetoTextStyle.poppins(context).subtitleBlackNormal20,
                             textAlign: TextAlign.center,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 10),
+                          padding: EdgeInsets.only(bottom: ScreenPadding.padding10px),
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const TobetoSuccesScreen(),
+                                  builder: (context) => const TobetoSuccesScreen(),
                                 ),
                               );
                             },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: TobetoColor.purple),
+                            style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
                             child: Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: EdgeInsets.all(ScreenPadding.padding12px),
                               child: Text(
-                                'Hemen Başla',
-                                style: TobetoTextStyle.poppins(context)
-                                    .bodyWhiteBold16,
+                                TobetoText.tmainButton,
+                                style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
                               ),
                             ),
                           ),
@@ -590,7 +559,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               style: TobetoTextStyle.poppins(context).captionBlackNormal12,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 16, bottom: 16),
+              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(33.0),
@@ -610,7 +579,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                   ),
                 ),
                 child: Padding(
-                  padding: const EdgeInsets.all(4.0),
+                  padding: EdgeInsets.all(ScreenPadding.padding4px),
                   child: Container(
                     decoration: BoxDecoration(
                       borderRadius: const BorderRadius.all(Radius.circular(30)),
@@ -618,45 +587,39 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                     ),
                     width: double.infinity,
                     child: Padding(
-                      padding: const EdgeInsets.all(12.0),
+                      padding: EdgeInsets.all(ScreenPadding.padding12px),
                       child: Column(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(bottom: 30),
-                            child: Text(
-                                'Tobeto ve İstanbul Kodluyor Projesi, kariyerimde kaybolmuş hissettiğim bir dönemde karşıma çıktı ve gerçekten bir pusula gibi yol gösterdi. Artık hangi yöne ilerleyeceğim konusunda daha eminim. Tobeto ailesine minnettarım, benim için gerçek bir destek ve ilham kaynağı oldular. İyi ki varsınız, Tobeto ailesi.',
-                                style: TobetoTextStyle.poppins(context)
-                                    .subtitleBlackNormal20,
+                            padding: EdgeInsets.only(bottom: ScreenPadding.padding30px),
+                            child: Text(TobetoText.tmainHeadline3Body,
+                                style: TobetoTextStyle.poppins(context).subtitleBlackNormal20,
                                 textAlign: TextAlign.center),
                           ),
                           Container(
                             decoration: BoxDecoration(
-                              borderRadius:
-                                  const BorderRadius.all(Radius.circular(50)),
-                              border: Border.all(
-                                  color: TobetoColor.purple, width: 2),
+                              borderRadius: const BorderRadius.all(Radius.circular(60)),
+                              border: Border.all(color: TobetoColor.purple, width: 2),
                               color: TobetoColor.card.white,
                               image: const DecorationImage(
                                 image: AssetImage(ImagePath.student),
                                 fit: BoxFit.cover,
                               ),
                             ),
-                            height: 100,
-                            width: 100,
+                            height: ScreenUtil.getHeight(context) * 0.11,
+                            width: ScreenUtil.getWidth(context) * 0.23,
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(top: 30, bottom: 10),
+                            padding: EdgeInsets.only(top: ScreenPadding.padding30px, bottom: ScreenPadding.padding10px),
                             child: Text(
-                              'Zeynep KOŞUN',
-                              style: TobetoTextStyle.poppins(context)
-                                  .subtitleBlackBold20,
+                              TobetoText.tmainHeadline4Name,
+                              style: TobetoTextStyle.poppins(context).subtitleBlackBold20,
                               textAlign: TextAlign.center,
                             ),
                           ),
                           Text(
-                            'Öğrenci',
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackNormal12,
+                            TobetoText.tmainHeadline4Student,
+                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -675,27 +638,26 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: ScreenPadding.padding30px),
                   child: Image.asset(ImagePath.enocta),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
+                  padding: EdgeInsets.only(top: ScreenPadding.padding30px),
                   child: Image.asset(ImagePath.advancity),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: SizedBox(
-                      height: 50, child: Image.asset(ImagePath.codecademy)),
+                  padding: EdgeInsets.only(top: ScreenPadding.padding30px),
+                  child:
+                      SizedBox(height: ScreenUtil.getHeight(context) * 0.055, child: Image.asset(ImagePath.codecademy)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30),
-                  child: SizedBox(
-                      height: 50, child: Image.asset(ImagePath.perculus)),
+                  padding: EdgeInsets.only(top: ScreenPadding.padding30px),
+                  child:
+                      SizedBox(height: ScreenUtil.getHeight(context) * 0.055, child: Image.asset(ImagePath.perculus)),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 20),
-                  child: SizedBox(
-                      height: 100, child: Image.asset(ImagePath.huawei)),
+                  padding: EdgeInsets.only(top: ScreenPadding.padding30px, bottom: ScreenPadding.padding20px),
+                  child: SizedBox(height: ScreenUtil.getHeight(context) * 0.08, child: Image.asset(ImagePath.huawei)),
                 ),
               ],
             ),

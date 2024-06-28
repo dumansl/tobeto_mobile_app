@@ -21,7 +21,7 @@ class WeInThePressScreen extends StatelessWidget {
           style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
         ),
       ),
-      backgroundColor: TobetoColor.background.lightGrey,
+      backgroundColor: Theme.of(context).colorScheme.surface,
       body: Padding(
         padding: EdgeInsets.all(ScreenPadding.padding12px),
         child: BlocBuilder<PressBloc, PressState>(
@@ -70,7 +70,7 @@ class WeInThePressScreen extends StatelessWidget {
           Container(
             padding: EdgeInsets.all(ScreenPadding.padding12px),
             decoration: BoxDecoration(
-              color: TobetoColor.card.white,
+              color: Theme.of(context).colorScheme.onPrimary,
               boxShadow: [
                 BoxShadow(
                   color: TobetoColor.card.shadowColor,
@@ -93,8 +93,7 @@ class WeInThePressScreen extends StatelessWidget {
                 Container(
                   height: ScreenUtil.getHeight(context) * 0.25,
                   decoration: BoxDecoration(
-                    borderRadius: BorderRadius.all(
-                        Radius.circular(SizeRadius.radius20px)),
+                    borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius20px)),
                     image: DecorationImage(
                       image: NetworkImage(press.imageUrls[0]),
                       fit: BoxFit.fill,
@@ -104,19 +103,17 @@ class WeInThePressScreen extends StatelessWidget {
                 SizedBox(height: ScreenPadding.padding8px),
                 Text(
                   formattedDate,
-                  style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
+                  style: TobetoTextStyle.poppins(context).captionMediumBlack16,
                 ),
                 SizedBox(height: ScreenPadding.padding8px),
                 Text(
                   press.title,
-                  style:
-                      TobetoTextStyle.poppins(context).bodyGrayDarkSemiBold16,
+                  style: TobetoTextStyle.poppins(context).captionMediumBlack16,
                 ),
                 SizedBox(height: ScreenPadding.padding8px),
                 Text(
                   "${press.description.substring(0, 160)} . . .",
-                  style:
-                      TobetoTextStyle.poppins(context).captionGrayDarkLight15,
+                  style: TobetoTextStyle.poppins(context).captionBlackLight15,
                   textAlign: TextAlign.justify,
                 ),
               ],
