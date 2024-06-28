@@ -21,8 +21,10 @@ class SocialMedia extends StatefulWidget {
 }
 
 class _SocialMediaState extends State<SocialMedia> {
-  final TextEditingController socialMediaNameController = TextEditingController();
-  final TextEditingController socialMediaLinkController = TextEditingController();
+  final TextEditingController socialMediaNameController =
+      TextEditingController();
+  final TextEditingController socialMediaLinkController =
+      TextEditingController();
 
   void _clearControllers() {
     socialMediaNameController.clear();
@@ -30,7 +32,8 @@ class _SocialMediaState extends State<SocialMedia> {
   }
 
   bool _areControllersValid() {
-    return socialMediaNameController.text.isNotEmpty && socialMediaLinkController.text.isNotEmpty;
+    return socialMediaNameController.text.isNotEmpty &&
+        socialMediaLinkController.text.isNotEmpty;
   }
 
   void _addEducationLife() {
@@ -51,7 +54,8 @@ class _SocialMediaState extends State<SocialMedia> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SocialMediaBloc, SocialMediaState>(builder: (context, state) {
+    return BlocBuilder<SocialMediaBloc, SocialMediaState>(
+        builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -63,7 +67,8 @@ class _SocialMediaState extends State<SocialMedia> {
           InputText(
               child: CustomDropDownInput(
             onChanged: (newValue) {
-              socialMediaNameController.text = newValue ?? socialMediaNameController.text;
+              socialMediaNameController.text =
+                  newValue ?? socialMediaNameController.text;
             },
             items: TobetoText.socialMediaName
                 .map((label) => DropdownMenuItem(
