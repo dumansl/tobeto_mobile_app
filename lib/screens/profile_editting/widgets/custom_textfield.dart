@@ -41,6 +41,7 @@ class CustomTextField extends StatelessWidget {
       controller: controller,
       maxLines: maxLines,
       obscureText: obscureText,
+
       cursorColor: Theme.of(context).colorScheme.onSurface, //imleç rengi
       keyboardType: keyboardType,
       textInputAction: TextInputAction.next,
@@ -64,8 +65,7 @@ class CustomTextField extends StatelessWidget {
           Radius.circular(SizeRadius.radius12px),
         )),
         enabledBorder: OutlineInputBorder(
-          borderSide:
-              BorderSide(color: TobetoColor.background.transparent, width: 1.0),
+          borderSide: const BorderSide(color: TobetoColor.purple, width: 1.0),
           borderRadius:
               BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
         ),

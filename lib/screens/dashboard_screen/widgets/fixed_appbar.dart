@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_state.dart';
+
 import 'package:tobeto_mobile_app/screens/login_screen/login_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_bloc.dart';
@@ -25,6 +26,10 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.light;
+    final assetImagePath = isDarkMode
+        ? 'assets/images/grey-tobeto.png'
+        : 'assets/images/white-tobeto.png';
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is NotAuthenticated) {
@@ -46,7 +51,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
         title: isTobetoScreen
             ? Padding(
                 padding: EdgeInsets.all(ScreenPadding.padding24px),
-                child: Image.asset(ImagePath.greyTobeto),
+                child: Image.asset(assetImagePath),
               )
             : title,
         centerTitle: true,
@@ -90,7 +95,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                   PopupMenuButton<String>(
-                    color: TobetoColor.card.white,
+                    color: Theme.of(context).colorScheme.onSurface,
                     onSelected: (value) {
                       if (value == 'logout') {
                         context.read<AuthBloc>().add(const LogoutEvent());

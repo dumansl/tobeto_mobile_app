@@ -37,7 +37,7 @@ class CatalogCourseCardBig extends StatelessWidget {
             boxShadow: [
               BoxShadow(
                 color: Theme.of(context).colorScheme.shadow,
-                spreadRadius: 2,
+                spreadRadius: 0.5,
                 blurRadius: 5,
                 offset: const Offset(2, 4), // changes position of shadow
               ),

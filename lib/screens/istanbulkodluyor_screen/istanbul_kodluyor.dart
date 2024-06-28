@@ -11,6 +11,7 @@ import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/introduc
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/process_card.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/project_photos_card.dart';
 import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/project_support_card.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class IstanbulKodluyorScreen extends StatefulWidget {
   const IstanbulKodluyorScreen({super.key});
@@ -24,7 +25,8 @@ class _IstanbulKodluyorScreenState extends State<IstanbulKodluyorScreen> {
 
   void _scrollToItem() {
     _scrollController.animateTo(
-      _scrollController.position.viewportDimension * 4, // Belirli bir pozisyon belirtin
+      _scrollController.position.viewportDimension *
+          4, // Belirli bir pozisyon belirtin
       duration: const Duration(seconds: 1),
       curve: Curves.easeInOut,
     );
@@ -55,6 +57,9 @@ class _IstanbulKodluyorScreenState extends State<IstanbulKodluyorScreen> {
             const FAQCard(),
             const ProjectPhotosCard(),
             const FinalCard(),
+            SizedBox(
+              height: ScreenUtil.getHeight(context) * 0.07,
+            )
           ],
         ),
       ),
