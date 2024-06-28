@@ -17,8 +17,7 @@ class ApplicationScreen extends StatefulWidget {
 class _ApplicationScreenState extends State<ApplicationScreen> {
   late ApplicationBloc _applicationBloc;
   late User currentUser;
-  final String _errorMessage =
-      'Exception: Failed to get application ID: Exception: No applications found';
+  final String _errorMessage = 'Exception: Failed to get application ID: Exception: No applications found';
 
   @override
   void initState() {
@@ -36,8 +35,7 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FixedAppbar(
-        title: Text(TobetoText.mainCard1,
-            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
+        title: Text(TobetoText.mainCard1, style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -79,17 +77,15 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
     );
   }
 
-  Widget _buildApplicationContent(
-      BuildContext context, Application application) {
+  Widget _buildApplicationContent(BuildContext context, Application application) {
     final isDarkMode = Theme.of(context).brightness == Brightness.dark;
-    final assetImagePath =
-        isDarkMode ? ImagePath.ikLogoLight : ImagePath.ikLogoDart;
+    final assetImagePath = isDarkMode ? ImagePath.ikLogoLight : ImagePath.ikLogoDart;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.onPrimary,
+            color: Theme.of(context).colorScheme.inverseSurface,
             borderRadius: BorderRadius.circular(16),
             border: Border(
               left: BorderSide(
@@ -116,14 +112,12 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                         children: [
                           Text(
                             application.title,
-                            style: TobetoTextStyle.poppins(context)
-                                .bodyBlackBold16,
+                            style: TobetoTextStyle.poppins(context).bodyBlackBold16,
                           ),
                           SizedBox(height: ScreenPadding.padding8px),
                           Text(
                             application.description,
-                            style: TobetoTextStyle.poppins(context)
-                                .captionMediumBlack16,
+                            style: TobetoTextStyle.poppins(context).captionMediumBlack16,
                           ),
                         ],
                       ),
@@ -135,11 +129,10 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                 top: 11,
                 right: 0,
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: const BoxDecoration(
-                    color: Color(0xFF076B34),
-                    borderRadius: BorderRadius.only(
+                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
+                  decoration: BoxDecoration(
+                    color: TobetoColor.card.darkGreen,
+                    borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(8),
                       bottomLeft: Radius.circular(8),
                     ),
@@ -147,9 +140,8 @@ class _ApplicationScreenState extends State<ApplicationScreen> {
                   width: 120,
                   child: Text(
                     application.status,
-                    style: TobetoTextStyle.poppins(context)
-                        .captionBlackNormal12
-                        .copyWith(color: TobetoColor.card.white),
+                    style:
+                        TobetoTextStyle.poppins(context).captionBlackNormal12.copyWith(color: TobetoColor.card.white),
                     textAlign: TextAlign.center,
                   ),
                 ),

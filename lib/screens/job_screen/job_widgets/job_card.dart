@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/job_model.dart';
+import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '../job_details.dart';
 
 class JobCard extends StatelessWidget {
@@ -9,7 +11,9 @@ class JobCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return Card(
+      color: isDarkMode ? TobetoColor.formField.darkGrey : TobetoColor.card.cream,
       margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 20),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -18,29 +22,17 @@ class JobCard extends StatelessWidget {
           children: [
             Text(
               job.jobType,
-              style: const TextStyle(
-                fontFamily: 'Poppins',
-                fontWeight: FontWeight.bold,
-                color: Colors.purple,
-              ),
+              style: TobetoTextStyle.poppins(context).bodyPurpleBold16,
             ),
             const SizedBox(height: 5),
             Text(
               job.jobTitle,
-              style: const TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              style: TobetoTextStyle.poppins(context).subtitleBlackNormal20,
             ),
             const SizedBox(height: 5),
             Text(
               '${job.companyName} - ${job.location}',
-              style: TextStyle(
-                fontFamily: 'Poppins',
-                fontSize: 16,
-                color: Colors.grey[600],
-              ),
+              style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
             ),
             const SizedBox(height: 15),
             Row(
@@ -48,10 +40,7 @@ class JobCard extends StatelessWidget {
               children: [
                 Text(
                   job.appliedDate.toLocal().toString().split(' ')[0],
-                  style: TextStyle(
-                    fontFamily: 'Poppins',
-                    color: Colors.grey[600],
-                  ),
+                  style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
                 ),
                 GestureDetector(
                   onTap: () {

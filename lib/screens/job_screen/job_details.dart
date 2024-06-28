@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/job_model.dart';
+import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class JobDetails extends StatelessWidget {
@@ -10,9 +11,8 @@ class JobDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('İş Detayları', style: TobetoTextStyle.poppins(context).captionLightGrayBold24),
-        backgroundColor: Colors.white,
+      appBar: FixedAppbar(
+        title: Text('İş Süreçlerim', style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

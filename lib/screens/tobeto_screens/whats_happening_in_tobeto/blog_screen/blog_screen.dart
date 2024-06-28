@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import 'blog_details.dart';
 import 'package:tobeto_mobile_app/blocs/blog_bloc/blog_bloc.dart';
 import 'package:tobeto_mobile_app/model/blog_model.dart';
 
 class BlogScreen extends StatelessWidget {
   const BlogScreen({super.key});
-  // TO DO : Zehra Karaca
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,9 +32,7 @@ class BlogList extends StatelessWidget {
         if (state is BlogLoadingState) {
           return const Center(child: CircularProgressIndicator());
         } else if (state is BlogLoadedState) {
-          // Blogları tarihe göre sıralayın (en güncelden en eskiye)
-          final sortedBlogs = state.blogs
-            ..sort((a, b) => b.date.compareTo(a.date));
+          final sortedBlogs = state.blogs..sort((a, b) => b.date.compareTo(a.date));
 
           return ListView.builder(
             itemCount: sortedBlogs.length,
@@ -67,6 +65,7 @@ class BlogCard extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
       child: Card(
+        color: Theme.of(context).colorScheme.onTertiaryContainer,
         elevation: 4,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(15),
@@ -76,8 +75,7 @@ class BlogCard extends StatelessWidget {
             Navigator.push(
               context,
               MaterialPageRoute(
-                builder: (context) =>
-                    BlogDetails(blog: blog, allBlogs: allBlogs),
+                builder: (context) => BlogDetails(blog: blog, allBlogs: allBlogs),
               ),
             );
           },
@@ -85,8 +83,7 @@ class BlogCard extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               ClipRRect(
-                borderRadius:
-                    const BorderRadius.vertical(top: Radius.circular(15)),
+                borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
                 child: Image.network(
                   blog.image,
                   height: 150,
@@ -101,22 +98,14 @@ class BlogCard extends StatelessWidget {
                   children: [
                     Text(
                       _formatDate(blog.date),
-                      style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        color: Colors.grey,
-                      ),
+                      style: TobetoTextStyle.poppins(context).captionGrayThin12,
                     ),
                     const SizedBox(height: 8),
                     Text(
                       blog.title,
-                      style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                      maxLines: 2, // Metin iki satırla sınırlıdır.
-                      overflow: TextOverflow
-                          .ellipsis, // Taşan metin üç nokta ile gösterilir.
+                      style: TobetoTextStyle.poppins(context).bodyBlackBold16,
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
                     ),
                   ],
                 ),
