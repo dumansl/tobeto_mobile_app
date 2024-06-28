@@ -23,7 +23,7 @@ class WhatDoWeOffer extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(ScreenPadding.padding8px),
           child: Column(
             children: [
               OfferCard(
@@ -31,35 +31,35 @@ class WhatDoWeOffer extends StatelessWidget {
                   textAlign: TextAlign.center,
                   text: TextSpan(
                     children: [
-                      const TextSpan(
-                        text: 'Kontrol sende\n',
+                      TextSpan(
+                        text: TobetoText.tofferPersonalCard1BodyRich1,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                       TextSpan(
-                        text: 'adım at,\n',
-                        style: TextStyle(
+                        text: TobetoText.tofferPersonalCard1BodyRich2,
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.purple[900],
+                          color: TobetoColor.purple,
                         ),
                       ),
-                      const TextSpan(
-                        text: ' Tobeto ile fark yarat!',
+                      TextSpan(
+                        text: TobetoText.tofferPersonalCard1BodyRich3,
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
-                          color: Colors.black,
+                          color: Theme.of(context).colorScheme.onSurface,
                         ),
                       ),
                     ],
                   ),
                 ),
                 description: '',
-                color: const Color(0xFFE9E8FF),
+                color: Theme.of(context).colorScheme.surfaceDim,
                 imageAlignment: Alignment.centerRight,
                 imagePath: ImagePath.code,
                 isFirst: true,
@@ -67,67 +67,56 @@ class WhatDoWeOffer extends StatelessWidget {
               OfferCard(
                 title: TobetoText.tofferPersonalCard2Title,
                 description: TobetoText.tofferPersonalCard2Body,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
                 imageAlignment: Alignment.centerLeft,
                 imagePath: ImagePath.ekip1,
               ),
               OfferCard(
                 title: TobetoText.tofferPersonalCard3Title,
                 description: TobetoText.tofferPersonalCard3Body,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
                 imageAlignment: Alignment.centerRight,
                 imagePath: ImagePath.biz3,
               ),
               OfferCard(
                 title: TobetoText.tofferPersonalCard4Title,
                 description: TobetoText.tofferPersonalCard4Body,
-                color: Colors.white,
+                color: Theme.of(context).colorScheme.onPrimary,
                 imageAlignment: Alignment.centerLeft,
                 imagePath: ImagePath.ekip2,
                 isLast: true,
               ),
-              const SizedBox(height: 16),
               Container(
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(ScreenPadding.padding16px),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
                     image: AssetImage(ImagePath.kapak),
                     fit: BoxFit.cover,
                   ),
-                  borderRadius:
-                      BorderRadius.vertical(bottom: Radius.circular(8)),
                 ),
-                child: const Column(
+                child: Column(
                   children: [
                     Text(
-                      'Kariyeriniz için en iyi yolculuklar',
+                      TobetoText.tofferPersonalCard5Title,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 18,
-                        color: Colors.white,
+                        color: TobetoColor.text.white,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 8),
+                    SizedBox(height: ScreenUtil.getHeight(context) * 0.016),
                     SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          ActionButton(
-                              label: 'AI PROMPTING', route: CatalogScreen()),
-                          ActionButton(
-                              label: 'PROJE YÖNETİMİ', route: CatalogScreen()),
-                          ActionButton(
-                              label: 'FULL STACK DEVELOPER',
-                              route: CatalogScreen()),
-                          ActionButton(
-                              label: 'İŞ ANALİSTİ', route: CatalogScreen()),
-                          ActionButton(
-                              label: 'DİJİTAL PAZARLAMA',
-                              route: CatalogScreen()),
-                          ActionButton(
-                              label: 'YAZILIM KALİTE', route: CatalogScreen()),
+                          ActionButton(label: TobetoText.tofferPersonalCard5TitleE1, route: const CatalogScreen()),
+                          ActionButton(label: TobetoText.tofferPersonalCard5TitleE2, route: const CatalogScreen()),
+                          ActionButton(label: TobetoText.tofferPersonalCard5TitleE3, route: const CatalogScreen()),
+                          ActionButton(label: TobetoText.tofferPersonalCard5TitleE4, route: const CatalogScreen()),
+                          ActionButton(label: TobetoText.tofferPersonalCard5TitleE5, route: const CatalogScreen()),
+                          ActionButton(label: TobetoText.tofferPersonalCard5TitleE6, route: const CatalogScreen()),
                         ],
                       ),
                     ),
@@ -165,31 +154,39 @@ class OfferCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(16),
+      padding: EdgeInsets.all(ScreenPadding.padding16px),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.vertical(
-          top: isFirst ? const Radius.circular(8) : Radius.zero,
-          bottom: isLast ? const Radius.circular(8) : Radius.zero,
+          top: isFirst ? const Radius.circular(0) : Radius.zero,
+          bottom: isLast ? const Radius.circular(0) : Radius.zero,
         ),
         border: Border(
-          bottom: BorderSide(
-            color: isLast ? Colors.transparent : Colors.grey.shade300,
-            width: 1,
-          ),
+          top: isFirst
+              ? const BorderSide(color: TobetoColor.purple, width: 4)
+              : const BorderSide(color: TobetoColor.purple, width: 2),
+          bottom: isLast
+              ? const BorderSide(color: TobetoColor.purple, width: 4)
+              : const BorderSide(color: TobetoColor.purple, width: 2),
+          left: imageAlignment == Alignment.centerLeft
+              ? BorderSide.none
+              : const BorderSide(color: TobetoColor.purple, width: 4),
+          right: imageAlignment == Alignment.centerRight
+              ? BorderSide.none
+              : const BorderSide(color: TobetoColor.purple, width: 4),
         ),
       ),
       child: Row(
         children: [
           if (imageAlignment == Alignment.centerLeft)
             Padding(
-              padding: const EdgeInsets.only(right: 16.0),
+              padding: EdgeInsets.only(right: ScreenPadding.padding16px),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
                   imagePath,
-                  width: 150,
-                  height: 170,
+                  width: ScreenUtil.getWidth(context) * 0.46,
+                  height: ScreenUtil.getHeight(context) * 0.16,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -207,21 +204,21 @@ class OfferCard extends StatelessWidget {
                           fontSize: 18,
                         ),
                       ),
-                const SizedBox(height: 8),
+                SizedBox(height: ScreenUtil.getHeight(context) * 0.005),
                 if (description.isNotEmpty) Text(description),
-                if (description.isNotEmpty) const SizedBox(height: 8),
+                if (description.isNotEmpty) SizedBox(height: ScreenUtil.getHeight(context) * 0.005),
               ],
             ),
           ),
           if (imageAlignment == Alignment.centerRight)
             Padding(
-              padding: const EdgeInsets.only(left: 16.0),
+              padding: EdgeInsets.only(left: ScreenPadding.padding16px),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.asset(
                   imagePath,
-                  width: 150,
-                  height: 170,
+                  width: ScreenUtil.getWidth(context) * 0.47,
+                  height: ScreenUtil.getWidth(context) * 0.35,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -248,24 +245,24 @@ class ActionButton extends StatelessWidget {
         );
       },
       child: Container(
-        width: 100,
-        height: 80,
-        margin: const EdgeInsets.symmetric(horizontal: 4.0),
-        padding: const EdgeInsets.all(8),
+        width: ScreenUtil.getWidth(context) * 0.22,
+        height: ScreenUtil.getWidth(context) * 0.22,
+        margin: EdgeInsets.symmetric(horizontal: ScreenPadding.padding4px),
+        padding: EdgeInsets.all(ScreenPadding.padding8px),
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.onPrimary,
           borderRadius: BorderRadius.circular(8.0),
         ),
         child: Center(
           child: ShaderMask(
             shaderCallback: (bounds) => const LinearGradient(
-              colors: [Colors.blue, Colors.cyan],
+              colors: [TobetoColor.purple, Colors.cyan],
               tileMode: TileMode.mirror,
             ).createShader(bounds),
             child: Text(
               label,
-              style: const TextStyle(
-                color: Colors.white,
+              style: TextStyle(
+                color: TobetoColor.card.white,
                 fontSize: 14,
               ),
               textAlign: TextAlign.center,

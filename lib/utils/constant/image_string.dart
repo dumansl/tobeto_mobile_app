@@ -145,7 +145,7 @@ abstract class ImagePath {
 
   static const String biz1 = "assets/images/bizkimiz1.png";
   static const String biz2 = "assets/images/bizkimiz2.png";
-  static const String biz3 = "assets/images/bizkimiz3.png";
+  static const String biz3 = "assets/images/bizkimiz3.jpg";
   static const String biz4 = "assets/images/bizkimiz4.png";
   static const String code = "assets/images/code.png";
   static const String ekip1 = "assets/images/ekip1.jpg";

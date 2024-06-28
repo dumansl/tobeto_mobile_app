@@ -12,9 +12,7 @@ class WhatsHappeningIntobetoScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const FixedAppbar(
-        isTobetoScreen: true,
-      ),
+      appBar: const FixedAppbar(isTobetoScreen: true),
       body: Padding(
         padding: EdgeInsets.only(
           top: ScreenPadding.padding24px,

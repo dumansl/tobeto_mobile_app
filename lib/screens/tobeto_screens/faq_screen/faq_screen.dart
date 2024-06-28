@@ -17,11 +17,11 @@ class FAQScreen extends StatefulWidget {
 }
 
 class _FAQScreenState extends State<FAQScreen> {
-  String selectedCategory = 'tobeto';
+  String selectedCategory = TobetoText.tobeto;
   final Map<String, String> categoryTitles = {
-    'tobeto': 'Tobeto',
-    'education': 'Eğitim',
-    'support': 'Destek'
+    TobetoText.tobeto: TobetoText.bigTobeto,
+    TobetoText.education: TobetoText.bigEducation,
+    TobetoText.support: TobetoText.bigSupport
   };
 
   @override
@@ -37,13 +37,13 @@ class _FAQScreenState extends State<FAQScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(
+                TobetoText.tmapFAQBox,
+                style: TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
+              ),
               Padding(
-                padding: EdgeInsets.only(bottom: ScreenPadding.padding16px),
-                child: Text(
-                  TobetoText.tmapFAQBox,
-                  style:
-                      TobetoTextStyle.poppins(context).subtitleGrayDarkBold20,
-                ),
+                padding: EdgeInsets.only(bottom: ScreenPadding.padding8px),
+                child: Divider(color: TobetoColor.frame.lightGrey),
               ),
               Padding(
                 padding: EdgeInsets.only(bottom: ScreenPadding.padding24px),
@@ -54,7 +54,7 @@ class _FAQScreenState extends State<FAQScreen> {
                       child: Text(categoryTitles[label]!),
                     );
                   }).toList(),
-                  title: "Tobeto",
+                  title: TobetoText.bigTobeto,
                   onChanged: (value) {
                     setState(() {
                       selectedCategory = value!;
@@ -81,7 +81,7 @@ class _FAQScreenState extends State<FAQScreen> {
                     } else if (state is FAQError) {
                       return Center(child: Text('Error: ${state.message}'));
                     } else {
-                      return const Center(child: Text('Bilinmedik durum'));
+                      return Center(child: Text(TobetoText.unKnown));
                     }
                   },
                 ),

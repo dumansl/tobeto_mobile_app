@@ -46,8 +46,11 @@ abstract class ScreenPadding {
   static double padding24px = 24;
   static double padding30px = 30;
   static double padding32px = 32;
+  static double padding40px = 40;
   static double padding52px = 52;
   static double padding58px = 58;
+  static double padding70px = 70;
+  static double padding80px = 80;
   static double screenpadding = 12;
 }
 

@@ -80,7 +80,7 @@ class _DescriptionTitleContentState extends State<DescriptionTitleContent> {
                 ),
                 child: Text(
                   widget.description!,
-                  style: TobetoTextStyle.poppins(context).captionGrayBold12,
+                  style: TobetoTextStyle.poppins(context).captionLightGrayBold12,
                   textAlign: TextAlign.justify,
                 ),
               )

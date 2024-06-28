@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
+import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CustomDropDownInput extends StatelessWidget {
@@ -16,11 +17,11 @@ class CustomDropDownInput extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DropdownButtonFormField<String>(
-      icon: const Padding(
-        padding: EdgeInsets.only(right: 10),
-        child: Icon(
+      icon: Padding(
+        padding: EdgeInsets.only(right: ScreenPadding.padding10px),
+        child: const Icon(
           Icons.keyboard_arrow_down_rounded,
-          size: 25,
+          size: 30,
         ),
       ),
       items: items,
@@ -41,9 +42,9 @@ class CustomDropDownInput extends StatelessWidget {
             borderRadius: BorderRadius.all(
           Radius.circular(12),
         )),
-        enabledBorder: const OutlineInputBorder(
-          borderSide: BorderSide(color: Colors.black, width: 1.0),
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+        enabledBorder: OutlineInputBorder(
+          borderSide: BorderSide(color: Theme.of(context).colorScheme.onSurface, width: 1.0),
+          borderRadius: const BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
     );
