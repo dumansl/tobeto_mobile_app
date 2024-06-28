@@ -20,8 +20,8 @@ class SurveyService {
       DocumentSnapshot snapshot = await _firestore.collection('survey').doc(surveyId).get();
       Map<String, dynamic> data = snapshot.data() as Map<String, dynamic>;
       List<dynamic> questionsData = data['questions'] as List<dynamic>;
-      return questionsData.map((question) {
-        return SurveyModel.fromMap(question as Map<String, dynamic>);
+      return questionsData.map((questionData) {
+        return SurveyModel.fromMap(questionData as Map<String, dynamic>);
       }).toList();
     } catch (e) {
       throw Exception('Error getting survey details: $e');

@@ -30,10 +30,8 @@ class _SurveyScreenState extends State<SurveyScreen> {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       userId = user.uid;
-      DocumentSnapshot surveyDoc = await FirebaseFirestore.instance
-          .collection('surveys')
-          .doc('uVhMmvdqeWXX3AW5oGTI')
-          .get();
+      DocumentSnapshot surveyDoc =
+          await FirebaseFirestore.instance.collection('surveys').doc('uVhMmvdqeWXX3AW5oGTI').get();
 
       surveyId = surveyDoc.id;
 
@@ -56,8 +54,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
       create: (_) => SurveyBloc()..add(LoadSurveys()),
       child: Scaffold(
         appBar: FixedAppbar(
-          title: Text(TobetoText.survey,
-              style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
+          title: Text(TobetoText.survey, style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
         ),
         body: Padding(
           padding: EdgeInsets.all(ScreenPadding.padding8px),
@@ -71,8 +68,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
                   itemBuilder: (context, index) {
                     final survey = state.surveys[index];
                     return Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: ScreenPadding.padding8px),
+                      padding: EdgeInsets.symmetric(vertical: ScreenPadding.padding8px),
                       child: GestureDetector(
                         onTap: () => Navigator.push(
                           context,
@@ -129,16 +125,14 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
   @override
   void initState() {
     super.initState();
-    BlocProvider.of<SurveyBloc>(context)
-        .add(LoadSurveyDetails(surveyId: widget.surveyId));
+    BlocProvider.of<SurveyBloc>(context).add(LoadSurveyDetails(surveyId: widget.surveyId));
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: FixedAppbar(
-        title: Text('Anket',
-            style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
+        title: Text('Anket', style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28),
       ),
       body: BlocBuilder<SurveyBloc, SurveyState>(
         builder: (context, state) {
@@ -163,15 +157,12 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(question.question,
-                                  style: TobetoTextStyle.poppins(context)
-                                      .captionBlackBold18),
+                              Text(question.question, style: TobetoTextStyle.poppins(context).captionBlackBold18),
                               const SizedBox(height: 10.0),
                               ...question.options.map((option) {
                                 return ListTile(
                                   title: Text(option),
-                                  textColor:
-                                      Theme.of(context).colorScheme.onSurface,
+                                  textColor: Theme.of(context).colorScheme.onSurface,
                                   leading: Radio<String>(
                                     value: option,
                                     groupValue: question.selected,
@@ -204,9 +195,6 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                         userId: widget.userId,
                         surveyId: widget.surveyId,
                       ));
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Cevaplar kaydedildi!')),
-                      );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: TobetoColor.purple,
@@ -217,8 +205,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 15.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 15.0),
                     ),
                     child: const Text('Kaydet'),
                   ),
@@ -231,7 +218,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
           } else if (state is SurveyError) {
             return Center(child: Text(state.error));
           } else {
-            return const Center(child: Text('Bir hata oluştu.'));
+            return const Center(child: Text('Cevaplar kaydedildi! Teşekkürler!'));
           }
         },
       ),
