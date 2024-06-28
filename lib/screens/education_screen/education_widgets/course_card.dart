@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '/model/course_model.dart';
-import '../education_details.dart';
+import '../education_about.dart';
 
 class CourseCard extends StatelessWidget {
   final Course course;
@@ -20,14 +20,7 @@ class CourseCard extends StatelessWidget {
           Navigator.push(
             context,
             MaterialPageRoute(
-              builder: (context) => EducationDetails(
-                imageUrl: course.image,
-                videoName: course.title,
-                videoDuration: course.duration,
-                videoPoints: course.points,
-                videoLanguage: course.language,
-                educationContent: course.content,
-              ),
+              builder: (context) => EducationAbout(course: course),
             ),
           );
         },
@@ -38,8 +31,8 @@ class CourseCard extends StatelessWidget {
                 topLeft: Radius.circular(20.0),
                 topRight: Radius.circular(20.0),
               ),
-              child: Image.asset(
-                course.image,
+              child: Image.network(
+                course.imageUrl,
                 height: 180,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -50,6 +43,7 @@ class CourseCard extends StatelessWidget {
               child: Text(
                 course.title,
                 style: TobetoTextStyle.poppins(context).captionBlackNormal18,
+                textAlign: TextAlign.center,
               ),
             ),
             ElevatedButton(
@@ -57,22 +51,14 @@ class CourseCard extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => EducationDetails(
-                      imageUrl: course.image,
-                      videoName: course.title,
-                      videoDuration: course.duration,
-                      videoPoints: course.points,
-                      videoLanguage: course.language,
-                      educationContent: course.content,
-                    ),
+                    builder: (context) => EducationAbout(course: course),
                   ),
                 );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: TobetoColor.purple,
                 foregroundColor: Colors.white,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 22, vertical: 7),
+                padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 7),
                 textStyle: const TextStyle(fontSize: 14),
               ),
               child: const Text('Eğitime Git'),
