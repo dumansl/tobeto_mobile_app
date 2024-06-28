@@ -22,46 +22,48 @@ class WhatDoWeOfferFor extends StatelessWidget {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: EdgeInsets.all(ScreenPadding.padding8px),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE9E8FF),
+                  color: Theme.of(context).colorScheme.surfaceDim,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(ScreenPadding.padding16px),
                 child: Row(
                   children: [
                     Expanded(
                       child: RichText(
+                        textAlign: TextAlign.center,
                         text: TextSpan(
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontFamily: 'Poppins',
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: Theme.of(context).colorScheme.onSurface,
                           ),
                           children: [
-                            const TextSpan(text: 'Tobeto: yetenekleri '),
+                            TextSpan(text: TobetoText.tcompaniesCard1BodyRich1),
                             TextSpan(
-                              text: 'keşfeder,',
-                              style: TextStyle(color: Colors.purple[900]),
+                              text: TobetoText.tcompaniesCard1BodyRich2,
+                              style: const TextStyle(color: TobetoColor.purple),
                             ),
-                            const TextSpan(
-                                text: ' geliştirir\nve yeni işine hazırlar.'),
+                            TextSpan(text: TobetoText.tcompaniesCard1BodyRich3),
                           ],
                         ),
                       ),
                     ),
-                    const SizedBox(width: 16),
+                    SizedBox(
+                      width: ScreenUtil.getWidth(context) * 0.04,
+                    ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(10),
                       child: Image.asset(
                         ImagePath.ekip3,
-                        width: 100,
-                        height: 100,
+                        width: ScreenUtil.getWidth(context) * 0.45,
+                        height: ScreenUtil.getHeight(context) * 0.14,
                         fit: BoxFit.cover,
                       ),
                     ),
@@ -70,10 +72,10 @@ class WhatDoWeOfferFor extends StatelessWidget {
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF6104BE),
+                  color: TobetoColor.purple,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(ScreenPadding.padding16px),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -97,19 +99,25 @@ class WhatDoWeOfferFor extends StatelessWidget {
                         fontSize: 14,
                         color: Colors.white,
                       ),
+                      textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 16),
-                    buildOptionCard(
-                      TobetoText.tcompaniesCard3Title,
-                      TobetoText.tcompaniesCard3Body,
+                    Padding(
+                      padding: EdgeInsets.only(top: ScreenPadding.padding16px),
+                      child: buildOptionCard(
+                        TobetoText.tcompaniesCard3Title,
+                        TobetoText.tcompaniesCard3Body,
+                        context,
+                      ),
                     ),
                     buildOptionCard(
                       TobetoText.tcompaniesCard4Title,
                       TobetoText.tcompaniesCard4Body,
+                      context,
                     ),
                     buildOptionCard(
                       TobetoText.tcompaniesCard5Title,
                       TobetoText.tcompaniesCard5Body,
+                      context,
                     ),
                   ],
                 ),
@@ -119,7 +127,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
                   color: const Color(0xFF1D4499),
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(ScreenPadding.padding16px),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -135,63 +143,73 @@ class WhatDoWeOfferFor extends StatelessWidget {
                         textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    Text(
-                      TobetoText.tcompaniesCard6Body,
-                      style: const TextStyle(
-                        fontFamily: 'Poppins',
-                        fontSize: 14,
-                        color: Colors.white,
+                    Padding(
+                      padding: EdgeInsets.only(top: ScreenPadding.padding8px),
+                      child: Text(
+                        TobetoText.tcompaniesCard6Body,
+                        style: const TextStyle(
+                          fontFamily: 'Poppins',
+                          fontSize: 14,
+                          color: Colors.white,
+                        ),
+                        textAlign: TextAlign.center,
                       ),
                     ),
-                    const SizedBox(height: 16),
-                    buildOptionCard(
-                      TobetoText.tcompaniesCard7Title,
-                      TobetoText.tcompaniesCard7Body,
+                    Padding(
+                      padding: EdgeInsets.only(top: ScreenPadding.padding16px),
+                      child: buildOptionCard(
+                        TobetoText.tcompaniesCard7Title,
+                        TobetoText.tcompaniesCard7Body,
+                        context,
+                      ),
                     ),
                     buildOptionCard(
                       TobetoText.tcompaniesCard8Title,
                       TobetoText.tcompaniesCard8Body,
+                      context,
                     ),
                     buildOptionCard(
                       TobetoText.tcompaniesCard9Title,
                       TobetoText.tcompaniesCard9Body,
+                      context,
                     ),
                   ],
                 ),
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFFE9E8FF),
+                  color: Theme.of(context).colorScheme.surfaceDim,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                padding: const EdgeInsets.all(16),
+                padding: EdgeInsets.all(ScreenPadding.padding16px),
                 child: Column(
                   children: [
                     Text(
                       TobetoText.tcompaniesCard10Body,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontFamily: 'Poppins',
                         fontSize: 14,
-                        color: Colors.black,
+                        color: Theme.of(context).colorScheme.onSurface,
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () {},
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: TobetoColor.purple,
-                        textStyle: const TextStyle(
-                          fontFamily: 'Poppins',
-                          fontSize: 16,
+                    Padding(
+                      padding: EdgeInsets.only(top: ScreenPadding.padding16px),
+                      child: ElevatedButton(
+                        onPressed: () {},
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: TobetoColor.purple,
+                          textStyle: const TextStyle(
+                            fontFamily: 'Poppins',
+                            fontSize: 16,
+                          ),
+                          padding: EdgeInsets.symmetric(
+                            horizontal: ScreenPadding.padding32px,
+                            vertical: ScreenPadding.padding16px,
+                          ),
                         ),
-                        padding: const EdgeInsets.symmetric(
-                          horizontal: 32,
-                          vertical: 16,
-                        ),
+                        child: Text(TobetoText.tcompaniesCard10ContactButton),
                       ),
-                      child: Text(TobetoText.tcompaniesCard10ContactButton),
                     ),
                   ],
                 ),
@@ -203,37 +221,37 @@ class WhatDoWeOfferFor extends StatelessWidget {
     );
   }
 
-  Widget buildOptionCard(String title, String description) {
+  Widget buildOptionCard(String title, String description, BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4.0),
+      padding: EdgeInsets.symmetric(vertical: ScreenPadding.padding4px),
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Theme.of(context).colorScheme.tertiary,
           borderRadius: BorderRadius.circular(10),
         ),
-        padding: const EdgeInsets.all(16),
+        padding: EdgeInsets.all(ScreenPadding.padding16px),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
               child: Text(
                 title,
-                style: const TextStyle(
+                style: TextStyle(
                   fontFamily: 'Poppins',
                   fontSize: 14,
                   fontWeight: FontWeight.bold,
-                  color: Colors.black,
+                  color: Theme.of(context).colorScheme.onSurface,
                 ),
                 textAlign: TextAlign.center,
               ),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: ScreenUtil.getHeight(context) * 0.01),
             Text(
               description,
-              style: const TextStyle(
+              style: TextStyle(
                 fontFamily: 'Poppins',
                 fontSize: 12,
-                color: Colors.black,
+                color: Theme.of(context).colorScheme.onSurface,
               ),
             ),
           ],
