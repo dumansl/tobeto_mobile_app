@@ -227,7 +227,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
     final assetImagePath =
         isDarkMode ? 'assets/gifs/skills.gif' : 'assets/gifs/skilldark.gif';
     return Padding(
-      padding: EdgeInsets.all(ScreenPadding.padding16px),
+      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px),
       child: SingleChildScrollView(
         child: Column(
           children: [

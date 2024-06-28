@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tobeto_mobile_app/blocs/theme_bloc/theme_bloc.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/nested_scroll.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
@@ -113,12 +114,11 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => const TobetoHomeScreen(),
-                          ),
-                        );
+                        pushWithoutNavBar(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TobetoHomeScreen()));
                       },
                       child: Container(
                         height: IconSize.size35px,
@@ -264,7 +264,7 @@ class _ExamplesCard extends StatelessWidget {
               children: [
                 Text(
                   "Herkes için Kodlama",
-                  style: TobetoTextStyle.poppins(context).captionBlackBold12,
+                  style: TobetoTextStyle.poppins(context).captionBlackThin12,
                 ),
               ],
             ),
@@ -272,7 +272,7 @@ class _ExamplesCard extends StatelessWidget {
               children: [
                 Text(
                   "Herkes için Kodlama",
-                  style: TobetoTextStyle.poppins(context).captionBlackBold12,
+                  style: TobetoTextStyle.poppins(context).captionBlackThin12,
                 ),
               ],
             ),
