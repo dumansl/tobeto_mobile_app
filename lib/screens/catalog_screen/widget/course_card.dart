@@ -43,7 +43,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                flex: 65,
+                flex: 70,
                 child: Container(
                   decoration: BoxDecoration(
                     borderRadius:
@@ -56,50 +56,52 @@ class CatalogCourseCardsmall extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 35,
+                flex: 30,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: ScreenPadding.padding4px,
-                    vertical: ScreenPadding.padding6px,
                   ),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         courseName,
-                        style:
-                            TobetoTextStyle.poppins(context).captionBlackBold12,
+                        style: TobetoTextStyle.poppins(context)
+                            .captionMediumBlack12,
                       ),
-                      Row(
-                        children: [
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.person,
-                                size: IconSize.size16px,
-                              ),
-                              Text(
-                                courseTeacher,
-                                style: TobetoTextStyle.poppins(context)
-                                    .captionBlackBold12,
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Row(
-                            children: [
-                              Icon(
-                                Icons.star_rate_rounded,
-                                size: IconSize.size16px,
-                              ),
-                              Text(
-                                rank,
-                                style: TobetoTextStyle.poppins(context)
-                                    .captionBlackBold12,
-                              ),
-                            ],
-                          ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 8.0),
+                        child: Row(
+                          children: [
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.person,
+                                  size: IconSize.size16px,
+                                ),
+                                Text(
+                                  courseTeacher,
+                                  style: TobetoTextStyle.poppins(context)
+                                      .captionMediumBlack12,
+                                ),
+                              ],
+                            ),
+                            const Spacer(),
+                            Row(
+                              children: [
+                                Icon(
+                                  Icons.star_rate_rounded,
+                                  size: IconSize.size16px,
+                                ),
+                                Text(
+                                  rank,
+                                  style: TobetoTextStyle.poppins(context)
+                                      .captionMediumBlack12,
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
                       )
                     ],
                   ),

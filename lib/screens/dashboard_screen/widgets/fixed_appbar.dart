@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/profile_photo_bloc/profile_photo_state.dart';
 
@@ -8,6 +9,7 @@ import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
   const FixedAppbar({
@@ -33,13 +35,8 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is NotAuthenticated) {
-          Navigator.pushAndRemoveUntil(
-            context,
-            MaterialPageRoute(
-              builder: (context) => const LoginScreen(),
-            ),
-            (route) => false,
-          );
+          pushReplacementWithoutNavBar(context,
+              MaterialPageRoute(builder: (context) => const LoginScreen()));
         }
       },
       child: AppBar(
@@ -95,7 +92,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                     ),
                   ),
                   PopupMenuButton<String>(
-                    color: Theme.of(context).colorScheme.onSurface,
+                    color: Theme.of(context).colorScheme.surfaceBright,
                     onSelected: (value) {
                       if (value == 'logout') {
                         context.read<AuthBloc>().add(const LogoutEvent());
@@ -112,7 +109,11 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                                 size: IconSize.size25px,
                               ),
                               const SizedBox(width: 8),
-                              Text(TobetoText.exit),
+                              Text(
+                                TobetoText.exit,
+                                style: TobetoTextStyle.poppins(context)
+                                    .bodyBlackBold16,
+                              ),
                             ],
                           ),
                         ),

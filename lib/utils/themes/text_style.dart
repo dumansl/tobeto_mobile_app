@@ -512,7 +512,7 @@ class Typography {
     );
     captionMediumBlack12 = baseStyle.copyWith(
       fontSize: 12,
-      fontWeight: FontWeight.w500,
+      fontWeight: FontWeight.bold,
       color: Theme.of(context).colorScheme.onSurface,
     );
     captionMediumBlack14 = baseStyle.copyWith(
@@ -642,8 +642,8 @@ class Typography {
     );
     captionWhiteNormal12 = baseStyle.copyWith(
       fontSize: 12,
-      fontWeight: FontWeight.normal,
-      color: TobetoColor.text.white,
+      fontWeight: FontWeight.bold,
+      color: Theme.of(context).colorScheme.onPrimaryFixed,
     );
     captionBlackThin12 = baseStyle.copyWith(
       fontSize: 12,
@@ -653,7 +653,7 @@ class Typography {
     captionBlackBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
-      color: Theme.of(context).colorScheme.onSurface,
+      color: Theme.of(context).colorScheme.onPrimary,
     );
     captionBlackNormal12 = baseStyle.copyWith(
       fontSize: 12,
@@ -1254,7 +1254,7 @@ class Typography {
     bodyWhiteSemiBold16 = baseStyle.copyWith(
       fontSize: 16,
       fontWeight: FontWeight.w600,
-      color: TobetoColor.text.white,
+      color: Theme.of(context).colorScheme.primaryContainer,
     );
     bodyWhiteNormal16 = baseStyle.copyWith(
       fontSize: 16,
