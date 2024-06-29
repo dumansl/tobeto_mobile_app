@@ -27,7 +27,8 @@ class _BlogDetailsState extends State<BlogDetails> {
   }
 
   void _shareContent(Blog blog) {
-    String shareText = "${blog.title}\n\n${blog.content}\n\nRead more at: ${blog.image}";
+    String shareText =
+        "${blog.title}\n\n${blog.content}\n\nRead more at: ${blog.image}";
     Share.share(shareText, subject: 'Check out this blog!');
   }
 
@@ -60,7 +61,8 @@ class _BlogDetailsState extends State<BlogDetails> {
                         Expanded(
                           child: Text(
                             blog.title,
-                            style: TobetoTextStyle.poppins(context).captionBlackBold18,
+                            style: TobetoTextStyle.poppins(context)
+                                .captionBlackBold18,
                             maxLines: 2,
                             overflow: TextOverflow.ellipsis,
                           ),
@@ -84,20 +86,23 @@ class _BlogDetailsState extends State<BlogDetails> {
                           onPressed: index > 0
                               ? () {
                                   _pageController.previousPage(
-                                    duration: Duration(milliseconds: 300),
+                                    duration: const Duration(milliseconds: 300),
                                     curve: Curves.easeInOut,
                                   );
                                 }
                               : null,
                           icon: const Icon(Icons.arrow_back),
-                          label: const Text('Önceki', style: TextStyle(fontFamily: 'Poppins')),
+                          label: const Text('Önceki',
+                              style: TextStyle(fontFamily: 'Poppins')),
                           style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.purple,
                           ),
                         ),
                         FloatingActionButton(
                           onPressed: () => _shareContent(blog),
-                          backgroundColor: isDarkMode ? TobetoColor.formField.darkGrey : TobetoColor.card.cream,
+                          backgroundColor: isDarkMode
+                              ? TobetoColor.formField.darkGrey
+                              : TobetoColor.card.cream,
                           child: const Icon(Icons.share, color: Colors.purple),
                         ),
                         ElevatedButton(
@@ -115,7 +120,8 @@ class _BlogDetailsState extends State<BlogDetails> {
                           child: const Row(
                             mainAxisSize: MainAxisSize.min,
                             children: [
-                              Text('Sonraki', style: TextStyle(fontFamily: 'Poppins')),
+                              Text('Sonraki',
+                                  style: TextStyle(fontFamily: 'Poppins')),
                               Icon(Icons.arrow_forward),
                             ],
                           ),

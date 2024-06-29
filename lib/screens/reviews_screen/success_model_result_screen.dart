@@ -80,7 +80,8 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
             builder: (context, state) {
               if (state is QuizResultLoaded) {
                 if (state.quizResults.isEmpty) {
-                  return Center(child: Text('No quiz results available.'));
+                  return const Center(
+                      child: Text('No quiz results available.'));
                 }
 
                 score = (state.quizResults[0].score ?? 0);

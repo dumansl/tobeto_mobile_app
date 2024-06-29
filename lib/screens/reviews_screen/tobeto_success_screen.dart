@@ -6,7 +6,6 @@ import 'package:tobeto_mobile_app/blocs/tobeto_success_bloc/tobeto_success_state
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/custom_headline_text.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class TobetoSuccesScreen extends StatefulWidget {

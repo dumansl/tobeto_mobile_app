@@ -16,7 +16,8 @@ class EducationScreen extends StatefulWidget {
   State<EducationScreen> createState() => _EducationScreenState();
 }
 
-class _EducationScreenState extends State<EducationScreen> with SingleTickerProviderStateMixin {
+class _EducationScreenState extends State<EducationScreen>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   List<Course> _filteredCourses = [];
   TabController? _tabController;
@@ -56,7 +57,8 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
 
     if (_selectedProducer != null) {
       filteredList = filteredList.where((course) {
-        return course.producer.toLowerCase() == _selectedProducer!.toLowerCase();
+        return course.producer.toLowerCase() ==
+            _selectedProducer!.toLowerCase();
       }).toList();
     }
 
@@ -154,7 +156,8 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
     if (!_userEligible) {
       return const Scaffold(
         body: Center(
-          child: Text('Eğitimleri görüntülemek için başvurunuzun tamamlanmış olması gerekmektedir.'),
+          child: Text(
+              'Eğitimleri görüntülemek için başvurunuzun tamamlanmış olması gerekmektedir.'),
         ),
       );
     }
@@ -188,11 +191,14 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                               hintText: _focusNode.hasFocus ? '' : 'Arama',
                               prefixIcon: const Icon(Icons.search),
                               border: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0)),
                               ),
                               focusedBorder: const OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(30.0)),
-                                borderSide: BorderSide(color: TobetoColor.purple),
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(30.0)),
+                                borderSide:
+                                    BorderSide(color: TobetoColor.purple),
                               ),
                             ),
                           ),
@@ -201,7 +207,8 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                           flex: 2,
                           child: DropdownButton<String>(
                             value: _sortOrder,
-                            icon: const Icon(Icons.sort, color: TobetoColor.purple),
+                            icon: const Icon(Icons.sort,
+                                color: TobetoColor.purple),
                             onChanged: (String? newValue) {
                               if (newValue != null) {
                                 _updateSortOrder(newValue);
@@ -209,10 +216,13 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                             },
                             style: const TextStyle(color: TobetoColor.purple),
                             dropdownColor: Colors.white,
-                            items: <String>['A-Z', 'Z-A'].map<DropdownMenuItem<String>>((String value) {
+                            items: <String>['A-Z', 'Z-A']
+                                .map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
-                                child: Text(value, style: TextStyle(color: TobetoColor.purple)),
+                                child: Text(value,
+                                    style: const TextStyle(
+                                        color: TobetoColor.purple)),
                               );
                             }).toList(),
                           ),
@@ -225,7 +235,8 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(ImagePath.purpleFilter, width: 36, height: 36),
+                              child: Image.asset(ImagePath.purpleFilter,
+                                  width: 36, height: 36),
                             ),
                           ),
                         ),
@@ -241,21 +252,24 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                         Tab(
                           child: Text(
                             TobetoText.mainEducation,
-                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
+                            style: TobetoTextStyle.poppins(context)
+                                .captionBlackNormal12,
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Tab(
                           child: Text(
                             TobetoText.mainContinue,
-                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
+                            style: TobetoTextStyle.poppins(context)
+                                .captionBlackNormal12,
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Tab(
                           child: Text(
                             TobetoText.mainComplated,
-                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
+                            style: TobetoTextStyle.poppins(context)
+                                .captionBlackNormal12,
                             textAlign: TextAlign.left,
                           ),
                         ),
@@ -268,17 +282,25 @@ class _EducationScreenState extends State<EducationScreen> with SingleTickerProv
                 child: BlocBuilder<CourseBloc, CourseState>(
                   builder: (context, state) {
                     if (state is CoursesLoaded) {
-                      final coursesToShow = _searchController.text.isEmpty ? state.courses : _filteredCourses;
+                      final coursesToShow = _searchController.text.isEmpty
+                          ? state.courses
+                          : _filteredCourses;
                       return TabBarView(
                         controller: _tabController,
                         children: [
                           _buildCourseList(coursesToShow),
-                          _buildCourseList(coursesToShow.where((course) => course.status == 'ongoing').toList()),
-                          _buildCourseList(coursesToShow.where((course) => course.status == 'completed').toList()),
+                          _buildCourseList(coursesToShow
+                              .where((course) => course.status == 'ongoing')
+                              .toList()),
+                          _buildCourseList(coursesToShow
+                              .where((course) => course.status == 'completed')
+                              .toList()),
                         ],
                       );
                     } else if (state is CourseLoadFailure) {
-                      return Center(child: Text('Failed to load courses: ${state.error}'));
+                      return Center(
+                          child:
+                              Text('Failed to load courses: ${state.error}'));
                     }
                     return const Center(child: CircularProgressIndicator());
                   },
