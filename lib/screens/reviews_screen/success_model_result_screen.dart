@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
-
+import 'package:tobeto_mobile_app/model/tobeto_success_model.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/custom_headline_text.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/spider_chart.dart';
+import 'package:tobeto_mobile_app/services/tobeto_success_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -18,17 +17,39 @@ class SuccessModelResultScreen extends StatefulWidget {
 }
 
 class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
+  final TobetoSuccessService _service = TobetoSuccessService();
   double score = 0.0;
+  List<QuizResult> _quizResults = [];
+  bool _isLoading = true;
+  String? _errorMessage;
 
   @override
   void initState() {
     super.initState();
-    context.read<BusinessSuccessBloc>().add(FetchBusinessSuccess());
-    context.read<BusinessSuccessBloc>().add(FetchQuizResult());
+    _fetchQuizResults();
+  }
+
+  Future<void> _fetchQuizResults() async {
+    try {
+      final quizResults = await _service.fetchQuizResults();
+      setState(() {
+        _quizResults = quizResults;
+        if (quizResults.isNotEmpty) {
+          score = quizResults[0].score ?? 0.0;
+        }
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Failed to fetch quiz results: $e';
+        _isLoading = false;
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    debugPrint(_quizResults.toString());
     return Scaffold(
       body: SafeArea(
         child: Column(
@@ -39,13 +60,17 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   const CustomHeadlineText(),
-                  _subHeadlineText(),
+                  _subHeadlineText(), // context parametresini ekledik
                 ],
               ),
             ),
             Expanded(
               flex: 85,
-              child: _successModelContent(context),
+              child: _isLoading
+                  ? const Center(child: CircularProgressIndicator())
+                  : _errorMessage != null
+                      ? Center(child: Text('Error: $_errorMessage'))
+                      : _successModelContent(context),
             ),
           ],
         ),
@@ -76,148 +101,120 @@ class _SuccessModelResultScreenState extends State<SuccessModelResultScreen> {
       child: Column(
         children: [
           _purpleDivider(context),
-          BlocBuilder<BusinessSuccessBloc, BusinessSuccessState>(
-            builder: (context, state) {
-              if (state is QuizResultLoaded) {
-                if (state.quizResults.isEmpty) {
-                  return const Center(
-                      child: Text('No quiz results available.'));
-                }
-
-                score = (state.quizResults[0].score ?? 0);
-                double resultScore = score == 0 ? 0 : score / 5;
-
-                return Expanded(
-                  child: SingleChildScrollView(
+          Expanded(
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: ScreenPadding.padding24px,
+                    ),
+                    child: SpiderChart(
+                      values: [
+                        score == 0 ? 0 : score / 5,
+                        0.95,
+                        0.90,
+                        0.95,
+                        0.68,
+                        0.89,
+                        0.95,
+                        0.98,
+                      ],
+                    ),
+                  ),
+                  _spiderDescription(score),
+                  Padding(
+                    padding: EdgeInsets.symmetric(
+                      vertical: ScreenPadding.padding16px,
+                    ),
                     child: Column(
                       children: [
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: ScreenPadding.padding24px,
-                          ),
-                          child: SpiderChart(
-                            values: [
-                              resultScore,
-                              0.95,
-                              0.90,
-                              0.95,
-                              0.68,
-                              0.89,
-                              0.95,
-                              0.98,
-                            ],
-                          ),
+                        _successModelDescription(
+                          title: TobetoText.evaluationspiderChartDescription1,
+                          score: (score * 10).round() / 10,
+                          description:
+                              TobetoText.successExamResultDescriptionContent,
+                          description2:
+                              TobetoText.successExamResultDescription2Content,
+                          description3:
+                              TobetoText.successExamResultDescription3Content,
                         ),
-                        _spiderDescription(score),
-                        Padding(
-                          padding: EdgeInsets.symmetric(
-                            vertical: ScreenPadding.padding16px,
-                          ),
-                          child: Column(
-                            children: [
-                              _successModelDescription(
-                                title: TobetoText
-                                    .evaluationspiderChartDescription1,
-                                score: (score * 10).round() / 10,
-                                description: TobetoText
-                                    .successExamResultDescriptionContent,
-                                description2: TobetoText
-                                    .successExamResultDescription2Content,
-                                description3: TobetoText
-                                    .successExamResultDescription3Content,
-                              ),
-                              _successModelDescription(
-                                title: TobetoText
-                                    .evaluationspiderChartDescription2,
-                                score: (score * 10).round() / 10,
-                                description: TobetoText
-                                    .successExamResultDescriptionContent,
-                                description2: TobetoText
-                                    .successExamResultDescription2Content,
-                                description3: TobetoText
-                                    .successExamResultDescription3Content,
-                              ),
-                              _successModelDescription(
-                                title: TobetoText
-                                    .evaluationspiderChartDescription3,
-                                score: (score * 10).round() / 10,
-                                description: TobetoText
-                                    .successExamResultDescriptionContent,
-                                description2: TobetoText
-                                    .successExamResultDescription2Content,
-                                description3: TobetoText
-                                    .successExamResultDescription3Content,
-                              ),
-                              _successModelDescription(
-                                title: TobetoText
-                                    .evaluationspiderChartDescription4,
-                                score: (score * 10).round() / 10,
-                                description: TobetoText
-                                    .successExamResultDescriptionContent,
-                                description2: TobetoText
-                                    .successExamResultDescription2Content,
-                                description3: TobetoText
-                                    .successExamResultDescription3Content,
-                              ),
-                              _successModelDescription(
-                                title: TobetoText
-                                    .evaluationspiderChartDescription5,
-                                score: (score * 10).round() / 10,
-                                description: TobetoText
-                                    .successExamResultDescriptionContent,
-                                description2: TobetoText
-                                    .successExamResultDescription2Content,
-                                description3: TobetoText
-                                    .successExamResultDescription3Content,
-                              ),
-                              _successModelDescription(
-                                title: TobetoText
-                                    .evaluationspiderChartDescription6,
-                                score: (score * 10).round() / 10,
-                                description: TobetoText
-                                    .successExamResultDescriptionContent,
-                                description2: TobetoText
-                                    .successExamResultDescription2Content,
-                                description3: TobetoText
-                                    .successExamResultDescription3Content,
-                              ),
-                              _successModelDescription(
-                                title: TobetoText
-                                    .evaluationspiderChartDescription7,
-                                score: (score * 10).round() / 10,
-                                description: TobetoText
-                                    .successExamResultDescriptionContent,
-                                description2: TobetoText
-                                    .successExamResultDescription2Content,
-                                description3: TobetoText
-                                    .successExamResultDescription3Content,
-                              ),
-                              _successModelDescription(
-                                title: TobetoText
-                                    .evaluationspiderChartDescription8,
-                                score: (score * 10).round() / 10,
-                                description: TobetoText
-                                    .successExamResultDescriptionContent,
-                                description2: TobetoText
-                                    .successExamResultDescription2Content,
-                                description3: TobetoText
-                                    .successExamResultDescription3Content,
-                              ),
-                            ],
-                          ),
+                        _successModelDescription(
+                          title: TobetoText.evaluationspiderChartDescription2,
+                          score: (score * 10).round() / 10,
+                          description:
+                              TobetoText.successExamResultDescriptionContent,
+                          description2:
+                              TobetoText.successExamResultDescription2Content,
+                          description3:
+                              TobetoText.successExamResultDescription3Content,
+                        ),
+                        _successModelDescription(
+                          title: TobetoText.evaluationspiderChartDescription3,
+                          score: (score * 10).round() / 10,
+                          description:
+                              TobetoText.successExamResultDescriptionContent,
+                          description2:
+                              TobetoText.successExamResultDescription2Content,
+                          description3:
+                              TobetoText.successExamResultDescription3Content,
+                        ),
+                        _successModelDescription(
+                          title: TobetoText.evaluationspiderChartDescription4,
+                          score: (score * 10).round() / 10,
+                          description:
+                              TobetoText.successExamResultDescriptionContent,
+                          description2:
+                              TobetoText.successExamResultDescription2Content,
+                          description3:
+                              TobetoText.successExamResultDescription3Content,
+                        ),
+                        _successModelDescription(
+                          title: TobetoText.evaluationspiderChartDescription5,
+                          score: (score * 10).round() / 10,
+                          description:
+                              TobetoText.successExamResultDescriptionContent,
+                          description2:
+                              TobetoText.successExamResultDescription2Content,
+                          description3:
+                              TobetoText.successExamResultDescription3Content,
+                        ),
+                        _successModelDescription(
+                          title: TobetoText.evaluationspiderChartDescription6,
+                          score: (score * 10).round() / 10,
+                          description:
+                              TobetoText.successExamResultDescriptionContent,
+                          description2:
+                              TobetoText.successExamResultDescription2Content,
+                          description3:
+                              TobetoText.successExamResultDescription3Content,
+                        ),
+                        _successModelDescription(
+                          title: TobetoText.evaluationspiderChartDescription7,
+                          score: (score * 10).round() / 10,
+                          description:
+                              TobetoText.successExamResultDescriptionContent,
+                          description2:
+                              TobetoText.successExamResultDescription2Content,
+                          description3:
+                              TobetoText.successExamResultDescription3Content,
+                        ),
+                        _successModelDescription(
+                          title: TobetoText.evaluationspiderChartDescription8,
+                          score: (score * 10).round() / 10,
+                          description:
+                              TobetoText.successExamResultDescriptionContent,
+                          description2:
+                              TobetoText.successExamResultDescription2Content,
+                          description3:
+                              TobetoText.successExamResultDescription3Content,
                         ),
                       ],
                     ),
                   ),
-                );
-              } else if (state is QuizResultLoading) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (state is QuizResultError) {
-                return Center(child: Text('Error: ${state.message}'));
-              } else {
-                return Container();
-              }
-            },
+                ],
+              ),
+            ),
           ),
         ],
       ),

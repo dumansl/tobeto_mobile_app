@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_state.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
 import 'package:tobeto_mobile_app/model/exam_model.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '../../utils/constant/constants.dart';
@@ -48,10 +46,9 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
           return const Center(child: CircularProgressIndicator());
         } else if (state is ExamLoaded) {
           final exams = state.exams;
-          final currentExam = exams[_currentQuestionIndex];
-          final totalQuestions = currentExam.exam.questions.length;
-          final currentQuestion =
-              currentExam.exam.questions[_currentQuestionIndex];
+          final currentExam = exams.first;
+          final totalQuestions = currentExam.questions.length;
+          final currentQuestion = currentExam.questions[_currentQuestionIndex];
 
           return Container(
             height: double.infinity,
@@ -97,19 +94,26 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
                     crossAxisAlignment: CrossAxisAlignment.end,
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      _questionText(currentQuestion.question),
-                      for (String answerKey in currentQuestion.answers.keys)
-                        _answerButton(
-                          answerText: answerKey,
-                          isSelected: _selectedAnswers[_currentQuestionIndex] ==
-                              answerKey,
-                          onTap: () {
-                            setState(() {
-                              _selectedAnswers[_currentQuestionIndex] =
-                                  answerKey;
-                            });
-                          },
-                        ),
+                      _questionText(currentQuestion['question']),
+                      Column(
+                        children:
+                            currentQuestion['answers'].keys.map<Widget>((key) {
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 16.0),
+                            child: _answerButton(
+                              answerText: key,
+                              isSelected:
+                                  _selectedAnswers[_currentQuestionIndex] ==
+                                      key,
+                              onTap: () {
+                                setState(() {
+                                  _selectedAnswers[_currentQuestionIndex] = key;
+                                });
+                              },
+                            ),
+                          );
+                        }).toList(),
+                      ),
                       CustomReviewButton(
                         buttonText: _currentQuestionIndex + 1 == totalQuestions
                             ? "Sonucu Gör"
@@ -157,33 +161,20 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
     );
   }
 
-  Future<void> _showResult(BuildContext context, List<UserExam> exams) async {
-    int totalScore = 0;
-    String userExamId = '';
+  Future<void> _showResult(BuildContext context, List<ExamModel> exams) async {
+    double totalScore = 0;
 
-    // Toplam puanı hesapla
     _selectedAnswers.forEach((index, selectedAnswer) {
-      final selectedAnswerValue = exams[_currentQuestionIndex]
-          .exam
-          .questions[index]
-          .answers[selectedAnswer];
-
+      final selectedAnswerValue =
+          exams.first.questions[index]['answers'][selectedAnswer];
       if (selectedAnswerValue == true) {
         totalScore += 20;
       }
-
-      userExamId = exams[index].id;
     });
 
-    BlocProvider.of<ExamBloc>(context)
-        .add(UpdateExamResult(userExamId, totalScore));
+    context.read<ExamBloc>().add(SaveExamResult(totalScore, true));
 
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => const SuccessModelResultScreen(),
-      ),
-    );
+    debugPrint(totalScore.toString());
   }
 
   Widget _answerButton({

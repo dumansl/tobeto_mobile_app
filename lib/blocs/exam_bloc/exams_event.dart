@@ -2,9 +2,11 @@ abstract class ExamEvent {}
 
 class FetchExams extends ExamEvent {}
 
-class UpdateExamResult extends ExamEvent {
-  final String userExamId;
-  final int totalScore;
+class SaveExamResult extends ExamEvent {
+  final double score;
+  final bool isCompleted;
 
-  UpdateExamResult(this.userExamId, this.totalScore);
+  SaveExamResult(this.score, this.isCompleted);
 }
+
+class FetchExamResult extends ExamEvent {}

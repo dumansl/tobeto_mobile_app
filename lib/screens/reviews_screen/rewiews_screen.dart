@@ -5,6 +5,7 @@ import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_event.dart';
 import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_state.dart';
 import 'package:tobeto_mobile_app/model/exam_model.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/screens/reviews_screen/area_exam_screen.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -246,7 +247,7 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  Widget _examCard(BuildContext context, {required UserExam exam}) {
+  Widget _examCard(BuildContext context, {required ExamModel exam}) {
     return Container(
       margin: EdgeInsets.only(top: ScreenPadding.padding8px),
       width: double.infinity,
@@ -275,7 +276,7 @@ class RewiewsScreen extends StatelessWidget {
           SizedBox(width: ScreenPadding.padding8px),
           Expanded(
             child: Text(
-              exam.exam.exam,
+              exam.exam,
               style: TobetoTextStyle.poppins(context).subtitleWhiteSemiBold20,
               overflow: TextOverflow.ellipsis,
             ),
@@ -285,7 +286,7 @@ class RewiewsScreen extends StatelessWidget {
             onPressed: () {
               _showCustomDialog(context, exam);
             },
-            backgroundColor: TobetoColor.card.white,
+            backgroundColor: Theme.of(context).colorScheme.primaryContainer,
             buttonText: TobetoText.evaluationCardButton,
             style: TobetoTextStyle.poppins(context).captionBlackBold12,
           ),
@@ -330,7 +331,7 @@ class RewiewsScreen extends StatelessWidget {
     );
   }
 
-  void _showCustomDialog(BuildContext context, UserExam exam) {
+  void _showCustomDialog(BuildContext context, ExamModel exam) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -339,7 +340,7 @@ class RewiewsScreen extends StatelessWidget {
             text: TextSpan(
               children: [
                 TextSpan(
-                  text: '${exam.exam.exam}\n',
+                  text: '${exam.exam}\n',
                   style:
                       TobetoTextStyle.poppins(context).subtitleBlackSemiBold20,
                 ),
@@ -350,7 +351,7 @@ class RewiewsScreen extends StatelessWidget {
                 ),
                 TextSpan(
                   text:
-                      'Sınav Süresi : ${exam.exam.duration} Dakika Soru\nSayısı : ${exam.exam.duration}\nSoru Tipi : ${exam.exam.numberOfQuestion}',
+                      'Sınav Süresi : ${exam.examDuration} Dakika Soru\nSayısı : ${exam.numberOfQuestions}\nSoru Tipi : ${exam.questionType}',
                   style:
                       TobetoTextStyle.poppins(context).captionBlackSemiBold15,
                 ),

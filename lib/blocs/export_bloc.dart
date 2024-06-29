@@ -19,6 +19,7 @@ export 'education_life_bloc/education_life_event.dart';
 export 'education_life_bloc/education_life_state.dart';
 export 'exam_bloc/exams_bloc.dart';
 export 'exam_bloc/exams_event.dart';
+export 'exam_bloc/exams_state.dart';
 export 'faq_bloc/faq_bloc.dart';
 export 'faq_bloc/faq_event.dart';
 export 'faq_bloc/faq_state.dart';
