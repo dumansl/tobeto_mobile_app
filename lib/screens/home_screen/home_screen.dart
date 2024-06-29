@@ -114,7 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   children: [
                     InkWell(
                       onTap: () {
-                        pushWithoutNavBar(
+                        pushReplacementWithoutNavBar(
                             context,
                             MaterialPageRoute(
                                 builder: (context) =>
