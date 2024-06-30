@@ -118,30 +118,7 @@ class _EducationDetailsState extends State<EducationDetails> {
                   child: Text(_courseDetails!.title, style: TobetoTextStyle.poppins(context).subtitleBlackBold20),
                 ),
                 Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        _isLiked ? Icons.favorite : Icons.favorite_border,
-                        color: _isLiked ? Colors.red : (isDarkMode ? Colors.white : null),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isLiked = !_isLiked;
-                        });
-                      },
-                    ),
-                    IconButton(
-                      icon: Icon(
-                        _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                        color: _isBookmarked ? Colors.yellow : (isDarkMode ? Colors.white : null),
-                      ),
-                      onPressed: () {
-                        setState(() {
-                          _isBookmarked = !_isBookmarked;
-                        });
-                      },
-                    ),
-                  ],
+                  children: [],
                 ),
               ],
             ),
@@ -286,12 +263,13 @@ class _EducationDetailsState extends State<EducationDetails> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Icon(icon, size: 20, color: Theme.of(context).colorScheme.onSecondary),
+          Icon(icon, size: 20, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
           const SizedBox(height: 4.0),
           Flexible(
             child: Text(
               text,
-              style: TextStyle(fontSize: 12, color: Theme.of(context).colorScheme.onSecondary),
+              style: TextStyle(
+                  fontSize: 12, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
               textAlign: TextAlign.center,
             ),
           ),
