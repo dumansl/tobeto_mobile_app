@@ -23,7 +23,7 @@ class ExamResultScreen extends StatelessWidget {
         body: BlocBuilder<ExamBloc, ExamState>(
           builder: (context, state) {
             if (state is ExamResultLoading) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (state is ExamResultLoaded) {
               final examResult = state.examResult;
               return Column(
@@ -53,7 +53,7 @@ class ExamResultScreen extends StatelessWidget {
             } else if (state is ExamResultError) {
               return Center(child: Text(state.message));
             } else {
-              return Center(child: Text("Bir hata oluştu"));
+              return const Center(child: Text("Bir hata oluştu"));
             }
           },
         ),
