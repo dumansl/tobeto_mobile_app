@@ -5,7 +5,6 @@ import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_event.dart';
 import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_state.dart';
 import 'package:tobeto_mobile_app/model/exam_model.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/screens/reviews_screen/area_exam_screen.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
@@ -367,7 +366,7 @@ class RewiewsScreen extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => const AreaExamScreen(),
+                    builder: (context) => AreaExamScreen(exam: exam),
                   ),
                 );
               },

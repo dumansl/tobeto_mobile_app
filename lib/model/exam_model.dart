@@ -1,4 +1,5 @@
 class ExamModel {
+  String examId;
   String exam;
   int examDuration;
   int numberOfQuestions;
@@ -6,6 +7,7 @@ class ExamModel {
   List<Map<String, dynamic>> questions;
 
   ExamModel({
+    required this.examId,
     required this.exam,
     required this.examDuration,
     required this.numberOfQuestions,
@@ -17,6 +19,7 @@ class ExamModel {
     List<Map<String, dynamic>> questions =
         List<Map<String, dynamic>>.from(map['questions'] ?? []);
     return ExamModel(
+      examId: map['examId'] ?? '',
       exam: map['exam'] ?? '',
       examDuration: map['exam_duration'] ?? 0,
       numberOfQuestions: map['number_of_question'] ?? 0,
@@ -27,23 +30,35 @@ class ExamModel {
 }
 
 class ExamResult {
-  final double? score;
-  final bool? isCompleted;
+  final int correctAnswers;
+  final int incorrectAnswers;
+  final int unansweredQuestions;
+  final double score;
+  final bool isCompleted;
 
   ExamResult({
-    this.score,
-    this.isCompleted,
+    required this.correctAnswers,
+    required this.incorrectAnswers,
+    required this.unansweredQuestions,
+    required this.score,
+    required this.isCompleted,
   });
 
   factory ExamResult.fromMap(Map<String, dynamic> map) {
     return ExamResult(
-      score: map['score'] ?? 0,
+      correctAnswers: map['correctCount'] ?? 0,
+      incorrectAnswers: map['incorrectCount'] ?? 0,
+      unansweredQuestions: map['unansweredCount'] ?? 0,
+      score: map['score'] ?? 0.0,
       isCompleted: map['isCompleted'] ?? false,
     );
   }
 
   Map<String, dynamic> toMap() {
     return {
+      'correctAnswers': correctAnswers,
+      'incorrectAnswers': incorrectAnswers,
+      'unansweredQuestions': unansweredQuestions,
       'score': score,
       'isCompleted': isCompleted,
     };
@@ -51,6 +66,6 @@ class ExamResult {
 
   @override
   String toString() {
-    return 'ExamResult{score: $score, isCompleted: $isCompleted}';
+    return 'ExamResult{correctAnswers: $correctAnswers, incorrectAnswers: $incorrectAnswers, unansweredQuestions: $unansweredQuestions, score: $score, isCompleted: $isCompleted}';
   }
 }

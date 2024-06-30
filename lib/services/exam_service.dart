@@ -24,7 +24,14 @@ class ExamService {
     }
   }
 
-  Future<void> saveExamResult(double score, bool isCompleted) async {
+  Future<void> saveExamResult({
+    required int correctCount,
+    required int incorrectCount,
+    required int unansweredCount,
+    required double score,
+    required bool isCompleted,
+    required String examId,
+  }) async {
     try {
       User? user = _auth.currentUser;
 
@@ -33,7 +40,11 @@ class ExamService {
             .collection('users')
             .doc(user.uid)
             .collection('my_exams')
-            .add({
+            .doc(examId)
+            .set({
+          'correctCount': correctCount,
+          'incorrectCount': incorrectCount,
+          'unansweredCount': unansweredCount,
           'score': score,
           'isCompleted': isCompleted,
         });
@@ -45,22 +56,27 @@ class ExamService {
     }
   }
 
-  Future<List<ExamResult>> fetchExamResults() async {
+  Future<ExamResult> fetchExamResults({required String examId}) async {
     try {
       User? user = _auth.currentUser;
 
       if (user != null) {
-        QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
-            .collection('users')
-            .doc(user.uid)
-            .collection('my_exams')
-            .get();
+        DocumentSnapshot<Map<String, dynamic>> documentSnapshot =
+            await _firestore
+                .collection('users')
+                .doc(user.uid)
+                .collection('my_exams')
+                .doc(examId)
+                .get();
 
-        List<ExamResult> result = querySnapshot.docs
-            .map((doc) => ExamResult.fromMap(doc.data()))
-            .toList();
-        debugPrint(result.toString());
-        return result;
+        // Check if the document exists
+        if (documentSnapshot.exists) {
+          ExamResult result = ExamResult.fromMap(documentSnapshot.data()!);
+          debugPrint("Burada $result");
+          return result;
+        } else {
+          throw Exception('Document does not exist');
+        }
       } else {
         throw Exception('No authenticated user');
       }
