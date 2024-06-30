@@ -12,8 +12,7 @@ class ProfileEditPage extends StatefulWidget {
   State<ProfileEditPage> createState() => _ProfileEditPageState();
 }
 
-class _ProfileEditPageState extends State<ProfileEditPage>
-    with SingleTickerProviderStateMixin {
+class _ProfileEditPageState extends State<ProfileEditPage> with SingleTickerProviderStateMixin {
   late TabController _tabController;
 
   @override
@@ -60,7 +59,7 @@ class _ProfileEditPageState extends State<ProfileEditPage>
         ),
         title: Text(
           TobetoText.profileEditAppBar,
-          style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
+          style: TobetoTextStyle.poppins(context).captionPurpleBold24,
         ),
       ),
       body: Padding(
