@@ -51,23 +51,19 @@ class CustomTextField extends StatelessWidget {
         suffixIcon: suffixIcon,
         counterText: "",
         focusedBorder: OutlineInputBorder(
-          borderRadius:
-              BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
-          borderSide: BorderSide(
-              color: TobetoColor.purple, width: ScreenPadding.padding2px),
+          borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
+          borderSide: BorderSide(color: TobetoColor.purple, width: ScreenPadding.padding2px),
         ),
         labelText: title,
         labelStyle: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
-        floatingLabelStyle:
-            TobetoTextStyle.poppins(context).captionPurpleNormal18,
+        floatingLabelStyle: TobetoTextStyle.poppins(context).captionPurpleNormal18,
         border: OutlineInputBorder(
             borderRadius: BorderRadius.all(
           Radius.circular(SizeRadius.radius12px),
         )),
         enabledBorder: OutlineInputBorder(
-          borderSide: const BorderSide(color: TobetoColor.purple, width: 1.0),
-          borderRadius:
-              BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
+          borderSide: BorderSide(color: TobetoColor.background.transparent),
+          borderRadius: BorderRadius.all(Radius.circular(SizeRadius.radius10px)),
         ),
       ),
     );

@@ -14,8 +14,7 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _HomeState extends State<DashboardScreen> {
-  final PersistentTabController _controller =
-      PersistentTabController(initialIndex: 2);
+  final PersistentTabController _controller = PersistentTabController(initialIndex: 2);
 
   @override
   void initState() {
@@ -47,11 +46,11 @@ class _HomeState extends State<DashboardScreen> {
               item: ItemConfig(
                 icon: Image.asset(
                   ImagePath.homepageActive,
-                  width: IconSize.size35px,
+                  width: ScreenUtil.getWidth(context) * 0.085,
                 ),
                 inactiveIcon: Image.asset(
                   ImagePath.homepage,
-                  width: IconSize.size35px,
+                  width: ScreenUtil.getWidth(context) * 0.085,
                 ),
               )),
           PersistentTabConfig(
