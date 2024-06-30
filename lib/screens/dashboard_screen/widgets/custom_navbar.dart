@@ -21,9 +21,9 @@ class CustomNavBar extends StatelessWidget {
         children: <Widget>[
           Expanded(
             child: IconTheme(
-              data: IconThemeData(
-                size: IconSize.size35px,
-              ),
+              data: const IconThemeData(
+                  // size: IconSize.size35px,
+                  ),
               child: isSelected ? item.icon : item.inactiveIcon,
             ),
           ),

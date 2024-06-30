@@ -29,14 +29,11 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.light;
-    final assetImagePath = isDarkMode
-        ? 'assets/images/grey-tobeto.png'
-        : 'assets/images/white-tobeto.png';
+    final assetImagePath = isDarkMode ? 'assets/images/grey-tobeto.png' : 'assets/images/white-tobeto.png';
     return BlocListener<AuthBloc, AuthState>(
       listener: (context, state) {
         if (state is NotAuthenticated) {
-          pushReplacementWithoutNavBar(context,
-              MaterialPageRoute(builder: (context) => const LoginScreen()));
+          pushReplacementWithoutNavBar(context, MaterialPageRoute(builder: (context) => const LoginScreen()));
         }
       },
       child: AppBar(
@@ -57,7 +54,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                 icon: Icon(
                   Icons.arrow_back_rounded,
                   color: TobetoColor.purple,
-                  size: IconSize.size35px,
+                  size: ScreenUtil.getWidth(context) * 0.08,
                 ),
                 onPressed: () {
                   Navigator.pop(context);
@@ -65,8 +62,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
               )
             : null,
         actions: [
-          BlocBuilder<ProfilePhotoBloc, ProfilePhotoState>(
-              builder: (context, state) {
+          BlocBuilder<ProfilePhotoBloc, ProfilePhotoState>(builder: (context, state) {
             if (state is ProfilePhotoLoading) {
               return const Center(child: CircularProgressIndicator());
             } else if (state is ProfilePhotoLoaded) {
@@ -74,8 +70,8 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                 padding: EdgeInsets.only(right: ScreenPadding.padding12px),
                 child: Stack(alignment: Alignment.center, children: [
                   Container(
-                    width: ScreenUtil.getWidth(context) * 0.155,
-                    height: ScreenUtil.getHeight(context) * 0.155,
+                    width: ScreenUtil.getWidth(context) * 0.140,
+                    height: ScreenUtil.getHeight(context) * 0.140,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       gradient: LinearGradient(
@@ -111,8 +107,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                               const SizedBox(width: 8),
                               Text(
                                 TobetoText.exit,
-                                style: TobetoTextStyle.poppins(context)
-                                    .bodyBlackBold16,
+                                style: TobetoTextStyle.poppins(context).bodyBlackBold16,
                               ),
                             ],
                           ),
@@ -120,7 +115,7 @@ class FixedAppbar extends StatelessWidget implements PreferredSizeWidget {
                       ];
                     },
                     icon: CircleAvatar(
-                      radius: ScreenUtil.getWidth(context) * 0.075,
+                      radius: ScreenUtil.getWidth(context) * 0.065,
                       foregroundImage: state.imageUrl.isNotEmpty
                           ? NetworkImage(state.imageUrl)
                           : const AssetImage(ImagePath.defaultProfilePhoto),
