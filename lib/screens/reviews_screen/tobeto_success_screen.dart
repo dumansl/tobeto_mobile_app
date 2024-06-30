@@ -94,6 +94,7 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
                     ),
                     SizedBox(height: ScreenPadding.padding16px),
                     _tobetoSuccesTable(context),
+                    SizedBox(height: ScreenPadding.padding58px * 1.5),
                   ],
                 ),
               ),

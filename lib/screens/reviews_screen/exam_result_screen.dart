@@ -13,10 +13,10 @@ class ExamResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final isDarkMode = Theme.of(context).brightness == Brightness.light;
     return BlocProvider(
       create: (context) => ExamBloc()..add(FetchExamResult(examId)),
       child: Scaffold(
-        backgroundColor: TobetoColor.background.lightGrey,
         appBar: const ReviewsAppbar(
           title: "Sınav Sonucu",
         ),
@@ -31,22 +31,30 @@ class ExamResultScreen extends StatelessWidget {
                   Expanded(
                       flex: 25,
                       child: _resultCard(context,
-                          assetName: ImagePath.trueLight,
+                          assetName: isDarkMode
+                              ? ImagePath.trueLight
+                              : ImagePath.trueDark,
                           text: "${examResult.correctAnswers}\nDoğru")),
                   Expanded(
                       flex: 25,
                       child: _resultCard(context,
-                          assetName: ImagePath.falseLight,
+                          assetName: isDarkMode
+                              ? ImagePath.falseLight
+                              : ImagePath.falseDark,
                           text: "${examResult.incorrectAnswers}\nYanlış")),
                   Expanded(
                       flex: 25,
                       child: _resultCard(context,
-                          assetName: ImagePath.emptyLight,
+                          assetName: isDarkMode
+                              ? ImagePath.emptyLight
+                              : ImagePath.emptyDark,
                           text: "${examResult.unansweredQuestions}\nBoş")),
                   Expanded(
                       flex: 25,
                       child: _resultCard(context,
-                          assetName: ImagePath.pointLight,
+                          assetName: isDarkMode
+                              ? ImagePath.pointLight
+                              : ImagePath.pointDark,
                           text: "${examResult.score}\nPuan")),
                 ],
               );

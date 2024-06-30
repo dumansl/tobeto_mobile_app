@@ -24,7 +24,6 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: TobetoColor.background.lightGrey,
       appBar: const ReviewsAppbar(
         title: "Sınav Ekranı",
       ),
@@ -41,7 +40,7 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
       margin: EdgeInsets.only(top: ScreenPadding.padding24px),
       padding: EdgeInsets.all(ScreenPadding.padding24px),
       decoration: BoxDecoration(
-        color: TobetoColor.background.white,
+        color: Theme.of(context).colorScheme.primaryContainer,
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(SizeRadius.radius20px),
           topRight: Radius.circular(SizeRadius.radius20px),
