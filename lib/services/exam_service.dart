@@ -4,67 +4,68 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/exam_model.dart';
 
 class ExamService {
-  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-  final userId = FirebaseAuth.instance.currentUser!.uid;
+  final FirebaseFirestore _firestore;
+  final FirebaseAuth _auth;
 
-  Future<List<UserExam>> getExamData() async {
+  ExamService({
+    FirebaseFirestore? firestore,
+    FirebaseAuth? auth,
+  })  : _firestore = firestore ?? FirebaseFirestore.instance,
+        _auth = auth ?? FirebaseAuth.instance;
+
+  Future<List<ExamModel>> fetchReviewData() async {
     try {
-      QuerySnapshot<Map<String, dynamic>> snapshot = await _firestore
-          .collection('users')
-          .doc(userId)
-          .collection('my_exams')
-          .get();
+      QuerySnapshot snapshot = await _firestore.collection('reviews').get();
+      return snapshot.docs.map((doc) {
+        return ExamModel.fromMap(doc.data() as Map<String, dynamic>);
+      }).toList();
+    } catch (e) {
+      throw Exception('Error fetching review data: $e');
+    }
+  }
 
-      if (snapshot.docs.isNotEmpty) {
-        List<UserExam> exams = [];
+  Future<void> saveExamResult(double score, bool isCompleted) async {
+    try {
+      User? user = _auth.currentUser;
 
-        for (var doc in snapshot.docs) {
-          var data = doc.data();
-          data['id'] = doc.id;
-
-          if (data.containsKey('exam') && data['exam'] is DocumentReference) {
-            DocumentSnapshot<Map<String, dynamic>> examSnapshot =
-                await (data['exam'] as DocumentReference).get()
-                    as DocumentSnapshot<Map<String, dynamic>>;
-            data['exam'] = examSnapshot.data();
-          }
-
-          exams.add(UserExam.fromMap(data, doc.id));
-        }
-
-        return exams;
+      if (user != null) {
+        await _firestore
+            .collection('users')
+            .doc(user.uid)
+            .collection('my_exams')
+            .add({
+          'score': score,
+          'isCompleted': isCompleted,
+        });
       } else {
-        return [];
+        throw Exception('No authenticated user');
       }
     } catch (e) {
-      debugPrint("Error getting exam data: $e");
-      return [];
+      throw Exception('Failed to save quiz result: $e');
     }
   }
 
-  Future<void> updateExamStatus(String examId, bool isCompleted) async {
+  Future<List<ExamResult>> fetchExamResults() async {
     try {
-      await _firestore
-          .collection('users')
-          .doc(userId)
-          .collection('my_exams')
-          .doc(examId)
-          .update({'isCompleted': isCompleted});
-    } catch (e) {
-      debugPrint("Error updating exam status: $e");
-    }
-  }
+      User? user = _auth.currentUser;
 
-  Future<void> updateExamScore(String examId, Map<String, int> score) async {
-    try {
-      await _firestore
-          .collection('users')
-          .doc(userId)
-          .collection('my_exams')
-          .doc(examId)
-          .update({'score': score});
+      if (user != null) {
+        QuerySnapshot<Map<String, dynamic>> querySnapshot = await _firestore
+            .collection('users')
+            .doc(user.uid)
+            .collection('my_exams')
+            .get();
+
+        List<ExamResult> result = querySnapshot.docs
+            .map((doc) => ExamResult.fromMap(doc.data()))
+            .toList();
+        debugPrint(result.toString());
+        return result;
+      } else {
+        throw Exception('No authenticated user');
+      }
     } catch (e) {
-      debugPrint("Error updating exam score: $e");
+      throw Exception('Failed to fetch quiz results: $e');
     }
   }
 }

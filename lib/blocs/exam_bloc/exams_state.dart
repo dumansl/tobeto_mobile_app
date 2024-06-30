@@ -7,21 +7,25 @@ class ExamInitialState extends ExamState {}
 class ExamLoading extends ExamState {}
 
 class ExamLoaded extends ExamState {
-  final List<UserExam> exams;
+  final List<ExamModel> exams;
 
   ExamLoaded(this.exams);
 }
 
-class ExamUpdated extends ExamState {
-  final List<UserExam> exams;
+class ExamResultLoading extends ExamState {}
 
-  ExamUpdated(this.exams);
+class ExamResultLoaded extends ExamState {
+  final List<ExamResult> quizResults;
+
+  ExamResultLoaded(this.quizResults);
 }
 
-class ExamUpdatedError extends ExamState {
+class ExamResultSaved extends ExamState {}
+
+class ExamResultError extends ExamState {
   final String message;
 
-  ExamUpdatedError(this.message);
+  ExamResultError(this.message);
 }
 
 class ExamError extends ExamState {

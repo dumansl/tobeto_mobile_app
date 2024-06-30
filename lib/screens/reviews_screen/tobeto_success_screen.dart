@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/tobeto_success_bloc/tobeto_success_bloc.dart';
-import 'package:tobeto_mobile_app/blocs/tobeto_success_bloc/tobeto_success_event.dart';
-import 'package:tobeto_mobile_app/blocs/tobeto_success_bloc/tobeto_success_state.dart';
 import 'package:tobeto_mobile_app/screens/reviews_screen/reviews_widgets/custom_headline_text.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
+import 'package:tobeto_mobile_app/model/tobeto_success_model.dart';
+import 'package:tobeto_mobile_app/services/tobeto_success_service.dart';
 
 class TobetoSuccesScreen extends StatefulWidget {
   const TobetoSuccesScreen({super.key});
@@ -16,11 +14,30 @@ class TobetoSuccesScreen extends StatefulWidget {
 }
 
 class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
+  final TobetoSuccessService _service = TobetoSuccessService();
+  List<QuizResult> _quizResults = [];
+  bool _isLoading = true;
+  String? _errorMessage;
+
   @override
   void initState() {
     super.initState();
-    context.read<BusinessSuccessBloc>().add(FetchBusinessSuccess());
-    context.read<BusinessSuccessBloc>().add(FetchQuizResult());
+    _fetchData();
+  }
+
+  Future<void> _fetchData() async {
+    try {
+      final quizResults = await _service.fetchQuizResults();
+      setState(() {
+        _quizResults = quizResults;
+        _isLoading = false;
+      });
+    } catch (e) {
+      setState(() {
+        _errorMessage = 'Failed to fetch data: $e';
+        _isLoading = false;
+      });
+    }
   }
 
   @override
@@ -32,15 +49,20 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Column(
-        children: [
-          const Expanded(flex: 15, child: Center(child: CustomHeadlineText())),
-          Expanded(
-            flex: 85,
-            child: _tobetoSuccesContent(context),
-          ),
-        ],
-      ),
+      body: _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : _errorMessage != null
+              ? Center(child: Text('Error: $_errorMessage'))
+              : Column(
+                  children: [
+                    const Expanded(
+                        flex: 15, child: Center(child: CustomHeadlineText())),
+                    Expanded(
+                      flex: 85,
+                      child: _tobetoSuccesContent(context),
+                    ),
+                  ],
+                ),
     );
   }
 
@@ -83,101 +105,57 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
   }
 
   Widget _startEvaluateButton(BuildContext context) {
-    return BlocBuilder<BusinessSuccessBloc, BusinessSuccessState>(
-      builder: (context, state) {
-        if (state is BusinessSuccessInitial) {
-          return Container(
-            height: ScreenUtil.getHeight(context) * 0.12,
-            width: double.infinity,
-            padding: EdgeInsets.symmetric(
-                horizontal: ScreenPadding.padding16px,
-                vertical: ScreenPadding.padding32px),
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [
-                  TobetoColor.purple,
-                  TobetoColor.purple.withOpacity(0.8),
-                  TobetoColor.purple.withOpacity(0.6),
-                  TobetoColor.purple.withOpacity(0.4),
-                ],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-              ),
-              borderRadius: BorderRadius.only(
-                bottomLeft: Radius.circular(SizeRadius.radius30px),
-                topRight: Radius.circular(SizeRadius.radius30px),
-              ),
-            ),
-            child: Center(
-              child: Text(
-                'Initializing...',
-                style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
-              ),
+    final isCompleted =
+        _quizResults.isNotEmpty ? _quizResults[0].isCompleted : false;
+    return InkWell(
+      onTap: () {
+        if (isCompleted) {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SuccessModelResultScreen(),
             ),
           );
-        } else if (state is QuizResultLoading) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (state is QuizResultLoaded) {
-          final isCompleted = state.quizResults.isNotEmpty
-              ? state.quizResults[0].isCompleted
-              : false;
-          debugPrint("Burada $isCompleted");
-          return InkWell(
-            onTap: () {
-              if (isCompleted) {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SuccessModelResultScreen(),
-                  ),
-                );
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SuccessExamScreen(),
-                  ),
-                );
-              }
-            },
-            child: Container(
-              height: ScreenUtil.getHeight(context) * 0.12,
-              width: double.infinity,
-              padding: EdgeInsets.symmetric(
-                  horizontal: ScreenPadding.padding16px,
-                  vertical: ScreenPadding.padding32px),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [
-                    TobetoColor.purple,
-                    TobetoColor.purple.withOpacity(0.8),
-                    TobetoColor.purple.withOpacity(0.6),
-                    TobetoColor.purple.withOpacity(0.4),
-                  ],
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                ),
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(SizeRadius.radius30px),
-                  topRight: Radius.circular(SizeRadius.radius30px),
-                ),
-              ),
-              child: Center(
-                child: Text(
-                  isCompleted!
-                      ? TobetoText.tmainCard2RaporButton
-                      : TobetoText.evaluationCard5,
-                  style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
-                ),
-              ),
-            ),
-          );
-        } else if (state is BusinessSuccessError) {
-          return Center(child: Text('Error: ${state.message}'));
         } else {
-          return Container();
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const SuccessExamScreen(),
+            ),
+          );
         }
       },
+      child: Container(
+        height: ScreenUtil.getHeight(context) * 0.12,
+        width: double.infinity,
+        padding: EdgeInsets.symmetric(
+            horizontal: ScreenPadding.padding16px,
+            vertical: ScreenPadding.padding32px),
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              TobetoColor.purple,
+              TobetoColor.purple.withOpacity(0.8),
+              TobetoColor.purple.withOpacity(0.6),
+              TobetoColor.purple.withOpacity(0.4),
+            ],
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+          ),
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(SizeRadius.radius30px),
+            topRight: Radius.circular(SizeRadius.radius30px),
+          ),
+        ),
+        child: Center(
+          child: Text(
+            isCompleted!
+                ? TobetoText.tmainCard2RaporButton
+                : TobetoText.evaluationCard5,
+            style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
+          ),
+        ),
+      ),
     );
   }
 

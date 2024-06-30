@@ -5,43 +5,41 @@ import 'package:tobeto_mobile_app/model/exam_model.dart';
 import 'package:tobeto_mobile_app/services/exam_service.dart';
 
 class ExamBloc extends Bloc<ExamEvent, ExamState> {
-  final ExamService examService = ExamService();
+  final ExamService _examService = ExamService();
   ExamBloc() : super(ExamInitialState()) {
     on<FetchExams>(fetchExams);
+    on<SaveExamResult>(saveExamResult);
+    on<FetchExamResult>(fetchExamResultSuccess);
   }
 
   Future<void> fetchExams(FetchExams event, Emitter<ExamState> emit) async {
     emit(ExamLoading());
     try {
-      final List<UserExam> exams = await examService.getExamData();
+      final List<ExamModel> exams = await _examService.fetchReviewData();
       emit(ExamLoaded(exams));
     } catch (e) {
       emit(ExamError(e.toString()));
     }
   }
 
-  void updateExamResult(UpdateExamResult event, Emitter<ExamState> emit) {
-    emit(ExamLoading());
-    if (state is ExamLoaded) {
-      final List<UserExam> updatedExams =
-          (state as ExamLoaded).exams.map((exam) {
-        if (exam.id == event.userExamId) {
-          final updatedExam = UserExam(
-            id: exam.id,
-            exam: exam.exam,
-            score: {
-              'score': event.totalScore,
-            },
-            isCompleted: true,
-          );
-          return updatedExam;
-        }
-        return exam;
-      }).toList();
+  Future<void> saveExamResult(
+      SaveExamResult event, Emitter<ExamState> emit) async {
+    try {
+      await _examService.saveExamResult(event.score, event.isCompleted);
+      emit(ExamResultSaved());
+    } catch (e) {
+      emit(ExamResultError(e.toString()));
+    }
+  }
 
-      emit(ExamLoaded(updatedExams));
-    } else {
-      emit(ExamUpdatedError("Exam state is not loaded"));
+  Future<void> fetchExamResultSuccess(
+      FetchExamResult event, Emitter<ExamState> emit) async {
+    emit(ExamResultLoading());
+    try {
+      final data = await _examService.fetchExamResults();
+      emit(ExamResultLoaded(data));
+    } catch (e) {
+      emit(ExamResultError(e.toString()));
     }
   }
 }
