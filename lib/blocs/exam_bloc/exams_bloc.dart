@@ -9,7 +9,7 @@ class ExamBloc extends Bloc<ExamEvent, ExamState> {
   ExamBloc() : super(ExamInitialState()) {
     on<FetchExams>(fetchExams);
     on<SaveExamResult>(saveExamResult);
-    on<FetchExamResult>(fetchExamResultSuccess);
+    on<FetchExamResult>(_fetchExamResult);
   }
 
   Future<void> fetchExams(FetchExams event, Emitter<ExamState> emit) async {
@@ -25,19 +25,27 @@ class ExamBloc extends Bloc<ExamEvent, ExamState> {
   Future<void> saveExamResult(
       SaveExamResult event, Emitter<ExamState> emit) async {
     try {
-      await _examService.saveExamResult(event.score, event.isCompleted);
+      await _examService.saveExamResult(
+        correctCount: event.correctCount,
+        incorrectCount: event.incorrectCount,
+        unansweredCount: event.unansweredCount,
+        score: event.score,
+        isCompleted: event.isCompleted,
+        examId: event.examId,
+      );
       emit(ExamResultSaved());
     } catch (e) {
       emit(ExamResultError(e.toString()));
     }
   }
 
-  Future<void> fetchExamResultSuccess(
+  Future<void> _fetchExamResult(
       FetchExamResult event, Emitter<ExamState> emit) async {
     emit(ExamResultLoading());
     try {
-      final data = await _examService.fetchExamResults();
-      emit(ExamResultLoaded(data));
+      final ExamResult examResult =
+          await _examService.fetchExamResults(examId: event.examId);
+      emit(ExamResultLoaded(examResult));
     } catch (e) {
       emit(ExamResultError(e.toString()));
     }

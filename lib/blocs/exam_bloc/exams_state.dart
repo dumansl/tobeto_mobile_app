@@ -12,14 +12,6 @@ class ExamLoaded extends ExamState {
   ExamLoaded(this.exams);
 }
 
-class ExamResultLoading extends ExamState {}
-
-class ExamResultLoaded extends ExamState {
-  final List<ExamResult> quizResults;
-
-  ExamResultLoaded(this.quizResults);
-}
-
 class ExamResultSaved extends ExamState {}
 
 class ExamResultError extends ExamState {
@@ -32,4 +24,14 @@ class ExamError extends ExamState {
   final String message;
 
   ExamError(this.message);
+}
+
+class ExamResultInitial extends ExamState {}
+
+class ExamResultLoading extends ExamState {}
+
+class ExamResultLoaded extends ExamState {
+  final ExamResult examResult;
+
+  ExamResultLoaded(this.examResult);
 }

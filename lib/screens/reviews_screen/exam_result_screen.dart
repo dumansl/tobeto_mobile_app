@@ -1,42 +1,95 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
+import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_event.dart';
+import 'package:tobeto_mobile_app/blocs/exam_bloc/exams_state.dart';
+import 'reviews_widgets/reviews_appbar.dart';
 
 class ExamResultScreen extends StatelessWidget {
-  final int totalQuestions;
-  final int correctAnswers;
-
-  const ExamResultScreen({
-    super.key,
-    required this.totalQuestions,
-    required this.correctAnswers,
-  });
+  final String examId;
+  const ExamResultScreen({super.key, required this.examId});
 
   @override
   Widget build(BuildContext context) {
-    double scorePercentage = (correctAnswers / totalQuestions) * 100;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quiz Result'),
+    return BlocProvider(
+      create: (context) => ExamBloc()..add(FetchExamResult(examId)),
+      child: Scaffold(
+        backgroundColor: TobetoColor.background.lightGrey,
+        appBar: const ReviewsAppbar(
+          title: "Sınav Sonucu",
+        ),
+        body: BlocBuilder<ExamBloc, ExamState>(
+          builder: (context, state) {
+            if (state is ExamResultLoading) {
+              return Center(child: CircularProgressIndicator());
+            } else if (state is ExamResultLoaded) {
+              final examResult = state.examResult;
+              return Column(
+                children: [
+                  Expanded(
+                      flex: 25,
+                      child: _resultCard(context,
+                          assetName: ImagePath.trueLight,
+                          text: "${examResult.correctAnswers}\nDoğru")),
+                  Expanded(
+                      flex: 25,
+                      child: _resultCard(context,
+                          assetName: ImagePath.falseLight,
+                          text: "${examResult.incorrectAnswers}\nYanlış")),
+                  Expanded(
+                      flex: 25,
+                      child: _resultCard(context,
+                          assetName: ImagePath.emptyLight,
+                          text: "${examResult.unansweredQuestions}\nBoş")),
+                  Expanded(
+                      flex: 25,
+                      child: _resultCard(context,
+                          assetName: ImagePath.pointLight,
+                          text: "${examResult.score}\nPuan")),
+                ],
+              );
+            } else if (state is ExamResultError) {
+              return Center(child: Text(state.message));
+            } else {
+              return Center(child: Text("Bir hata oluştu"));
+            }
+          },
+        ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Text(
-              'Quiz Finished!',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 20),
-            Text(
-              'Correct Answers: $correctAnswers / $totalQuestions',
-              style: const TextStyle(fontSize: 18),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Score: ${scorePercentage.toStringAsFixed(2)}%',
-              style: const TextStyle(fontSize: 18),
-            ),
-          ],
+    );
+  }
+
+  Widget _resultCard(BuildContext context,
+      {required String assetName, required String text}) {
+    return Container(
+      width: double.infinity,
+      margin: EdgeInsets.symmetric(
+          horizontal: ScreenPadding.screenpadding,
+          vertical: ScreenPadding.padding8px),
+      decoration: ShapeDecoration(
+        image: DecorationImage(
+          image: AssetImage(assetName),
+          fit: BoxFit.fitWidth,
+        ),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(25),
+        ),
+        shadows: const [
+          BoxShadow(
+            color: Color(0x3F000000),
+            blurRadius: 4,
+            offset: Offset(0, 4),
+            spreadRadius: 0,
+          )
+        ],
+      ),
+      child: Center(
+        child: Text(
+          text,
+          style: TobetoTextStyle.poppins(context).headlinePurpleSemiBold32,
+          textAlign: TextAlign.center,
         ),
       ),
     );
