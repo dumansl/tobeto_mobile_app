@@ -5,9 +5,9 @@ import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_state.dart';
 import 'package:tobeto_mobile_app/services/calendar_service.dart';
 
 class CalendarBloc extends Bloc<CalendarEvent, CalendarState> {
-  final CalendarService repository;
+  final CalendarService repository = CalendarService();
 
-  CalendarBloc(this.repository) : super(CalendarLoading()) {
+  CalendarBloc() : super(CalendarLoading()) {
     on<FetchLessons>((event, emit) async {
       try {
         final lessons = await repository.fetchLessons();

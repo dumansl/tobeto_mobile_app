@@ -1,5 +1,4 @@
 import 'package:appinio_video_player/appinio_video_player.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -54,7 +53,7 @@ class _CatalogVideoState extends State<CatalogVideo> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => VideoBloc(VideoRepository(FirebaseStorage.instance))
+      create: (context) => VideoBloc(VideoRepository())
         ..add(FetchVideo(widget.catalogCourse.videoUrl)),
       child: Scaffold(
         appBar: AppBar(

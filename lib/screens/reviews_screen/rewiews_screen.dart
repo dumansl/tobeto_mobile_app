@@ -58,10 +58,8 @@ class RewiewsScreen extends StatelessWidget {
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                   child: BlocBuilder<ExamBloc, ExamState>(
                     builder: (context, state) {
-                      if (state is ExamInitialState) {
+                      if (state is ExamInitialState || state is ExamLoading) {
                         context.read<ExamBloc>().add(FetchExams());
-                        return const Center(child: CircularProgressIndicator());
-                      } else if (state is ExamLoading) {
                         return const Center(child: CircularProgressIndicator());
                       } else if (state is ExamLoaded) {
                         return ListView.builder(
