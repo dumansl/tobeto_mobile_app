@@ -1,4 +1,3 @@
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -39,8 +38,7 @@ class TobetoMobileApp extends StatelessWidget {
             create: (context) => BusinessSuccessBloc()),
         BlocProvider<AnnouncementBloc>(create: (context) => AnnouncementBloc()),
         BlocProvider<VideoBloc>(
-            create: (context) =>
-                VideoBloc(VideoRepository(FirebaseStorage.instance))),
+            create: (context) => VideoBloc(VideoRepository())),
         BlocProvider<ApplicationBloc>(create: (context) => ApplicationBloc()),
         BlocProvider<WorkLifeBloc>(
             create: (context) => WorkLifeBloc()..add(LoadWorkLife())),

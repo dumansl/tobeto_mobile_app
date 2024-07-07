@@ -7,7 +7,6 @@ import 'package:tobeto_mobile_app/blocs/calendar_bloc/calendar_state.dart';
 
 import 'package:tobeto_mobile_app/model/calendar_model.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/services/calendar_service.dart';
 
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -22,7 +21,7 @@ class _SimpleEducationScreenState extends State<SimpleEducationScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => CalendarBloc(CalendarService())..add(FetchLessons()),
+      create: (context) => CalendarBloc()..add(FetchLessons()),
       child: Scaffold(
         appBar: FixedAppbar(
           title: Text(

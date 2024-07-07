@@ -1,13 +1,23 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:tobeto_mobile_app/model/press_model.dart';
+import 'package:tobeto_mobile_app/services/firebase_service.provider.dart';
+import 'package:tobeto_mobile_app/services/handler_errors.dart';
 
 class PressService {
-  final FirebaseFirestore _db = FirebaseFirestore.instance;
+  FirebaseFirestore get firestore => FirebaseServiceProvider().firestore;
 
   Future<List<PressModel>> getPress() async {
-    QuerySnapshot snapshot = await _db.collection('weInThePress').get();
-    List<PressModel> pressList =
-        snapshot.docs.map((doc) => PressModel.fromFirestore(doc)).toList();
-    return pressList;
+    return handleErrors(
+      operation: () async {
+        QuerySnapshot snapshot =
+            await firestore.collection('weInThePress').get();
+        return snapshot.docs
+            .map((doc) => PressModel.fromFirestore(doc))
+            .toList();
+      },
+      onError: (e) {
+        throw Exception('Error fetching press: $e');
+      },
+    );
   }
 }

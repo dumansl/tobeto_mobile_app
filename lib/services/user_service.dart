@@ -7,32 +7,40 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/model/user_model.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/screen/personal_information.dart';
+import 'package:tobeto_mobile_app/services/firebase_service.provider.dart';
 
 class UserService {
   final String userId;
-  FirebaseFirestore db = FirebaseFirestore.instance;
-  final FirebaseStorage storage = FirebaseStorage.instance;
+  FirebaseFirestore get db => FirebaseServiceProvider().firestore;
+  FirebaseStorage get storage => FirebaseServiceProvider().storage;
+  FirebaseAuth get auth => FirebaseServiceProvider().auth;
+  FirebaseMessaging get fcm => FirebaseServiceProvider().messaging;
+
   UserService() : userId = FirebaseAuth.instance.currentUser!.uid;
-  FirebaseMessaging fcm = FirebaseMessaging.instance;
 
   Future<List<dynamic>?> _getCollectionData(String collectionName) async {
-    final DocumentSnapshot snapshot = await db.collection('users').doc(userId).get();
+    final DocumentSnapshot snapshot =
+        await db.collection('users').doc(userId).get();
     var data = snapshot.data() as Map<String, dynamic>;
     return data[collectionName];
   }
 
-  Future<void> _updateCollection(String collectionName, dynamic dataToUpdate) async {
+  Future<void> _updateCollection(
+      String collectionName, dynamic dataToUpdate) async {
     await db.collection('users').doc(userId).update({
       collectionName: dataToUpdate,
     });
   }
 
-  Future<void> _addToCollection(String collectionName, dynamic dataToAdd) async {
+  Future<void> _addToCollection(
+      String collectionName, dynamic dataToAdd) async {
     await _updateCollection(collectionName, FieldValue.arrayUnion([dataToAdd]));
   }
 
-  Future<void> _removeFromCollection(String collectionName, dynamic dataToRemove) async {
-    await _updateCollection(collectionName, FieldValue.arrayRemove([dataToRemove]));
+  Future<void> _removeFromCollection(
+      String collectionName, dynamic dataToRemove) async {
+    await _updateCollection(
+        collectionName, FieldValue.arrayRemove([dataToRemove]));
   }
 
   Future<List<String>> loadSkills() async {
@@ -181,7 +189,8 @@ class UserService {
   }
 
   Future<String> getPhoto() async {
-    final DocumentSnapshot userDoc = await db.collection('users').doc(userId).get();
+    final DocumentSnapshot userDoc =
+        await db.collection('users').doc(userId).get();
     final data = userDoc.data() as Map<String, dynamic>?;
     if (userDoc.exists && data != null && data.containsKey('avatarUrl')) {
       return data['avatarUrl'] ?? '';
@@ -219,7 +228,8 @@ class UserService {
   }
 
   Future<UserModel?> getData() async {
-    final DocumentSnapshot userDoc = await db.collection('users').doc(userId).get();
+    final DocumentSnapshot userDoc =
+        await db.collection('users').doc(userId).get();
     if (userDoc.exists) {
       final data = userDoc.data() as Map<String, dynamic>;
       firstNameController.text = data['firstName'] ?? '';
