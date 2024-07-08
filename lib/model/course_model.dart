@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:equatable/equatable.dart';
 
 class Course extends Equatable {
+  final String id;
   final String title;
   final String imageUrl;
   final String status;
@@ -24,31 +25,33 @@ class Course extends Equatable {
   final List<String> playlist;
   final String videoCategory;
   final String subType;
+  final bool isWatched;
 
-  const Course({
-    required this.title,
-    required this.imageUrl,
-    required this.status,
-    required this.duration,
-    required this.points,
-    required this.language,
-    required this.category,
-    required this.type,
-    required this.content,
-    required this.videoUrl,
-    required this.videoName,
-    required this.videoDuration,
-    required this.videoPoints,
-    required this.videoLanguage,
-    required this.educationContent,
-    required this.producer,
-    required this.videoNumber,
-    required this.startTime,
-    required this.endTime,
-    required this.playlist,
-    required this.videoCategory,
-    required this.subType,
-  });
+  const Course(
+      {required this.id,
+      required this.title,
+      required this.imageUrl,
+      required this.status,
+      required this.duration,
+      required this.points,
+      required this.language,
+      required this.category,
+      required this.type,
+      required this.content,
+      required this.videoUrl,
+      required this.videoName,
+      required this.videoDuration,
+      required this.videoPoints,
+      required this.videoLanguage,
+      required this.educationContent,
+      required this.producer,
+      required this.videoNumber,
+      required this.startTime,
+      required this.endTime,
+      required this.playlist,
+      required this.videoCategory,
+      required this.subType,
+      required this.isWatched});
 
   @override
   List<Object?> get props => [
@@ -73,12 +76,14 @@ class Course extends Equatable {
         endTime,
         playlist,
         videoCategory,
-        subType
+        subType,
+        isWatched
       ];
 
   factory Course.fromFirestore(DocumentSnapshot doc) {
     Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
     return Course(
+      id: doc.id,
       title: data['title'] ?? '',
       imageUrl: data['imageUrl'] ?? '',
       status: data['statu'] ?? '',
@@ -101,6 +106,7 @@ class Course extends Equatable {
       playlist: List<String>.from(data['playlist'] ?? []),
       videoCategory: data['videoCategory'] ?? '',
       subType: data['subTyp'] ?? '',
+      isWatched: data['isWatched'] ?? false,
     );
   }
 }
