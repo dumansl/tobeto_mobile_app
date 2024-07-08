@@ -12,18 +12,17 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
   CourseBloc() : super(CourseInitial()) {
     on<LoadCourses>((event, emit) async {
       try {
-        final courses = await _educationService.fetchCourses();
+        final List<Course> courses = await _educationService.fetchCourses();
         emit(CoursesLoaded(courses: courses));
       } catch (e) {
         emit(CourseLoadFailure(error: e.toString()));
       }
     });
 
-    on<LoadCourseVideo>((event, emit) async {
+    on<LoadCourseVideos>((event, emit) async {
       try {
-        final course =
-            await _educationService.fetchCourseVideo(event.educationId, event.asyncEducationId, event.videoId);
-        emit(CourseVideoLoaded(course: course));
+        final List<Course> videos = await _educationService.fetchCourseVideo(event.educationId, event.asyncEducationId);
+        emit(CourseVideosLoaded(videos: videos));
       } catch (e) {
         emit(CourseLoadFailure(error: e.toString()));
       }

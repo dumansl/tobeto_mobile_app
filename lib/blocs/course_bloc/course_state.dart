@@ -18,13 +18,13 @@ class CoursesLoaded extends CourseState {
   List<Object> get props => [courses];
 }
 
-class CourseVideoLoaded extends CourseState {
-  final Course course;
+class CourseVideosLoaded extends CourseState {
+  final List<Course> videos;
 
-  const CourseVideoLoaded({required this.course});
+  const CourseVideosLoaded({required this.videos});
 
   @override
-  List<Object> get props => [course];
+  List<Object> get props => [videos];
 }
 
 class CourseLoadFailure extends CourseState {

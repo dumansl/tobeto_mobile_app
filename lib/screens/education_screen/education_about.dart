@@ -140,7 +140,7 @@ class _EducationAboutState extends State<EducationAbout> {
                           course: widget.course,
                           educationId: 'HRp6G8T2HcpZMjQMApaA',
                           asyncEducationId: 'g5RGqVOgtFU3rdU7j0gc',
-                          videoId: 'video1',
+                          //videoId: 'video1',
                         ),
                       ),
                     );
