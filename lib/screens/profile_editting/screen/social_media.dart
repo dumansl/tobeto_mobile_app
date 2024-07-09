@@ -26,14 +26,43 @@ class _SocialMediaState extends State<SocialMedia> {
   final TextEditingController socialMediaLinkController =
       TextEditingController();
 
+  String? errorMessage;
+
   void _clearControllers() {
     socialMediaNameController.clear();
     socialMediaLinkController.clear();
   }
 
   bool _areControllersValid() {
-    return socialMediaNameController.text.isNotEmpty &&
-        socialMediaLinkController.text.isNotEmpty;
+    if (socialMediaNameController.text.isNotEmpty &&
+        socialMediaLinkController.text.isNotEmpty) {
+      final socialMediaName = socialMediaNameController.text;
+      final socialMediaLink = socialMediaLinkController.text;
+
+      final patterns = {
+        'Facebook': r'^(https?:\/\/)?(www\.)?facebook\.com\/.*$',
+        'Twitter': r'^(https?:\/\/)?(www\.)?twitter\.com\/.*$',
+        'Instagram': r'^(https?:\/\/)?(www\.)?instagram\.com\/.*$',
+        'LinkedIn': r'^(https?:\/\/)?(www\.)?linkedin\.com\/.*$',
+      };
+
+      if (patterns.containsKey(socialMediaName)) {
+        final regex = RegExp(patterns[socialMediaName]!);
+        if (!regex.hasMatch(socialMediaLink)) {
+          setState(() {
+            errorMessage =
+                'Lütfen $socialMediaName profil adresinizi kontrol ediniz.';
+          });
+          return false;
+        }
+      }
+
+      setState(() {
+        errorMessage = null;
+      });
+      return true;
+    }
+    return false;
   }
 
   void _addEducationLife() {
@@ -84,6 +113,14 @@ class _SocialMediaState extends State<SocialMedia> {
             title: TobetoText.profileEditSocialMediaLink,
             controller: socialMediaLinkController,
           )),
+          if (errorMessage != null)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                errorMessage!,
+                style: const TextStyle(color: Colors.red),
+              ),
+            ),
           CustomElevatedButton(
             onPressed: () {
               if (_areControllersValid()) {
