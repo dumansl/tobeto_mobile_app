@@ -19,7 +19,7 @@ class EducationDetails extends StatefulWidget {
   });
 
   @override
-  _EducationDetailsState createState() => _EducationDetailsState();
+  State<EducationDetails> createState() => _EducationDetailsState();
 }
 
 class _EducationDetailsState extends State<EducationDetails> {
@@ -38,9 +38,11 @@ class _EducationDetailsState extends State<EducationDetails> {
   }
 
   Future<void> fetchVideos() async {
-    _videos = await EducationService().fetchCourseVideo(widget.educationId, widget.asyncEducationId);
+    _videos = await EducationService()
+        .fetchCourseVideo(widget.educationId, widget.asyncEducationId);
     if (_videos.isNotEmpty) {
-      _currentVideo = _videos.firstWhere((video) => !video.isWatched, orElse: () => _videos.first);
+      _currentVideo = _videos.firstWhere((video) => !video.isWatched,
+          orElse: () => _videos.first);
       initializeVideoPlayer(_currentVideo!.videoUrl);
     } else {
       setState(() {
@@ -52,21 +54,27 @@ class _EducationDetailsState extends State<EducationDetails> {
 
   Future<void> initializeVideoPlayer(String? videoUrl) async {
     if (videoUrl != null && videoUrl.isNotEmpty) {
-      _cachedVideoPlayerController = CachedVideoPlayerController.network(videoUrl);
+      _cachedVideoPlayerController =
+          CachedVideoPlayerController.network(videoUrl);
       await _cachedVideoPlayerController!.initialize();
-      _customVideoPlayerController = CustomVideoPlayerController(
-        context: context,
-        videoPlayerController: _cachedVideoPlayerController!,
-      );
+      if (mounted) {
+        _customVideoPlayerController = CustomVideoPlayerController(
+          context: context,
+          videoPlayerController: _cachedVideoPlayerController!,
+        );
+      }
       _cachedVideoPlayerController!.pause();
       setState(() {
         _videoInitialized = true;
       });
 
       _cachedVideoPlayerController!.addListener(() async {
-        if (_cachedVideoPlayerController!.value.position == _cachedVideoPlayerController!.value.duration) {
-          final videoId = _videos.firstWhere((video) => video.videoUrl == videoUrl).id;
-          await EducationService().updateWatchStatus(widget.educationId, widget.asyncEducationId, videoId, true);
+        if (_cachedVideoPlayerController!.value.position ==
+            _cachedVideoPlayerController!.value.duration) {
+          final videoId =
+              _videos.firstWhere((video) => video.videoUrl == videoUrl).id;
+          await EducationService().updateWatchStatus(
+              widget.educationId, widget.asyncEducationId, videoId, true);
           await _calculateProgress();
         }
       });
@@ -82,7 +90,8 @@ class _EducationDetailsState extends State<EducationDetails> {
     int watchedVideos = 0;
 
     for (var video in _videos) {
-      bool isWatched = await EducationService().getWatchStatus(widget.educationId, widget.asyncEducationId, video.id);
+      bool isWatched = await EducationService().getWatchStatus(
+          widget.educationId, widget.asyncEducationId, video.id);
       if (isWatched) {
         watchedVideos++;
       }
@@ -122,13 +131,16 @@ class _EducationDetailsState extends State<EducationDetails> {
                 customVideoPlayerController: _customVideoPlayerController!,
               ),
             ),
-          if (!_videoInitialized) const Center(child: CircularProgressIndicator()),
+          if (!_videoInitialized)
+            const Center(child: CircularProgressIndicator()),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(widget.course.title, style: TobetoTextStyle.poppins(context).subtitleBlackBold20),
+                Text(widget.course.title,
+                    style:
+                        TobetoTextStyle.poppins(context).subtitleBlackBold20),
                 const SizedBox(height: 8.0),
                 Container(
                   height: 10.0, // Progress bar height
@@ -138,7 +150,8 @@ class _EducationDetailsState extends State<EducationDetails> {
                   ),
                   child: LinearProgressIndicator(
                     value: _progress,
-                    valueColor: AlwaysStoppedAnimation<Color>(TobetoColor.purple),
+                    valueColor:
+                        const AlwaysStoppedAnimation<Color>(TobetoColor.purple),
                     backgroundColor: Colors.transparent,
                   ),
                 ),
@@ -160,21 +173,25 @@ class _EducationDetailsState extends State<EducationDetails> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color:
-                              _selectedIndex == 0 ? TobetoColor.purple : (Theme.of(context).colorScheme.inverseSurface),
+                          color: _selectedIndex == 0
+                              ? TobetoColor.purple
+                              : (Theme.of(context).colorScheme.inverseSurface),
                           borderRadius: const BorderRadius.only(
                             topLeft: Radius.circular(30.0),
                             bottomLeft: Radius.circular(30.0),
                           ),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
                         child: Center(
                           child: Text(
                             'Liste',
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
-                              color: _selectedIndex == 0 ? Colors.white : TobetoColor.purple,
+                              color: _selectedIndex == 0
+                                  ? Colors.white
+                                  : TobetoColor.purple,
                             ),
                           ),
                         ),
@@ -190,21 +207,25 @@ class _EducationDetailsState extends State<EducationDetails> {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color:
-                              _selectedIndex == 1 ? TobetoColor.purple : (Theme.of(context).colorScheme.inverseSurface),
+                          color: _selectedIndex == 1
+                              ? TobetoColor.purple
+                              : (Theme.of(context).colorScheme.inverseSurface),
                           borderRadius: const BorderRadius.only(
                             topRight: Radius.circular(30.0),
                             bottomRight: Radius.circular(30.0),
                           ),
                         ),
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16.0, vertical: 10.0),
                         child: Center(
                           child: Text(
                             'Detay',
                             style: TextStyle(
                               fontSize: 16.0,
                               fontWeight: FontWeight.w600,
-                              color: _selectedIndex == 1 ? Colors.white : TobetoColor.purple,
+                              color: _selectedIndex == 1
+                                  ? Colors.white
+                                  : TobetoColor.purple,
                             ),
                           ),
                         ),
@@ -216,7 +237,9 @@ class _EducationDetailsState extends State<EducationDetails> {
             ),
           ),
           Expanded(
-            child: _selectedIndex == 0 ? _buildVideoList() : _buildDetails(isDarkMode),
+            child: _selectedIndex == 0
+                ? _buildVideoList()
+                : _buildDetails(isDarkMode),
           ),
         ],
       ),
@@ -236,7 +259,8 @@ class _EducationDetailsState extends State<EducationDetails> {
             Icons.play_circle_fill,
             color: TobetoColor.purple,
           ),
-          title: Text('Video ${index + 1}', style: TobetoTextStyle.poppins(context).captionBlackBold18),
+          title: Text('Video ${index + 1}',
+              style: TobetoTextStyle.poppins(context).captionBlackBold18),
           onTap: () {
             setState(() {
               _currentVideo = video;
@@ -257,13 +281,17 @@ class _EducationDetailsState extends State<EducationDetails> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              _buildDetailItem(Icons.access_time, '${_currentVideo!.videoDuration} dakika', isDarkMode),
-              _buildDetailItem(Icons.subscriptions_outlined, '${_currentVideo!.videoPoints} puan', isDarkMode),
-              _buildDetailItem(Icons.language, widget.course.language, isDarkMode),
+              _buildDetailItem(Icons.access_time,
+                  '${_currentVideo!.videoDuration} dakika', isDarkMode),
+              _buildDetailItem(Icons.subscriptions_outlined,
+                  '${_currentVideo!.videoPoints} puan', isDarkMode),
+              _buildDetailItem(
+                  Icons.language, widget.course.language, isDarkMode),
             ],
           ),
           const SizedBox(height: 16.0),
-          const Text('Eğitim İçeriği', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+          const Text('Eğitim İçeriği',
+              style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
           const Divider(
             color: Colors.black,
             thickness: 2,
@@ -292,13 +320,20 @@ class _EducationDetailsState extends State<EducationDetails> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Icon(icon, size: 20, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
+          Icon(icon,
+              size: 20,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black),
           const SizedBox(height: 4.0),
           Flexible(
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: 12, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
+                  fontSize: 12,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black),
               textAlign: TextAlign.center,
             ),
           ),
