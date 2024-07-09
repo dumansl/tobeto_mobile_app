@@ -36,7 +36,7 @@ class AuthService {
   }
 
   // Kaydolma işlemi
-  Future<void> createUserWithEmailAndPassword({
+  Future<User?> createUserWithEmailAndPassword({
     required String email,
     required String password,
     required String name,
@@ -44,8 +44,7 @@ class AuthService {
   }) async {
     return handleErrors(
       operation: () async {
-        UserCredential userCredential =
-            await _auth.createUserWithEmailAndPassword(
+        UserCredential userCredential = await _auth.createUserWithEmailAndPassword(
           email: email,
           password: password,
         );
@@ -53,13 +52,11 @@ class AuthService {
         User? user = userCredential.user;
 
         if (user != null) {
-          await registerUser(
-            user: user,
-            name: name,
-            lastName: lastName,
-            email: email,
-          );
+          await user.updateDisplayName('$name $lastName');
+          await user.sendEmailVerification();
         }
+
+        return user;
       },
       onError: (e) {
         if (e is FirebaseAuthException) {
@@ -80,17 +77,14 @@ class AuthService {
   Future<void> signInWithGoogle() async {
     return handleErrors(
       operation: () async {
-        final GoogleSignInAccount? googleSignInAccount =
-            await googleSignIn.signIn();
+        final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
         if (googleSignInAccount != null) {
-          final GoogleSignInAuthentication googleSignInAuthentication =
-              await googleSignInAccount.authentication;
+          final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
           final AuthCredential authCredential = GoogleAuthProvider.credential(
             accessToken: googleSignInAuthentication.accessToken,
             idToken: googleSignInAuthentication.idToken,
           );
-          UserCredential userCredential =
-              await _auth.signInWithCredential(authCredential);
+          UserCredential userCredential = await _auth.signInWithCredential(authCredential);
           User? user = userCredential.user;
 
           if (user != null) {
@@ -120,15 +114,13 @@ class AuthService {
     return handleErrors(
       operation: () async {
         final userCredential = await _auth.signInAnonymously();
-        debugPrint(
-            "Signed in with temporary account. ${userCredential.user?.uid}");
+        debugPrint("Signed in with temporary account. ${userCredential.user?.uid}");
       },
       onError: (e) {
         if (e is FirebaseAuthException) {
           switch (e.code) {
             case "operation-not-allowed":
-              debugPrint(
-                  "Bu proje için anonim kimlik doğrulama etkinleştirilmedi");
+              debugPrint("Bu proje için anonim kimlik doğrulama etkinleştirilmedi");
               break;
             default:
               debugPrint("Bilinmeyen hata");
@@ -152,11 +144,9 @@ class AuthService {
       onError: (e) {
         if (e is FirebaseAuthException) {
           if (e.code == 'invalid-email') {
-            throw Exception(
-                'E-posta adresi geçersizdir, bilgilerinizi kontrol ediniz.');
+            throw Exception('E-posta adresi geçersizdir, bilgilerinizi kontrol ediniz.');
           } else if (e.code == 'invalid-credential') {
-            throw Exception(
-                'Kimlik doğrulama bilgileriniz yanlış, bilgilerinizi kontrol ediniz.');
+            throw Exception('Kimlik doğrulama bilgileriniz yanlış, bilgilerinizi kontrol ediniz.');
           } else {
             throw Exception("Bir hata oluştu: ${e.message}");
           }
@@ -184,8 +174,7 @@ class AuthService {
     return handleErrors(
       operation: () async {
         if (currentUser != null) {
-          var userInfo =
-              await _db.collection("users").doc(currentUser!.uid).get();
+          var userInfo = await _db.collection("users").doc(currentUser!.uid).get();
           var userJson = userInfo.data();
           return UserModel.fromMap(userJson!);
         }
@@ -226,8 +215,7 @@ class AuthService {
       onError: (e) {
         if (e is FirebaseAuthException) {
           if (e.code == 'requires-recent-login') {
-            throw Exception(
-                "Hesabınızı silmek için yeniden giriş yapmanız gerekiyor.");
+            throw Exception("Hesabınızı silmek için yeniden giriş yapmanız gerekiyor.");
           } else {
             throw Exception("Hesap silme hatası: ${e.message}");
           }
@@ -239,8 +227,7 @@ class AuthService {
   }
 
   // Şifre değiştirme işlemi
-  Future<void> changePassword(
-      String currentPassword, String newPassword) async {
+  Future<void> changePassword(String currentPassword, String newPassword) async {
     return handleErrors(
       operation: () async {
         User? user = _auth.currentUser;

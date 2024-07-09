@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_bloc.dart';
@@ -6,6 +7,7 @@ import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
 
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_leading.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
+import 'package:tobeto_mobile_app/services/auth_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/horizontal_page_route.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
@@ -24,6 +26,7 @@ class RegisterScreen extends StatefulWidget {
 }
 
 class _RegisterScreenState extends State<RegisterScreen> {
+  final AuthService _authService = AuthService();
   final formKey = GlobalKey<FormState>();
   bool _showPassword = false;
   bool _showConfirmPassword = false;
@@ -56,12 +59,18 @@ class _RegisterScreenState extends State<RegisterScreen> {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) {
           if (state is LoginSuccess) {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const DashboardScreen(),
-              ),
-            );
+            if (_authService.currentUser != null && _authService.currentUser!.emailVerified) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const DashboardScreen(),
+                ),
+              );
+            } else {
+              snackBar(context,
+                  'E-posta adresinize doğrulama linki gönderildi. Doğrulama işlemini gerçekleştirdikten sonra giriş yapabilirsiniz.');
+              FirebaseAuth.instance.signOut();
+            }
           } else if (state is LoginError) {
             snackBar(
               context,
@@ -212,9 +221,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
               obscureText: !_showConfirmPassword,
               suffixIcon: IconButton(
                 icon: Icon(
-                  _showConfirmPassword
-                      ? Icons.visibility
-                      : Icons.visibility_off,
+                  _showConfirmPassword ? Icons.visibility : Icons.visibility_off,
                   color: Theme.of(context).colorScheme.surfaceContainer,
                 ),
                 onPressed: () {

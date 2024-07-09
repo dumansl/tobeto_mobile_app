@@ -1,9 +1,9 @@
-import 'package:bloc/bloc.dart';
-import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_event.dart';
+import 'package:tobeto_mobile_app/blocs/auth_bloc/auth_state.dart';
 import 'package:tobeto_mobile_app/services/auth_service.dart';
 import 'package:tobeto_mobile_app/services/shared_preferences_service.dart';
-import 'auth_event.dart';
-import 'auth_state.dart';
 
 class AuthBloc extends Bloc<AuthEvent, AuthState> {
   AuthBloc() : super(NotAuthenticated()) {
@@ -31,6 +31,32 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     }
   }
 
+  Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
+    try {
+      emit(LoginProgress());
+      User? user = await _authService.createUserWithEmailAndPassword(
+        email: event.email,
+        password: event.password,
+        name: event.name,
+        lastName: event.lastName,
+      );
+
+      if (user != null) {
+        await _authService.registerUser(
+          user: user,
+          name: event.name,
+          lastName: event.lastName,
+          email: event.email,
+        );
+      }
+
+      emit(LoginSuccess());
+    } catch (e) {
+      emit(LoginError(errorMessage: e.toString()));
+    }
+  }
+
+  // Diğer metotlar
   Future<void> _onGoogleLogin(GoogleLoginEvent event, Emitter<AuthState> emit) async {
     try {
       emit(LoginProgress());
@@ -38,7 +64,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
       await _sharedPreferencesService.setLoggedIn(true);
       emit(LoginSuccess());
     } catch (e) {
-      debugPrint(e.toString());
       emit(LoginError(errorMessage: e.toString()));
     }
   }
@@ -57,18 +82,6 @@ class AuthBloc extends Bloc<AuthEvent, AuthState> {
     await _authService.signOut();
     await _sharedPreferencesService.setLoggedIn(false);
     emit(NotAuthenticated());
-  }
-
-  Future<void> _onRegister(RegisterEvent event, Emitter<AuthState> emit) async {
-    try {
-      emit(LoginProgress());
-      await _authService.createUserWithEmailAndPassword(
-          email: event.email, password: event.password, name: event.name, lastName: event.lastName);
-      await _sharedPreferencesService.setLoggedIn(true);
-      emit(LoginSuccess());
-    } catch (e) {
-      emit(LoginError(errorMessage: e.toString()));
-    }
   }
 
   Future<void> _onResetPassword(ResetPasswordEvent event, Emitter<AuthState> emit) async {
