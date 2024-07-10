@@ -9,6 +9,8 @@ import 'package:tobeto_mobile_app/services/shared_preferences_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
+import 'home_widgets/drawer_text_button.dart';
+
 class TobetoHomeScreen extends StatefulWidget {
   const TobetoHomeScreen({super.key});
 
@@ -60,8 +62,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 children: [
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.hambugerMenuAboutUs,
                     onPressed: () {
                       Navigator.pop(context);
@@ -73,8 +74,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       );
                     },
                   ),
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.hambugerMenuWhatDoWeOffer,
                     onPressed: () {
                       Navigator.pop(context);
@@ -86,8 +86,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       );
                     },
                   ),
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.hambugerMenuWhatDoWeOfferfor,
                     onPressed: () {
                       Navigator.pop(context);
@@ -99,8 +98,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       );
                     },
                   ),
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.hambugerMenuOurTrainings,
                     onPressed: () {
                       Navigator.pop(context);
@@ -112,21 +110,20 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       );
                     },
                   ),
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.hambugerMenuWhatHappeningTobeto,
                     onPressed: () {
                       Navigator.pop(context);
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const WhatsHappeningIntobetoScreen(),
+                          builder: (context) =>
+                              const WhatsHappeningIntobetoScreen(),
                         ),
                       );
                     },
                   ),
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.tmapFAQBox,
                     onPressed: () {
                       Navigator.pop(context);
@@ -138,8 +135,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       );
                     },
                   ),
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.hambugerMenuResources,
                     onPressed: () {
                       Navigator.pop(context);
@@ -151,8 +147,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       );
                     },
                   ),
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.hambugerMenuAboutUsCommunication,
                     onPressed: () {
                       Navigator.pop(context);
@@ -164,8 +159,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       );
                     },
                   ),
-                  _drawerTextButton(
-                    context,
+                  DrawerTextButton(
                     text: TobetoText.hambugerMenuIstanbulIsCodding,
                     onPressed: () {
                       if (_sharedPreferencesService.isLoggedIn()) {
@@ -209,19 +203,10 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
     );
   }
 
-  Widget _drawerTextButton(BuildContext context, {required String text, required VoidCallback onPressed}) {
-    return TextButton(
-      onPressed: onPressed,
-      child: Text(
-        text,
-        style: TobetoTextStyle.poppins(context).captionGrayBold18,
-      ),
-    );
-  }
-
   Widget _body(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.light;
-    final assetImagePath = isDarkMode ? 'assets/gifs/skills.gif' : 'assets/gifs/skilldark.gif';
+    final assetImagePath =
+        isDarkMode ? 'assets/gifs/skills.gif' : 'assets/gifs/skilldark.gif';
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px),
       child: SingleChildScrollView(
@@ -245,7 +230,8 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(vertical: ScreenPadding.padding24px),
+                      padding: EdgeInsets.symmetric(
+                          vertical: ScreenPadding.padding24px),
                       child: Container(
                         height: ScreenUtil.getHeight(context) * 0.155,
                         width: ScreenUtil.getWidth(context) * 0.42,
@@ -262,19 +248,23 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(left: ScreenPadding.padding6px),
+                            padding:
+                                EdgeInsets.only(left: ScreenPadding.padding6px),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   TobetoText.tmainCard1Title,
-                                  style: TobetoTextStyle.poppins(context).captionBlackBold12,
+                                  style: TobetoTextStyle.poppins(context)
+                                      .captionBlackBold12,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(top: ScreenPadding.padding12px),
+                                  padding: EdgeInsets.only(
+                                      top: ScreenPadding.padding12px),
                                   child: Text(
                                     TobetoText.tmainCard1Body,
-                                    style: TobetoTextStyle.poppins(context).captionBlackNormal12,
+                                    style: TobetoTextStyle.poppins(context)
+                                        .captionBlackNormal12,
                                   ),
                                 ),
                               ],
@@ -288,16 +278,20 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
+              padding: EdgeInsets.only(
+                  top: ScreenPadding.padding16px,
+                  bottom: ScreenPadding.padding16px),
               child: RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                         text: TobetoText.tmainHeadline1Rich1,
-                        style: TobetoTextStyle.poppins(context).subtitlePurpleLight20),
+                        style: TobetoTextStyle.poppins(context)
+                            .subtitlePurpleLight20),
                     TextSpan(
                         text: TobetoText.tmainHeadline1Rich2,
-                        style: TobetoTextStyle.poppins(context).titlePurpleBold24),
+                        style:
+                            TobetoTextStyle.poppins(context).titlePurpleBold24),
                   ],
                 ),
               ),
@@ -305,172 +299,35 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(35.0),
-                    gradient: LinearGradient(
-                      colors: [
-                        TobetoColor.card.lightGrey,
-                        TobetoColor.card.lightGrey,
-                        TobetoColor.rainbow.linearpurple,
-                        TobetoColor.rainbow.linearpurple,
-                        TobetoColor.card.lightGrey,
-                        TobetoColor.card.lightGrey,
-                      ],
-                      begin: Alignment.topRight,
-                      end: Alignment.bottomLeft,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(ScreenPadding.padding4px),
-                    child: Expanded(
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: const BorderRadius.all(Radius.circular(30)),
-                          color: Theme.of(context).colorScheme.onSecondary,
-                        ),
-                        height: ScreenUtil.getHeight(context) * 0.140,
-                        width: ScreenUtil.getWidth(context) * 0.275,
-                        child: Column(
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(top: ScreenPadding.padding16px),
-                              child: Expanded(
-                                child: Container(
-                                    width: ScreenUtil.getWidth(context) * 0.1,
-                                    decoration: const BoxDecoration(
-                                        color: Color.fromARGB(255, 196, 133, 255), shape: BoxShape.circle),
-                                    child: Image.asset(ImagePath.news)),
-                              ),
-                            ),
-                            Text(
-                              TobetoText.infoEducationNumber,
-                              style: TobetoTextStyle.poppins(context).titlePurpleBold24,
-                            ),
-                            Expanded(
-                              child: Text(
-                                TobetoText.infoEducationTitle,
-                                style: TobetoTextStyle.poppins(context).captionBlackThin12,
-                                textAlign: TextAlign.center,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
+                _contentCard(
+                  context,
+                  imageUrl: ImagePath.news,
+                  infoEducationNumber: TobetoText.infoEducationNumber,
+                  infoEducationTitle: TobetoText.infoEducationTitle,
                 ),
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(35.0),
-                    gradient: LinearGradient(
-                      colors: [
-                        TobetoColor.card.lightGrey,
-                        TobetoColor.card.lightGrey,
-                        TobetoColor.rainbow.linearpurple,
-                        TobetoColor.rainbow.linearpurple,
-                        TobetoColor.card.lightGrey,
-                        TobetoColor.card.lightGrey,
-                      ],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
-                  ),
-                  child: Padding(
-                    padding: EdgeInsets.all(ScreenPadding.padding4px),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        borderRadius: const BorderRadius.all(Radius.circular(30)),
-                        color: Theme.of(context).colorScheme.onSecondary,
-                      ),
-                      height: ScreenUtil.getHeight(context) * 0.140,
-                      width: ScreenUtil.getWidth(context) * 0.275,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.only(top: ScreenPadding.padding16px),
-                            child: Container(
-                                width: ScreenUtil.getWidth(context) * 0.1,
-                                decoration: BoxDecoration(
-                                    color: const Color.fromARGB(255, 196, 133, 255),
-                                    borderRadius: BorderRadius.circular(30)),
-                                child: Image.asset(ImagePath.company)),
-                          ),
-                          Text(
-                            TobetoText.infoOnlineNumber,
-                            style: TobetoTextStyle.poppins(context).titlePurpleBold24,
-                          ),
-                          Expanded(
-                            child: Text(
-                              TobetoText.infoOnlineTitle,
-                              style: TobetoTextStyle.poppins(context).captionBlackThin12,
-                              textAlign: TextAlign.center,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
+                _contentCard(
+                  context,
+                  imageUrl: ImagePath.company,
+                  infoEducationNumber: TobetoText.infoOnlineNumber,
+                  infoEducationTitle: TobetoText.infoOnlineTitle,
                 ),
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(35.0),
-                  gradient: LinearGradient(
-                    colors: [
-                      TobetoColor.card.lightGrey,
-                      TobetoColor.card.lightGrey,
-                      Colors.indigo,
-                      Colors.indigo,
-                      TobetoColor.card.lightGrey,
-                      TobetoColor.card.lightGrey,
-                    ],
-                    begin: Alignment.topRight,
-                    end: Alignment.bottomLeft,
-                  ),
-                ),
-                child: Padding(
-                  padding: EdgeInsets.all(ScreenPadding.padding4px),
-                  child: Container(
-                    decoration: BoxDecoration(
-                      borderRadius: const BorderRadius.all(Radius.circular(30)),
-                      color: Theme.of(context).colorScheme.onSecondary,
-                    ),
-                    height: ScreenUtil.getHeight(context) * 0.140,
-                    width: ScreenUtil.getWidth(context) * 0.275,
-                    child: Column(
-                      children: [
-                        Padding(
-                          padding: EdgeInsets.only(top: ScreenPadding.padding16px),
-                          child: Container(
-                              width: ScreenUtil.getWidth(context) * 0.1,
-                              decoration:
-                                  BoxDecoration(color: Colors.blueAccent, borderRadius: BorderRadius.circular(30)),
-                              child: Image.asset(ImagePath.graduationCap)),
-                        ),
-                        Text(
-                          TobetoText.infoStudentNumber,
-                          style: const TextStyle(
-                              color: Colors.indigo, fontSize: 22, fontWeight: FontWeight.bold, fontFamily: 'Poppins'),
-                        ),
-                        Expanded(
-                          child: Text(
-                            TobetoText.infoStudentTitle,
-                            style: TobetoTextStyle.poppins(context).captionBlackThin12,
-                            textAlign: TextAlign.center,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
+              padding: EdgeInsets.only(
+                  top: ScreenPadding.padding16px,
+                  bottom: ScreenPadding.padding16px),
+              child: _contentCard(
+                context,
+                imageUrl: ImagePath.graduationCap,
+                infoEducationNumber: TobetoText.infoStudentNumber,
+                infoEducationTitle: TobetoText.infoStudentTitle,
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
+              padding: EdgeInsets.only(
+                  top: ScreenPadding.padding16px,
+                  bottom: ScreenPadding.padding16px),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(35.0),
@@ -506,10 +363,12 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: TobetoColor.card.shadowColor.withOpacity(0.4),
+                                    color: TobetoColor.card.shadowColor
+                                        .withOpacity(0.4),
                                     spreadRadius: 2,
                                     blurRadius: 5,
-                                    offset: const Offset(2, 4), // changes position of shadow
+                                    offset: const Offset(
+                                        2, 4), // changes position of shadow
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(50),
@@ -523,9 +382,12 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                           },
                         ),
                         Padding(
-                          padding: EdgeInsets.only(top: ScreenPadding.padding8px),
+                          padding:
+                              EdgeInsets.only(top: ScreenPadding.padding8px),
                           child: Text(TobetoText.tmainTobetoTitle,
-                              style: TobetoTextStyle.poppins(context).titleBlackBold24, textAlign: TextAlign.center),
+                              style: TobetoTextStyle.poppins(context)
+                                  .titleBlackBold24,
+                              textAlign: TextAlign.center),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
@@ -535,27 +397,33 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                               bottom: ScreenPadding.padding20px),
                           child: Text(
                             TobetoText.tmainTobetoBody,
-                            style: TobetoTextStyle.poppins(context).subtitleBlackNormal20,
+                            style: TobetoTextStyle.poppins(context)
+                                .subtitleBlackNormal20,
                             textAlign: TextAlign.center,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(bottom: ScreenPadding.padding10px),
+                          padding: EdgeInsets.only(
+                              bottom: ScreenPadding.padding10px),
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) => const TobetoSuccesScreen(),
+                                  builder: (context) =>
+                                      const TobetoSuccesScreen(),
                                 ),
                               );
                             },
-                            style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
+                            style: ElevatedButton.styleFrom(
+                                backgroundColor: TobetoColor.purple),
                             child: Padding(
-                              padding: EdgeInsets.all(ScreenPadding.padding12px),
+                              padding:
+                                  EdgeInsets.all(ScreenPadding.padding12px),
                               child: Text(
                                 TobetoText.tmainButton,
-                                style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
+                                style: TobetoTextStyle.poppins(context)
+                                    .bodyWhiteBold16,
                               ),
                             ),
                           ),
@@ -575,7 +443,9 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               style: TobetoTextStyle.poppins(context).captionBlackNormal12,
             ),
             Padding(
-              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
+              padding: EdgeInsets.only(
+                  top: ScreenPadding.padding16px,
+                  bottom: ScreenPadding.padding16px),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(35.0),
@@ -607,15 +477,18 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(bottom: ScreenPadding.padding30px),
+                            padding: EdgeInsets.only(
+                                bottom: ScreenPadding.padding30px),
                             child: Text(TobetoText.tmainHeadline3Body,
-                                style: TobetoTextStyle.poppins(context).subtitleBlackNormal20,
+                                style: TobetoTextStyle.poppins(context)
+                                    .subtitleBlackNormal20,
                                 textAlign: TextAlign.center),
                           ),
                           Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(color: TobetoColor.purple, width: 2),
+                              border: Border.all(
+                                  color: TobetoColor.purple, width: 2),
                               color: TobetoColor.card.white,
                               image: const DecorationImage(
                                 image: AssetImage(ImagePath.ekip1),
@@ -626,16 +499,20 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                             width: ScreenUtil.getWidth(context) * 0.23,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: ScreenPadding.padding30px, bottom: ScreenPadding.padding10px),
+                            padding: EdgeInsets.only(
+                                top: ScreenPadding.padding30px,
+                                bottom: ScreenPadding.padding10px),
                             child: Text(
                               TobetoText.tmainHeadline4Name,
-                              style: TobetoTextStyle.poppins(context).subtitleBlackBold20,
+                              style: TobetoTextStyle.poppins(context)
+                                  .subtitleBlackBold20,
                               textAlign: TextAlign.center,
                             ),
                           ),
                           Text(
                             TobetoText.tmainHeadline4Student,
-                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
+                            style: TobetoTextStyle.poppins(context)
+                                .captionBlackNormal12,
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -663,23 +540,85 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding30px),
-                  child:
-                      SizedBox(height: ScreenUtil.getHeight(context) * 0.055, child: Image.asset(ImagePath.codecademy)),
+                  child: SizedBox(
+                      height: ScreenUtil.getHeight(context) * 0.055,
+                      child: Image.asset(ImagePath.codecademy)),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding30px),
-                  child:
-                      SizedBox(height: ScreenUtil.getHeight(context) * 0.055, child: Image.asset(ImagePath.perculus)),
+                  child: SizedBox(
+                      height: ScreenUtil.getHeight(context) * 0.055,
+                      child: Image.asset(ImagePath.perculus)),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: ScreenPadding.padding30px, bottom: ScreenPadding.padding20px),
-                  child: SizedBox(height: ScreenUtil.getHeight(context) * 0.08, child: Image.asset(ImagePath.huawei)),
+                  padding: EdgeInsets.only(
+                      top: ScreenPadding.padding30px,
+                      bottom: ScreenPadding.padding20px),
+                  child: SizedBox(
+                      height: ScreenUtil.getHeight(context) * 0.08,
+                      child: Image.asset(ImagePath.huawei)),
                 ),
                 SizedBox(
                   height: ScreenUtil.getHeight(context) * 0.1,
                 )
               ],
             ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Container _contentCard(
+    BuildContext context, {
+    required String imageUrl,
+    required String infoEducationNumber,
+    required String infoEducationTitle,
+  }) {
+    return Container(
+      padding: EdgeInsets.all(ScreenPadding.padding4px),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(SizeRadius.radius30px),
+        gradient: LinearGradient(
+          colors: [
+            TobetoColor.card.lightGrey,
+            TobetoColor.card.lightGrey,
+            TobetoColor.rainbow.linearpurple,
+            TobetoColor.rainbow.linearpurple,
+            TobetoColor.card.lightGrey,
+            TobetoColor.card.lightGrey,
+          ],
+          begin: Alignment.topRight,
+          end: Alignment.bottomLeft,
+        ),
+      ),
+      child: Container(
+        padding: EdgeInsets.all(ScreenPadding.padding12px),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.all(
+            Radius.circular(SizeRadius.radius30px),
+          ),
+          color: Theme.of(context).colorScheme.onSecondary,
+        ),
+        child: Column(
+          children: [
+            Container(
+              padding: EdgeInsets.all(ScreenPadding.padding12px),
+              decoration: const BoxDecoration(
+                color: Color.fromARGB(255, 196, 133, 255),
+                shape: BoxShape.circle,
+              ),
+              child: Image.asset(imageUrl),
+            ),
+            Text(
+              infoEducationNumber,
+              style: TobetoTextStyle.poppins(context).titlePurpleBold24,
+            ),
+            Text(
+              infoEducationTitle,
+              style: TobetoTextStyle.poppins(context).captionBlackThin12,
+              textAlign: TextAlign.center,
+            )
           ],
         ),
       ),
