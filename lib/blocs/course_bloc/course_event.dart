@@ -9,17 +9,15 @@ abstract class CourseEvent extends Equatable {
 
 class LoadCourses extends CourseEvent {}
 
-class LoadCourseVideo extends CourseEvent {
+class LoadCourseVideos extends CourseEvent {
   final String educationId;
   final String asyncEducationId;
-  final String videoId;
 
-  const LoadCourseVideo({
+  const LoadCourseVideos({
     required this.educationId,
     required this.asyncEducationId,
-    required this.videoId,
   });
 
   @override
-  List<Object> get props => [educationId, asyncEducationId, videoId];
+  List<Object> get props => [educationId, asyncEducationId];
 }

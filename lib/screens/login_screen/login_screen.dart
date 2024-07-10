@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
@@ -54,21 +55,26 @@ class _LoginScreenState extends State<LoginScreen> {
       backgroundColor: Theme.of(context).colorScheme.outline,
       resizeToAvoidBottomInset: false,
       body: BlocListener<AuthBloc, AuthState>(
-        listener: (context, state) {
+        listener: (context, state) async {
           if (state is LoginSuccess) {
-            if (_authService.currentUser?.isAnonymous ?? false) {
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => const TobetoHomeScreen()),
-              );
+            if (_authService.currentUser != null && _authService.currentUser!.emailVerified) {
+              if (_authService.currentUser?.isAnonymous ?? false) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TobetoHomeScreen()),
+                );
+              } else {
+                _educatorSwitch
+                    ? Navigator.pushReplacement(
+                        context, MaterialPageRoute(builder: (context) => const DashboardScreenEducator()))
+                    : Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+                      );
+              }
             } else {
-              _educatorSwitch
-                  ? Navigator.pushReplacement(
-                      context, MaterialPageRoute(builder: (context) => const DashboardScreenEducator()))
-                  : Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(builder: (context) => const DashboardScreen()),
-                    );
+              snackBar(context, 'E-posta adresiniz doğrulanmadı. Lütfen doğrulama e-postasını kontrol edin.');
+              await FirebaseAuth.instance.signOut();
             }
           } else if (state is LoginError) {
             if (state.errorMessage != null) {

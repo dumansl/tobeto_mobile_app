@@ -1,83 +1,80 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/services/handler_errors.dart';
 import '/model/course_model.dart';
-import 'firebase_service.provider.dart';
 
 class EducationService {
-  FirebaseFirestore get _firestore => FirebaseServiceProvider().firestore;
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
   Future<List<Course>> fetchCourses() async {
-    return handleErrors(
-      operation: () async {
-        QuerySnapshot snapshot =
-            await _firestore.collection('educations').get();
-        List<Course> courses = [];
-        for (var doc in snapshot.docs) {
-          QuerySnapshot asyncSnapshot =
-              await doc.reference.collection('asynchronous_educations').get();
-          for (var asyncDoc in asyncSnapshot.docs) {
-            DocumentSnapshot aboutDoc = await asyncDoc.reference
-                .collection('about')
-                .doc('details')
-                .get();
-            courses.add(Course.fromFirestore(aboutDoc));
-          }
+    try {
+      QuerySnapshot snapshot = await _firestore.collection('educations').get();
+      List<Course> courses = [];
+      for (var doc in snapshot.docs) {
+        QuerySnapshot asyncSnapshot = await doc.reference.collection('asynchronous_educations').get();
+        for (var asyncDoc in asyncSnapshot.docs) {
+          DocumentSnapshot aboutDoc = await asyncDoc.reference.collection('about').doc('details').get();
+          courses.add(Course.fromFirestore(aboutDoc));
         }
-        return courses;
-      },
-      onError: (e) {
-        debugPrint('Error fetching courses: $e');
-        throw Exception('Error fetching courses: $e');
-      },
-    );
+      }
+      return courses;
+    } catch (e) {
+      throw Exception('Error fetching courses: $e');
+    }
   }
 
-  Future<Course> fetchCourseVideo(
-      String educationId, String asyncEducationId, String videoId) async {
-    return handleErrors(
-      operation: () async {
-        DocumentSnapshot courseSnapshot = await _firestore
-            .collection('educations')
-            .doc(educationId)
-            .collection('asynchronous_educations')
-            .doc(asyncEducationId)
-            .collection('videos')
-            .doc(videoId)
-            .get();
+  Future<List<Course>> fetchCourseVideo(String educationId, String asyncEducationId) async {
+    try {
+      QuerySnapshot snapshot = await _firestore
+          .collection('educations')
+          .doc(educationId)
+          .collection('asynchronous_educations')
+          .doc(asyncEducationId)
+          .collection('videos')
+          .get();
 
-        if (!courseSnapshot.exists) {
-          throw Exception('Video not found');
-        }
+      return snapshot.docs.map((doc) => Course.fromFirestore(doc)).toList();
+    } catch (e) {
+      throw Exception('Error fetching course videos: $e');
+    }
+  }
 
-        return Course.fromFirestore(courseSnapshot);
-      },
-      onError: (e) {
-        debugPrint('Error fetching course video: $e');
-        throw Exception('Error fetching course video: $e');
-      },
-    );
+  Future<void> updateWatchStatus(String educationId, String asyncEducationId, String videoId, bool isWatched) async {
+    await _firestore
+        .collection('educations')
+        .doc(educationId)
+        .collection('asynchronous_educations')
+        .doc(asyncEducationId)
+        .collection('videos')
+        .doc(videoId)
+        .set({'isWatched': isWatched}, SetOptions(merge: true));
+  }
+
+  Future<bool> getWatchStatus(String educationId, String asyncEducationId, String videoId) async {
+    DocumentSnapshot doc = await _firestore
+        .collection('educations')
+        .doc(educationId)
+        .collection('asynchronous_educations')
+        .doc(asyncEducationId)
+        .collection('videos')
+        .doc(videoId)
+        .get();
+
+    if (doc.exists) {
+      return doc['isWatched'] ?? false;
+    }
+    return false;
   }
 
   Future<bool> checkUserStatus(String userId) async {
-    return handleErrors(
-      operation: () async {
-        QuerySnapshot userSnapshot = await _firestore
-            .collection('users')
-            .doc(userId)
-            .collection('my_appeal')
-            .get();
-        for (var doc in userSnapshot.docs) {
-          if (doc['status'] == 'Kabul Edildi') {
-            return true;
-          }
+    try {
+      QuerySnapshot userSnapshot = await _firestore.collection('users').doc(userId).collection('my_appeal').get();
+      for (var doc in userSnapshot.docs) {
+        if (doc['status'] == 'Kabul Edildi') {
+          return true;
         }
-        return false;
-      },
-      onError: (e) {
-        debugPrint('Error checking user status: $e');
-        throw Exception('Error checking user status: $e');
-      },
-    );
+      }
+      return false;
+    } catch (e) {
+      throw Exception('Error checking user status: $e');
+    }
   }
 }
