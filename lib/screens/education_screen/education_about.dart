@@ -57,7 +57,8 @@ class _EducationAboutState extends State<EducationAbout> {
                       Expanded(
                         child: Text(
                           widget.course.title,
-                          style: TobetoTextStyle.poppins(context).captionBlackBold24,
+                          style: TobetoTextStyle.poppins(context)
+                              .captionBlackBold24,
                         ),
                       ),
                       Row(
@@ -67,7 +68,8 @@ class _EducationAboutState extends State<EducationAbout> {
                               _isLiked ? Icons.favorite : Icons.favorite_border,
                               color: _isLiked
                                   ? Colors.red
-                                  : Theme.of(context).brightness == Brightness.dark
+                                  : Theme.of(context).brightness ==
+                                          Brightness.dark
                                       ? Colors.white
                                       : null,
                             ),
@@ -79,10 +81,13 @@ class _EducationAboutState extends State<EducationAbout> {
                           ),
                           IconButton(
                             icon: Icon(
-                              _isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                              _isBookmarked
+                                  ? Icons.bookmark
+                                  : Icons.bookmark_border,
                               color: _isBookmarked
                                   ? Colors.yellow
-                                  : Theme.of(context).brightness == Brightness.dark
+                                  : Theme.of(context).brightness ==
+                                          Brightness.dark
                                       ? Colors.white
                                       : null,
                             ),
@@ -100,18 +105,23 @@ class _EducationAboutState extends State<EducationAbout> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      _buildDetailItem(Icons.access_time, '${widget.course.duration} dakika'),
-                      _buildDetailItem(Icons.subscriptions_outlined, '${widget.course.points} puan'),
+                      _buildDetailItem(Icons.access_time,
+                          '${widget.course.duration} dakika'),
+                      _buildDetailItem(Icons.subscriptions_outlined,
+                          '${widget.course.points} puan'),
                       _buildDetailItem(Icons.language, widget.course.language),
                     ],
                   ),
                   const SizedBox(height: 16),
                   const Text(
                     'Eğitim İçeriği',
-                    style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
+                    style:
+                        TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
                   ),
                   Divider(
-                    color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black,
+                    color: Theme.of(context).brightness == Brightness.dark
+                        ? Colors.white
+                        : Colors.black,
                     thickness: 2,
                   ),
                   const SizedBox(height: 8.0),
@@ -119,8 +129,10 @@ class _EducationAboutState extends State<EducationAbout> {
                   _buildInfoRow('Kategori:', widget.course.category),
                   _buildInfoRow('Üretici Firma:', widget.course.producer),
                   _buildInfoRow('Video:', widget.course.videoNumber.toString()),
-                  _buildInfoRow('Başlangıç Tarihi:', DateFormat('dd-MM-yyyy').format(widget.course.startTime)),
-                  _buildInfoRow('Bitiş Tarihi:', DateFormat('dd-MM-yyyy').format(widget.course.endTime)),
+                  _buildInfoRow('Başlangıç Tarihi:',
+                      DateFormat('dd-MM-yyyy').format(widget.course.startTime)),
+                  _buildInfoRow('Bitiş Tarihi:',
+                      DateFormat('dd-MM-yyyy').format(widget.course.endTime)),
                   const SizedBox(height: 8.0),
                   Padding(
                     padding: const EdgeInsets.only(bottom: 10),
@@ -135,7 +147,6 @@ class _EducationAboutState extends State<EducationAbout> {
                                 course: widget.course,
                                 educationId: 'HRp6G8T2HcpZMjQMApaA',
                                 asyncEducationId: 'g5RGqVOgtFU3rdU7j0gc',
-                                videoId: 'video1',
                               ),
                             ),
                           );
@@ -143,7 +154,8 @@ class _EducationAboutState extends State<EducationAbout> {
                         style: ElevatedButton.styleFrom(
                           backgroundColor: TobetoColor.purple,
                           foregroundColor: Colors.white,
-                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 10, vertical: 5),
                           textStyle: const TextStyle(fontSize: 14),
                         ),
                         child: Text(TobetoText.mainGoEducation),
@@ -175,7 +187,11 @@ class _EducationAboutState extends State<EducationAbout> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Icon(icon, size: 20, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
+          Icon(icon,
+              size: 20,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black),
           const SizedBox(height: 4.0),
           Flexible(
             child: Text(
