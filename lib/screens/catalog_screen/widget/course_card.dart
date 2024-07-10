@@ -43,11 +43,10 @@ class CatalogCourseCardsmall extends StatelessWidget {
           child: Column(
             children: [
               Expanded(
-                flex: 70,
+                flex: 60,
                 child: Container(
                   decoration: BoxDecoration(
-                    borderRadius:
-                        const BorderRadius.vertical(top: Radius.circular(8)),
+                    borderRadius: const BorderRadius.vertical(top: Radius.circular(8)),
                     image: DecorationImage(
                       image: NetworkImage(imagePath),
                       fit: BoxFit.cover,
@@ -56,7 +55,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
                 ),
               ),
               Expanded(
-                flex: 30,
+                flex: 40,
                 child: Padding(
                   padding: EdgeInsets.symmetric(
                     horizontal: ScreenPadding.padding4px,
@@ -66,8 +65,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
                     children: [
                       Text(
                         courseName,
-                        style: TobetoTextStyle.poppins(context)
-                            .captionMediumBlack12,
+                        style: TobetoTextStyle.poppins(context).captionMediumBlack12,
                       ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8.0),
@@ -81,8 +79,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
                                 ),
                                 Text(
                                   courseTeacher,
-                                  style: TobetoTextStyle.poppins(context)
-                                      .captionMediumBlack12,
+                                  style: TobetoTextStyle.poppins(context).captionMediumBlack12,
                                 ),
                               ],
                             ),
@@ -95,8 +92,7 @@ class CatalogCourseCardsmall extends StatelessWidget {
                                 ),
                                 Text(
                                   rank,
-                                  style: TobetoTextStyle.poppins(context)
-                                      .captionMediumBlack12,
+                                  style: TobetoTextStyle.poppins(context).captionMediumBlack12,
                                 ),
                               ],
                             ),

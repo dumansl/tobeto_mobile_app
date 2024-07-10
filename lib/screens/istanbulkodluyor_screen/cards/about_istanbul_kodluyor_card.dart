@@ -43,7 +43,7 @@ class ProjectAboutHeader extends StatelessWidget {
               TobetoText.istanbulHeadline3,
               style: TobetoTextStyle.poppins(context).captionWhiteBold18,
             ),
-            SizedBox(width: ScreenUtil.getWidth(context) * 0.068),
+            SizedBox(width: ScreenUtil.getWidth(context) * 0.12),
             Padding(
               padding: EdgeInsets.all(ScreenPadding.padding2px),
               child: CircleAvatar(

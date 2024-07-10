@@ -122,37 +122,39 @@ class _EducationAboutState extends State<EducationAbout> {
                   _buildInfoRow('Başlangıç Tarihi:', DateFormat('dd-MM-yyyy').format(widget.course.startTime)),
                   _buildInfoRow('Bitiş Tarihi:', DateFormat('dd-MM-yyyy').format(widget.course.endTime)),
                   const SizedBox(height: 8.0),
+                  Padding(
+                    padding: const EdgeInsets.only(bottom: 10),
+                    child: Align(
+                      alignment: Alignment.bottomRight,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => EducationDetails(
+                                course: widget.course,
+                                educationId: 'HRp6G8T2HcpZMjQMApaA',
+                                asyncEducationId: 'g5RGqVOgtFU3rdU7j0gc',
+                                videoId: 'video1',
+                              ),
+                            ),
+                          );
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: TobetoColor.purple,
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                          textStyle: const TextStyle(fontSize: 14),
+                        ),
+                        child: Text(TobetoText.mainGoEducation),
+                      ),
+                    ),
+                  ),
                   Text(
                     widget.course.content,
                     style: const TextStyle(fontSize: 16.0),
                   ),
                 ],
-              ),
-              Positioned(
-                top: 560,
-                right: 0,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => EducationDetails(
-                          course: widget.course,
-                          educationId: 'HRp6G8T2HcpZMjQMApaA',
-                          asyncEducationId: 'g5RGqVOgtFU3rdU7j0gc',
-                          //videoId: 'video1',
-                        ),
-                      ),
-                    );
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: TobetoColor.purple,
-                    foregroundColor: Colors.white,
-                    padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                    textStyle: const TextStyle(fontSize: 14),
-                  ),
-                  child: Text(TobetoText.mainGoEducation),
-                ),
               ),
             ],
           ),
