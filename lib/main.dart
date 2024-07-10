@@ -31,38 +31,24 @@ class TobetoMobileApp extends StatelessWidget {
         BlocProvider<CourseBloc>(create: (context) => CourseBloc()),
         BlocProvider<ThemeBloc>(create: (context) => ThemeBloc()),
         BlocProvider<AuthBloc>(create: (context) => AuthBloc()),
-        BlocProvider<UserBloc>(
-            create: (context) => UserBloc()..add(LoadUserData())),
+        BlocProvider<UserBloc>(create: (context) => UserBloc()..add(LoadUserData())),
         BlocProvider<ExamBloc>(create: (context) => ExamBloc()),
-        BlocProvider<BusinessSuccessBloc>(
-            create: (context) => BusinessSuccessBloc()),
+        BlocProvider<BusinessSuccessBloc>(create: (context) => BusinessSuccessBloc()),
         BlocProvider<AnnouncementBloc>(create: (context) => AnnouncementBloc()),
-        BlocProvider<VideoBloc>(
-            create: (context) => VideoBloc(VideoRepository())),
+        BlocProvider<VideoBloc>(create: (context) => VideoBloc(VideoRepository())),
         BlocProvider<ApplicationBloc>(create: (context) => ApplicationBloc()),
-        BlocProvider<WorkLifeBloc>(
-            create: (context) => WorkLifeBloc()..add(LoadWorkLife())),
-        BlocProvider<EducationLifeBloc>(
-            create: (context) => EducationLifeBloc()..add(LoadEducationLife())),
-        BlocProvider<ClubCominitiesBloc>(
-            create: (context) =>
-                ClubCominitiesBloc()..add(LoadClubCominities())),
-        BlocProvider<ProjectsPrizeBloc>(
-            create: (context) => ProjectsPrizeBloc()..add(LoadProjectsPrize())),
-        BlocProvider<SocialMediaBloc>(
-            create: (context) => SocialMediaBloc()..add(LoadSocialMedia())),
-        BlocProvider<LanguagesBloc>(
-            create: (context) => LanguagesBloc()..add(LoadLanguages())),
+        BlocProvider<WorkLifeBloc>(create: (context) => WorkLifeBloc()..add(LoadWorkLife())),
+        BlocProvider<EducationLifeBloc>(create: (context) => EducationLifeBloc()..add(LoadEducationLife())),
+        BlocProvider<ClubCominitiesBloc>(create: (context) => ClubCominitiesBloc()..add(LoadClubCominities())),
+        BlocProvider<ProjectsPrizeBloc>(create: (context) => ProjectsPrizeBloc()..add(LoadProjectsPrize())),
+        BlocProvider<SocialMediaBloc>(create: (context) => SocialMediaBloc()..add(LoadSocialMedia())),
+        BlocProvider<LanguagesBloc>(create: (context) => LanguagesBloc()..add(LoadLanguages())),
         BlocProvider<SurveyBloc>(create: (context) => SurveyBloc()),
         BlocProvider<JobBloc>(create: (context) => JobBloc()),
-        BlocProvider<CompetenciesBloc>(
-            create: (context) => CompetenciesBloc()..add(LoadSkills())),
-        BlocProvider<CertificateBloc>(
-            create: (context) => CertificateBloc()..add(LoadCertificate())),
-        BlocProvider<ProfilePhotoBloc>(
-            create: (context) => ProfilePhotoBloc()..add(LoadProfilePhoto())),
-        BlocProvider<PressBloc>(
-            create: (context) => PressBloc()..add(FetchPress())),
+        BlocProvider<CompetenciesBloc>(create: (context) => CompetenciesBloc()..add(LoadSkills())),
+        BlocProvider<CertificateBloc>(create: (context) => CertificateBloc()..add(LoadCertificate())),
+        BlocProvider<ProfilePhotoBloc>(create: (context) => ProfilePhotoBloc()..add(LoadProfilePhoto())),
+        BlocProvider<PressBloc>(create: (context) => PressBloc()..add(FetchPress())),
         BlocProvider<BlogBloc>(create: (context) => BlogBloc()),
         BlocProvider(
           create: (context) => EducatorAnnouncementBloc(

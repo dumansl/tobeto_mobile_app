@@ -25,9 +25,8 @@ class _IstanbulKodluyorScreenState extends State<IstanbulKodluyorScreen> {
 
   void _scrollToItem() {
     _scrollController.animateTo(
-      _scrollController.position.viewportDimension *
-          4, // Belirli bir pozisyon belirtin
-      duration: const Duration(seconds: 1),
+      _scrollController.position.viewportDimension * 4, // Belirli bir pozisyon belirtin
+      duration: const Duration(seconds: 3),
       curve: Curves.easeInOut,
     );
   }

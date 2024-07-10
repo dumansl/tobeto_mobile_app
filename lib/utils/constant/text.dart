@@ -361,14 +361,14 @@ abstract class TobetoText {
       "Sanayi ve Teknoloji Bakanlığı Kalkınma Ajansları Genel Müdürlüğü koordinasyonunda İstanbul Kalkınma Ajansı (İSTKA) ve İngiltere merkezli Bridges Outcomes Partnerships iş birliğinde başladı!";
   static String istanbulFAQButton = "Sıkça Sorulan \n Sorular";
   static String istanbulGoPlatformButton = "Platforma Git";
-  static String istanbulHeadline3 = "İstanbul Kodluyor Projesi Hakkında";
+  static String istanbulHeadline3 = "İstanbul Kodluyor Hakkında";
   static String istanbulCard2Body =
       "Yazılım ve teknoloji alanında meslek sahibi olmak isteyen genç yetişkinlere,ücretsiz ve kapsamlı eğitimlerle gerekli bilgi ve becerileri kazandıran, Türkiye’nin önde gelen kurumlarında işe yerleşmelerini  sağlayan bir projedir. Teknoloji alanında nitelikli insan kaynağını geliştirmeyi amaçlayan bu proje, aynı zamanda kadınların  sektördeki temsiliyetini artırmayı da hedeflemektedir.";
   static String istanbulProcess = "SÜREÇ";
   static String istanbulProcessBox1 = "Başvuru ve Ön-değerlendirme";
   static String istanbulProcessBox2 = "'Herkes için Kodlama' Eğitimleri";
   static String istanbulProcessBox3 = "Seçme ve Değerlendirme";
-  static String istanbulProcessBox4 = "Mesleki ve Profesyonel Gelişim Eğitimleri";
+  static String istanbulProcessBox4 = "Mesleki ve Profesyonel Gelişim";
   static String istanbulProcessBox5 = "İstihdam";
   static String istanbulHeadline4 = "İstihdama Giden Yol";
   static String istanbulCard3Title1 = "Yazılım ve Teknoloji Alanında Meslek \n        Edinmeye Yönelik Eğitimler";
@@ -420,11 +420,11 @@ abstract class TobetoText {
   static String tmainHeadline1Rich1 = "Birlikte ";
   static String tmainHeadline1Rich2 = "Büyüyoruz!";
   static String infoEducationNumber = "8.000";
-  static String infoEducationTitle = "Asenkron Eğitim İçeriği";
+  static String infoEducationTitle = "Asenkron Eğitim";
   static String infoOnlineNumber = "1.000";
   static String infoOnlineTitle = "Saat Canlı Ders";
   static String infoStudentNumber = "17.600";
-  static String infoStudentTitle = "Öğrenci";
+  static String infoStudentTitle = "Öğrenci Katılımı";
   static String tmainTobetoTitle = "Tobeto “İşte Başarı Modeli” mizi Keşfet!";
   static String tmainTobetoBody =
       "Üyelerimize ücretsiz sunduğumuz, iş bulma ve işte başarılı olma sürecinde gerekli 80 tane davranış ifadesinden oluşan Tobeto “İşte Başarı Modeli” ile, profesyonellik yetkinliklerini ölç, raporunu gör";
