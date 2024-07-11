@@ -17,17 +17,28 @@ class CommunicationScreen extends StatefulWidget {
 
 class _CommunicationScreenState extends State<CommunicationScreen> {
   final TextEditingController nameController = TextEditingController();
-
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController messageController = TextEditingController();
 
   Future<void> sendMessage(context) async {
     // Check if all fields are filled
-    if (nameController.text.isEmpty || emailController.text.isEmpty || messageController.text.isEmpty) {
+    if (nameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        messageController.text.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text('Lütfen ilgili yerleri doldurun'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return;
+    }
+
+    // Check if email is valid
+    if (!isValidEmail(emailController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Geçerli bir e-posta adresi girin'),
           backgroundColor: Colors.red,
         ),
       );
@@ -59,11 +70,16 @@ class _CommunicationScreenState extends State<CommunicationScreen> {
       // Handle errors
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Mesajınız gönderilemedi :$e'),
+          content: Text('Mesajınız gönderilemedi: $e'),
           backgroundColor: Colors.red,
         ),
       );
     }
+  }
+
+  bool isValidEmail(String email) {
+    final emailRegex = RegExp(r'^[^@]+@[^@]+\.[^@]+');
+    return emailRegex.hasMatch(email);
   }
 
   @override
@@ -75,6 +91,7 @@ class _CommunicationScreenState extends State<CommunicationScreen> {
       body: SingleChildScrollView(
         padding: EdgeInsets.all(ScreenPadding.padding16px),
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Center(
@@ -84,15 +101,51 @@ class _CommunicationScreenState extends State<CommunicationScreen> {
               ),
             ),
             SizedBox(height: ScreenPadding.padding10px),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle1, TobetoText.tcommunucationComment1),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle2, TobetoText.tcommunucationComment2),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle3, TobetoText.tcommunucationComment3),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle4, TobetoText.tcommunucationComment4),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle5, TobetoText.tcommunucationComment5),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle6, TobetoText.tcommunucationComment6),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle7, TobetoText.tcommunucationComment7),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle8, TobetoText.tcommunucationComment8),
-            sideTitleAndComment(context, TobetoText.tcommunucationSideTitle9, TobetoText.tcommunucationComment9),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle1,
+              TobetoText.tcommunucationComment1,
+            ),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle2,
+              TobetoText.tcommunucationComment2,
+            ),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle3,
+              TobetoText.tcommunucationComment3,
+            ),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle4,
+              TobetoText.tcommunucationComment4,
+            ),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle5,
+              TobetoText.tcommunucationComment5,
+            ),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle6,
+              TobetoText.tcommunucationComment6,
+            ),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle7,
+              TobetoText.tcommunucationComment7,
+            ),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle8,
+              TobetoText.tcommunucationComment8,
+            ),
+            sideTitleAndComment(
+              context,
+              TobetoText.tcommunucationSideTitle9,
+              TobetoText.tcommunucationComment9,
+            ),
             SizedBox(height: ScreenPadding.padding20px),
             Center(
               child: Text(
@@ -101,11 +154,24 @@ class _CommunicationScreenState extends State<CommunicationScreen> {
               ),
             ),
             SizedBox(height: ScreenPadding.padding10px),
-            communicationTextField(context, TobetoText.tcommunucationNameBox, 1, textEditingController: nameController),
-            communicationTextField(context, TobetoText.tcommunucationMailBox, 1,
-                textEditingController: emailController),
-            communicationTextField(context, TobetoText.tcommunucationMessageBox, 5,
-                textEditingController: messageController),
+            communicationTextField(
+              context,
+              TobetoText.tcommunucationNameBox,
+              1,
+              textEditingController: nameController,
+            ),
+            communicationTextField(
+              context,
+              TobetoText.tcommunucationMailBox,
+              1,
+              textEditingController: emailController,
+            ),
+            communicationTextField(
+              context,
+              TobetoText.tcommunucationMessageBox,
+              5,
+              textEditingController: messageController,
+            ),
             SizedBox(height: ScreenPadding.padding10px),
             Text(
               TobetoText.tcommunucationSubtitle,
@@ -114,7 +180,7 @@ class _CommunicationScreenState extends State<CommunicationScreen> {
             SizedBox(height: ScreenPadding.padding30px),
             Center(
               child: ElevatedButton(
-                onPressed: () => sendMessage(context), // sendMessage fonksiyonunu çağır
+                onPressed: () => sendMessage(context),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: TobetoColor.purple,
                   textStyle: TobetoTextStyle.poppins(context).bodyWhiteBold16,
