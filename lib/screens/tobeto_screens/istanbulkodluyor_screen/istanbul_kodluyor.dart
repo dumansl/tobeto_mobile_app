@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/about_istanbul_kodluyor_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/apply_now_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/description_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/employment_path_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/faq_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/featured_education_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/final_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/introduction_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/process_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/project_photos_card.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/cards/project_support_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/about_istanbul_kodluyor_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/apply_now_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/description_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/employment_path_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/faq_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/featured_education_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/final_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/introduction_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/process_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/project_photos_card.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/project_support_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 
 class IstanbulKodluyorScreen extends StatefulWidget {

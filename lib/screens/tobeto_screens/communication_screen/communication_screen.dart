@@ -117,6 +117,7 @@ class _CommunicationScreenState extends State<CommunicationScreen> {
                 onPressed: () => sendMessage(context), // sendMessage fonksiyonunu çağır
                 style: ElevatedButton.styleFrom(
                   backgroundColor: TobetoColor.purple,
+                  foregroundColor: TobetoColor.text.white,
                   textStyle: TobetoTextStyle.poppins(context).bodyWhiteBold16,
                 ),
                 child: Text(TobetoText.tcommunucationSendButton),

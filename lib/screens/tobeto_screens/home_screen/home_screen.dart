@@ -7,6 +7,7 @@ import 'package:tobeto_mobile_app/screens/tobeto_screens/widgets/custom_logo.dar
 import 'package:tobeto_mobile_app/screens/tobeto_screens/tobeto_screens.dart';
 import 'package:tobeto_mobile_app/services/shared_preferences_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/constant/floating_action_button.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 import 'home_widgets/drawer_text_button.dart';
@@ -36,6 +37,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
         isTobetoScreen: true,
       ),
       body: _body(context),
+      floatingActionButton: const CustomFloatingActionButton(),
     );
   }
 
@@ -117,8 +119,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) =>
-                              const WhatsHappeningIntobetoScreen(),
+                          builder: (context) => const WhatsHappeningIntobetoScreen(),
                         ),
                       );
                     },
@@ -205,8 +206,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
 
   Widget _body(BuildContext context) {
     final isDarkMode = Theme.of(context).brightness == Brightness.light;
-    final assetImagePath =
-        isDarkMode ? 'assets/gifs/skills.gif' : 'assets/gifs/skilldark.gif';
+    final assetImagePath = isDarkMode ? 'assets/gifs/skills.gif' : 'assets/gifs/skilldark.gif';
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px),
       child: SingleChildScrollView(
@@ -230,8 +230,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                 Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: ScreenPadding.padding24px),
+                      padding: EdgeInsets.symmetric(vertical: ScreenPadding.padding24px),
                       child: Container(
                         height: ScreenUtil.getHeight(context) * 0.155,
                         width: ScreenUtil.getWidth(context) * 0.42,
@@ -248,23 +247,19 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       child: Column(
                         children: [
                           Padding(
-                            padding:
-                                EdgeInsets.only(left: ScreenPadding.padding6px),
+                            padding: EdgeInsets.only(left: ScreenPadding.padding6px),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
                                   TobetoText.tmainCard1Title,
-                                  style: TobetoTextStyle.poppins(context)
-                                      .captionBlackBold12,
+                                  style: TobetoTextStyle.poppins(context).captionBlackBold12,
                                 ),
                                 Padding(
-                                  padding: EdgeInsets.only(
-                                      top: ScreenPadding.padding12px),
+                                  padding: EdgeInsets.only(top: ScreenPadding.padding12px),
                                   child: Text(
                                     TobetoText.tmainCard1Body,
-                                    style: TobetoTextStyle.poppins(context)
-                                        .captionBlackNormal12,
+                                    style: TobetoTextStyle.poppins(context).captionBlackNormal12,
                                   ),
                                 ),
                               ],
@@ -278,20 +273,16 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: ScreenPadding.padding16px,
-                  bottom: ScreenPadding.padding16px),
+              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
               child: RichText(
                 text: TextSpan(
                   children: [
                     TextSpan(
                         text: TobetoText.tmainHeadline1Rich1,
-                        style: TobetoTextStyle.poppins(context)
-                            .subtitlePurpleLight20),
+                        style: TobetoTextStyle.poppins(context).subtitlePurpleLight20),
                     TextSpan(
                         text: TobetoText.tmainHeadline1Rich2,
-                        style:
-                            TobetoTextStyle.poppins(context).titlePurpleBold24),
+                        style: TobetoTextStyle.poppins(context).titlePurpleBold24),
                   ],
                 ),
               ),
@@ -314,9 +305,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               ],
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: ScreenPadding.padding16px,
-                  bottom: ScreenPadding.padding16px),
+              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
               child: _contentCard(
                 context,
                 imageUrl: ImagePath.graduationCap,
@@ -325,9 +314,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: ScreenPadding.padding16px,
-                  bottom: ScreenPadding.padding16px),
+              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(35.0),
@@ -363,12 +350,10 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                               decoration: BoxDecoration(
                                 boxShadow: [
                                   BoxShadow(
-                                    color: TobetoColor.card.shadowColor
-                                        .withOpacity(0.4),
+                                    color: TobetoColor.card.shadowColor.withOpacity(0.4),
                                     spreadRadius: 2,
                                     blurRadius: 5,
-                                    offset: const Offset(
-                                        2, 4), // changes position of shadow
+                                    offset: const Offset(2, 4), // changes position of shadow
                                   ),
                                 ],
                                 borderRadius: BorderRadius.circular(50),
@@ -382,12 +367,9 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                           },
                         ),
                         Padding(
-                          padding:
-                              EdgeInsets.only(top: ScreenPadding.padding8px),
+                          padding: EdgeInsets.only(top: ScreenPadding.padding8px),
                           child: Text(TobetoText.tmainTobetoTitle,
-                              style: TobetoTextStyle.poppins(context)
-                                  .titleBlackBold24,
-                              textAlign: TextAlign.center),
+                              style: TobetoTextStyle.poppins(context).titleBlackBold24, textAlign: TextAlign.center),
                         ),
                         Padding(
                           padding: EdgeInsets.only(
@@ -397,33 +379,27 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                               bottom: ScreenPadding.padding20px),
                           child: Text(
                             TobetoText.tmainTobetoBody,
-                            style: TobetoTextStyle.poppins(context)
-                                .subtitleBlackNormal20,
+                            style: TobetoTextStyle.poppins(context).subtitleBlackNormal20,
                             textAlign: TextAlign.center,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(
-                              bottom: ScreenPadding.padding10px),
+                          padding: EdgeInsets.only(bottom: ScreenPadding.padding10px),
                           child: ElevatedButton(
                             onPressed: () {
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                  builder: (context) =>
-                                      const TobetoSuccesScreen(),
+                                  builder: (context) => const TobetoSuccesScreen(),
                                 ),
                               );
                             },
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor: TobetoColor.purple),
+                            style: ElevatedButton.styleFrom(backgroundColor: TobetoColor.purple),
                             child: Padding(
-                              padding:
-                                  EdgeInsets.all(ScreenPadding.padding12px),
+                              padding: EdgeInsets.all(ScreenPadding.padding12px),
                               child: Text(
                                 TobetoText.tmainButton,
-                                style: TobetoTextStyle.poppins(context)
-                                    .bodyWhiteBold16,
+                                style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
                               ),
                             ),
                           ),
@@ -443,9 +419,7 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
               style: TobetoTextStyle.poppins(context).captionBlackNormal12,
             ),
             Padding(
-              padding: EdgeInsets.only(
-                  top: ScreenPadding.padding16px,
-                  bottom: ScreenPadding.padding16px),
+              padding: EdgeInsets.only(top: ScreenPadding.padding16px, bottom: ScreenPadding.padding16px),
               child: Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(35.0),
@@ -477,18 +451,15 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                       child: Column(
                         children: [
                           Padding(
-                            padding: EdgeInsets.only(
-                                bottom: ScreenPadding.padding30px),
+                            padding: EdgeInsets.only(bottom: ScreenPadding.padding30px),
                             child: Text(TobetoText.tmainHeadline3Body,
-                                style: TobetoTextStyle.poppins(context)
-                                    .subtitleBlackNormal20,
+                                style: TobetoTextStyle.poppins(context).subtitleBlackNormal20,
                                 textAlign: TextAlign.center),
                           ),
                           Container(
                             decoration: BoxDecoration(
                               shape: BoxShape.circle,
-                              border: Border.all(
-                                  color: TobetoColor.purple, width: 2),
+                              border: Border.all(color: TobetoColor.purple, width: 2),
                               color: TobetoColor.card.white,
                               image: const DecorationImage(
                                 image: AssetImage(ImagePath.ekip1),
@@ -499,20 +470,16 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                             width: ScreenUtil.getWidth(context) * 0.23,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(
-                                top: ScreenPadding.padding30px,
-                                bottom: ScreenPadding.padding10px),
+                            padding: EdgeInsets.only(top: ScreenPadding.padding30px, bottom: ScreenPadding.padding10px),
                             child: Text(
                               TobetoText.tmainHeadline4Name,
-                              style: TobetoTextStyle.poppins(context)
-                                  .subtitleBlackBold20,
+                              style: TobetoTextStyle.poppins(context).subtitleBlackBold20,
                               textAlign: TextAlign.center,
                             ),
                           ),
                           Text(
                             TobetoText.tmainHeadline4Student,
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackNormal12,
+                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
                             textAlign: TextAlign.center,
                           ),
                         ],
@@ -540,23 +507,17 @@ class _TobetoHomeScreenState extends State<TobetoHomeScreen> {
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding30px),
-                  child: SizedBox(
-                      height: ScreenUtil.getHeight(context) * 0.055,
-                      child: Image.asset(ImagePath.codecademy)),
+                  child:
+                      SizedBox(height: ScreenUtil.getHeight(context) * 0.055, child: Image.asset(ImagePath.codecademy)),
                 ),
                 Padding(
                   padding: EdgeInsets.only(top: ScreenPadding.padding30px),
-                  child: SizedBox(
-                      height: ScreenUtil.getHeight(context) * 0.055,
-                      child: Image.asset(ImagePath.perculus)),
+                  child:
+                      SizedBox(height: ScreenUtil.getHeight(context) * 0.055, child: Image.asset(ImagePath.perculus)),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(
-                      top: ScreenPadding.padding30px,
-                      bottom: ScreenPadding.padding20px),
-                  child: SizedBox(
-                      height: ScreenUtil.getHeight(context) * 0.08,
-                      child: Image.asset(ImagePath.huawei)),
+                  padding: EdgeInsets.only(top: ScreenPadding.padding30px, bottom: ScreenPadding.padding20px),
+                  child: SizedBox(height: ScreenUtil.getHeight(context) * 0.08, child: Image.asset(ImagePath.huawei)),
                 ),
                 SizedBox(
                   height: ScreenUtil.getHeight(context) * 0.1,

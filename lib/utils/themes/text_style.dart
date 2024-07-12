@@ -630,11 +630,8 @@ class Typography {
       fontWeight: FontWeight.normal,
       color: TobetoColor.purple,
     );
-    captionWhiteThin12 = baseStyle.copyWith(
-      fontSize: 12,
-      fontWeight: FontWeight.w300,
-      color: TobetoColor.text.white,
-    );
+    captionWhiteThin12 =
+        baseStyle.copyWith(fontSize: 12, fontWeight: FontWeight.w300, color: Theme.of(context).colorScheme.scrim);
     captionWhiteBold12 = baseStyle.copyWith(
       fontSize: 12,
       fontWeight: FontWeight.bold,
