@@ -207,7 +207,7 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding.padding16px,
+          vertical: ScreenPadding.padding8px,
         ),
         decoration: BoxDecoration(
           color: TobetoColor.purple,

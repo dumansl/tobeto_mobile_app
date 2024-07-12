@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_c
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class Languages extends StatefulWidget {
   const Languages({super.key});
@@ -28,80 +29,100 @@ class _LanguagesState extends State<Languages> {
   }
 
   bool _areControllersValid() {
-    return languageNameController.text.isNotEmpty && languageLevelController.text.isNotEmpty;
+    return languageNameController.text.isNotEmpty &&
+        languageLevelController.text.isNotEmpty;
   }
 
-  void _addEducationLife() {
-    final projects = {
+  void _addLanguage() {
+    final languageData = {
       'languageName': languageNameController.text,
       'languageLevel': languageLevelController.text,
     };
-    context.read<LanguagesBloc>().add(AddLanguages(projects));
+    context.read<LanguagesBloc>().add(AddLanguages(languageData));
     _clearControllers();
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<LanguagesBloc, LanguagesState>(builder: (context, state) {
-      if (state.isLoading) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (state.error != null) {
-        return Center(child: Text('Error: ${state.error}'));
-      }
-      return ListView(
-        children: [
-          CustomTitle(title: TobetoText.profileLanguages),
-          InputText(
+    return BlocConsumer<LanguagesBloc, LanguagesState>(
+      listener: (context, state) {
+        if (!state.isLoading) {
+          if (state.error != null) {
+            snackBar(context, "İşleminiz başarısız: ${state.error}");
+          } else {
+            snackBar(context, "İşleminiz başarılı!",
+                bgColor: TobetoColor.state.success);
+          }
+        }
+      },
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (state.error != null) {
+          return Center(child: Text('Error: ${state.error}'));
+        }
+        return ListView(
+          children: [
+            CustomTitle(title: TobetoText.profileLanguages),
+            InputText(
               child: CustomDropDownInput(
-            onChanged: (newValue) {
-              languageNameController.text = newValue ?? languageNameController.text;
-            },
-            items: TobetoText.languageList
-                .map((label) => DropdownMenuItem(
-                      value: label,
-                      child: Text(label),
-                    ))
-                .toList(),
-            title: TobetoText.profileEditLanguageName,
-            controller: languageNameController,
-          )),
-          InputText(
-              child: CustomDropDownInput(
-            onChanged: (newValue) {
-              languageLevelController.text = newValue ?? languageLevelController.text;
-            },
-            items: TobetoText.languageLevel
-                .map((label) => DropdownMenuItem(
-                      value: label,
-                      child: Text(label),
-                    ))
-                .toList(),
-            title: TobetoText.profileEditLanguageLevel,
-            controller: languageLevelController,
-          )),
-          CustomElevatedButton(
-            onPressed: () {
-              if (_areControllersValid()) {
-                _addEducationLife();
-              }
-            },
-          ),
-          if (state.languages.isEmpty)
-            CustomColumn(title: TobetoText.emptyLanguage)
-          else
-            ...state.languages.map((languages) {
-              return InputText(
-                  child: CustomMiniCard(
-                imagepath: Image.asset(ImagePath.foreignLanguages),
-                onpressed: () {
-                  context.read<LanguagesBloc>().add(RemoveLanguages(languages));
+                onChanged: (newValue) {
+                  languageNameController.text =
+                      newValue ?? languageNameController.text;
                 },
-                title: languages['languageName'],
-                content: languages['languageLevel'],
-              ));
-            })
-        ],
-      );
-    });
+                items: TobetoText.languageList
+                    .map((label) => DropdownMenuItem(
+                          value: label,
+                          child: Text(label),
+                        ))
+                    .toList(),
+                title: TobetoText.profileEditLanguageName,
+                controller: languageNameController,
+              ),
+            ),
+            InputText(
+              child: CustomDropDownInput(
+                onChanged: (newValue) {
+                  languageLevelController.text =
+                      newValue ?? languageLevelController.text;
+                },
+                items: TobetoText.languageLevel
+                    .map((label) => DropdownMenuItem(
+                          value: label,
+                          child: Text(label),
+                        ))
+                    .toList(),
+                title: TobetoText.profileEditLanguageLevel,
+                controller: languageLevelController,
+              ),
+            ),
+            CustomElevatedButton(
+              onPressed: () {
+                if (_areControllersValid()) {
+                  _addLanguage();
+                }
+              },
+            ),
+            if (state.languages.isEmpty)
+              CustomColumn(title: TobetoText.emptyLanguage)
+            else
+              ...state.languages.map((language) {
+                return InputText(
+                  child: CustomMiniCard(
+                    imagepath: Image.asset(ImagePath.foreignLanguages),
+                    onpressed: () {
+                      context
+                          .read<LanguagesBloc>()
+                          .add(RemoveLanguages(language));
+                    },
+                    title: language['languageName'],
+                    content: language['languageLevel'],
+                  ),
+                );
+              }),
+          ],
+        );
+      },
+    );
   }
 }

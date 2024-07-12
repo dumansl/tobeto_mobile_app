@@ -11,12 +11,14 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/phone_textfield.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class PersonalInformationForm extends StatefulWidget {
   const PersonalInformationForm({super.key});
 
   @override
-  State<PersonalInformationForm> createState() => _PersonalInformationFormState();
+  State<PersonalInformationForm> createState() =>
+      _PersonalInformationFormState();
 }
 
 final TextEditingController firstNameController = TextEditingController();
@@ -38,7 +40,15 @@ final TextEditingController disabledStatuController = TextEditingController();
 class _PersonalInformationFormState extends State<PersonalInformationForm> {
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<UserBloc, UserState>(
+    return BlocConsumer<UserBloc, UserState>(
+      listener: (context, state) {
+        if (state is UserLoaded) {
+          snackBar(context, "İşleminiz başarılı!",
+              bgColor: TobetoColor.state.success);
+        } else if (state is UserError) {
+          snackBar(context, "İşleminiz başarısız: ${state.message}");
+        }
+      },
       builder: (context, state) {
         if (state is UserLoading) {
           return const Center(child: CircularProgressIndicator());
@@ -61,7 +71,9 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                 controller: phoneNumberController,
               )),
               InputText(
-                  child: CustomDateInput(controller: birthDateController, labelText: TobetoText.profileEditBirthday)),
+                  child: CustomDateInput(
+                      controller: birthDateController,
+                      labelText: TobetoText.profileEditBirthday)),
               InputText(
                   child: CustomTextField(
                 title: TobetoText.profileEditIdentificationNumber,
@@ -74,7 +86,8 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                 title: TobetoText.profileEditEmail,
                 keyboardType: TextInputType.emailAddress,
                 controller: emailController,
-                readOnly: true, // E-posta alanını yalnızca okunabilir yapıyoruz.
+                readOnly:
+                    true, // E-posta alanını yalnızca okunabilir yapıyoruz.
               )),
               InputText(
                 child: CustomDropDownInput(
@@ -87,7 +100,9 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
                             child: Text(label),
                           ))
                       .toList(),
-                  title: genderController.text.isNotEmpty ? genderController.text : TobetoText.profileEditGender,
+                  title: genderController.text.isNotEmpty
+                      ? genderController.text
+                      : TobetoText.profileEditGender,
                   controller: genderController,
                   labelText: TobetoText.profileEditGender,
                 ),
@@ -95,7 +110,8 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
               InputText(
                   child: CustomDropDownInput(
                 onChanged: (newValue) {
-                  militaryStatuController.text = newValue ?? militaryStatuController.text;
+                  militaryStatuController.text =
+                      newValue ?? militaryStatuController.text;
                 },
                 items: TobetoText.militaryStatu
                     .map((label) => DropdownMenuItem(
@@ -112,7 +128,8 @@ class _PersonalInformationFormState extends State<PersonalInformationForm> {
               InputText(
                   child: CustomDropDownInput(
                 onChanged: (newValue) {
-                  disabledStatuController.text = newValue ?? disabledStatuController.text;
+                  disabledStatuController.text =
+                      newValue ?? disabledStatuController.text;
                 },
                 items: TobetoText.disableStatu
                     .map((label) => DropdownMenuItem(

@@ -187,7 +187,7 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding.padding16px,
+          vertical: ScreenPadding.padding8px,
         ),
         decoration: BoxDecoration(
           color: TobetoColor.purple,

@@ -56,9 +56,9 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
               : Column(
                   children: [
                     const Expanded(
-                        flex: 15, child: Center(child: CustomHeadlineText())),
+                        flex: 10, child: Center(child: CustomHeadlineText())),
                     Expanded(
-                      flex: 85,
+                      flex: 90,
                       child: _tobetoSuccesContent(context),
                     ),
                   ],
@@ -127,11 +127,11 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
         }
       },
       child: Container(
-        height: ScreenUtil.getHeight(context) * 0.12,
         width: double.infinity,
         padding: EdgeInsets.symmetric(
-            horizontal: ScreenPadding.padding16px,
-            vertical: ScreenPadding.padding32px),
+          horizontal: ScreenPadding.padding16px,
+          vertical: ScreenPadding.padding32px,
+        ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
