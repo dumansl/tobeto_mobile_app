@@ -76,15 +76,8 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
           ),
           CustomElevatedButton(
             onPressed: () {
-              String newProject = projectAwardNameController.text.trim();
-              if (_areControllersValid() &&
-                  state.projects.length < 5 &&
-                  !state.projects.toString().contains(newProject)) {
+              if (_areControllersValid()) {
                 _addEducationLife();
-              } else if (state.projects.toString().contains(newProject)) {
-                snackBar(context, TobetoText.alertProjectAward);
-              } else if (state.projects.length >= 5) {
-                snackBar(context, TobetoText.maxProjectAward);
               }
             },
           ),

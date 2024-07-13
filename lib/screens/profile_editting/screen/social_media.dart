@@ -102,19 +102,21 @@ class _SocialMediaState extends State<SocialMedia> {
         children: [
           CustomTitle(title: TobetoText.profileEditSocialMedia),
           InputText(
-              child: CustomDropDownInput(
-            onChanged: (newValue) {
-              socialMediaNameController.text = newValue ?? socialMediaNameController.text;
-            },
-            items: TobetoText.socialMediaName
-                .map((label) => DropdownMenuItem(
-                      value: label,
-                      child: Text(label),
-                    ))
-                .toList(),
-            title: TobetoText.profileEditSocialMediaName,
-            controller: socialMediaNameController,
-          )),
+            child: CustomDropDownInput(
+              onChanged: (newValue) {
+                socialMediaNameController.text =
+                    newValue ?? socialMediaNameController.text;
+              },
+              items: TobetoText.socialMediaName.map((label) {
+                return DropdownMenuItem(
+                  value: label,
+                  child: Text(label),
+                );
+              }).toList(),
+              title: TobetoText.profileEditSocialMediaName,
+              controller: socialMediaNameController,
+            ),
+          ),
           InputText(
             child: CustomTextField(
               title: TobetoText.profileEditSocialMediaLink,
@@ -131,10 +133,8 @@ class _SocialMediaState extends State<SocialMedia> {
             ),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid() && !state.media.toString().contains(socialMediaNameController.text)) {
-                _addEducationLife();
-              } else if (state.media.toString().contains(socialMediaNameController.text)) {
-                snackBar(context, TobetoText.alertSocialMedia);
+              if (_areControllersValid()) {
+                _addSocialMedia();
               }
             },
           ),
