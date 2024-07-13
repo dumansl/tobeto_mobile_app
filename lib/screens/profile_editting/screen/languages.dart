@@ -82,9 +82,40 @@ class _LanguagesState extends State<Languages> {
             ),
             InputText(
               child: CustomDropDownInput(
-                onChanged: (newValue) {
-                  languageLevelController.text =
-                      newValue ?? languageLevelController.text;
+            onChanged: (newValue) {
+              languageLevelController.text = newValue ?? languageLevelController.text;
+            },
+            items: TobetoText.languageLevel
+                .map((label) => DropdownMenuItem(
+                      value: label,
+                      child: Text(label),
+                    ))
+                .toList(),
+            title: TobetoText.profileEditLanguageLevel,
+            controller: languageLevelController,
+          )),
+          CustomElevatedButton(
+            onPressed: () {
+              if (_areControllersValid() &&
+                  state.languages.length < 4 &&
+                  !state.languages.toString().contains(languageNameController.text)) {
+                _addEducationLife();
+              } else if (state.languages.toString().contains(languageNameController.text)) {
+                snackBar(context, TobetoText.alertLanguage);
+              } else if (state.languages.length >= 4) {
+                snackBar(context, TobetoText.maxLanguage);
+              }
+            },
+          ),
+          if (state.languages.isEmpty)
+            CustomColumn(title: TobetoText.emptyLanguage)
+          else
+            ...state.languages.map((languages) {
+              return InputText(
+                  child: CustomMiniCard(
+                imagepath: Image.asset(ImagePath.foreignLanguages),
+                onpressed: () {
+                  context.read<LanguagesBloc>().add(RemoveLanguages(languages));
                 },
                 items: TobetoText.languageLevel
                     .map((label) => DropdownMenuItem(

@@ -81,26 +81,36 @@ class _ClubCominitiesState extends State<ClubCominities> {
                 }
               },
             ),
-            if (state.club.isEmpty)
-              CustomColumn(
-                title: TobetoText.emptyCommunity,
-              )
-            else
-              ...state.club.map((club) {
-                return InputText(
-                    child: CustomMiniCard(
-                  onpressed: () {
-                    context
-                        .read<ClubCominitiesBloc>()
-                        .add(RemoveClubCominities(club));
-                  },
-                  title: club['communityName'],
-                  content: club['communityTitle'],
-                ));
-              })
-          ],
-        );
-      },
-    );
+          ),
+          CustomElevatedButton(
+            onPressed: () {
+              String newClub = communityNameController.text.trim();
+              if (_areControllersValid() && state.club.length < 5 && !state.club.toString().contains(newClub)) {
+                _addClubCominities();
+              } else if (state.club.length >= 5) {
+                snackBar(context, TobetoText.maxCommunity);
+              } else if (state.club.toString().contains(newClub)) {
+                snackBar(context, TobetoText.alertCommunity);
+              }
+            },
+          ),
+          if (state.club.isEmpty)
+            CustomColumn(
+              title: TobetoText.emptyCommunity,
+            )
+          else
+            ...state.club.map((club) {
+              return InputText(
+                  child: CustomMiniCard(
+                onpressed: () {
+                  context.read<ClubCominitiesBloc>().add(RemoveClubCominities(club));
+                },
+                title: club['communityName'],
+                content: club['communityTitle'],
+              ));
+            })
+        ],
+      );
+    });
   }
 }

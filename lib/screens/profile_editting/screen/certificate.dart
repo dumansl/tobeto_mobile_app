@@ -82,26 +82,42 @@ class _CertificateScreenState extends State<CertificateScreen> {
                 }
               },
             ),
-            if (state.certificate.isEmpty)
-              CustomColumn(
-                title: TobetoText.emptyCertificate,
-              )
-            else
-              ...state.certificate.map((certificate) {
-                return InputText(
-                    child: CustomMiniCard(
-                  onpressed: () {
-                    context
-                        .read<CertificateBloc>()
-                        .add(RemoveCertificate(certificate));
-                  },
-                  title: certificate['certificatesName'],
-                  content: certificate['certificateDate'],
-                ));
-              })
-          ],
-        );
-      },
-    );
+          ),
+          InputText(
+            child: CustomDateInput(
+                controller: certificateDateController, labelText: TobetoText.profileEditCertificatesDate),
+          ),
+          CustomElevatedButton(
+            onPressed: () {
+              String newCertificate = certificatesNameController.text.trim();
+              if (_areControllersValid() &&
+                  state.certificate.length < 5 &&
+                  !state.certificate.toString().contains(newCertificate)) {
+                _addClubCominities();
+              } else if (state.certificate.length >= 5) {
+                snackBar(context, TobetoText.maxCertificate);
+              } else if (state.certificate.toString().contains(newCertificate)) {
+                snackBar(context, TobetoText.alertCertificate);
+              }
+            },
+          ),
+          if (state.certificate.isEmpty)
+            CustomColumn(
+              title: TobetoText.emptyCertificate,
+            )
+          else
+            ...state.certificate.map((certificate) {
+              return InputText(
+                  child: CustomMiniCard(
+                onpressed: () {
+                  context.read<CertificateBloc>().add(RemoveCertificate(certificate));
+                },
+                title: certificate['certificatesName'],
+                content: certificate['certificateDate'],
+              ));
+            })
+        ],
+      );
+    });
   }
 }

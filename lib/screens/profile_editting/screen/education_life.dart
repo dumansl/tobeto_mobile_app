@@ -134,60 +134,43 @@ class _EducationLifeState extends State<EducationLife> {
                 ),
               )
             ],
-            Row(
-              children: [
-                CustomCheckbox(
-                  onChanged: (value) {
-                    setState(() {
-                      _isChecked = value!;
-                      if (_isChecked) {
-                        graduateUnivercityDateController.clear();
-                      }
-                    });
-                    continueUnivercityController.text = value.toString();
-                  },
-                  value: _isChecked,
-                  controller: continueUnivercityController,
-                ),
-                Text(
-                  TobetoText.profileEditEducationContinueBox,
-                  style: TobetoTextStyle.poppins(context).bodyGrayLightNormal16,
-                ),
-              ],
-            ),
-            CustomElevatedButton(
-              onPressed: () {
-                if (_areControllersValid()) {
-                  _addEducationLife();
-                } else {
-                  snackBar(context, "Form bilgileri eksik veya hatalı",
-                      bgColor: TobetoColor.state.warning);
-                }
-              },
-            ),
-            if (state.education.isNotEmpty)
-              ...state.education.map((education) {
-                return InputText(
-                  child: CustomCard(
-                    startDate: education['startUnivercityDate'],
-                    endDate: education['continueUnivercity'] == 'true'
-                        ? 'Devam ediyor'
-                        : education['graduateUnivercityDate'],
-                    title: '${TobetoText.profileEditUnivercity}\n',
-                    content: education['univercity'],
-                    title2: TobetoText.profileEditGraduatedDepartment,
-                    content2: education['graduatedDepartment'],
-                    onpressed: () {
-                      context
-                          .read<EducationLifeBloc>()
-                          .add(RemoveEducationLife(education));
-                    },
-                  ),
-                );
-              })
-          ],
-        );
-      },
-    );
+          ),
+          CustomElevatedButton(
+            onPressed: () {
+              if (_areControllersValid() && state.education.length < 4) {
+                _addEducationLife();
+              } else if (state.education.length >= 4) {
+                snackBar(context, TobetoText.maxEducationLife);
+              }
+            },
+          ),
+          if (state.education.isNotEmpty)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...state.education.map((education) {
+                    return InputText(
+                      child: CustomCard(
+                        startDate: education['startUnivercityDate'],
+                        endDate: education['continueUnivercity'] == 'true'
+                            ? 'Devam ediyor'
+                            : education['graduateUnivercityDate'],
+                        title: '${TobetoText.profileEditUnivercity}\n',
+                        content: education['univercity'],
+                        title2: TobetoText.profileEditGraduatedDepartment,
+                        content2: education['graduatedDepartment'],
+                        onpressed: () {
+                          context.read<EducationLifeBloc>().add(RemoveEducationLife(education));
+                        },
+                      ),
+                    );
+                  })
+                ],
+              ),
+            )
+        ],
+      );
+    });
   }
 }

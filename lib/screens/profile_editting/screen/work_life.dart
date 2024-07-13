@@ -157,68 +157,54 @@ class _WorkLifeState extends State<WorkLife> {
                   labelText: TobetoText.profileEditFinishJobDate,
                 ),
               ),
-            ],
-            Row(
-              children: [
-                CustomCheckbox(
-                  onChanged: (value) {
-                    setState(() {
-                      isChecked = value!;
-                      if (isChecked) {
-                        worklifeEndController.clear();
-                      }
-                      workStatuController.text = isChecked.toString();
-                    });
-                  },
-                  value: isChecked,
-                  controller: workStatuController,
-                ),
-                Text(
-                  TobetoText.profileEditExperienceContinueBox,
-                  style:
-                      TobetoTextStyle.poppins(context).captionBlackSemiBold15,
-                ),
-              ],
+          ),
+          InputText(
+            child: CustomTextField(
+              title: TobetoText.profileEditJobDescription,
+              maxLines: 5,
+              controller: jobDescriptionController,
             ),
-            InputText(
-              child: CustomTextField(
-                title: TobetoText.profileEditJobDescription,
-                maxLines: 5,
-                controller: jobDescriptionController,
-              ),
-            ),
-            CustomElevatedButton(
-              onPressed: () {
-                if (_areControllersValid()) {
-                  _addWorkLife();
-                }
-              },
-            ),
-            if (state.works.isNotEmpty)
-              ...state.works.map((work) {
-                return InputText(
-                  child: CustomCard(
-                    startDate: work['worklifeStart'],
-                    endDate: work['workStatu'] == 'true'
-                        ? 'Devam ediyor'
-                        : work['worklifeEnd'],
-                    title: TobetoText.profileEditWorkplaceName,
-                    content: work['workplaceName'],
-                    title2: TobetoText.profileEditPosition,
-                    content2: work['position'],
-                    title3: TobetoText.profileEditSector,
-                    content3: work['sector'],
-                    title4: TobetoText.profileEditCity,
-                    content4: work['workplaceLocation'],
-                    onpressed: () {
-                      context.read<WorkLifeBloc>().add(RemoveWorkLife(work));
+          ),
+          CustomElevatedButton(
+            onPressed: () {
+              if (_areControllersValid() && state.works.length < 5) {
+                _addWorkLife();
+              } else if (state.works.length >= 5) {
+                snackBar(context, TobetoText.maxJob);
+              }
+            },
+          ),
+          if (state.works.isNotEmpty)
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...state.works.map(
+                    (work) {
+                      return InputText(
+                        child: CustomCard(
+                          startDate: work['worklifeStart'],
+                          endDate: work['workStatu'] == 'true' ? 'Devam ediyor' : work['worklifeEnd'],
+                          title: TobetoText.profileEditWorkplaceName,
+                          content: work['workplaceName'],
+                          title2: TobetoText.profileEditPosition,
+                          content2: work['position'],
+                          title3: TobetoText.profileEditSector,
+                          content3: work['sector'],
+                          title4: TobetoText.profileEditCity,
+                          content4: work['workplaceLocation'],
+                          onpressed: () {
+                            context.read<WorkLifeBloc>().add(RemoveWorkLife(work));
+                          },
+                        ),
+                      );
                     },
                   ),
-                );
-              }),
-          ],
-        );
-      },
-    );
+                ],
+              ),
+            ),
+        ],
+      );
+    });
   }
 }

@@ -183,6 +183,8 @@ abstract class TobetoText {
   static String profileEditJobDescription = "İş Açıklaması*";
   static String profileEditJobDescriptionBox = "Lütfen iş açıklaması giriniz...";
   static String emptyJob = "Henüz eklediğiniz bir iş deneyiminiz bulunmamaktadır.";
+  static String maxJob = 'En fazla 5 adet deneyim ekleyebilirsiniz!';
+
   // profile edit page/education
   static String profileEditEducationStatu = "Eğitim Durumu*";
   static List<String> educationStatu = ['Lise', 'Ön Lisans', 'Lisans', 'Yüksek Lisans', 'Doktora', 'Lisansüstü'];
@@ -196,10 +198,15 @@ abstract class TobetoText {
   static String profileEditGraduateUnivercityDate = "Mezuniyet Tarihi*";
   static String profileEditGraduateUnivercityDateBox = "gg.aa.yyyy";
   static String profileEditEducationContinueBox = "Eğitime Devam Ediyorum";
+  static String maxEducationLife = 'En fazla 4 adet eğitim ekleyebilirsiniz!';
+
   // profile edit page/skill
   static String profileEditSkill = "Yetkinlik*";
   static String profileEditEditSkillBox = "Lütfen yetkinlik seçiniz...";
   static String emptySkill = "Henüz eklediğiniz bir yetkinliğiniz bulunmamaktadır.";
+  static String alertSkill = 'Bu yetkinliği zaten eklediniz!';
+  static String maxSkill = 'En fazla 5 adet yetkinlik ekleyebilirsiniz!';
+
   // profile edit page/certificates
   static String emptyCertificate = "Henüz eklediğiniz bir sertifika bulunmamaktadır.";
   static String profileEditCertificatesHeadline = "Sertifikalarım";
@@ -209,6 +216,9 @@ abstract class TobetoText {
   static String profileEditCertificatesDateBox = "gg.aa.yyyy";
   static String profileEditCertificatesFile = "Dosya Yükle*";
   static String profileEditCertificatesFileBox = "Sürükleyip bırak, yapıştır veya gözat...";
+  static String maxCertificate = 'En fazla 5 adet sertifika ekleyebilirsiniz!';
+  static String alertCertificate = 'Bu sertifikayı zaten eklediniz!';
+
   // profile edit page/community
   static String emptyCommunity = "Henüz eklediğiniz bir kulüp veya topluluğunuz bulunmamaktadır.";
   static String profileEditCommunity = "Üye Topluluklar";
@@ -216,12 +226,18 @@ abstract class TobetoText {
   static String profileEditCommunityNameBox = "Örn. Kızılay...";
   static String profileEditCommunityTitle = "Ünvan veya Görev*";
   static String profileEditCommunityTitleBox = "Örn. Proje Yöneticisi...";
+  static String maxCommunity = 'En fazla 5 adet üye ve topluluk ekleyebilirsiniz!';
+  static String alertCommunity = 'Bu üye ve topluluğu zaten eklediniz!';
+
   // profile edit page/project and award
   static String profileEditProjectAwardName = "Proje veya Ödül Adı*";
   static String profileEditProjectAwardNameBox = "Örn. En İyi Yazılımcı...";
   static String profileEditProjectAwardDate = "Alınan Tarih*";
   static String profileEditProjectAwardDateBox = "gg.aa.yyyy*";
   static String profileEditProjectAwardSubtitle = "Henüz eklediğiniz bir proje veya ödül bulunmamaktadır.";
+  static String alertProjectAward = 'Bu proje ve ödülü zaten eklediniz!';
+  static String maxProjectAward = 'En fazla 5 adet proje ve ödül ekleyebilirsiniz!';
+
   // profile edit page/social media account
   static String emptySocialMedia = "Henüz eklediğiniz bir sosyal medyanız bulunmamaktadır.";
   static String profileEditSocialMedia = "Medya Hesaplarım";
@@ -230,7 +246,7 @@ abstract class TobetoText {
   static String profileEditSocialMediaNameBox = "Lütfen sosyal medya platformu seçiniz...";
   static String profileEditSocialMediaLink = "Sosyal Medya Linki*";
   static String profileEditSocialMediaLinkBox = "https://...";
-  static String profileEditSocialMediaAlert = "En fazla üç adet medya seçilebilir.";
+  static String alertSocialMedia = 'Bu sosyal medyayı zaten eklediniz!';
   // profile edit page/langluage
   static String profileEditLanguageName = "Yabancı Dil*";
   static List<String> languageList = [
@@ -269,6 +285,9 @@ abstract class TobetoText {
     'Anadil',
   ];
   static String profileEditLanguageLevelBox = "Lütfen seviyenizi seçiniz...";
+  static String alertLanguage = 'Bu dili zaten eklediniz!';
+  static String maxLanguage = 'En fazla 4 dil ekleyebilirsiniz!';
+
   // profile edit page/settings
   static String profileEditSettings = "Ayarlar";
   static String profileEditSettingsOldPassword = "Eski Şifre*";
