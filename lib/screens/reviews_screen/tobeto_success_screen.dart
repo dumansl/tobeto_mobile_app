@@ -44,8 +44,7 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        iconTheme:
-            IconThemeData(color: TobetoColor.purple, size: IconSize.size35px),
+        iconTheme: IconThemeData(color: TobetoColor.purple, size: IconSize.size35px),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -55,8 +54,7 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
               ? Center(child: Text('Error: $_errorMessage'))
               : Column(
                   children: [
-                    const Expanded(
-                        flex: 15, child: Center(child: CustomHeadlineText())),
+                    const Expanded(flex: 15, child: Center(child: CustomHeadlineText())),
                     Expanded(
                       flex: 85,
                       child: _tobetoSuccesContent(context),
@@ -88,8 +86,7 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
                   children: [
                     Text(
                       TobetoText.evaluationMain1,
-                      style:
-                          TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
+                      style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
                       textAlign: TextAlign.justify,
                     ),
                     SizedBox(height: ScreenPadding.padding16px),
@@ -106,8 +103,7 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
   }
 
   Widget _startEvaluateButton(BuildContext context) {
-    final isCompleted =
-        _quizResults.isNotEmpty ? _quizResults[0].isCompleted : false;
+    final isCompleted = _quizResults.isNotEmpty ? _quizResults[0].isCompleted : false;
     return InkWell(
       onTap: () {
         if (isCompleted) {
@@ -127,11 +123,9 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
         }
       },
       child: Container(
-        height: ScreenUtil.getHeight(context) * 0.12,
+        height: ScreenUtil.getHeight(context) * 0.14,
         width: double.infinity,
-        padding: EdgeInsets.symmetric(
-            horizontal: ScreenPadding.padding16px,
-            vertical: ScreenPadding.padding32px),
+        padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px, vertical: ScreenPadding.padding32px),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
@@ -150,9 +144,7 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
         ),
         child: Center(
           child: Text(
-            isCompleted!
-                ? TobetoText.tmainCard2RaporButton
-                : TobetoText.evaluationCard5,
+            isCompleted! ? TobetoText.tmainCard2RaporButton : TobetoText.evaluationCard5,
             style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
           ),
         ),
@@ -181,8 +173,7 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
             ]),
             TableRow(children: [
               _tableCell(context, '0'),
-              _tableCell(
-                  context, 'Bu konuda ortalama düzeydeyim, ne iyi ne kötü'),
+              _tableCell(context, 'Bu konuda ortalama düzeydeyim, ne iyi ne kötü'),
             ]),
             TableRow(children: [
               _tableCell(context, '+'),
@@ -201,8 +192,7 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
   Widget _tableCell(BuildContext context, String text) {
     return Padding(
       padding: EdgeInsets.all(ScreenPadding.padding8px),
-      child: Text(text,
-          style: TobetoTextStyle.poppins(context).captionGrayDarkLight15),
+      child: Text(text, style: TobetoTextStyle.poppins(context).captionGrayDarkLight15),
     );
   }
 }

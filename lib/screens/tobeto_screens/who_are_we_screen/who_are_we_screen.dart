@@ -422,6 +422,7 @@ class WhoAreWeState extends State<WhoAreWeScreen> {
                 padding: EdgeInsets.only(top: ScreenPadding.padding20px),
                 child: ClipOval(
                   child: Image.asset(
+                    fit: BoxFit.cover,
                     imagePath,
                     height: ScreenUtil.getHeight(context) * 0.1,
                     width: ScreenUtil.getWidth(context) * 0.217,

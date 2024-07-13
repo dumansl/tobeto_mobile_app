@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/communication_screen/communication_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class WhatDoWeOfferForScreen extends StatelessWidget {
   const WhatDoWeOfferForScreen({super.key});
@@ -196,19 +198,26 @@ class WhatDoWeOfferFor extends StatelessWidget {
                     Padding(
                       padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                       child: ElevatedButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => const CommunicationScreen(),
+                            ),
+                          );
+                        },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: TobetoColor.purple,
-                          textStyle: const TextStyle(
-                            fontFamily: 'Poppins',
-                            fontSize: 16,
-                          ),
+                          foregroundColor: TobetoColor.text.white,
+                          textStyle: TobetoTextStyle.poppins(context).captionMediumWhite14,
                           padding: EdgeInsets.symmetric(
                             horizontal: ScreenPadding.padding32px,
                             vertical: ScreenPadding.padding16px,
                           ),
                         ),
-                        child: Text(TobetoText.tcompaniesCard10ContactButton),
+                        child: Text(
+                          TobetoText.tcompaniesCard10ContactButton,
+                        ),
                       ),
                     ),
                   ],
