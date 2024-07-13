@@ -11,6 +11,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfi
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class CertificateScreen extends StatefulWidget {
   const CertificateScreen({super.key});
@@ -64,8 +65,15 @@ class _CertificateScreenState extends State<CertificateScreen> {
           ),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid()) {
+              String newCertificate = certificatesNameController.text.trim();
+              if (_areControllersValid() &&
+                  state.certificate.length < 5 &&
+                  !state.certificate.toString().contains(newCertificate)) {
                 _addClubCominities();
+              } else if (state.certificate.length >= 5) {
+                snackBar(context, TobetoText.maxCertificate);
+              } else if (state.certificate.toString().contains(newCertificate)) {
+                snackBar(context, TobetoText.alertCertificate);
               }
             },
           ),

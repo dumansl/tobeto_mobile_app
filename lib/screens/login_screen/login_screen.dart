@@ -60,20 +60,18 @@ class _LoginScreenState extends State<LoginScreen> {
         listener: (context, state) async {
           if (state is LoginSuccess) {
             if (_authService.currentUser != null && _authService.currentUser!.emailVerified) {
-              if (_authService.currentUser?.isAnonymous ?? false) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const TobetoHomeScreen()),
-                );
-              } else {
-                _educatorSwitch
-                    ? Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => const DashboardScreenEducator()))
-                    : Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(builder: (context) => const DashboardScreen()),
-                      );
-              }
+              _educatorSwitch
+                  ? Navigator.pushReplacement(
+                      context, MaterialPageRoute(builder: (context) => const DashboardScreenEducator()))
+                  : Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(builder: (context) => const DashboardScreen()),
+                    );
+            } else if (_authService.currentUser?.isAnonymous ?? false) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (context) => const TobetoHomeScreen()),
+              );
             } else {
               snackBar(context, 'E-posta adresiniz doğrulanmadı. Lütfen doğrulama e-postasını kontrol edin.');
               await FirebaseAuth.instance.signOut();

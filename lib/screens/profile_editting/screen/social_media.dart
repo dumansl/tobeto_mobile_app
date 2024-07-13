@@ -12,6 +12,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class SocialMedia extends StatefulWidget {
   const SocialMedia({super.key});
@@ -21,10 +22,8 @@ class SocialMedia extends StatefulWidget {
 }
 
 class _SocialMediaState extends State<SocialMedia> {
-  final TextEditingController socialMediaNameController =
-      TextEditingController();
-  final TextEditingController socialMediaLinkController =
-      TextEditingController();
+  final TextEditingController socialMediaNameController = TextEditingController();
+  final TextEditingController socialMediaLinkController = TextEditingController();
 
   void _clearControllers() {
     socialMediaNameController.clear();
@@ -32,8 +31,7 @@ class _SocialMediaState extends State<SocialMedia> {
   }
 
   bool _areControllersValid() {
-    return socialMediaNameController.text.isNotEmpty &&
-        socialMediaLinkController.text.isNotEmpty;
+    return socialMediaNameController.text.isNotEmpty && socialMediaLinkController.text.isNotEmpty;
   }
 
   void _addEducationLife() {
@@ -54,8 +52,7 @@ class _SocialMediaState extends State<SocialMedia> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SocialMediaBloc, SocialMediaState>(
-        builder: (context, state) {
+    return BlocBuilder<SocialMediaBloc, SocialMediaState>(builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -67,8 +64,7 @@ class _SocialMediaState extends State<SocialMedia> {
           InputText(
               child: CustomDropDownInput(
             onChanged: (newValue) {
-              socialMediaNameController.text =
-                  newValue ?? socialMediaNameController.text;
+              socialMediaNameController.text = newValue ?? socialMediaNameController.text;
             },
             items: TobetoText.socialMediaName
                 .map((label) => DropdownMenuItem(
@@ -86,8 +82,10 @@ class _SocialMediaState extends State<SocialMedia> {
           )),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid()) {
+              if (_areControllersValid() && !state.media.toString().contains(socialMediaNameController.text)) {
                 _addEducationLife();
+              } else if (state.media.toString().contains(socialMediaNameController.text)) {
+                snackBar(context, TobetoText.alertSocialMedia);
               }
             },
           ),

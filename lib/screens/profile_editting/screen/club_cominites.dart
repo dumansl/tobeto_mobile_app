@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfi
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class ClubCominities extends StatefulWidget {
   const ClubCominities({super.key});
@@ -65,8 +66,13 @@ class _ClubCominitiesState extends State<ClubCominities> {
           ),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid()) {
+              String newClub = communityNameController.text.trim();
+              if (_areControllersValid() && state.club.length < 5 && !state.club.toString().contains(newClub)) {
                 _addClubCominities();
+              } else if (state.club.length >= 5) {
+                snackBar(context, TobetoText.maxCommunity);
+              } else if (state.club.toString().contains(newClub)) {
+                snackBar(context, TobetoText.alertCommunity);
               }
             },
           ),

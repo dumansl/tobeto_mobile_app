@@ -11,6 +11,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfi
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class ProjectsPrize extends StatefulWidget {
   const ProjectsPrize({super.key});
@@ -64,8 +65,15 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
           ),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid()) {
+              String newProject = projectAwardNameController.text.trim();
+              if (_areControllersValid() &&
+                  state.projects.length < 5 &&
+                  !state.projects.toString().contains(newProject)) {
                 _addEducationLife();
+              } else if (state.projects.toString().contains(newProject)) {
+                snackBar(context, TobetoText.alertProjectAward);
+              } else if (state.projects.length >= 5) {
+                snackBar(context, TobetoText.maxProjectAward);
               }
             },
           ),

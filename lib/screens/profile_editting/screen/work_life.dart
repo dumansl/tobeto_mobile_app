@@ -12,6 +12,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfi
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class WorkLife extends StatefulWidget {
@@ -174,31 +175,42 @@ class _WorkLifeState extends State<WorkLife> {
           ),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid()) {
+              if (_areControllersValid() && state.works.length < 5) {
                 _addWorkLife();
+              } else if (state.works.length >= 5) {
+                snackBar(context, TobetoText.maxJob);
               }
             },
           ),
           if (state.works.isNotEmpty)
-            ...state.works.map((work) {
-              return InputText(
-                child: CustomCard(
-                  startDate: work['worklifeStart'],
-                  endDate: work['workStatu'] == 'true' ? 'Devam ediyor' : work['worklifeEnd'],
-                  title: TobetoText.profileEditWorkplaceName,
-                  content: work['workplaceName'],
-                  title2: TobetoText.profileEditPosition,
-                  content2: work['position'],
-                  title3: TobetoText.profileEditSector,
-                  content3: work['sector'],
-                  title4: TobetoText.profileEditCity,
-                  content4: work['workplaceLocation'],
-                  onpressed: () {
-                    context.read<WorkLifeBloc>().add(RemoveWorkLife(work));
-                  },
-                ),
-              );
-            }),
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...state.works.map(
+                    (work) {
+                      return InputText(
+                        child: CustomCard(
+                          startDate: work['worklifeStart'],
+                          endDate: work['workStatu'] == 'true' ? 'Devam ediyor' : work['worklifeEnd'],
+                          title: TobetoText.profileEditWorkplaceName,
+                          content: work['workplaceName'],
+                          title2: TobetoText.profileEditPosition,
+                          content2: work['position'],
+                          title3: TobetoText.profileEditSector,
+                          content3: work['sector'],
+                          title4: TobetoText.profileEditCity,
+                          content4: work['workplaceLocation'],
+                          onpressed: () {
+                            context.read<WorkLifeBloc>().add(RemoveWorkLife(work));
+                          },
+                        ),
+                      );
+                    },
+                  ),
+                ],
+              ),
+            ),
         ],
       );
     });

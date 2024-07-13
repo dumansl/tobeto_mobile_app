@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfi
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class Competencies extends StatefulWidget {
   const Competencies({super.key});
@@ -42,9 +43,14 @@ class _CompetenciesState extends State<Competencies> {
             ),
             CustomElevatedButton(
               onPressed: () {
-                if (skillController.text.isNotEmpty) {
+                String newSkill = skillController.text.trim();
+                if (skillController.text.isNotEmpty && state.skills.length < 5 && !state.skills.contains(newSkill)) {
                   context.read<CompetenciesBloc>().add(AddSkill(skillController.text));
                   skillController.clear();
+                } else if (state.skills.length >= 5) {
+                  snackBar(context, TobetoText.maxSkill);
+                } else if (state.skills.contains(newSkill)) {
+                  snackBar(context, TobetoText.alertSkill);
                 }
               },
             ),

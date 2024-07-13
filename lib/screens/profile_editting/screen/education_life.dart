@@ -12,6 +12,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfi
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class EducationLife extends StatefulWidget {
@@ -136,30 +137,38 @@ class _EducationLifeState extends State<EducationLife> {
           ),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid()) {
+              if (_areControllersValid() && state.education.length < 4) {
                 _addEducationLife();
-              } else {
-                debugPrint("Form bilgileri eksik veya hatalı");
+              } else if (state.education.length >= 4) {
+                snackBar(context, TobetoText.maxEducationLife);
               }
             },
           ),
           if (state.education.isNotEmpty)
-            ...state.education.map((education) {
-              return InputText(
-                child: CustomCard(
-                  startDate: education['startUnivercityDate'],
-                  endDate:
-                      education['continueUnivercity'] == 'true' ? 'Devam ediyor' : education['graduateUnivercityDate'],
-                  title: '${TobetoText.profileEditUnivercity}\n',
-                  content: education['univercity'],
-                  title2: TobetoText.profileEditGraduatedDepartment,
-                  content2: education['graduatedDepartment'],
-                  onpressed: () {
-                    context.read<EducationLifeBloc>().add(RemoveEducationLife(education));
-                  },
-                ),
-              );
-            })
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                children: [
+                  ...state.education.map((education) {
+                    return InputText(
+                      child: CustomCard(
+                        startDate: education['startUnivercityDate'],
+                        endDate: education['continueUnivercity'] == 'true'
+                            ? 'Devam ediyor'
+                            : education['graduateUnivercityDate'],
+                        title: '${TobetoText.profileEditUnivercity}\n',
+                        content: education['univercity'],
+                        title2: TobetoText.profileEditGraduatedDepartment,
+                        content2: education['graduatedDepartment'],
+                        onpressed: () {
+                          context.read<EducationLifeBloc>().add(RemoveEducationLife(education));
+                        },
+                      ),
+                    );
+                  })
+                ],
+              ),
+            )
         ],
       );
     });

@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_c
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class Languages extends StatefulWidget {
   const Languages({super.key});
@@ -81,8 +82,14 @@ class _LanguagesState extends State<Languages> {
           )),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid()) {
+              if (_areControllersValid() &&
+                  state.languages.length < 4 &&
+                  !state.languages.toString().contains(languageNameController.text)) {
                 _addEducationLife();
+              } else if (state.languages.toString().contains(languageNameController.text)) {
+                snackBar(context, TobetoText.alertLanguage);
+              } else if (state.languages.length >= 4) {
+                snackBar(context, TobetoText.maxLanguage);
               }
             },
           ),
