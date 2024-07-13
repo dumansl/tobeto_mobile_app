@@ -182,8 +182,8 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
-          horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding.padding8px,
+          horizontal: ScreenPadding.padding6px,
+          vertical: ScreenPadding.padding12px,
         ),
         decoration: BoxDecoration(
           color: TobetoColor.purple,

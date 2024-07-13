@@ -10,8 +10,8 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_c
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
-import 'package:tobeto_mobile_app/utils/constant/constants.dart';
-import 'package:tobeto_mobile_app/utils/snack_bar.dart';
+import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
+import 'package:tobeto_mobile_app/utils/constant/text.dart';
 
 class SocialMedia extends StatefulWidget {
   const SocialMedia({super.key});
@@ -25,6 +25,7 @@ class _SocialMediaState extends State<SocialMedia> {
       TextEditingController();
   final TextEditingController socialMediaLinkController =
       TextEditingController();
+
   String? errorMessage;
 
   void _clearControllers() {
@@ -64,12 +65,12 @@ class _SocialMediaState extends State<SocialMedia> {
     return false;
   }
 
-  void _addSocialMedia() {
-    final media = {
+  void _addEducationLife() {
+    final projects = {
       'socialMediaName': socialMediaNameController.text,
       'socialMediaLink': socialMediaLinkController.text,
     };
-    context.read<SocialMediaBloc>().add(AddSocialMedia(media));
+    context.read<SocialMediaBloc>().add(AddSocialMedia(projects));
     _clearControllers();
   }
 
@@ -82,17 +83,8 @@ class _SocialMediaState extends State<SocialMedia> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SocialMediaBloc, SocialMediaState>(
-        listener: (context, state) {
-      if (!state.isLoading) {
-        if (state.error != null) {
-          snackBar(context, "İşleminiz başarısız: ${state.error}");
-        } else {
-          snackBar(context, "İşleminiz başarılı!",
-              bgColor: TobetoColor.state.success);
-        }
-      }
-    }, builder: (context, state) {
+    return BlocBuilder<SocialMediaBloc, SocialMediaState>(
+        builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -102,27 +94,25 @@ class _SocialMediaState extends State<SocialMedia> {
         children: [
           CustomTitle(title: TobetoText.profileEditSocialMedia),
           InputText(
-            child: CustomDropDownInput(
-              onChanged: (newValue) {
-                socialMediaNameController.text =
-                    newValue ?? socialMediaNameController.text;
-              },
-              items: TobetoText.socialMediaName.map((label) {
-                return DropdownMenuItem(
-                  value: label,
-                  child: Text(label),
-                );
-              }).toList(),
-              title: TobetoText.profileEditSocialMediaName,
-              controller: socialMediaNameController,
-            ),
-          ),
+              child: CustomDropDownInput(
+            onChanged: (newValue) {
+              socialMediaNameController.text =
+                  newValue ?? socialMediaNameController.text;
+            },
+            items: TobetoText.socialMediaName
+                .map((label) => DropdownMenuItem(
+                      value: label,
+                      child: Text(label),
+                    ))
+                .toList(),
+            title: TobetoText.profileEditSocialMediaName,
+            controller: socialMediaNameController,
+          )),
           InputText(
-            child: CustomTextField(
-              title: TobetoText.profileEditSocialMediaLink,
-              controller: socialMediaLinkController,
-            ),
-          ),
+              child: CustomTextField(
+            title: TobetoText.profileEditSocialMediaLink,
+            controller: socialMediaLinkController,
+          )),
           if (errorMessage != null)
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -134,7 +124,7 @@ class _SocialMediaState extends State<SocialMedia> {
           CustomElevatedButton(
             onPressed: () {
               if (_areControllersValid()) {
-                _addSocialMedia();
+                _addEducationLife();
               }
             },
           ),
@@ -145,16 +135,13 @@ class _SocialMediaState extends State<SocialMedia> {
               final socialMediaName = media['socialMediaName'];
               final iconPath = socialMediaIcons[socialMediaName] ?? '';
               return InputText(
-                child: CustomMiniCard(
-                  imagepath: Image.asset(iconPath),
-                  onpressed: () {
-                    context
-                        .read<SocialMediaBloc>()
-                        .add(RemoveSocialMedia(media));
-                  },
-                  title: media['socialMediaLink'],
-                ),
-              );
+                  child: CustomMiniCard(
+                imagepath: Image.asset(iconPath),
+                onpressed: () {
+                  context.read<SocialMediaBloc>().add(RemoveSocialMedia(media));
+                },
+                title: media['socialMediaLink'],
+              ));
             })
         ],
       );
