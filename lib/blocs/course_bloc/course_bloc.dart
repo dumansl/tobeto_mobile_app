@@ -27,5 +27,15 @@ class CourseBloc extends Bloc<CourseEvent, CourseState> {
         emit(CourseLoadFailure(error: e.toString()));
       }
     });
+
+    on<UpdateCourseStatus>((event, emit) async {
+      try {
+        await _educationService.updateCourseCompletionStatus(event.userId, event.educationId, event.asyncEducationId);
+        final List<Course> courses = await _educationService.fetchCourses();
+        emit(CoursesLoaded(courses: courses));
+      } catch (e) {
+        emit(CourseLoadFailure(error: e.toString()));
+      }
+    });
   }
 }
