@@ -1,6 +1,7 @@
-import 'package:appinio_video_player/appinio_video_player.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:video_player/video_player.dart';
 
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/video_bloc/video_event.dart';
@@ -19,42 +20,32 @@ class CatalogVideo extends StatefulWidget {
 }
 
 class _CatalogVideoState extends State<CatalogVideo> {
-  CustomVideoPlayerController? _customVideoPlayerController;
-  CachedVideoPlayerController? _cachedVideoPlayerController;
+  VideoPlayerController? _videoPlayerController;
   bool _isDisposing = false;
 
   @override
   void dispose() {
     _isDisposing = true;
-    _cachedVideoPlayerController?.dispose();
-    _customVideoPlayerController?.dispose();
+    _videoPlayerController?.dispose();
     super.dispose();
   }
 
   Future<void> initializeVideoPlayer(String videoUrl) async {
     if (_isDisposing) return;
 
-    _cachedVideoPlayerController?.dispose();
-    _customVideoPlayerController?.dispose();
+    _videoPlayerController?.dispose();
 
-    _cachedVideoPlayerController =
-        CachedVideoPlayerController.network(videoUrl);
-    await _cachedVideoPlayerController!.initialize();
+    _videoPlayerController = VideoPlayerController.network(videoUrl);
+    await _videoPlayerController!.initialize();
     if (_isDisposing) return;
-    setState(() {
-      _customVideoPlayerController = CustomVideoPlayerController(
-        context: context,
-        videoPlayerController: _cachedVideoPlayerController!,
-      );
-    });
-    _cachedVideoPlayerController!.pause();
+    setState(() {});
+    _videoPlayerController!.pause();
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => VideoBloc(VideoRepository())
-        ..add(FetchVideo(widget.catalogCourse.videoUrl)),
+      create: (context) => VideoBloc(VideoRepository())..add(FetchVideo(widget.catalogCourse.videoUrl)),
       child: Scaffold(
         appBar: AppBar(
           iconTheme: IconThemeData(
@@ -74,7 +65,7 @@ class _CatalogVideoState extends State<CatalogVideo> {
               return const Center(child: CircularProgressIndicator());
             } else if (state is VideoLoaded) {
               return CatalogContent(
-                customVideoPlayerController: _customVideoPlayerController,
+                videoPlayerController: _videoPlayerController,
                 catalogCourse: widget.catalogCourse,
                 onVideoSelected: (videoUrl) {
                   initializeVideoPlayer(videoUrl);
@@ -95,13 +86,13 @@ class _CatalogVideoState extends State<CatalogVideo> {
 class CatalogContent extends StatelessWidget {
   const CatalogContent({
     super.key,
-    required CustomVideoPlayerController? customVideoPlayerController,
+    required VideoPlayerController? videoPlayerController,
     required this.catalogCourse,
     required this.onVideoSelected,
-  }) : _customVideoPlayerController = customVideoPlayerController;
+  }) : _videoPlayerController = videoPlayerController;
 
   final CatalogCourse catalogCourse;
-  final CustomVideoPlayerController? _customVideoPlayerController;
+  final VideoPlayerController? _videoPlayerController;
   final Function(String) onVideoSelected;
 
   @override
@@ -115,14 +106,40 @@ class CatalogContent extends StatelessWidget {
             decoration: const BoxDecoration(
               color: Colors.black,
             ),
-            child: _customVideoPlayerController != null
-                ? CustomVideoPlayer(
-                    customVideoPlayerController: _customVideoPlayerController!,
+            child: _videoPlayerController != null && _videoPlayerController!.value.isInitialized
+                ? Stack(
+                    children: [
+                      AspectRatio(
+                        aspectRatio: _videoPlayerController!.value.aspectRatio,
+                        child: VideoPlayer(_videoPlayerController!),
+                      ),
+                      Positioned(
+                        right: 8.0,
+                        bottom: 8.0,
+                        child: IconButton(
+                          icon: const Icon(Icons.fullscreen),
+                          color: Colors.white,
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => FullScreenVideo(
+                                  videoPlayerController: _videoPlayerController!,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
+                    ],
                   )
                 : const Center(
                     child: CircularProgressIndicator(),
                   ),
           ),
+          _videoPlayerController != null && _videoPlayerController!.value.isInitialized
+              ? VideoControls(controller: _videoPlayerController!)
+              : Container(),
           Container(
             width: double.infinity,
             padding: const EdgeInsets.symmetric(
@@ -143,6 +160,136 @@ class CatalogContent extends StatelessWidget {
           ),
         ],
       ),
+    );
+  }
+}
+
+class FullScreenVideo extends StatefulWidget {
+  final VideoPlayerController videoPlayerController;
+
+  const FullScreenVideo({super.key, required this.videoPlayerController});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _FullScreenVideoState createState() => _FullScreenVideoState();
+}
+
+class _FullScreenVideoState extends State<FullScreenVideo> {
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
+  }
+
+  @override
+  void dispose() {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Stack(
+          children: [
+            AspectRatio(
+              aspectRatio: widget.videoPlayerController.value.aspectRatio,
+              child: VideoPlayer(widget.videoPlayerController),
+            ),
+            Positioned(
+              left: 8.0,
+              top: 8.0,
+              child: IconButton(
+                icon: const Icon(Icons.fullscreen_exit),
+                color: Colors.white,
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            Positioned(
+              bottom: 8.0,
+              left: 8.0,
+              right: 8.0,
+              child: VideoControls(controller: widget.videoPlayerController),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class VideoControls extends StatefulWidget {
+  final VideoPlayerController controller;
+
+  const VideoControls({super.key, required this.controller});
+
+  @override
+  State<VideoControls> createState() => _VideoControlsState();
+}
+
+class _VideoControlsState extends State<VideoControls> {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(() {});
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          icon: Icon(
+            widget.controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          ),
+          onPressed: () {
+            widget.controller.value.isPlaying ? widget.controller.pause() : widget.controller.play();
+          },
+        ),
+        IconButton(
+          icon: Icon(widget.controller.value.volume > 0 ? Icons.volume_up : Icons.volume_off),
+          onPressed: () {
+            widget.controller.setVolume(widget.controller.value.volume > 0 ? 0 : 1);
+          },
+        ),
+        DropdownButton<double>(
+          value: widget.controller.value.playbackSpeed,
+          items: [0.5, 1.0, 1.5, 2.0]
+              .map((speed) => DropdownMenuItem(
+                    value: speed,
+                    child: Text('${speed}x'),
+                  ))
+              .toList(),
+          onChanged: (speed) {
+            if (speed != null) {
+              widget.controller.setPlaybackSpeed(speed);
+            }
+          },
+        ),
+      ],
     );
   }
 }
@@ -172,7 +319,7 @@ class Playlist extends StatelessWidget {
   }
 }
 
-class PlaylistItem extends StatefulWidget {
+class PlaylistItem extends StatelessWidget {
   final int index;
   final CatalogCourse catalogCourse;
   final Function(String) onVideoSelected;
@@ -185,45 +332,10 @@ class PlaylistItem extends StatefulWidget {
   });
 
   @override
-  State<PlaylistItem> createState() => _PlaylistItemState();
-}
-
-class _PlaylistItemState extends State<PlaylistItem> {
-  CustomVideoPlayerController? _customVideoPlayerController;
-  CachedVideoPlayerController? _cachedVideoPlayerController;
-
-  @override
-  void initState() {
-    super.initState();
-    _initializeVideoPlayer();
-  }
-
-  @override
-  void dispose() {
-    _cachedVideoPlayerController?.dispose();
-    _customVideoPlayerController?.dispose();
-    super.dispose();
-  }
-
-  void _initializeVideoPlayer() {
-    _cachedVideoPlayerController = CachedVideoPlayerController.network(
-        widget.catalogCourse.playlist[widget.index]);
-    _cachedVideoPlayerController!.initialize().then((_) {
-      if (!mounted) return; // Check if widget is still mounted
-      setState(() {
-        _customVideoPlayerController = CustomVideoPlayerController(
-          context: context,
-          videoPlayerController: _cachedVideoPlayerController!,
-        );
-      });
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        widget.onVideoSelected(widget.catalogCourse.playlist[widget.index]);
+        onVideoSelected(catalogCourse.playlist[index]);
       },
       child: Container(
         padding: const EdgeInsets.all(16.0),
@@ -254,12 +366,11 @@ class _PlaylistItemState extends State<PlaylistItem> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    '${widget.catalogCourse.courseName} ',
-                    style: TobetoTextStyle.poppins(context)
-                        .subtitleGrayDarkLight20,
+                    '${catalogCourse.courseName} ',
+                    style: TobetoTextStyle.poppins(context).subtitleGrayDarkLight20,
                   ),
                   Text(
-                    '${widget.catalogCourse.courseTeacher} ',
+                    '${catalogCourse.courseTeacher} ',
                     style: TobetoTextStyle.poppins(context).bodyGrayDarkLight16,
                   ),
                 ],

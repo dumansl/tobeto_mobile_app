@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 import '/model/course_model.dart';
@@ -49,12 +50,7 @@ class CourseCard extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => EducationAbout(course: course),
-                  ),
-                );
+                pushWithoutNavBar(context, MaterialPageRoute(builder: (context) => EducationAbout(course: course)));
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: TobetoColor.purple,
