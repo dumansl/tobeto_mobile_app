@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:video_player/video_player.dart';
 import 'package:tobeto_mobile_app/model/course_model.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
@@ -190,6 +191,24 @@ class _EducationDetailsState extends State<EducationDetails> {
                       child: Stack(
                         children: [
                           VideoPlayer(_videoPlayerController!),
+                          Positioned(
+                            right: 8.0,
+                            bottom: 8.0,
+                            child: IconButton(
+                              icon: const Icon(Icons.fullscreen),
+                              color: Colors.white,
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => FullScreenVideo(
+                                      videoPlayerController: _videoPlayerController!,
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -452,6 +471,242 @@ class _EducationDetailsState extends State<EducationDetails> {
           ],
         ),
       ),
+    );
+  }
+}
+
+class FullScreenVideo extends StatefulWidget {
+  final VideoPlayerController videoPlayerController;
+
+  const FullScreenVideo({super.key, required this.videoPlayerController});
+
+  @override
+  // ignore: library_private_types_in_public_api
+  _FullScreenVideoState createState() => _FullScreenVideoState();
+}
+
+class _FullScreenVideoState extends State<FullScreenVideo> {
+  bool _isExitingFullScreen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+    ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky, overlays: []);
+    widget.videoPlayerController.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  Future<void> _exitFullScreen() async {
+    setState(() {
+      _isExitingFullScreen = true;
+    });
+    await Future.delayed(const Duration(seconds: 1)); // Simulate a loading period
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    Navigator.pop(context);
+  }
+
+  @override
+  void dispose() {
+    if (!_isExitingFullScreen) {
+      SystemChrome.setPreferredOrientations([
+        DeviceOrientation.portraitUp,
+        DeviceOrientation.portraitDown,
+      ]);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    }
+    widget.videoPlayerController.removeListener(() {});
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black,
+      body: Center(
+        child: Stack(
+          children: [
+            AspectRatio(
+              aspectRatio: widget.videoPlayerController.value.aspectRatio,
+              child: VideoPlayer(widget.videoPlayerController),
+            ),
+            if (_isExitingFullScreen)
+              Container(
+                color: Colors.black.withOpacity(0.8),
+                child: const Center(
+                  child: CircularProgressIndicator(
+                    color: TobetoColor.purple,
+                  ),
+                ),
+              ),
+            Positioned(
+              left: 16.0,
+              top: 16.0,
+              child: GestureDetector(
+                onTap: _exitFullScreen,
+                child: Container(
+                  padding: const EdgeInsets.all(8.0),
+                  decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.7),
+                    shape: BoxShape.circle,
+                  ),
+                  child: const Icon(
+                    Icons.fullscreen_exit,
+                    color: Colors.white,
+                    size: 30,
+                  ),
+                ),
+              ),
+            ),
+            Positioned(
+              bottom: 16.0,
+              left: 16.0,
+              right: 16.0,
+              child: FullScreenVideoControls(controller: widget.videoPlayerController),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class FullScreenVideoControls extends StatefulWidget {
+  final VideoPlayerController controller;
+
+  const FullScreenVideoControls({super.key, required this.controller});
+
+  @override
+  _FullScreenVideoControlsState createState() => _FullScreenVideoControlsState();
+}
+
+class _FullScreenVideoControlsState extends State<FullScreenVideoControls> {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(() {});
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          icon: Icon(
+            widget.controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          ),
+          onPressed: () {
+            setState(() {
+              widget.controller.value.isPlaying ? widget.controller.pause() : widget.controller.play();
+            });
+          },
+        ),
+        IconButton(
+          icon: Icon(widget.controller.value.volume > 0 ? Icons.volume_up : Icons.volume_off),
+          onPressed: () {
+            widget.controller.setVolume(widget.controller.value.volume > 0 ? 0 : 1);
+          },
+        ),
+        DropdownButton<double>(
+          value: widget.controller.value.playbackSpeed,
+          items: [0.5, 1.0, 1.5, 2.0]
+              .map((speed) => DropdownMenuItem(
+                    value: speed,
+                    child: Text('${speed}x'),
+                  ))
+              .toList(),
+          onChanged: (speed) {
+            if (speed != null) {
+              widget.controller.setPlaybackSpeed(speed);
+            }
+          },
+        ),
+      ],
+    );
+  }
+}
+
+class VideoControls extends StatefulWidget {
+  final VideoPlayerController controller;
+
+  const VideoControls({super.key, required this.controller});
+
+  @override
+  _VideoControlsState createState() => _VideoControlsState();
+}
+
+class _VideoControlsState extends State<VideoControls> {
+  @override
+  void initState() {
+    super.initState();
+    widget.controller.addListener(() {
+      if (mounted) {
+        setState(() {});
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    widget.controller.removeListener(() {});
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        IconButton(
+          icon: Icon(
+            widget.controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          ),
+          onPressed: () {
+            widget.controller.value.isPlaying ? widget.controller.pause() : widget.controller.play();
+          },
+        ),
+        IconButton(
+          icon: Icon(widget.controller.value.volume > 0 ? Icons.volume_up : Icons.volume_off),
+          onPressed: () {
+            widget.controller.setVolume(widget.controller.value.volume > 0 ? 0 : 1);
+          },
+        ),
+        DropdownButton<double>(
+          value: widget.controller.value.playbackSpeed,
+          items: [0.5, 1.0, 1.5, 2.0]
+              .map((speed) => DropdownMenuItem(
+                    value: speed,
+                    child: Text('${speed}x'),
+                  ))
+              .toList(),
+          onChanged: (speed) {
+            if (speed != null) {
+              widget.controller.setPlaybackSpeed(speed);
+            }
+          },
+        ),
+      ],
     );
   }
 }
