@@ -54,9 +54,12 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
               ? Center(child: Text('Error: $_errorMessage'))
               : Column(
                   children: [
-                    const Expanded(flex: 15, child: Center(child: CustomHeadlineText())),
+
+                    const Expanded(
+                        flex: 10, child: Center(child: CustomHeadlineText())),
+
                     Expanded(
-                      flex: 85,
+                      flex: 90,
                       child: _tobetoSuccesContent(context),
                     ),
                   ],
@@ -123,9 +126,11 @@ class _TobetoSuccesScreenState extends State<TobetoSuccesScreen> {
         }
       },
       child: Container(
-        height: ScreenUtil.getHeight(context) * 0.14,
         width: double.infinity,
-        padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px, vertical: ScreenPadding.padding32px),
+        padding: EdgeInsets.symmetric(
+          horizontal: ScreenPadding.padding16px,
+          vertical: ScreenPadding.padding32px,
+        ),
         decoration: BoxDecoration(
           gradient: LinearGradient(
             colors: [
