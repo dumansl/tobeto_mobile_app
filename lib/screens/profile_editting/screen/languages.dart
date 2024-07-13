@@ -29,8 +29,7 @@ class _LanguagesState extends State<Languages> {
   }
 
   bool _areControllersValid() {
-    return languageNameController.text.isNotEmpty &&
-        languageLevelController.text.isNotEmpty;
+    return languageNameController.text.isNotEmpty && languageLevelController.text.isNotEmpty;
   }
 
   void _addLanguage() {
@@ -50,8 +49,7 @@ class _LanguagesState extends State<Languages> {
           if (state.error != null) {
             snackBar(context, "İşleminiz başarısız: ${state.error}");
           } else {
-            snackBar(context, "İşleminiz başarılı!",
-                bgColor: TobetoColor.state.success);
+            snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
           }
         }
       },
@@ -67,8 +65,7 @@ class _LanguagesState extends State<Languages> {
             InputText(
               child: CustomDropDownInput(
                 onChanged: (newValue) {
-                  languageNameController.text =
-                      newValue ?? languageNameController.text;
+                  languageNameController.text = newValue ?? languageNameController.text;
                 },
                 items: TobetoText.languageList
                     .map((label) => DropdownMenuItem(
@@ -83,8 +80,7 @@ class _LanguagesState extends State<Languages> {
             InputText(
               child: CustomDropDownInput(
                 onChanged: (newValue) {
-                  languageLevelController.text =
-                      newValue ?? languageLevelController.text;
+                  languageLevelController.text = newValue ?? languageLevelController.text;
                 },
                 items: TobetoText.languageLevel
                     .map((label) => DropdownMenuItem(
@@ -98,8 +94,14 @@ class _LanguagesState extends State<Languages> {
             ),
             CustomElevatedButton(
               onPressed: () {
-                if (_areControllersValid()) {
+                if (_areControllersValid() &&
+                    state.languages.length < 4 &&
+                    !state.languages.toString().contains(languageNameController.text)) {
                   _addLanguage();
+                } else if (state.languages.toString().contains(languageNameController.text)) {
+                  snackBar(context, TobetoText.alertLanguage);
+                } else if (state.languages.length >= 4) {
+                  snackBar(context, TobetoText.maxLanguage);
                 }
               },
             ),
@@ -111,9 +113,7 @@ class _LanguagesState extends State<Languages> {
                   child: CustomMiniCard(
                     imagepath: Image.asset(ImagePath.foreignLanguages),
                     onpressed: () {
-                      context
-                          .read<LanguagesBloc>()
-                          .add(RemoveLanguages(language));
+                      context.read<LanguagesBloc>().add(RemoveLanguages(language));
                     },
                     title: language['languageName'],
                     content: language['languageLevel'],

@@ -23,17 +23,12 @@ class EducationLife extends StatefulWidget {
 }
 
 class _EducationLifeState extends State<EducationLife> {
-  final TextEditingController educationStatuController =
-      TextEditingController();
+  final TextEditingController educationStatuController = TextEditingController();
   final TextEditingController univercityController = TextEditingController();
-  final TextEditingController graduatedDepartmentController =
-      TextEditingController();
-  final TextEditingController startUnivercityDateController =
-      TextEditingController();
-  final TextEditingController graduateUnivercityDateController =
-      TextEditingController();
-  final TextEditingController continueUnivercityController =
-      TextEditingController();
+  final TextEditingController graduatedDepartmentController = TextEditingController();
+  final TextEditingController startUnivercityDateController = TextEditingController();
+  final TextEditingController graduateUnivercityDateController = TextEditingController();
+  final TextEditingController continueUnivercityController = TextEditingController();
   bool _isChecked = false;
 
   void _clearControllers() {
@@ -79,8 +74,7 @@ class _EducationLifeState extends State<EducationLife> {
         if (state.error != null) {
           snackBar(context, "İşleminiz başarısız: ${state.error}");
         } else if (!state.isLoading && state.error == null) {
-          snackBar(context, "İşleminiz başarılı!",
-              bgColor: TobetoColor.state.success);
+          snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
         }
       },
       builder: (context, state) {
@@ -93,8 +87,7 @@ class _EducationLifeState extends State<EducationLife> {
             InputText(
               child: CustomDropDownInput(
                 onChanged: (newValue) {
-                  educationStatuController.text =
-                      newValue ?? educationStatuController.text;
+                  educationStatuController.text = newValue ?? educationStatuController.text;
                 },
                 items: TobetoText.educationStatu
                     .map((label) => DropdownMenuItem(
@@ -157,34 +150,38 @@ class _EducationLifeState extends State<EducationLife> {
             ),
             CustomElevatedButton(
               onPressed: () {
-                if (_areControllersValid()) {
+                if (_areControllersValid() && state.education.length < 4) {
                   _addEducationLife();
-                } else {
-                  snackBar(context, "Form bilgileri eksik veya hatalı",
-                      bgColor: TobetoColor.state.warning);
+                } else if (state.education.length >= 4) {
+                  snackBar(context, TobetoText.maxEducationLife);
                 }
               },
             ),
             if (state.education.isNotEmpty)
-              ...state.education.map((education) {
-                return InputText(
-                  child: CustomCard(
-                    startDate: education['startUnivercityDate'],
-                    endDate: education['continueUnivercity'] == 'true'
-                        ? 'Devam ediyor'
-                        : education['graduateUnivercityDate'],
-                    title: '${TobetoText.profileEditUnivercity}\n',
-                    content: education['univercity'],
-                    title2: TobetoText.profileEditGraduatedDepartment,
-                    content2: education['graduatedDepartment'],
-                    onpressed: () {
-                      context
-                          .read<EducationLifeBloc>()
-                          .add(RemoveEducationLife(education));
-                    },
-                  ),
-                );
-              })
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ...state.education.map((education) {
+                      return InputText(
+                        child: CustomCard(
+                          startDate: education['startUnivercityDate'],
+                          endDate: education['continueUnivercity'] == 'true'
+                              ? 'Devam ediyor'
+                              : education['graduateUnivercityDate'],
+                          title: '${TobetoText.profileEditUnivercity}\n',
+                          content: education['univercity'],
+                          title2: TobetoText.profileEditGraduatedDepartment,
+                          content2: education['graduatedDepartment'],
+                          onpressed: () {
+                            context.read<EducationLifeBloc>().add(RemoveEducationLife(education));
+                          },
+                        ),
+                      );
+                    })
+                  ],
+                ),
+              )
           ],
         );
       },

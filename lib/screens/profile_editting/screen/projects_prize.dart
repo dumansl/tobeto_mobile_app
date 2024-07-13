@@ -21,10 +21,8 @@ class ProjectsPrize extends StatefulWidget {
 }
 
 class _ProjectsPrizeState extends State<ProjectsPrize> {
-  final TextEditingController projectAwardNameController =
-      TextEditingController();
-  final TextEditingController certificatesDateController =
-      TextEditingController();
+  final TextEditingController projectAwardNameController = TextEditingController();
+  final TextEditingController certificatesDateController = TextEditingController();
 
   void _clearControllers() {
     projectAwardNameController.clear();
@@ -32,11 +30,10 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
   }
 
   bool _areControllersValid() {
-    return projectAwardNameController.text.isNotEmpty &&
-        certificatesDateController.text.isNotEmpty;
+    return projectAwardNameController.text.isNotEmpty && certificatesDateController.text.isNotEmpty;
   }
 
-  void _addEducationLife() {
+  void _addProject() {
     final projects = {
       'projectAwardName': projectAwardNameController.text,
       'certificatesDate': certificatesDateController.text,
@@ -47,13 +44,11 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<ProjectsPrizeBloc, ProjectsPrizeState>(
-        listener: (context, state) {
+    return BlocConsumer<ProjectsPrizeBloc, ProjectsPrizeState>(listener: (context, state) {
       if (!state.isLoading && state.error != null) {
         snackBar(context, "İşleminiz başarısız: ${state.error}");
       } else if (!state.isLoading && state.error == null) {
-        snackBar(context, "İşleminiz başarılı!",
-            bgColor: TobetoColor.state.success);
+        snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
       }
     }, builder: (context, state) {
       if (state.isLoading) {
@@ -71,13 +66,19 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
           ),
           InputText(
             child: CustomDateInput(
-                controller: certificatesDateController,
-                labelText: TobetoText.profileEditCertificatesDate),
+                controller: certificatesDateController, labelText: TobetoText.profileEditCertificatesDate),
           ),
           CustomElevatedButton(
             onPressed: () {
-              if (_areControllersValid()) {
-                _addEducationLife();
+              String newProject = projectAwardNameController.text.trim();
+              if (_areControllersValid() &&
+                  state.projects.length < 5 &&
+                  !state.projects.toString().contains(newProject)) {
+                _addProject();
+              } else if (state.projects.toString().contains(newProject)) {
+                snackBar(context, TobetoText.alertProjectAward);
+              } else if (state.projects.length >= 5) {
+                snackBar(context, TobetoText.maxProjectAward);
               }
             },
           ),
@@ -88,9 +89,7 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
               return InputText(
                   child: CustomMiniCard(
                 onpressed: () {
-                  context
-                      .read<ProjectsPrizeBloc>()
-                      .add(RemoveProjectsPrize(projects));
+                  context.read<ProjectsPrizeBloc>().add(RemoveProjectsPrize(projects));
                 },
                 title: projects['projectAwardName'],
                 content: projects['certificatesDate'],

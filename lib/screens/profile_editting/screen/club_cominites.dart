@@ -21,8 +21,7 @@ class ClubCominities extends StatefulWidget {
 
 class _ClubCominitiesState extends State<ClubCominities> {
   final TextEditingController communityNameController = TextEditingController();
-  final TextEditingController communityTitleController =
-      TextEditingController();
+  final TextEditingController communityTitleController = TextEditingController();
 
   void _clearControllers() {
     communityNameController.clear();
@@ -30,8 +29,7 @@ class _ClubCominitiesState extends State<ClubCominities> {
   }
 
   bool _areControllersValid() {
-    return communityNameController.text.isNotEmpty &&
-        communityTitleController.text.isNotEmpty;
+    return communityNameController.text.isNotEmpty && communityTitleController.text.isNotEmpty;
   }
 
   void _addClubCominities() {
@@ -50,8 +48,7 @@ class _ClubCominitiesState extends State<ClubCominities> {
         if (!state.isLoading && state.error != null) {
           snackBar(context, "İşleminiz başarısız: ${state.error}");
         } else if (!state.isLoading && state.error == null) {
-          snackBar(context, "İşleminiz başarılı!",
-              bgColor: TobetoColor.state.success);
+          snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
         }
       },
       builder: (context, state) {
@@ -76,8 +73,13 @@ class _ClubCominitiesState extends State<ClubCominities> {
             ),
             CustomElevatedButton(
               onPressed: () {
-                if (_areControllersValid()) {
+                String newClub = communityNameController.text.trim();
+                if (_areControllersValid() && state.club.length < 5 && !state.club.toString().contains(newClub)) {
                   _addClubCominities();
+                } else if (state.club.length >= 5) {
+                  snackBar(context, TobetoText.maxCommunity);
+                } else if (state.club.toString().contains(newClub)) {
+                  snackBar(context, TobetoText.alertCommunity);
                 }
               },
             ),
@@ -90,9 +92,7 @@ class _ClubCominitiesState extends State<ClubCominities> {
                 return InputText(
                     child: CustomMiniCard(
                   onpressed: () {
-                    context
-                        .read<ClubCominitiesBloc>()
-                        .add(RemoveClubCominities(club));
+                    context.read<ClubCominitiesBloc>().add(RemoveClubCominities(club));
                   },
                   title: club['communityName'],
                   content: club['communityTitle'],

@@ -29,8 +29,7 @@ class _CompetenciesState extends State<Competencies> {
         if (!state.isLoading && state.error != null) {
           snackBar(context, "İşleminiz başarısız: ${state.error}");
         } else if (!state.isLoading && state.error == null) {
-          snackBar(context, "İşleminiz başarılı!",
-              bgColor: TobetoColor.state.success);
+          snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
         }
       },
       builder: (context, state) {
@@ -49,11 +48,14 @@ class _CompetenciesState extends State<Competencies> {
             ),
             CustomElevatedButton(
               onPressed: () {
-                if (skillController.text.isNotEmpty) {
-                  context
-                      .read<CompetenciesBloc>()
-                      .add(AddSkill(skillController.text));
+                String newSkill = skillController.text.trim();
+                if (skillController.text.isNotEmpty && state.skills.length < 5 && !state.skills.contains(newSkill)) {
+                  context.read<CompetenciesBloc>().add(AddSkill(skillController.text));
                   skillController.clear();
+                } else if (state.skills.length >= 5) {
+                  snackBar(context, TobetoText.maxSkill);
+                } else if (state.skills.contains(newSkill)) {
+                  snackBar(context, TobetoText.alertSkill);
                 }
               },
             ),

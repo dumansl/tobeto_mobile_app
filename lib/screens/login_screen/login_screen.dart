@@ -59,11 +59,6 @@ class _LoginScreenState extends State<LoginScreen> {
           if (state is LoginSuccess) {
             if (_authService.currentUser != null && _authService.currentUser!.emailVerified) {
               if (_authService.currentUser?.isAnonymous ?? false) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const TobetoHomeScreen()),
-                );
-              } else {
                 _educatorSwitch
                     ? Navigator.pushReplacement(
                         context, MaterialPageRoute(builder: (context) => const DashboardScreenEducator()))
@@ -71,6 +66,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         context,
                         MaterialPageRoute(builder: (context) => const DashboardScreen()),
                       );
+              } else if (_authService.currentUser?.isAnonymous ?? false) {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => const TobetoHomeScreen()),
+                );
               }
             } else {
               snackBar(context, 'E-posta adresiniz doğrulanmadı. Lütfen doğrulama e-postasını kontrol edin.');

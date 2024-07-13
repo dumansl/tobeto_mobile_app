@@ -21,10 +21,8 @@ class CertificateScreen extends StatefulWidget {
 }
 
 class _CertificateScreenState extends State<CertificateScreen> {
-  final TextEditingController certificatesNameController =
-      TextEditingController();
-  final TextEditingController certificateDateController =
-      TextEditingController();
+  final TextEditingController certificatesNameController = TextEditingController();
+  final TextEditingController certificateDateController = TextEditingController();
 
   void _clearControllers() {
     certificatesNameController.clear();
@@ -32,8 +30,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
   }
 
   bool _areControllersValid() {
-    return certificatesNameController.text.isNotEmpty &&
-        certificateDateController.text.isNotEmpty;
+    return certificatesNameController.text.isNotEmpty && certificateDateController.text.isNotEmpty;
   }
 
   void _addClubCominities() {
@@ -52,8 +49,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
         if (!state.isLoading && state.error != null) {
           snackBar(context, "İşleminiz başarısız: ${state.error}");
         } else if (!state.isLoading && state.error == null) {
-          snackBar(context, "İşleminiz başarılı!",
-              bgColor: TobetoColor.state.success);
+          snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
         }
       },
       builder: (context, state) {
@@ -72,13 +68,19 @@ class _CertificateScreenState extends State<CertificateScreen> {
             ),
             InputText(
               child: CustomDateInput(
-                  controller: certificateDateController,
-                  labelText: TobetoText.profileEditCertificatesDate),
+                  controller: certificateDateController, labelText: TobetoText.profileEditCertificatesDate),
             ),
             CustomElevatedButton(
               onPressed: () {
-                if (_areControllersValid()) {
+                String newCertificate = certificatesNameController.text.trim();
+                if (_areControllersValid() &&
+                    state.certificate.length < 5 &&
+                    !state.certificate.toString().contains(newCertificate)) {
                   _addClubCominities();
+                } else if (state.certificate.length >= 5) {
+                  snackBar(context, TobetoText.maxCertificate);
+                } else if (state.certificate.toString().contains(newCertificate)) {
+                  snackBar(context, TobetoText.alertCertificate);
                 }
               },
             ),
@@ -91,9 +93,7 @@ class _CertificateScreenState extends State<CertificateScreen> {
                 return InputText(
                     child: CustomMiniCard(
                   onpressed: () {
-                    context
-                        .read<CertificateBloc>()
-                        .add(RemoveCertificate(certificate));
+                    context.read<CertificateBloc>().add(RemoveCertificate(certificate));
                   },
                   title: certificate['certificatesName'],
                   content: certificate['certificateDate'],

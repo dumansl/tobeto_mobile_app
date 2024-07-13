@@ -25,15 +25,12 @@ class WorkLife extends StatefulWidget {
 class _WorkLifeState extends State<WorkLife> {
   final TextEditingController workplaceNameController = TextEditingController();
   final TextEditingController positionController = TextEditingController();
-  final TextEditingController experienceTypeController =
-      TextEditingController();
+  final TextEditingController experienceTypeController = TextEditingController();
   final TextEditingController sectorController = TextEditingController();
-  final TextEditingController workplaceLocationController =
-      TextEditingController();
+  final TextEditingController workplaceLocationController = TextEditingController();
   final TextEditingController worklifeStartController = TextEditingController();
   final TextEditingController worklifeEndController = TextEditingController();
-  final TextEditingController jobDescriptionController =
-      TextEditingController();
+  final TextEditingController jobDescriptionController = TextEditingController();
   final TextEditingController workStatuController = TextEditingController();
   bool isChecked = false;
 
@@ -89,8 +86,7 @@ class _WorkLifeState extends State<WorkLife> {
         if (state.error != null) {
           snackBar(context, "İşleminiz başarısız: ${state.error}");
         } else if (!state.isLoading && state.error == null) {
-          snackBar(context, "İşleminiz başarılı!",
-              bgColor: TobetoColor.state.success);
+          snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
         }
       },
       builder: (context, state) {
@@ -117,8 +113,7 @@ class _WorkLifeState extends State<WorkLife> {
             InputText(
               child: CustomDropDownInput(
                 onChanged: (newValue) {
-                  experienceTypeController.text =
-                      newValue ?? experienceTypeController.text;
+                  experienceTypeController.text = newValue ?? experienceTypeController.text;
                 },
                 items: TobetoText.profileEditExperienceTypeList
                     .map((label) => DropdownMenuItem(
@@ -175,8 +170,7 @@ class _WorkLifeState extends State<WorkLife> {
                 ),
                 Text(
                   TobetoText.profileEditExperienceContinueBox,
-                  style:
-                      TobetoTextStyle.poppins(context).captionBlackSemiBold15,
+                  style: TobetoTextStyle.poppins(context).captionBlackSemiBold15,
                 ),
               ],
             ),
@@ -189,33 +183,42 @@ class _WorkLifeState extends State<WorkLife> {
             ),
             CustomElevatedButton(
               onPressed: () {
-                if (_areControllersValid()) {
+                if (_areControllersValid() && state.works.length < 5) {
                   _addWorkLife();
+                } else if (state.works.length >= 5) {
+                  snackBar(context, TobetoText.maxJob);
                 }
               },
             ),
             if (state.works.isNotEmpty)
-              ...state.works.map((work) {
-                return InputText(
-                  child: CustomCard(
-                    startDate: work['worklifeStart'],
-                    endDate: work['workStatu'] == 'true'
-                        ? 'Devam ediyor'
-                        : work['worklifeEnd'],
-                    title: TobetoText.profileEditWorkplaceName,
-                    content: work['workplaceName'],
-                    title2: TobetoText.profileEditPosition,
-                    content2: work['position'],
-                    title3: TobetoText.profileEditSector,
-                    content3: work['sector'],
-                    title4: TobetoText.profileEditCity,
-                    content4: work['workplaceLocation'],
-                    onpressed: () {
-                      context.read<WorkLifeBloc>().add(RemoveWorkLife(work));
-                    },
-                  ),
-                );
-              }),
+              SingleChildScrollView(
+                scrollDirection: Axis.horizontal,
+                child: Row(
+                  children: [
+                    ...state.works.map(
+                      (work) {
+                        return InputText(
+                          child: CustomCard(
+                            startDate: work['worklifeStart'],
+                            endDate: work['workStatu'] == 'true' ? 'Devam ediyor' : work['worklifeEnd'],
+                            title: TobetoText.profileEditWorkplaceName,
+                            content: work['workplaceName'],
+                            title2: TobetoText.profileEditPosition,
+                            content2: work['position'],
+                            title3: TobetoText.profileEditSector,
+                            content3: work['sector'],
+                            title4: TobetoText.profileEditCity,
+                            content4: work['workplaceLocation'],
+                            onpressed: () {
+                              context.read<WorkLifeBloc>().add(RemoveWorkLife(work));
+                            },
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
           ],
         );
       },
