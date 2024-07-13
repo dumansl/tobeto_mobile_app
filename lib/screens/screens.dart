@@ -30,7 +30,7 @@ export 'announcement_screen/announcement_screen.dart';
 export 'application_screen/application_screen.dart';
 export 'survey_screen/survey_screen.dart';
 export 'job_screen/job_screen.dart';
-export 'istanbulkodluyor_screen/istanbul_kodluyor.dart';
+export 'tobeto_screens/istanbulkodluyor_screen/istanbul_kodluyor.dart';
 export 'catalog_screen/catalog.dart';
 export 'tobeto_screens/whats_happening_in_tobeto/blog_screen/blog_screen.dart';
 export 'tobeto_screens/whats_happening_in_tobeto/blog_screen/blog_details.dart';

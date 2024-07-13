@@ -198,6 +198,7 @@ class _SurveyDetailScreenState extends State<SurveyDetailScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: TobetoColor.purple,
+                      foregroundColor: TobetoColor.text.white,
                       textStyle: const TextStyle(
                         fontSize: 16.0,
                         fontWeight: FontWeight.bold,

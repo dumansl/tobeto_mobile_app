@@ -12,7 +12,12 @@ class EducationService {
         QuerySnapshot asyncSnapshot = await doc.reference.collection('asynchronous_educations').get();
         for (var asyncDoc in asyncSnapshot.docs) {
           DocumentSnapshot aboutDoc = await asyncDoc.reference.collection('about').doc('details').get();
-          courses.add(Course.fromFirestore(aboutDoc));
+          var course = Course.fromFirestore(aboutDoc);
+          course = course.copyWith(
+            educationId: doc.id,
+            asyncEducationId: asyncDoc.id,
+          );
+          courses.add(course);
         }
       }
       return courses;
@@ -37,26 +42,46 @@ class EducationService {
     }
   }
 
-  Future<void> updateWatchStatus(String educationId, String asyncEducationId, String videoId, bool isWatched) async {
+  Future<void> updateWatchStatus(
+      String userId, String videoId, String educationId, String asyncEducationId, bool isWatched) async {
     await _firestore
-        .collection('educations')
-        .doc(educationId)
-        .collection('asynchronous_educations')
-        .doc(asyncEducationId)
+        .collection('users')
+        .doc(userId)
         .collection('videos')
         .doc(videoId)
-        .set({'isWatched': isWatched}, SetOptions(merge: true));
+        .set({
+          'educationId': educationId,
+          'asyncEducationId': asyncEducationId,
+          'isWatched': isWatched,
+        }, SetOptions(merge: true))
+        .then((_) {})
+        .catchError((error) {});
+    await updateCourseCompletionStatus(userId, educationId, asyncEducationId);
   }
 
-  Future<bool> getWatchStatus(String educationId, String asyncEducationId, String videoId) async {
-    DocumentSnapshot doc = await _firestore
-        .collection('educations')
-        .doc(educationId)
-        .collection('asynchronous_educations')
-        .doc(asyncEducationId)
+  Future<void> updateCourseCompletionStatus(String userId, String educationId, String asyncEducationId) async {
+    QuerySnapshot videoSnapshot = await _firestore
+        .collection('users')
+        .doc(userId)
         .collection('videos')
-        .doc(videoId)
+        .where('educationId', isEqualTo: educationId)
+        .where('asyncEducationId', isEqualTo: asyncEducationId)
         .get();
+
+    bool allVideosWatched = videoSnapshot.docs.every((doc) => doc['isWatched'] == true);
+
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('completed_videos')
+        .doc(asyncEducationId)
+        .set({'isCompleted': allVideosWatched}, SetOptions(merge: true))
+        .then((_) {})
+        .catchError((error) {});
+  }
+
+  Future<bool> getWatchStatus(String userId, String videoId) async {
+    DocumentSnapshot doc = await _firestore.collection('users').doc(userId).collection('videos').doc(videoId).get();
 
     if (doc.exists) {
       return doc['isWatched'] ?? false;
@@ -76,5 +101,33 @@ class EducationService {
     } catch (e) {
       throw Exception('Error checking user status: $e');
     }
+  }
+
+  Future<void> updateFavoriteStatus(String userId, String asyncEducationId, bool isLiked) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('favorites')
+        .doc(asyncEducationId)
+        .set({'isLiked': isLiked});
+  }
+
+  Future<bool> getFavoriteStatus(String userId, String asyncEducationId) async {
+    final doc = await _firestore.collection('users').doc(userId).collection('favorites').doc(asyncEducationId).get();
+    return doc.exists ? doc['isLiked'] : false;
+  }
+
+  Future<void> updateBookmarkStatus(String userId, String asyncEducationId, bool isBookmarked) async {
+    await _firestore
+        .collection('users')
+        .doc(userId)
+        .collection('bookmarks')
+        .doc(asyncEducationId)
+        .set({'isBookmarked': isBookmarked});
+  }
+
+  Future<bool> getBookmarkStatus(String userId, String asyncEducationId) async {
+    final doc = await _firestore.collection('users').doc(userId).collection('bookmarks').doc(asyncEducationId).get();
+    return doc.exists ? doc['isBookmarked'] : false;
   }
 }
