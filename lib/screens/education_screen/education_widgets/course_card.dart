@@ -62,7 +62,7 @@ class CourseCard extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 7),
                 textStyle: const TextStyle(fontSize: 14),
               ),
-              child: const Text('Eğitime Git'),
+              child: Text(TobetoText.mainGoEducation),
             ),
           ],
         ),
@@ -73,8 +73,9 @@ class CourseCard extends StatelessWidget {
 
 class CourseCardList extends StatefulWidget {
   final List<Course> courses;
+  final String? selectedProducer;
 
-  const CourseCardList({super.key, required this.courses});
+  const CourseCardList({super.key, required this.courses, this.selectedProducer});
 
   @override
   State<CourseCardList> createState() => _CourseCardListState();
@@ -102,7 +103,10 @@ class _CourseCardListState extends State<CourseCardList> {
     final query = _searchController.text.toLowerCase();
     setState(() {
       _filteredCourses = widget.courses.where((course) {
-        return course.title.toLowerCase().contains(query);
+        final matchesTitle = course.title.toLowerCase().contains(query);
+        final matchesProducer =
+            widget.selectedProducer == null || course.producer.toLowerCase() == widget.selectedProducer!.toLowerCase();
+        return matchesTitle && matchesProducer;
       }).toList();
     });
   }
@@ -111,7 +115,7 @@ class _CourseCardListState extends State<CourseCardList> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Kurslar'),
+        title: Text(TobetoText.catalogCategory),
       ),
       body: Column(
         children: [
@@ -119,9 +123,9 @@ class _CourseCardListState extends State<CourseCardList> {
             padding: const EdgeInsets.all(8.0),
             child: TextField(
               controller: _searchController,
-              decoration: const InputDecoration(
-                labelText: 'Ara',
-                border: OutlineInputBorder(),
+              decoration: InputDecoration(
+                labelText: TobetoText.mainSearch,
+                border: const OutlineInputBorder(),
               ),
             ),
           ),

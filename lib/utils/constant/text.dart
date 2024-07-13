@@ -91,6 +91,16 @@ abstract class TobetoText {
   static String mainCard2title1 = "Kendini Değerlendir";
   static String mainCardbuttontitle = "Başla";
   static String mainCard3title1 = "Öğrenmeye Başla";
+  static String mainEducationNotification =
+      "Eğitimleri görüntülemek için başvurunuzun tamamlanmış olması gerekmektedir.";
+  static String mainEducationNotificationImage = "Resim yüklenemedi";
+  static String educationType = "Eğitim Türü:";
+  static String educationContent = "Eğitim İçeriği";
+  static String educationCategory = "Kategori:";
+  static String educationProducer = "Üretici Firma:";
+  static String educationVideo = "Video:";
+  static String educationStart = "Başlangıç Tarihi:";
+  static String educationFinish = "Bitiş Tarihi:";
   // profile page
   static String profileAppBar = "Profil";
   static String profileName = "Ad Soyad";
@@ -339,6 +349,9 @@ abstract class TobetoText {
   static String catalogSpecialMeButton = "Bana Özel";
   static String catalogFilterButton = "Filtrele";
   static String catalogCleanButton = "Temizle";
+  static String filterAll = "Hepsi";
+  static String filterEnocta = "Enocta";
+  static String filterIstanbulKodluyor = "Istanbul Kodluyor";
   // calendar page/main
   static String calendarAppBar = "Takvim";
   static String calendarFilterButton = "Filtre";
