@@ -10,8 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_c
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
-import 'package:tobeto_mobile_app/utils/constant/image_string.dart';
-import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class SocialMedia extends StatefulWidget {
@@ -22,8 +21,11 @@ class SocialMedia extends StatefulWidget {
 }
 
 class _SocialMediaState extends State<SocialMedia> {
-  final TextEditingController socialMediaNameController = TextEditingController();
-  final TextEditingController socialMediaLinkController = TextEditingController();
+  final TextEditingController socialMediaNameController =
+      TextEditingController();
+  final TextEditingController socialMediaLinkController =
+      TextEditingController();
+  String? errorMessage;
 
   void _clearControllers() {
     socialMediaNameController.clear();
@@ -31,15 +33,43 @@ class _SocialMediaState extends State<SocialMedia> {
   }
 
   bool _areControllersValid() {
-    return socialMediaNameController.text.isNotEmpty && socialMediaLinkController.text.isNotEmpty;
+    if (socialMediaNameController.text.isNotEmpty &&
+        socialMediaLinkController.text.isNotEmpty) {
+      final socialMediaName = socialMediaNameController.text;
+      final socialMediaLink = socialMediaLinkController.text;
+
+      final patterns = {
+        'Facebook': r'^(https?:\/\/)?(www\.)?facebook\.com\/.*$',
+        'Twitter': r'^(https?:\/\/)?(www\.)?twitter\.com\/.*$',
+        'Instagram': r'^(https?:\/\/)?(www\.)?instagram\.com\/.*$',
+        'LinkedIn': r'^(https?:\/\/)?(www\.)?linkedin\.com\/.*$',
+      };
+
+      if (patterns.containsKey(socialMediaName)) {
+        final regex = RegExp(patterns[socialMediaName]!);
+        if (!regex.hasMatch(socialMediaLink)) {
+          setState(() {
+            errorMessage =
+                'Lütfen $socialMediaName profil adresinizi kontrol ediniz.';
+          });
+          return false;
+        }
+      }
+
+      setState(() {
+        errorMessage = null;
+      });
+      return true;
+    }
+    return false;
   }
 
-  void _addEducationLife() {
-    final projects = {
+  void _addSocialMedia() {
+    final media = {
       'socialMediaName': socialMediaNameController.text,
       'socialMediaLink': socialMediaLinkController.text,
     };
-    context.read<SocialMediaBloc>().add(AddSocialMedia(projects));
+    context.read<SocialMediaBloc>().add(AddSocialMedia(media));
     _clearControllers();
   }
 
@@ -52,7 +82,17 @@ class _SocialMediaState extends State<SocialMedia> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<SocialMediaBloc, SocialMediaState>(builder: (context, state) {
+    return BlocConsumer<SocialMediaBloc, SocialMediaState>(
+        listener: (context, state) {
+      if (!state.isLoading) {
+        if (state.error != null) {
+          snackBar(context, "İşleminiz başarısız: ${state.error}");
+        } else {
+          snackBar(context, "İşleminiz başarılı!",
+              bgColor: TobetoColor.state.success);
+        }
+      }
+    }, builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
       } else if (state.error != null) {
@@ -76,10 +116,19 @@ class _SocialMediaState extends State<SocialMedia> {
             controller: socialMediaNameController,
           )),
           InputText(
-              child: CustomTextField(
-            title: TobetoText.profileEditSocialMediaLink,
-            controller: socialMediaLinkController,
-          )),
+            child: CustomTextField(
+              title: TobetoText.profileEditSocialMediaLink,
+              controller: socialMediaLinkController,
+            ),
+          ),
+          if (errorMessage != null)
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                errorMessage!,
+                style: const TextStyle(color: Colors.red),
+              ),
+            ),
           CustomElevatedButton(
             onPressed: () {
               if (_areControllersValid() && !state.media.toString().contains(socialMediaNameController.text)) {
@@ -96,13 +145,16 @@ class _SocialMediaState extends State<SocialMedia> {
               final socialMediaName = media['socialMediaName'];
               final iconPath = socialMediaIcons[socialMediaName] ?? '';
               return InputText(
-                  child: CustomMiniCard(
-                imagepath: Image.asset(iconPath),
-                onpressed: () {
-                  context.read<SocialMediaBloc>().add(RemoveSocialMedia(media));
-                },
-                title: media['socialMediaLink'],
-              ));
+                child: CustomMiniCard(
+                  imagepath: Image.asset(iconPath),
+                  onpressed: () {
+                    context
+                        .read<SocialMediaBloc>()
+                        .add(RemoveSocialMedia(media));
+                  },
+                  title: media['socialMediaLink'],
+                ),
+              );
             })
         ],
       );

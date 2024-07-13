@@ -16,8 +16,7 @@ class EducationScreen extends StatefulWidget {
   State<EducationScreen> createState() => _EducationScreenState();
 }
 
-class _EducationScreenState extends State<EducationScreen>
-    with SingleTickerProviderStateMixin {
+class _EducationScreenState extends State<EducationScreen> with SingleTickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   List<Course> _filteredCourses = [];
   TabController? _tabController;
@@ -57,8 +56,7 @@ class _EducationScreenState extends State<EducationScreen>
 
     if (_selectedProducer != null) {
       filteredList = filteredList.where((course) {
-        return course.producer.toLowerCase() ==
-            _selectedProducer!.toLowerCase();
+        return course.producer.toLowerCase() == _selectedProducer!.toLowerCase();
       }).toList();
     }
 
@@ -106,12 +104,12 @@ class _EducationScreenState extends State<EducationScreen>
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Filtrele'),
+          title: Text(TobetoText.catalogFilterButton),
           content: Column(
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ListTile(
-                title: const Text('Hepsi'),
+                title: Text(TobetoText.filterAll),
                 onTap: () {
                   setState(() {
                     _selectedProducer = null;
@@ -121,7 +119,7 @@ class _EducationScreenState extends State<EducationScreen>
                 },
               ),
               ListTile(
-                title: const Text('Enocta'),
+                title: Text(TobetoText.filterEnocta),
                 onTap: () {
                   setState(() {
                     _selectedProducer = 'enocta';
@@ -131,7 +129,7 @@ class _EducationScreenState extends State<EducationScreen>
                 },
               ),
               ListTile(
-                title: const Text('Istanbul Kodluyor'),
+                title: Text(TobetoText.filterIstanbulKodluyor),
                 onTap: () {
                   setState(() {
                     _selectedProducer = 'istanbul kodluyor';
@@ -154,10 +152,9 @@ class _EducationScreenState extends State<EducationScreen>
     }
 
     if (!_userEligible) {
-      return const Scaffold(
+      return Scaffold(
         body: Center(
-          child: Text(
-              'Eğitimleri görüntülemek için başvurunuzun tamamlanmış olması gerekmektedir.'),
+          child: Text(TobetoText.mainEducationNotification),
         ),
       );
     }
@@ -170,7 +167,7 @@ class _EducationScreenState extends State<EducationScreen>
           appBar: FixedAppbar(
             isLeading: false,
             title: Text(
-              "Eğitimlerim",
+              TobetoText.bottomIconEducation,
               style: TobetoTextStyle.poppins(context).subHeadlinePurpleBold28,
             ),
           ),
@@ -188,17 +185,14 @@ class _EducationScreenState extends State<EducationScreen>
                             controller: _searchController,
                             focusNode: _focusNode,
                             decoration: InputDecoration(
-                              hintText: _focusNode.hasFocus ? '' : 'Arama',
+                              hintText: _focusNode.hasFocus ? '' : TobetoText.mainSearch,
                               prefixIcon: const Icon(Icons.search),
                               border: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30.0)),
+                                borderRadius: BorderRadius.all(Radius.circular(30.0)),
                               ),
                               focusedBorder: const OutlineInputBorder(
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(30.0)),
-                                borderSide:
-                                    BorderSide(color: TobetoColor.purple),
+                                borderRadius: BorderRadius.all(Radius.circular(30.0)),
+                                borderSide: BorderSide(color: TobetoColor.purple),
                               ),
                             ),
                           ),
@@ -207,8 +201,7 @@ class _EducationScreenState extends State<EducationScreen>
                           flex: 2,
                           child: DropdownButton<String>(
                             value: _sortOrder,
-                            icon: const Icon(Icons.sort,
-                                color: TobetoColor.purple),
+                            icon: const Icon(Icons.sort, color: TobetoColor.purple),
                             onChanged: (String? newValue) {
                               if (newValue != null) {
                                 _updateSortOrder(newValue);
@@ -216,13 +209,10 @@ class _EducationScreenState extends State<EducationScreen>
                             },
                             style: const TextStyle(color: TobetoColor.purple),
                             dropdownColor: Colors.white,
-                            items: <String>['A-Z', 'Z-A']
-                                .map<DropdownMenuItem<String>>((String value) {
+                            items: <String>['A-Z', 'Z-A'].map<DropdownMenuItem<String>>((String value) {
                               return DropdownMenuItem<String>(
                                 value: value,
-                                child: Text(value,
-                                    style: const TextStyle(
-                                        color: TobetoColor.purple)),
+                                child: Text(value, style: const TextStyle(color: TobetoColor.purple)),
                               );
                             }).toList(),
                           ),
@@ -235,8 +225,7 @@ class _EducationScreenState extends State<EducationScreen>
                             },
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
-                              child: Image.asset(ImagePath.purpleFilter,
-                                  width: 36, height: 36),
+                              child: Image.asset(ImagePath.purpleFilter, width: 36, height: 36),
                             ),
                           ),
                         ),
@@ -252,24 +241,21 @@ class _EducationScreenState extends State<EducationScreen>
                         Tab(
                           child: Text(
                             TobetoText.mainEducation,
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackNormal12,
+                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Tab(
                           child: Text(
                             TobetoText.mainContinue,
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackNormal12,
+                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
                             textAlign: TextAlign.left,
                           ),
                         ),
                         Tab(
                           child: Text(
                             TobetoText.mainComplated,
-                            style: TobetoTextStyle.poppins(context)
-                                .captionBlackNormal12,
+                            style: TobetoTextStyle.poppins(context).captionBlackNormal12,
                             textAlign: TextAlign.left,
                           ),
                         ),
@@ -282,25 +268,17 @@ class _EducationScreenState extends State<EducationScreen>
                 child: BlocBuilder<CourseBloc, CourseState>(
                   builder: (context, state) {
                     if (state is CoursesLoaded) {
-                      final coursesToShow = _searchController.text.isEmpty
-                          ? state.courses
-                          : _filteredCourses;
+                      final coursesToShow = _searchController.text.isEmpty ? state.courses : _filteredCourses;
                       return TabBarView(
                         controller: _tabController,
                         children: [
                           _buildCourseList(coursesToShow),
-                          _buildCourseList(coursesToShow
-                              .where((course) => course.status == 'ongoing')
-                              .toList()),
-                          _buildCourseList(coursesToShow
-                              .where((course) => course.status == 'completed')
-                              .toList()),
+                          _buildCourseList(coursesToShow.where((course) => !course.isCompleted).toList()),
+                          _buildCourseList(coursesToShow.where((course) => course.isCompleted).toList()),
                         ],
                       );
                     } else if (state is CourseLoadFailure) {
-                      return Center(
-                          child:
-                              Text('Failed to load courses: ${state.error}'));
+                      return Center(child: Text('Failed to load courses: ${state.error}'));
                     }
                     return const Center(child: CircularProgressIndicator());
                   },

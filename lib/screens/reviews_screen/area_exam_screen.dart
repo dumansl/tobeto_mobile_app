@@ -82,11 +82,10 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
                 Column(
                   children: currentQuestion['answers'].keys.map<Widget>((key) {
                     return Padding(
-                      padding: const EdgeInsets.only(bottom: 16.0),
+                      padding: const EdgeInsets.only(bottom: 10.0),
                       child: _answerButton(
                         answerText: key,
-                        isSelected:
-                            _selectedAnswers[_currentQuestionIndex] == key,
+                        isSelected: _selectedAnswers[_currentQuestionIndex] == key,
                         onTap: () {
                           setState(() {
                             _selectedAnswers[_currentQuestionIndex] = key;
@@ -97,11 +96,10 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
                   }).toList(),
                 ),
                 CustomReviewButton(
-                  buttonText: _currentQuestionIndex + 1 == totalQuestions
-                      ? "Sonucu Gör"
-                      : "Sonraki Soru",
+                  buttonText: _currentQuestionIndex + 1 == totalQuestions ? "Sonucu Gör" : "Sonraki Soru",
                   backgroundColor: TobetoColor.purple,
-                  style: TobetoTextStyle.poppins(context).bodyWhiteSemiBold16,
+                  foregroundColor: TobetoColor.text.white,
+                  style: TobetoTextStyle.poppins(context).bodyWhiteBold16,
                   onPressed: _selectedAnswers.containsKey(_currentQuestionIndex)
                       ? () async {
                           if (_currentQuestionIndex + 1 == totalQuestions) {
@@ -113,8 +111,7 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
                           }
                         }
                       : () {
-                          snackBar(context, "Lütfen bir cevap seçin.",
-                              bgColor: TobetoColor.state.error);
+                          snackBar(context, "Lütfen bir cevap seçin.", bgColor: TobetoColor.state.error);
                         },
                 ),
               ],
@@ -164,8 +161,7 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
           examId: exam.examId,
         ));
 
-    debugPrint(
-        'Correct: $correctCount, Incorrect: $incorrectCount, Unanswered: $unansweredCount, Score: $totalScore');
+    debugPrint('Correct: $correctCount, Incorrect: $incorrectCount, Unanswered: $unansweredCount, Score: $totalScore');
 
     Navigator.push(
       context,
@@ -187,7 +183,7 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding.padding16px,
+          vertical: ScreenPadding.padding8px,
         ),
         decoration: BoxDecoration(
           color: TobetoColor.purple,
@@ -199,11 +195,8 @@ class _AreaExamScreenState extends State<AreaExamScreen> {
               height: ScreenUtil.getHeight(context) * 0.02,
               width: ScreenUtil.getHeight(context) * 0.02,
               decoration: BoxDecoration(
-                color:
-                    isSelected ? TobetoColor.purple : TobetoColor.button.white,
-                border: isSelected
-                    ? Border.all(color: TobetoColor.frame.white, width: 3)
-                    : null,
+                color: isSelected ? TobetoColor.purple : TobetoColor.button.white,
+                border: isSelected ? Border.all(color: TobetoColor.frame.white, width: 3) : null,
                 shape: BoxShape.circle,
               ),
             ),

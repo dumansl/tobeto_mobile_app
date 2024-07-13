@@ -132,26 +132,18 @@ class _SettingState extends State<Setting> {
           BlocListener<AuthBloc, AuthState>(
             listener: (context, state) {
               if (state is ChangePasswordSuccess) {
-                snackBar(context, 'Şifre değiştirme başarılı!', bgColor: TobetoColor.state.success);
+                snackBar(context, 'Şifre değiştirme başarılı!',
+                    bgColor: TobetoColor.state.success);
               } else if (state is ChangePasswordError) {
-                snackBar(context, 'Şifre değiştirme işlemi başarısız!', bgColor: TobetoColor.state.error);
+                snackBar(context, 'Şifre değiştirme işlemi başarısız!',
+                    bgColor: TobetoColor.state.error);
               }
             },
             child: CustomElevatedButton(
               text: TobetoText.profileEditSaveButton,
               onPressed: () {
                 if (_formKey.currentState!.validate()) {
-                  _formKey.currentState!.save();
-                  if (_password != _confirmPassword) {
-                    snackBar(context, TobetoText.passwordWrong);
-                    return;
-                  }
-                  context.read<AuthBloc>().add(
-                        ChangePasswordEvent(
-                          currentPassword: _oldPassword,
-                          newPassword: _password,
-                        ),
-                      );
+                  _showChangePasswordConfirmationDialog(context);
                 }
               },
             ),
@@ -216,7 +208,60 @@ class _SettingState extends State<Setting> {
               onPressed: () {
                 context.read<AuthBloc>().add(const DeleteAccountEvent());
                 Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => const LoginScreen()), (Route route) => false);
+                    MaterialPageRoute(
+                        builder: (context) => const LoginScreen()),
+                    (Route route) => false);
+              },
+              child: Text(
+                TobetoText.yes,
+                style: TextStyle(color: TobetoColor.card.black),
+              ),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  void _showChangePasswordConfirmationDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text(
+            'Şifre Değişikliği',
+            style: TextStyle(color: TobetoColor.card.black),
+          ),
+          content: Text(
+            'Şifrenizi değiştirmek istediğinizden emin misiniz?',
+            style: TextStyle(color: TobetoColor.card.black),
+          ),
+          actions: <Widget>[
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(
+                TobetoText.cancel,
+                style: TextStyle(color: TobetoColor.card.black),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                if (_formKey.currentState!.validate()) {
+                  _formKey.currentState!.save();
+                  if (_password != _confirmPassword) {
+                    snackBar(context, TobetoText.passwordWrong);
+                    return;
+                  }
+                  context.read<AuthBloc>().add(
+                        ChangePasswordEvent(
+                          currentPassword: _oldPassword,
+                          newPassword: _password,
+                        ),
+                      );
+                }
               },
               child: Text(
                 TobetoText.yes,

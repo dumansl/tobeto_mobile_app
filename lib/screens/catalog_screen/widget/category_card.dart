@@ -4,8 +4,7 @@ import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class CategoryCard extends StatelessWidget {
-  const CategoryCard(
-      {super.key, required this.categoryText, required this.onpressed});
+  const CategoryCard({super.key, required this.categoryText, required this.onpressed});
   final String categoryText;
   final VoidCallback onpressed;
   @override
@@ -17,7 +16,7 @@ class CategoryCard extends StatelessWidget {
         children: [
           Container(
             width: ScreenUtil.getWidth(context) * 0.23,
-            height: ScreenUtil.getHeight(context) * 0.051,
+            height: ScreenUtil.getHeight(context) * 0.51,
             padding: const EdgeInsets.all(1), // Rainbow border thickness
             decoration: BoxDecoration(
               gradient: LinearGradient(

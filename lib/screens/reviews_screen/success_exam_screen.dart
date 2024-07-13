@@ -87,8 +87,7 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
                       SizedBox(width: ScreenPadding.padding8px),
                       Text(
                         "${_currentQuestionIndex + 1} / $totalQuestions",
-                        style: TobetoTextStyle.poppins(context)
-                            .bodyGrayDarkNormal16,
+                        style: TobetoTextStyle.poppins(context).bodyGrayDarkNormal16,
                       ),
                     ],
                   ),
@@ -104,13 +103,10 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
                         for (String answerKey in review.answers.keys)
                           _answerButton(
                             answerText: answerKey,
-                            isSelected:
-                                _selectedAnswers[_currentQuestionIndex] ==
-                                    answerKey,
+                            isSelected: _selectedAnswers[_currentQuestionIndex] == answerKey,
                             onTap: () {
                               setState(() {
-                                _selectedAnswers[_currentQuestionIndex] =
-                                    answerKey;
+                                _selectedAnswers[_currentQuestionIndex] = answerKey;
                               });
                             },
                           )
@@ -123,25 +119,22 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
                             ? TobetoText.successExamButtonEnd
                             : TobetoText.successExamButtonNext,
                         backgroundColor: TobetoColor.purple,
-                        style: TobetoTextStyle.poppins(context)
-                            .bodyWhiteSemiBold16,
-                        onPressed:
-                            _selectedAnswers.containsKey(_currentQuestionIndex)
-                                ? () async {
-                                    if (_currentQuestionIndex + 1 ==
-                                        totalQuestions) {
-                                      await _showResult(context);
-                                    } else {
-                                      setState(() {
-                                        _currentQuestionIndex++;
-                                      });
-                                    }
-                                  }
-                                : () {
-                                    snackBar(context,
-                                        "Lütfen uygun bulduğunuz cevabı işaretleyin.",
-                                        bgColor: TobetoColor.state.error);
-                                  },
+                        foregroundColor: TobetoColor.text.white,
+                        style: TobetoTextStyle.poppins(context).bodyWhiteSemiBold16,
+                        onPressed: _selectedAnswers.containsKey(_currentQuestionIndex)
+                            ? () async {
+                                if (_currentQuestionIndex + 1 == totalQuestions) {
+                                  await _showResult(context);
+                                } else {
+                                  setState(() {
+                                    _currentQuestionIndex++;
+                                  });
+                                }
+                              }
+                            : () {
+                                snackBar(context, "Lütfen uygun bulduğunuz cevabı işaretleyin.",
+                                    bgColor: TobetoColor.state.error);
+                              },
                       ),
                     ],
                   )),
@@ -198,16 +191,13 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
     );
   }
 
-  Widget _answerButton(
-      {required String answerText,
-      required bool isSelected,
-      required VoidCallback onTap}) {
+  Widget _answerButton({required String answerText, required bool isSelected, required VoidCallback onTap}) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
         padding: EdgeInsets.symmetric(
           horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding.padding16px,
+          vertical: ScreenPadding.padding8px,
         ),
         decoration: BoxDecoration(
           color: TobetoColor.purple,
@@ -219,11 +209,8 @@ class _SuccessExamScreenState extends State<SuccessExamScreen> {
               height: ScreenUtil.getHeight(context) * 0.02,
               width: ScreenUtil.getHeight(context) * 0.02,
               decoration: BoxDecoration(
-                color:
-                    isSelected ? TobetoColor.purple : TobetoColor.button.white,
-                border: isSelected
-                    ? Border.all(color: TobetoColor.frame.white, width: 3)
-                    : null,
+                color: isSelected ? TobetoColor.purple : TobetoColor.button.white,
+                border: isSelected ? Border.all(color: TobetoColor.frame.white, width: 3) : null,
                 shape: BoxShape.circle,
               ),
             ),

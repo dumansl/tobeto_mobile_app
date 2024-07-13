@@ -160,9 +160,7 @@ class RewiewsScreen extends StatelessWidget {
   }) {
     return Container(
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-          horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding.padding32px),
+      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px, vertical: ScreenPadding.padding32px),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -196,8 +194,8 @@ class RewiewsScreen extends StatelessWidget {
                   child: CustomReviewButton(
                     buttonText: TobetoText.evaluationCardButton,
                     backgroundColor: TobetoColor.purple,
-                    style:
-                        TobetoTextStyle.poppins(context).captionWhiteNormal14,
+                    foregroundColor: TobetoColor.text.white,
+                    style: TobetoTextStyle.poppins(context).captionWhiteNormal14,
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -213,8 +211,7 @@ class RewiewsScreen extends StatelessWidget {
                       padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                       child: Text(
                         dividerText,
-                        style:
-                            TobetoTextStyle.poppins(context).bodyWhiteNormal16,
+                        style: TobetoTextStyle.poppins(context).bodyWhiteNormal16,
                       ),
                     )
                   : const SizedBox(),
@@ -233,8 +230,7 @@ class RewiewsScreen extends StatelessWidget {
                   padding: EdgeInsets.only(top: ScreenPadding.padding16px),
                   child: Text(
                     subTitle,
-                    style:
-                        TobetoTextStyle.poppins(context).captionWhiteSemiBold8,
+                    style: TobetoTextStyle.poppins(context).captionWhiteSemiBold8,
                     textAlign: TextAlign.center,
                   ),
                 )
@@ -248,9 +244,7 @@ class RewiewsScreen extends StatelessWidget {
     return Container(
       margin: EdgeInsets.only(top: ScreenPadding.padding8px),
       width: double.infinity,
-      padding: EdgeInsets.symmetric(
-          horizontal: ScreenPadding.padding16px,
-          vertical: ScreenPadding.padding8px),
+      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px, vertical: ScreenPadding.padding8px),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -284,6 +278,7 @@ class RewiewsScreen extends StatelessWidget {
               _showCustomDialog(context, exam);
             },
             backgroundColor: Theme.of(context).colorScheme.primaryContainer,
+            foregroundColor: TobetoColor.text.white,
             buttonText: TobetoText.evaluationCardButton,
             style: TobetoTextStyle.poppins(context).captionBlackBold12,
           ),
@@ -338,8 +333,7 @@ class RewiewsScreen extends StatelessWidget {
               children: [
                 TextSpan(
                   text: '${exam.exam}\n',
-                  style:
-                      TobetoTextStyle.poppins(context).subtitleBlackSemiBold20,
+                  style: TobetoTextStyle.poppins(context).subtitleBlackSemiBold20,
                 ),
                 TextSpan(
                   text:
@@ -349,8 +343,7 @@ class RewiewsScreen extends StatelessWidget {
                 TextSpan(
                   text:
                       'Sınav Süresi : ${exam.examDuration} Dakika Soru\nSayısı : ${exam.numberOfQuestions}\nSoru Tipi : ${exam.questionType}',
-                  style:
-                      TobetoTextStyle.poppins(context).captionBlackSemiBold15,
+                  style: TobetoTextStyle.poppins(context).captionBlackSemiBold15,
                 ),
               ],
             ),
@@ -359,6 +352,7 @@ class RewiewsScreen extends StatelessWidget {
             CustomReviewButton(
               buttonText: TobetoText.evaluationCardButton,
               backgroundColor: TobetoColor.purple,
+              foregroundColor: TobetoColor.text.white,
               style: TobetoTextStyle.poppins(context).captionWhiteBold12,
               onPressed: () {
                 Navigator.push(

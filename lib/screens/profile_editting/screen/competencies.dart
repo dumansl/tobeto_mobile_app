@@ -24,12 +24,18 @@ class _CompetenciesState extends State<Competencies> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CompetenciesBloc, CompetenciesState>(
+    return BlocConsumer<CompetenciesBloc, CompetenciesState>(
+      listener: (context, state) {
+        if (!state.isLoading && state.error != null) {
+          snackBar(context, "İşleminiz başarısız: ${state.error}");
+        } else if (!state.isLoading && state.error == null) {
+          snackBar(context, "İşleminiz başarılı!",
+              bgColor: TobetoColor.state.success);
+        }
+      },
       builder: (context, state) {
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state.error != null) {
-          return Center(child: Text('Error: ${state.error}'));
         }
 
         return ListView(

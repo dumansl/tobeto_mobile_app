@@ -115,17 +115,13 @@ class _HomeScreenState extends State<HomeScreen> {
                     InkWell(
                       onTap: () {
                         pushReplacementWithoutNavBar(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const TobetoHomeScreen()));
+                            context, MaterialPageRoute(builder: (context) => const TobetoHomeScreen()));
                       },
                       child: Container(
                         height: IconSize.size35px,
                         width: IconSize.size35px,
                         decoration: const BoxDecoration(
-                          image: DecorationImage(
-                              image: AssetImage(ImagePath.tTobeto)),
+                          image: DecorationImage(image: AssetImage(ImagePath.tTobeto)),
                         ),
                       ),
                     ),
@@ -171,8 +167,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: boxWidgets.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
-                    return boxWidgets[
-                        index]; // Belirlenen Box widget'larını kullan
+                    return boxWidgets[index]; // Belirlenen Box widget'larını kullan
                   },
                 ),
               ),
@@ -217,7 +212,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           buttonText: TobetoText.mainCardbuttontitle,
                         ),
                       ),
-                      SizedBox(width: ScreenUtil.getWidth(context) * 0.1),
+                      SizedBox(width: ScreenUtil.getWidth(context) * 0.08),
                       Expanded(
                         child: Boxlong(
                           text: TobetoText.mainCard3title1,
@@ -286,8 +281,7 @@ class _ExamplesCard extends StatelessWidget {
                   padding: EdgeInsets.only(left: ScreenPadding.padding8px),
                   child: Text(
                     "Herkes için Kodlama",
-                    style: TextStyle(
-                        color: Theme.of(context).colorScheme.onSurface),
+                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ),
               ],

@@ -13,11 +13,19 @@ class LoadCourseVideos extends CourseEvent {
   final String educationId;
   final String asyncEducationId;
 
-  const LoadCourseVideos({
-    required this.educationId,
-    required this.asyncEducationId,
-  });
+  const LoadCourseVideos({required this.educationId, required this.asyncEducationId});
 
   @override
   List<Object> get props => [educationId, asyncEducationId];
+}
+
+class UpdateCourseStatus extends CourseEvent {
+  final String userId;
+  final String educationId;
+  final String asyncEducationId;
+
+  const UpdateCourseStatus(this.userId, this.educationId, this.asyncEducationId);
+
+  @override
+  List<Object> get props => [userId, educationId, asyncEducationId];
 }

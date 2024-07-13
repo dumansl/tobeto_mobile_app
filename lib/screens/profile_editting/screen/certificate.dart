@@ -10,7 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_c
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
-import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class CertificateScreen extends StatefulWidget {
@@ -21,8 +21,10 @@ class CertificateScreen extends StatefulWidget {
 }
 
 class _CertificateScreenState extends State<CertificateScreen> {
-  final TextEditingController certificatesNameController = TextEditingController();
-  final TextEditingController certificateDateController = TextEditingController();
+  final TextEditingController certificatesNameController =
+      TextEditingController();
+  final TextEditingController certificateDateController =
+      TextEditingController();
 
   void _clearControllers() {
     certificatesNameController.clear();
@@ -30,7 +32,8 @@ class _CertificateScreenState extends State<CertificateScreen> {
   }
 
   bool _areControllersValid() {
-    return certificatesNameController.text.isNotEmpty && certificateDateController.text.isNotEmpty;
+    return certificatesNameController.text.isNotEmpty &&
+        certificateDateController.text.isNotEmpty;
   }
 
   void _addClubCominities() {
@@ -44,19 +47,40 @@ class _CertificateScreenState extends State<CertificateScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CertificateBloc, CertificateState>(builder: (context, state) {
-      if (state.isLoading) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (state.error != null) {
-        return Center(child: Text('Error: ${state.error}'));
-      }
-      return ListView(
-        children: [
-          CustomTitle(title: TobetoText.profileMyCertificate),
-          InputText(
-            child: CustomTextField(
-              title: TobetoText.profileEditCertificatesName,
-              controller: certificatesNameController,
+    return BlocConsumer<CertificateBloc, CertificateState>(
+      listener: (context, state) {
+        if (!state.isLoading && state.error != null) {
+          snackBar(context, "İşleminiz başarısız: ${state.error}");
+        } else if (!state.isLoading && state.error == null) {
+          snackBar(context, "İşleminiz başarılı!",
+              bgColor: TobetoColor.state.success);
+        }
+      },
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        return ListView(
+          children: [
+            CustomTitle(title: TobetoText.profileMyCertificate),
+            InputText(
+              child: CustomTextField(
+                title: TobetoText.profileEditCertificatesName,
+                controller: certificatesNameController,
+              ),
+            ),
+            InputText(
+              child: CustomDateInput(
+                  controller: certificateDateController,
+                  labelText: TobetoText.profileEditCertificatesDate),
+            ),
+            CustomElevatedButton(
+              onPressed: () {
+                if (_areControllersValid()) {
+                  _addClubCominities();
+                }
+              },
             ),
           ),
           InputText(

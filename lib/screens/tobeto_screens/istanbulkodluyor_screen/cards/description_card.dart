@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/centered_text.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/custom_container.dart';
-import 'package:tobeto_mobile_app/screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/widgets/centered_text.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/widgets/custom_container.dart';
+import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/widgets/vertical_padding.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/utils/constant/colors.dart';
 import 'package:tobeto_mobile_app/utils/constant/sizes.dart';
@@ -86,7 +86,7 @@ class FAQButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.only(left: ScreenPadding.padding30px, right: ScreenPadding.padding30px),
+      padding: EdgeInsets.only(left: ScreenPadding.padding32px, right: ScreenPadding.padding6px),
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
             backgroundColor: TobetoColor.purple, elevation: 9, shadowColor: TobetoColor.card.darkGrey.withOpacity(0.2)),

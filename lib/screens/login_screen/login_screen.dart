@@ -2,7 +2,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
-
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_logo.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_educator/dasboard-educator/dashboard_screen_educator.dart';
@@ -12,7 +11,6 @@ import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/horizontal_page_route.dart';
 import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
-
 import 'login_widgets/custom_button.dart';
 import 'login_widgets/custom_text_button.dart';
 import 'login_widgets/input_text_form_field.dart';
@@ -295,15 +293,17 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           ),
         ),
-        CustomTextButton(
-          text: TobetoText.loginSubtitle,
-          textbold: TobetoText.loginRegisterButton,
-          onPressed: () {
-            Navigator.push(
-              context,
-              createHorizontalPageRoute(const RegisterScreen()),
-            );
-          },
+        Expanded(
+          child: CustomTextButton(
+            text: TobetoText.loginSubtitle,
+            textbold: TobetoText.loginRegisterButton,
+            onPressed: () {
+              Navigator.push(
+                context,
+                createHorizontalPageRoute(const RegisterScreen()),
+              );
+            },
+          ),
         ),
       ],
     );
@@ -339,7 +339,7 @@ class _LoginScreenState extends State<LoginScreen> {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: ScreenUtil.getHeight(context) * 0.08,
+        height: ScreenUtil.getHeight(context) * 0.075,
         width: width,
         padding: EdgeInsets.symmetric(
           vertical: ScreenPadding.padding8px,
