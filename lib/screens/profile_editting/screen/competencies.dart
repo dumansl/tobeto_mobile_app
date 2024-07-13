@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfi
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class Competencies extends StatefulWidget {
   const Competencies({super.key});
@@ -23,12 +24,18 @@ class _CompetenciesState extends State<Competencies> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<CompetenciesBloc, CompetenciesState>(
+    return BlocConsumer<CompetenciesBloc, CompetenciesState>(
+      listener: (context, state) {
+        if (!state.isLoading && state.error != null) {
+          snackBar(context, "İşleminiz başarısız: ${state.error}");
+        } else if (!state.isLoading && state.error == null) {
+          snackBar(context, "İşleminiz başarılı!",
+              bgColor: TobetoColor.state.success);
+        }
+      },
       builder: (context, state) {
         if (state.isLoading) {
           return const Center(child: CircularProgressIndicator());
-        } else if (state.error != null) {
-          return Center(child: Text('Error: ${state.error}'));
         }
 
         return ListView(
@@ -43,7 +50,9 @@ class _CompetenciesState extends State<Competencies> {
             CustomElevatedButton(
               onPressed: () {
                 if (skillController.text.isNotEmpty) {
-                  context.read<CompetenciesBloc>().add(AddSkill(skillController.text));
+                  context
+                      .read<CompetenciesBloc>()
+                      .add(AddSkill(skillController.text));
                   skillController.clear();
                 }
               },

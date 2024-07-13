@@ -10,6 +10,7 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfi
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class ClubCominities extends StatefulWidget {
   const ClubCominities({super.key});
@@ -20,7 +21,8 @@ class ClubCominities extends StatefulWidget {
 
 class _ClubCominitiesState extends State<ClubCominities> {
   final TextEditingController communityNameController = TextEditingController();
-  final TextEditingController communityTitleController = TextEditingController();
+  final TextEditingController communityTitleController =
+      TextEditingController();
 
   void _clearControllers() {
     communityNameController.clear();
@@ -28,7 +30,8 @@ class _ClubCominitiesState extends State<ClubCominities> {
   }
 
   bool _areControllersValid() {
-    return communityNameController.text.isNotEmpty && communityTitleController.text.isNotEmpty;
+    return communityNameController.text.isNotEmpty &&
+        communityTitleController.text.isNotEmpty;
   }
 
   void _addClubCominities() {
@@ -42,51 +45,62 @@ class _ClubCominitiesState extends State<ClubCominities> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ClubCominitiesBloc, ClubCominitiesState>(builder: (context, state) {
-      if (state.isLoading) {
-        return const Center(child: CircularProgressIndicator());
-      } else if (state.error != null) {
-        return Center(child: Text('Error: ${state.error}'));
-      }
-      return ListView(
-        children: [
-          CustomTitle(title: TobetoText.profileEditCommunity),
-          InputText(
-            child: CustomTextField(
-              title: TobetoText.profileEditCommunityName,
-              controller: communityNameController,
+    return BlocConsumer<ClubCominitiesBloc, ClubCominitiesState>(
+      listener: (context, state) {
+        if (!state.isLoading && state.error != null) {
+          snackBar(context, "İşleminiz başarısız: ${state.error}");
+        } else if (!state.isLoading && state.error == null) {
+          snackBar(context, "İşleminiz başarılı!",
+              bgColor: TobetoColor.state.success);
+        }
+      },
+      builder: (context, state) {
+        if (state.isLoading) {
+          return const Center(child: CircularProgressIndicator());
+        }
+
+        return ListView(
+          children: [
+            CustomTitle(title: TobetoText.profileEditCommunity),
+            InputText(
+              child: CustomTextField(
+                title: TobetoText.profileEditCommunityName,
+                controller: communityNameController,
+              ),
             ),
-          ),
-          InputText(
-            child: CustomTextField(
-              title: TobetoText.profileEditCommunityTitle,
-              controller: communityTitleController,
+            InputText(
+              child: CustomTextField(
+                title: TobetoText.profileEditCommunityTitle,
+                controller: communityTitleController,
+              ),
             ),
-          ),
-          CustomElevatedButton(
-            onPressed: () {
-              if (_areControllersValid()) {
-                _addClubCominities();
-              }
-            },
-          ),
-          if (state.club.isEmpty)
-            CustomColumn(
-              title: TobetoText.emptyCommunity,
-            )
-          else
-            ...state.club.map((club) {
-              return InputText(
-                  child: CustomMiniCard(
-                onpressed: () {
-                  context.read<ClubCominitiesBloc>().add(RemoveClubCominities(club));
-                },
-                title: club['communityName'],
-                content: club['communityTitle'],
-              ));
-            })
-        ],
-      );
-    });
+            CustomElevatedButton(
+              onPressed: () {
+                if (_areControllersValid()) {
+                  _addClubCominities();
+                }
+              },
+            ),
+            if (state.club.isEmpty)
+              CustomColumn(
+                title: TobetoText.emptyCommunity,
+              )
+            else
+              ...state.club.map((club) {
+                return InputText(
+                    child: CustomMiniCard(
+                  onpressed: () {
+                    context
+                        .read<ClubCominitiesBloc>()
+                        .add(RemoveClubCominities(club));
+                  },
+                  title: club['communityName'],
+                  content: club['communityTitle'],
+                ));
+              })
+          ],
+        );
+      },
+    );
   }
 }

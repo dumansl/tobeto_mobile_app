@@ -10,7 +10,8 @@ import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_mini_c
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_textfield.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/custom_title.dart';
 import 'package:tobeto_mobile_app/screens/profile_editting/widgets/input_text.dart';
-import 'package:tobeto_mobile_app/utils/constant/text.dart';
+import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/snack_bar.dart';
 
 class ProjectsPrize extends StatefulWidget {
   const ProjectsPrize({super.key});
@@ -20,8 +21,10 @@ class ProjectsPrize extends StatefulWidget {
 }
 
 class _ProjectsPrizeState extends State<ProjectsPrize> {
-  final TextEditingController projectAwardNameController = TextEditingController();
-  final TextEditingController certificatesDateController = TextEditingController();
+  final TextEditingController projectAwardNameController =
+      TextEditingController();
+  final TextEditingController certificatesDateController =
+      TextEditingController();
 
   void _clearControllers() {
     projectAwardNameController.clear();
@@ -29,7 +32,8 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
   }
 
   bool _areControllersValid() {
-    return projectAwardNameController.text.isNotEmpty && certificatesDateController.text.isNotEmpty;
+    return projectAwardNameController.text.isNotEmpty &&
+        certificatesDateController.text.isNotEmpty;
   }
 
   void _addEducationLife() {
@@ -43,12 +47,19 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProjectsPrizeBloc, ProjectsPrizeState>(builder: (context, state) {
+    return BlocConsumer<ProjectsPrizeBloc, ProjectsPrizeState>(
+        listener: (context, state) {
+      if (!state.isLoading && state.error != null) {
+        snackBar(context, "İşleminiz başarısız: ${state.error}");
+      } else if (!state.isLoading && state.error == null) {
+        snackBar(context, "İşleminiz başarılı!",
+            bgColor: TobetoColor.state.success);
+      }
+    }, builder: (context, state) {
       if (state.isLoading) {
         return const Center(child: CircularProgressIndicator());
-      } else if (state.error != null) {
-        return Center(child: Text('Error: ${state.error}'));
       }
+
       return ListView(
         children: [
           CustomTitle(title: TobetoText.profileProjectAwards),
@@ -60,7 +71,8 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
           ),
           InputText(
             child: CustomDateInput(
-                controller: certificatesDateController, labelText: TobetoText.profileEditCertificatesDate),
+                controller: certificatesDateController,
+                labelText: TobetoText.profileEditCertificatesDate),
           ),
           CustomElevatedButton(
             onPressed: () {
@@ -76,7 +88,9 @@ class _ProjectsPrizeState extends State<ProjectsPrize> {
               return InputText(
                   child: CustomMiniCard(
                 onpressed: () {
-                  context.read<ProjectsPrizeBloc>().add(RemoveProjectsPrize(projects));
+                  context
+                      .read<ProjectsPrizeBloc>()
+                      .add(RemoveProjectsPrize(projects));
                 },
                 title: projects['projectAwardName'],
                 content: projects['certificatesDate'],
