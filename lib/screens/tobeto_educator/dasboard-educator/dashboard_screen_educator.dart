@@ -3,8 +3,6 @@ import 'package:persistent_bottom_nav_bar_v2/persistent_bottom_nav_bar_v2.dart';
 
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/custom_navbar.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_educator/education-educator/education_educator.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_educator/educator-home-screen/home_screen_educator.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_educator/educator_profile/educator_profile_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 

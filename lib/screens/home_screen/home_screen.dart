@@ -7,7 +7,6 @@ import 'package:tobeto_mobile_app/screens/home_screen/widgets/box.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/boxlong.dart';
 import 'package:tobeto_mobile_app/screens/home_screen/widgets/rainbow.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/home_screen/home_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
@@ -115,13 +114,17 @@ class _HomeScreenState extends State<HomeScreen> {
                     InkWell(
                       onTap: () {
                         pushReplacementWithoutNavBar(
-                            context, MaterialPageRoute(builder: (context) => const TobetoHomeScreen()));
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const TobetoHomeScreen()));
                       },
                       child: Container(
                         height: IconSize.size35px,
                         width: IconSize.size35px,
                         decoration: const BoxDecoration(
-                          image: DecorationImage(image: AssetImage(ImagePath.tTobeto)),
+                          image: DecorationImage(
+                              image: AssetImage(ImagePath.tTobeto)),
                         ),
                       ),
                     ),
@@ -167,7 +170,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   itemCount: boxWidgets.length,
                   scrollDirection: Axis.horizontal,
                   itemBuilder: (BuildContext context, int index) {
-                    return boxWidgets[index]; // Belirlenen Box widget'larını kullan
+                    return boxWidgets[
+                        index]; // Belirlenen Box widget'larını kullan
                   },
                 ),
               ),
@@ -281,7 +285,8 @@ class _ExamplesCard extends StatelessWidget {
                   padding: EdgeInsets.only(left: ScreenPadding.padding8px),
                   child: Text(
                     "Herkes için Kodlama",
-                    style: TextStyle(color: Theme.of(context).colorScheme.onSurface),
+                    style: TextStyle(
+                        color: Theme.of(context).colorScheme.onSurface),
                   ),
                 ),
               ],

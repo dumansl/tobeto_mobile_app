@@ -4,8 +4,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tobeto_mobile_app/blocs/export_bloc.dart';
 import 'package:tobeto_mobile_app/screens/login_screen/login_widgets/custom_logo.dart';
 import 'package:tobeto_mobile_app/screens/screens.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_educator/dasboard-educator/dashboard_screen_educator.dart';
-import 'package:tobeto_mobile_app/screens/tobeto_screens/tobeto_screens.dart';
 import 'package:tobeto_mobile_app/services/auth_service.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
 import 'package:tobeto_mobile_app/utils/horizontal_page_route.dart';
@@ -57,24 +55,33 @@ class _LoginScreenState extends State<LoginScreen> {
       body: BlocListener<AuthBloc, AuthState>(
         listener: (context, state) async {
           if (state is LoginSuccess) {
-            if (_authService.currentUser != null && _authService.currentUser!.emailVerified) {
-              if (_authService.currentUser?.isAnonymous ?? false) {
+            if (_authService.currentUser?.isAnonymous ?? false) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const TobetoHomeScreen()),
+              );
+            } else {
+              if (_authService.currentUser != null &&
+                  _authService.currentUser!.emailVerified) {
                 _educatorSwitch
                     ? Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (context) => const DashboardScreenEducator()))
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const DashboardScreenEducator(),
+                        ),
+                      )
                     : Navigator.pushReplacement(
                         context,
-                        MaterialPageRoute(builder: (context) => const DashboardScreen()),
+                        MaterialPageRoute(
+                          builder: (context) => const DashboardScreen(),
+                        ),
                       );
-              } else if (_authService.currentUser?.isAnonymous ?? false) {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (context) => const TobetoHomeScreen()),
-                );
+              } else {
+                snackBar(context,
+                    'E-posta adresiniz doğrulanmadı. Lütfen doğrulama e-postasını kontrol edin.');
+                await FirebaseAuth.instance.signOut();
               }
-            } else {
-              snackBar(context, 'E-posta adresiniz doğrulanmadı. Lütfen doğrulama e-postasını kontrol edin.');
-              await FirebaseAuth.instance.signOut();
             }
           } else if (state is LoginError) {
             if (state.errorMessage != null) {
@@ -224,14 +231,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 ? const SizedBox()
                 : Text(
                     TobetoText.loginForgotPassword,
-                    style: TobetoTextStyle.inter(context).captionGrayDarkSemiBold15,
+                    style: TobetoTextStyle.inter(context)
+                        .captionGrayDarkSemiBold15,
                   ),
           ),
           CustomButton(
             onPressed: () {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
-                context.read<AuthBloc>().add(LoginEvent(email: _email, password: _password));
+                context
+                    .read<AuthBloc>()
+                    .add(LoginEvent(email: _email, password: _password));
               }
             },
             text: TobetoText.loginButton,
@@ -252,7 +262,8 @@ class _LoginScreenState extends State<LoginScreen> {
           ),
         ),
         Padding(
-          padding: EdgeInsets.symmetric(horizontal: ScreenPadding.screenpadding),
+          padding:
+              EdgeInsets.symmetric(horizontal: ScreenPadding.screenpadding),
           child: Column(
             children: [
               _customframe(
@@ -262,12 +273,14 @@ class _LoginScreenState extends State<LoginScreen> {
                 child: Row(
                   children: [
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px),
+                      padding: EdgeInsets.symmetric(
+                          horizontal: ScreenPadding.padding16px),
                       child: Image.asset(ImagePath.visitorIcon),
                     ),
                     Text(
                       TobetoText.loginGuestButton,
-                      style: TobetoTextStyle.inter(context).captionGrayLightNormal15,
+                      style: TobetoTextStyle.inter(context)
+                          .captionGrayLightNormal15,
                     ),
                   ],
                 ),
@@ -281,12 +294,14 @@ class _LoginScreenState extends State<LoginScreen> {
                   child: Row(
                     children: [
                       Padding(
-                        padding: EdgeInsets.symmetric(horizontal: ScreenPadding.padding16px),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: ScreenPadding.padding16px),
                         child: Image.asset(ImagePath.googleIcon),
                       ),
                       Text(
                         TobetoText.loginGoogleButton,
-                        style: TobetoTextStyle.inter(context).captionGrayLightNormal15,
+                        style: TobetoTextStyle.inter(context)
+                            .captionGrayLightNormal15,
                       ),
                     ],
                   ),
@@ -337,7 +352,8 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  Widget _customframe({required Widget child, required VoidCallback onTap, double? width}) {
+  Widget _customframe(
+      {required Widget child, required VoidCallback onTap, double? width}) {
     return InkWell(
       onTap: onTap,
       child: Container(
