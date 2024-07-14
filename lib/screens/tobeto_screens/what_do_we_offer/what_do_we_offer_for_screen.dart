@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tobeto_mobile_app/screens/dashboard_screen/widgets/fixed_appbar.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/communication_screen/communication_screen.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/constant/floating_action_button.dart';
 import 'package:tobeto_mobile_app/utils/themes/text_style.dart';
 
 class WhatDoWeOfferForScreen extends StatelessWidget {
@@ -227,6 +228,7 @@ class WhatDoWeOfferFor extends StatelessWidget {
           ),
         ),
       ),
+      floatingActionButton: const CustomFloatingActionButton(),
     );
   }
 

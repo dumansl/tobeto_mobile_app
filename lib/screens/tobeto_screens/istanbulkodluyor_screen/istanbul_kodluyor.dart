@@ -12,6 +12,7 @@ import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen
 import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/project_photos_card.dart';
 import 'package:tobeto_mobile_app/screens/tobeto_screens/istanbulkodluyor_screen/cards/project_support_card.dart';
 import 'package:tobeto_mobile_app/utils/constant/constants.dart';
+import 'package:tobeto_mobile_app/utils/constant/floating_action_button.dart';
 
 class IstanbulKodluyorScreen extends StatefulWidget {
   const IstanbulKodluyorScreen({super.key});
@@ -62,6 +63,7 @@ class _IstanbulKodluyorScreenState extends State<IstanbulKodluyorScreen> {
           ],
         ),
       ),
+      floatingActionButton: const CustomFloatingActionButton(),
     );
   }
 }

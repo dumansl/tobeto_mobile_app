@@ -513,6 +513,7 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
       DeviceOrientation.portraitDown,
     ]);
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+    // ignore: use_build_context_synchronously
     Navigator.pop(context);
   }
 
@@ -587,6 +588,7 @@ class FullScreenVideoControls extends StatefulWidget {
   const FullScreenVideoControls({super.key, required this.controller});
 
   @override
+  // ignore: library_private_types_in_public_api
   _FullScreenVideoControlsState createState() => _FullScreenVideoControlsState();
 }
 
@@ -653,6 +655,7 @@ class VideoControls extends StatefulWidget {
   const VideoControls({super.key, required this.controller});
 
   @override
+  // ignore: library_private_types_in_public_api
   _VideoControlsState createState() => _VideoControlsState();
 }
 
