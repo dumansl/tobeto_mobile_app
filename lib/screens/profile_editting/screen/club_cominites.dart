@@ -21,7 +21,9 @@ class ClubCominities extends StatefulWidget {
 
 class _ClubCominitiesState extends State<ClubCominities> {
   final TextEditingController communityNameController = TextEditingController();
-  final TextEditingController communityTitleController = TextEditingController();
+  final TextEditingController communityTitleController =
+      TextEditingController();
+  bool _actionPerformed = false;
 
   void _clearControllers() {
     communityNameController.clear();
@@ -29,7 +31,8 @@ class _ClubCominitiesState extends State<ClubCominities> {
   }
 
   bool _areControllersValid() {
-    return communityNameController.text.isNotEmpty && communityTitleController.text.isNotEmpty;
+    return communityNameController.text.isNotEmpty &&
+        communityTitleController.text.isNotEmpty;
   }
 
   void _addClubCominities() {
@@ -39,16 +42,21 @@ class _ClubCominitiesState extends State<ClubCominities> {
     };
     context.read<ClubCominitiesBloc>().add(AddClubCominities(clubCominities));
     _clearControllers();
+    _actionPerformed = true;
   }
 
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ClubCominitiesBloc, ClubCominitiesState>(
       listener: (context, state) {
-        if (!state.isLoading && state.error != null) {
-          snackBar(context, "İşleminiz başarısız: ${state.error}");
-        } else if (!state.isLoading && state.error == null) {
-          snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
+        if (_actionPerformed) {
+          if (!state.isLoading && state.error != null) {
+            snackBar(context, "İşleminiz başarısız: ${state.error}");
+          } else if (!state.isLoading && state.error == null) {
+            snackBar(context, "İşleminiz başarılı!",
+                bgColor: TobetoColor.state.success);
+          }
+          _actionPerformed = false; // Reset the flag after handling the result
         }
       },
       builder: (context, state) {
@@ -74,7 +82,9 @@ class _ClubCominitiesState extends State<ClubCominities> {
             CustomElevatedButton(
               onPressed: () {
                 String newClub = communityNameController.text.trim();
-                if (_areControllersValid() && state.club.length < 5 && !state.club.toString().contains(newClub)) {
+                if (_areControllersValid() &&
+                    state.club.length < 5 &&
+                    !state.club.toString().contains(newClub)) {
                   _addClubCominities();
                 } else if (state.club.length >= 5) {
                   snackBar(context, TobetoText.maxCommunity);
@@ -92,7 +102,9 @@ class _ClubCominitiesState extends State<ClubCominities> {
                 return InputText(
                     child: CustomMiniCard(
                   onpressed: () {
-                    context.read<ClubCominitiesBloc>().add(RemoveClubCominities(club));
+                    context
+                        .read<ClubCominitiesBloc>()
+                        .add(RemoveClubCominities(club));
                   },
                   title: club['communityName'],
                   content: club['communityTitle'],

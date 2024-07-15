@@ -23,13 +23,19 @@ class EducationLife extends StatefulWidget {
 }
 
 class _EducationLifeState extends State<EducationLife> {
-  final TextEditingController educationStatuController = TextEditingController();
+  final TextEditingController educationStatuController =
+      TextEditingController();
   final TextEditingController univercityController = TextEditingController();
-  final TextEditingController graduatedDepartmentController = TextEditingController();
-  final TextEditingController startUnivercityDateController = TextEditingController();
-  final TextEditingController graduateUnivercityDateController = TextEditingController();
-  final TextEditingController continueUnivercityController = TextEditingController();
+  final TextEditingController graduatedDepartmentController =
+      TextEditingController();
+  final TextEditingController startUnivercityDateController =
+      TextEditingController();
+  final TextEditingController graduateUnivercityDateController =
+      TextEditingController();
+  final TextEditingController continueUnivercityController =
+      TextEditingController();
   bool _isChecked = false;
+  bool _isActionCompleted = false;
 
   void _clearControllers() {
     educationStatuController.clear();
@@ -59,6 +65,7 @@ class _EducationLifeState extends State<EducationLife> {
     };
     context.read<EducationLifeBloc>().add(AddEducationLife(educationLife));
     _clearControllers();
+    _isActionCompleted = true; // İşlem gerçekleştirildi olarak işaretle
   }
 
   @override
@@ -71,10 +78,15 @@ class _EducationLifeState extends State<EducationLife> {
   Widget build(BuildContext context) {
     return BlocConsumer<EducationLifeBloc, EducationLifeState>(
       listener: (context, state) {
-        if (state.error != null) {
-          snackBar(context, "İşleminiz başarısız: ${state.error}");
-        } else if (!state.isLoading && state.error == null) {
-          snackBar(context, "İşleminiz başarılı!", bgColor: TobetoColor.state.success);
+        if (_isActionCompleted) {
+          if (state.error != null) {
+            snackBar(context, "İşleminiz başarısız: ${state.error}");
+          } else if (!state.isLoading && state.error == null) {
+            snackBar(context, "İşleminiz başarılı!",
+                bgColor: TobetoColor.state.success);
+          }
+          _isActionCompleted =
+              false; // İşlem bildirimi gösterildiğinde false yap
         }
       },
       builder: (context, state) {
@@ -87,7 +99,8 @@ class _EducationLifeState extends State<EducationLife> {
             InputText(
               child: CustomDropDownInput(
                 onChanged: (newValue) {
-                  educationStatuController.text = newValue ?? educationStatuController.text;
+                  educationStatuController.text =
+                      newValue ?? educationStatuController.text;
                 },
                 items: TobetoText.educationStatu
                     .map((label) => DropdownMenuItem(
@@ -174,7 +187,11 @@ class _EducationLifeState extends State<EducationLife> {
                           title2: TobetoText.profileEditGraduatedDepartment,
                           content2: education['graduatedDepartment'],
                           onpressed: () {
-                            context.read<EducationLifeBloc>().add(RemoveEducationLife(education));
+                            context
+                                .read<EducationLifeBloc>()
+                                .add(RemoveEducationLife(education));
+                            _isActionCompleted =
+                                true; // İşlem gerçekleştirildi olarak işaretle
                           },
                         ),
                       );

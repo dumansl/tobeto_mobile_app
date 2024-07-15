@@ -50,13 +50,16 @@ class _EducationDetailsState extends State<EducationDetails> {
         _loading = true;
       });
 
-      _videos = await EducationService().fetchCourseVideo(widget.educationId, widget.asyncEducationId);
+      _videos = await EducationService()
+          .fetchCourseVideo(widget.educationId, widget.asyncEducationId);
       if (_videos.isNotEmpty) {
         for (int i = 0; i < _videos.length; i++) {
-          bool isWatched = await EducationService().getWatchStatus(widget.userId, _videos[i].id);
+          bool isWatched = await EducationService()
+              .getWatchStatus(widget.userId, _videos[i].id);
           _videos[i] = _videos[i].copyWith(isWatched: isWatched);
         }
-        _currentVideo = _videos.firstWhere((video) => !video.isWatched, orElse: () => _videos.first);
+        _currentVideo = _videos.firstWhere((video) => !video.isWatched,
+            orElse: () => _videos.first);
         await initializeVideoPlayer(_currentVideo!.videoUrl);
       } else {
         setState(() {
@@ -85,10 +88,12 @@ class _EducationDetailsState extends State<EducationDetails> {
         });
 
         _videoPlayerController!.addListener(() async {
-          if (_videoPlayerController!.value.position == _videoPlayerController!.value.duration) {
-            final videoId = _videos.firstWhere((video) => video.videoUrl == videoUrl).id;
-            await EducationService()
-                .updateWatchStatus(widget.userId, videoId, widget.educationId, widget.asyncEducationId, true);
+          if (_videoPlayerController!.value.position ==
+              _videoPlayerController!.value.duration) {
+            final videoId =
+                _videos.firstWhere((video) => video.videoUrl == videoUrl).id;
+            await EducationService().updateWatchStatus(widget.userId, videoId,
+                widget.educationId, widget.asyncEducationId, true);
             await _calculateProgress();
             _playNextVideo();
           }
@@ -119,7 +124,8 @@ class _EducationDetailsState extends State<EducationDetails> {
     int watchedVideos = 0;
 
     for (var video in _videos) {
-      bool isWatched = await EducationService().getWatchStatus(widget.userId, video.id);
+      bool isWatched =
+          await EducationService().getWatchStatus(widget.userId, video.id);
       if (isWatched) {
         watchedVideos++;
       }
@@ -202,7 +208,8 @@ class _EducationDetailsState extends State<EducationDetails> {
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => FullScreenVideo(
-                                      videoPlayerController: _videoPlayerController!,
+                                      videoPlayerController:
+                                          _videoPlayerController!,
                                     ),
                                   ),
                                 );
@@ -212,13 +219,16 @@ class _EducationDetailsState extends State<EducationDetails> {
                         ],
                       ),
                     ),
-                    VideoProgressIndicator(_videoPlayerController!, allowScrubbing: true),
+                    VideoProgressIndicator(_videoPlayerController!,
+                        allowScrubbing: true),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         IconButton(
                           icon: Icon(
-                            _videoPlayerController!.value.isPlaying ? Icons.pause : Icons.play_arrow,
+                            _videoPlayerController!.value.isPlaying
+                                ? Icons.pause
+                                : Icons.play_arrow,
                           ),
                           onPressed: () {
                             setState(() {
@@ -261,13 +271,16 @@ class _EducationDetailsState extends State<EducationDetails> {
                     ),
                   ],
                 ),
-              if (!_videoInitialized) const Center(child: CircularProgressIndicator()),
+              if (!_videoInitialized)
+                const Center(child: CircularProgressIndicator()),
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(widget.course.videoName, style: TobetoTextStyle.poppins(context).subtitleBlackBold20),
+                    Text(widget.course.videoName,
+                        style: TobetoTextStyle.poppins(context)
+                            .subtitleBlackBold20),
                     const SizedBox(height: 8.0),
                     Container(
                       height: 10.0, // Progress bar height
@@ -277,7 +290,8 @@ class _EducationDetailsState extends State<EducationDetails> {
                       ),
                       child: LinearProgressIndicator(
                         value: _progress,
-                        valueColor: const AlwaysStoppedAnimation<Color>(TobetoColor.purple),
+                        valueColor: const AlwaysStoppedAnimation<Color>(
+                            TobetoColor.purple),
                         backgroundColor: Colors.transparent,
                       ),
                     ),
@@ -301,20 +315,25 @@ class _EducationDetailsState extends State<EducationDetails> {
                             decoration: BoxDecoration(
                               color: _selectedIndex == 0
                                   ? TobetoColor.purple
-                                  : (Theme.of(context).colorScheme.inverseSurface),
+                                  : (Theme.of(context)
+                                      .colorScheme
+                                      .inverseSurface),
                               borderRadius: const BorderRadius.only(
                                 topLeft: Radius.circular(30.0),
                                 bottomLeft: Radius.circular(30.0),
                               ),
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 10.0),
                             child: Center(
                               child: Text(
                                 'Liste',
                                 style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w600,
-                                  color: _selectedIndex == 0 ? Colors.white : TobetoColor.purple,
+                                  color: _selectedIndex == 0
+                                      ? Colors.white
+                                      : TobetoColor.purple,
                                 ),
                               ),
                             ),
@@ -332,20 +351,25 @@ class _EducationDetailsState extends State<EducationDetails> {
                             decoration: BoxDecoration(
                               color: _selectedIndex == 1
                                   ? TobetoColor.purple
-                                  : (Theme.of(context).colorScheme.inverseSurface),
+                                  : (Theme.of(context)
+                                      .colorScheme
+                                      .inverseSurface),
                               borderRadius: const BorderRadius.only(
                                 topRight: Radius.circular(30.0),
                                 bottomRight: Radius.circular(30.0),
                               ),
                             ),
-                            padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 10.0),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 16.0, vertical: 10.0),
                             child: Center(
                               child: Text(
                                 'Detay',
                                 style: TextStyle(
                                   fontSize: 16.0,
                                   fontWeight: FontWeight.w600,
-                                  color: _selectedIndex == 1 ? Colors.white : TobetoColor.purple,
+                                  color: _selectedIndex == 1
+                                      ? Colors.white
+                                      : TobetoColor.purple,
                                 ),
                               ),
                             ),
@@ -357,7 +381,9 @@ class _EducationDetailsState extends State<EducationDetails> {
                 ),
               ),
               Expanded(
-                child: _selectedIndex == 0 ? _buildVideoList() : _buildDetails(isDarkMode),
+                child: _selectedIndex == 0
+                    ? _buildVideoList()
+                    : _buildDetails(isDarkMode),
               ),
             ],
           ),
@@ -385,7 +411,8 @@ class _EducationDetailsState extends State<EducationDetails> {
             Icons.play_circle_fill,
             color: TobetoColor.purple,
           ),
-          title: Text('Video ${index + 1}', style: TobetoTextStyle.poppins(context).captionBlackBold18),
+          title: Text('Video ${index + 1}',
+              style: TobetoTextStyle.poppins(context).captionBlackBold18),
           onTap: () {
             setState(() {
               _currentVideo = video;
@@ -406,13 +433,17 @@ class _EducationDetailsState extends State<EducationDetails> {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              _buildDetailItem(Icons.access_time, '${_currentVideo!.videoDuration} dakika', isDarkMode),
-              _buildDetailItem(Icons.subscriptions_outlined, '${_currentVideo!.videoPoints} puan', isDarkMode),
-              _buildDetailItem(Icons.language, widget.course.language, isDarkMode),
+              _buildDetailItem(Icons.access_time,
+                  '${_currentVideo!.videoDuration} dakika', isDarkMode),
+              _buildDetailItem(Icons.subscriptions_outlined,
+                  '${_currentVideo!.videoPoints} puan', isDarkMode),
+              _buildDetailItem(
+                  Icons.language, widget.course.language, isDarkMode),
             ],
           ),
           const SizedBox(height: 16.0),
-          Text(TobetoText.educationContent, style: TobetoTextStyle.poppins(context).captionBlackBold18),
+          Text(TobetoText.educationContent,
+              style: TobetoTextStyle.poppins(context).captionBlackBold18),
           const Divider(
             color: Colors.black,
             thickness: 2,
@@ -423,7 +454,8 @@ class _EducationDetailsState extends State<EducationDetails> {
             style: TobetoTextStyle.poppins(context).bodyBlackNormal16,
           ),
           const SizedBox(height: 16.0),
-          _buildInfoRow(TobetoText.educationCategory, _currentVideo!.videoCategory, isDarkMode),
+          _buildInfoRow(TobetoText.educationCategory,
+              _currentVideo!.videoCategory, isDarkMode),
         ],
       ),
     );
@@ -441,13 +473,20 @@ class _EducationDetailsState extends State<EducationDetails> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
-          Icon(icon, size: 20, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
+          Icon(icon,
+              size: 20,
+              color: Theme.of(context).brightness == Brightness.dark
+                  ? Colors.white
+                  : Colors.black),
           const SizedBox(height: 4.0),
           Flexible(
             child: Text(
               text,
               style: TextStyle(
-                  fontSize: 12, color: Theme.of(context).brightness == Brightness.dark ? Colors.white : Colors.black),
+                  fontSize: 12,
+                  color: Theme.of(context).brightness == Brightness.dark
+                      ? Colors.white
+                      : Colors.black),
               textAlign: TextAlign.center,
             ),
           ),
@@ -495,7 +534,8 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
       DeviceOrientation.landscapeRight,
       DeviceOrientation.landscapeLeft,
     ]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky, overlays: []);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky,
+        overlays: []);
     widget.videoPlayerController.addListener(() {
       if (mounted) {
         setState(() {});
@@ -507,14 +547,17 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
     setState(() {
       _isExitingFullScreen = true;
     });
-    await Future.delayed(const Duration(seconds: 1)); // Simulate a loading period
+    await Future.delayed(
+        const Duration(seconds: 1)); // Simulate a loading period
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
-    // ignore: use_build_context_synchronously
-    Navigator.pop(context);
+    SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+        overlays: SystemUiOverlay.values);
+    if (mounted) {
+      Navigator.pop(context);
+    }
   }
 
   @override
@@ -524,7 +567,8 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
         DeviceOrientation.portraitUp,
         DeviceOrientation.portraitDown,
       ]);
-      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual,
+          overlays: SystemUiOverlay.values);
     }
     widget.videoPlayerController.removeListener(() {});
     super.dispose();
@@ -573,7 +617,8 @@ class _FullScreenVideoState extends State<FullScreenVideo> {
               bottom: 16.0,
               left: 16.0,
               right: 16.0,
-              child: FullScreenVideoControls(controller: widget.videoPlayerController),
+              child: FullScreenVideoControls(
+                  controller: widget.videoPlayerController),
             ),
           ],
         ),
@@ -588,8 +633,8 @@ class FullScreenVideoControls extends StatefulWidget {
   const FullScreenVideoControls({super.key, required this.controller});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _FullScreenVideoControlsState createState() => _FullScreenVideoControlsState();
+  State<FullScreenVideoControls> createState() =>
+      _FullScreenVideoControlsState();
 }
 
 class _FullScreenVideoControlsState extends State<FullScreenVideoControls> {
@@ -620,14 +665,19 @@ class _FullScreenVideoControlsState extends State<FullScreenVideoControls> {
           ),
           onPressed: () {
             setState(() {
-              widget.controller.value.isPlaying ? widget.controller.pause() : widget.controller.play();
+              widget.controller.value.isPlaying
+                  ? widget.controller.pause()
+                  : widget.controller.play();
             });
           },
         ),
         IconButton(
-          icon: Icon(widget.controller.value.volume > 0 ? Icons.volume_up : Icons.volume_off),
+          icon: Icon(widget.controller.value.volume > 0
+              ? Icons.volume_up
+              : Icons.volume_off),
           onPressed: () {
-            widget.controller.setVolume(widget.controller.value.volume > 0 ? 0 : 1);
+            widget.controller
+                .setVolume(widget.controller.value.volume > 0 ? 0 : 1);
           },
         ),
         DropdownButton<double>(
@@ -655,8 +705,7 @@ class VideoControls extends StatefulWidget {
   const VideoControls({super.key, required this.controller});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _VideoControlsState createState() => _VideoControlsState();
+  State<VideoControls> createState() => _VideoControlsState();
 }
 
 class _VideoControlsState extends State<VideoControls> {
@@ -686,13 +735,18 @@ class _VideoControlsState extends State<VideoControls> {
             widget.controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
           ),
           onPressed: () {
-            widget.controller.value.isPlaying ? widget.controller.pause() : widget.controller.play();
+            widget.controller.value.isPlaying
+                ? widget.controller.pause()
+                : widget.controller.play();
           },
         ),
         IconButton(
-          icon: Icon(widget.controller.value.volume > 0 ? Icons.volume_up : Icons.volume_off),
+          icon: Icon(widget.controller.value.volume > 0
+              ? Icons.volume_up
+              : Icons.volume_off),
           onPressed: () {
-            widget.controller.setVolume(widget.controller.value.volume > 0 ? 0 : 1);
+            widget.controller
+                .setVolume(widget.controller.value.volume > 0 ? 0 : 1);
           },
         ),
         DropdownButton<double>(
